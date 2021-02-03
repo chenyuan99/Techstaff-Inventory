@@ -5,7 +5,7 @@
 <head>
   <meta name="viewport"
     content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=yes" />
-  <title>A Virginia Tech Tech Together Campaign Application Proposal</title>
+  <title>Virginia Tech Techstaff Inventory</title>
   <link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}" />
   <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
@@ -67,7 +67,7 @@
 <body>
   <nav class="navbar navbar-expand-lg navbar-light" style="background-color: white;">
     <div class="container">
-      <a class="navbar-brand" href="/">VTRAC</a>
+      <a class="navbar-brand" href="/">Techstaff Inventory</a>
       <div class="navbar-header">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
           aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -107,65 +107,8 @@
       </div>
     </div>
   </nav>
+  
 
-    <!-- 对话框HTML -->
-    <div class="modal fade" id="registerModal">
-      <div class="modal-dialog" style="width: 420px">
-        <div class="modal-content">
-          <div class="login-header text-center">
-            <p style="font-size: 45px; margin-bottom: 40px">独馨</p>
-            <p style="font-weight: 400">登录独馨，发现更大的世界</p>
-          </div>
-          <div class="container">
-            {% if messages %}
-            {% for message in messages %}
-            {% if message.tags == 'success'%}
-            <script>M.toast({ html: "{{message}}", classes: 'green rounded', displayLength: 2000 });</script>
-            {% elif message.tags == 'info'%}
-            <script>M.toast({ html: "{{message}}", classes: 'blue rounded', displayLength: 2000 });</script>
-            {% elif message.tags == 'warning'%}
-            <script>M.toast({ html: "{{message}}", classes: 'orange rounded', displayLength: 10000 });</script>
-            {% elif message.tags == 'error'%}
-            <script>M.toast({ html: "{{message}}", classes: 'red rounded', displayLength: 10000 });</script>
-            {% endif %}
-            {% endfor %}
-            {% endif %}
-            <div class="container">
-                <br>
-                <form method="POST">
-                    {% csrf_token %}
-                    {{form.as_p}}
-                    <button class="btn btn-outline-info" type="submit">Sign Up</button>
-                </form>
-            </div>
-            <div class="container text-center">
-                If you already have an account <a href="/login" target="blank"><strong>login</strong></a> instead.
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  
-    <!-- 对话框HTML -->
-    <div class="modal fade" id="loginModal">
-      <div class="modal-dialog" style="width: 420px">
-        <div class="modal-content">
-          <div class="login-header">
-            <p style="font-size: 45px; margin-bottom: 40px">独馨</p>
-            <h1 style="font-weight: 400">登录独馨，连接中文科研</h1>
-          </div>
-          <div class="center">
-            <form method="POST">
-              {% csrf_token %}
-              {{form.as_p}}
-              <button class="btn btn-lg btn-default" type="submit">Login</button>
-            </form>
-            Don't have an account? <a href="/register" target="blank"><strong>register here</strong></a>!
-          </div>
-  
-        </div>
-      </div>
-    </div>
 
   {% block content %}{% endblock %}
 
