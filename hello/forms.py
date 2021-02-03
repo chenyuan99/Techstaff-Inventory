@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from hello.models import Guest
+from hello.models import *
 from django.forms import ModelForm
 
 class NewUserForm(UserCreationForm):
@@ -32,3 +32,22 @@ class AddGuestForm(forms.ModelForm):
     class Meta:
         model = Guest
         fields = ['event', 'realname', 'phone', 'email', 'sign']
+
+class LaptopForm(forms.ModelForm):
+	class Meta:
+		model = Laptop
+		fields = ('type', 'price', 'status', 'issue')
+
+
+
+class DesktopForm(forms.ModelForm):
+	class Meta:
+		model = Desktop
+		fields = ('type', 'price', 'status', 'issue')
+
+
+
+class MobileForm(forms.ModelForm):
+	class Meta:
+		model = Mobile
+		fields = ('type', 'price', 'status', 'issue')
