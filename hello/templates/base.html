@@ -1,0 +1,176 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=yes" />
+  <title>A Virginia Tech Tech Together Campaign Application Proposal</title>
+  <link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}" />
+  <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  <script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+  <style type="text/css">
+    .jumbotron {
+      background: #861F41;
+      color: white;
+      padding-bottom: 80px
+    }
+
+    .jumbotron .btn-primary {
+      background: #C64600;
+      border-color: #C64600
+    }
+
+    .jumbotron .btn-primary:hover {
+      background: #E87722
+    }
+
+    .jumbotron p {
+      color: #FFFFFF;
+      max-width: 75%;
+      margin: 1em auto 2em
+    }
+
+    .navbar+.jumbotron {
+      margin-top: -20px
+    }
+
+    .jumbotron .lang-logo {
+      display: block;
+      background: #b01302;
+      border-radius: 50%;
+      overflow: hidden;
+      width: 100px;
+      height: 100px;
+      margin: auto;
+      border: 2px solid white
+    }
+
+    .jumbotron .lang-logo img {
+      max-width: 100%
+    }
+
+    .center {
+      margin: auto;
+      text-align: center;
+    }
+
+    .footer {
+      margin: auto;
+      text-align: center;
+    }
+  </style>
+
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light" style="background-color: white;">
+    <div class="container">
+      <a class="navbar-brand" href="/">VTRAC</a>
+      <div class="navbar-header">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      </div>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <div class="form-group">
+              <input name="s" type="text" class="form-control" placeholder="Search">
+            </div>
+            <button type="submit" class="btn btn-default">Search</button>
+          </form>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li class="nav-item active">
+            <a class="nav-link" href="/jobs">Jobs </a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+              aria-haspopup="true" aria-expanded="false">
+              functions<span class="caret"></span></a>
+            <ul class="dropdown-menu" role="menu">
+            </ul>
+          </li>
+          {% if user.is_authenticated %}
+          <li class="nav-item"><a class="nav-link" href="/account">{{user.username|title}}</a></li>
+          <li class="nav-item"><a class="nav-link" href="/logout">logout</a></li>
+          {% else %}
+          <!-- <button class="btn btn-default" type="button" data-toggle="modal" data-target="#loginModal">login</button>
+          <button class="btn btn-default" type="button" data-toggle="modal" data-target="#registerModal">register</button> -->
+          <li><a class="nav-link" href="/login"><span class="glyphicon glyphicon-user"></span> Login</a></li>
+          <li><a class="nav-link" href="/register">Register</a></li>
+          {% endif %}
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+    <!-- 对话框HTML -->
+    <div class="modal fade" id="registerModal">
+      <div class="modal-dialog" style="width: 420px">
+        <div class="modal-content">
+          <div class="login-header text-center">
+            <p style="font-size: 45px; margin-bottom: 40px">独馨</p>
+            <p style="font-weight: 400">登录独馨，发现更大的世界</p>
+          </div>
+          <div class="container">
+            {% if messages %}
+            {% for message in messages %}
+            {% if message.tags == 'success'%}
+            <script>M.toast({ html: "{{message}}", classes: 'green rounded', displayLength: 2000 });</script>
+            {% elif message.tags == 'info'%}
+            <script>M.toast({ html: "{{message}}", classes: 'blue rounded', displayLength: 2000 });</script>
+            {% elif message.tags == 'warning'%}
+            <script>M.toast({ html: "{{message}}", classes: 'orange rounded', displayLength: 10000 });</script>
+            {% elif message.tags == 'error'%}
+            <script>M.toast({ html: "{{message}}", classes: 'red rounded', displayLength: 10000 });</script>
+            {% endif %}
+            {% endfor %}
+            {% endif %}
+            <div class="container">
+                <br>
+                <form method="POST">
+                    {% csrf_token %}
+                    {{form.as_p}}
+                    <button class="btn btn-outline-info" type="submit">Sign Up</button>
+                </form>
+            </div>
+            <div class="container text-center">
+                If you already have an account <a href="/login" target="blank"><strong>login</strong></a> instead.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <!-- 对话框HTML -->
+    <div class="modal fade" id="loginModal">
+      <div class="modal-dialog" style="width: 420px">
+        <div class="modal-content">
+          <div class="login-header">
+            <p style="font-size: 45px; margin-bottom: 40px">独馨</p>
+            <h1 style="font-weight: 400">登录独馨，连接中文科研</h1>
+          </div>
+          <div class="center">
+            <form method="POST">
+              {% csrf_token %}
+              {{form.as_p}}
+              <button class="btn btn-lg btn-default" type="submit">Login</button>
+            </form>
+            Don't have an account? <a href="/register" target="blank"><strong>register here</strong></a>!
+          </div>
+  
+        </div>
+      </div>
+    </div>
+
+  {% block content %}{% endblock %}
+
+  {% include 'footer.html' %}
+
+</body>
+
+</html>
