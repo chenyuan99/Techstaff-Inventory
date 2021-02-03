@@ -2,3 +2,4 @@ django
 gunicorn
 django-heroku
 django-mobile
+django-import-export

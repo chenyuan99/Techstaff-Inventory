@@ -16,7 +16,7 @@ SECRET_KEY = "CHANGE_ME!!!! (P.S. the SECRET_KEY environment variable will be us
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["techstaffinventory.herokuapp.com",'.localhost', '127.0.0.1', '[::1]' ]
 
 
 # Application definition
@@ -29,6 +29,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "hello",
+    "import_export",
 ]
 
 MIDDLEWARE = [
