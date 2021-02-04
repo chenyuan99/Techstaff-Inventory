@@ -27,8 +27,6 @@ urlpatterns = [
     path("login", hello.views.login_request, name="login"),
     path("all-building", hello.views.allbuilding, name="all-building"),
     path("jobs/", hello.views.newmanlibrary, name="jobs"),
-    path("togresson-hall", hello.views.togressonhall, name="togresson-hall"),
-    path("mcbryde-hall", hello.views.mcbrydehall, name="mcbryde-hall"),
     re_path(r'^favicon\.ico$', favicon_view),
     path("about", hello.views.about, name="about"),
     path("faq", hello.views.faq, name="faq"),
@@ -52,4 +50,5 @@ urlpatterns = [
     url(r'^delete_laptop/(?P<pk>\d+)$', hello.views.delete_laptop, name='delete_laptop'),
     url(r'^delete_desktop/(?P<pk>\d+)$', hello.views.delete_desktop, name='delete_desktop'),
     url(r'^delete_mobile/(?P<pk>\d+)$', hello.views.delete_mobile, name='delete_mobile'),
+    url(r'^some_view$', hello.views.some_view, name='some_view'),
 ]
