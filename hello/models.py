@@ -4,7 +4,7 @@ from django.db import models
 class Greeting(models.Model):
     when = models.DateTimeField("date created", auto_now_add=True)
 
-class Event(models.Model):
+class Ticket(models.Model):
     address = models.CharField(max_length=200)        
     start_time = models.DateTimeField(auto_now=True)   
     create_time = models.DateTimeField(auto_now=True)  
@@ -15,7 +15,7 @@ class Event(models.Model):
 
 
 class Guest(models.Model):
-    event = models.ForeignKey(Event, on_delete=models.CASCADE)  # 关联发布会id
+    ticket = models.ForeignKey(Ticket, on_delete=models.CASCADE)  # 关联发布会id
     realname = models.CharField(max_length=64)  # 姓名
     phone = models.CharField(max_length=16)     # 手机号
     email = models.EmailField()                 # 邮箱
@@ -23,7 +23,7 @@ class Guest(models.Model):
     create_time = models.DateTimeField(auto_now=True)  # 创建时间（自动获取当前时间）
 
     class Meta:
-        unique_together = ('phone', 'event')
+        unique_together = ('phone', 'ticket')
         ordering = ['-id']
 
     def __str__(self):
@@ -65,7 +65,12 @@ class JobUpdate(models.Model):
 class Device(models.Model):
     type = models.CharField(max_length=100, blank=False)
     price = models.IntegerField()
-
+    Manufacturer = models.CharField(max_length=100, default = '')     # Manufacturer
+    Model = models.CharField(max_length=100, default = '')
+    VT_Tag = models.CharField(max_length=100, default = '')
+    CS_Tag = models.CharField(max_length=100, default = '')
+    Serial_Number = models.CharField(max_length=100, default = '')
+    #
     choices = (
         ('AVAILABLE', 'Item ready to be purchased'),
         ('SOLD', 'Item Sold'),
@@ -76,26 +81,27 @@ class Device(models.Model):
     issue = models.CharField(max_length=100, default="No issues")
 
     class Meta:
-        abstract = True
+        unique_together = ('VT_Tag', 'CS_Tag')
+        ordering = ['-id']
 
 
     def _str_(self):
         return 'Type : {0} Price : {1}'.format(self.type, self.price)
 
 
-class Laptop(Device):
-    pass
+# class Laptop(Device):
+#     pass
 
-class Desktop(Device):
-    pass
+# class Desktop(Device):
+#     pass
 
-class Mobile(Device):
-    pass
+# class Mobile(Device):
+#     pass
 
 class Hostname(models.Model):
-    Hostname = models.ForeignKey(Event, on_delete=models.CASCADE)  # Hostname
+    Hostname = models.ForeignKey(Ticket, on_delete=models.CASCADE)  # Hostname
     Aliases = models.CharField(max_length=64)  # Aliases/cnames
     IP_Address = models.CharField(max_length=64)     # IP Address
     IPv6_Address = models.EmailField()                 # IPv6 Address
     MAC_Address = models.CharField(max_length=64)               #  MAC Address
-    create_time = models.DateTimeField(auto_now=True)  # 创建时间（自动获取当前时间）
+    create_time = models.DateTimeField(auto_now=True)  # create time (automatic)

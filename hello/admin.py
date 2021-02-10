@@ -3,24 +3,24 @@ from django.contrib import admin
 # Register your models here.
 from .models import *
 from import_export.admin import ImportExportModelAdmin
-class JobUpdateInline(admin.StackedInline):
-    model = JobUpdate
-    extra = 1
-    max_num = 48
+# class JobUpdateInline(admin.StackedInline):
+#     model = JobUpdate
+#     extra = 1
+#     max_num = 48
 
-class JobApplicationAdmin(admin.ModelAdmin):
-    inlines = [JobUpdateInline]
-    model = JobApplication
+# class JobApplicationAdmin(admin.ModelAdmin):
+#     inlines = [JobUpdateInline]
+#     model = JobApplication
 
-    list_filter = (
-        'place',
-        'job_type',
-        'active'
-    )
-    list_display = ('company', 'place', 'job_type', 'created_on', 'updated_on')
+#     list_filter = (
+#         'place',
+#         'job_type',
+#         'active'
+#     )
+#     list_display = ('company', 'place', 'job_type', 'created_on', 'updated_on')
 
-admin.site.register(JobApplication, JobApplicationAdmin)
-@admin.register(Desktop, Laptop, Mobile,)
+# admin.site.register(JobApplication, JobApplicationAdmin)
+# @admin.register(Device, Ticket)
 class ViewAdmin(ImportExportModelAdmin):
 	pass
 
@@ -45,6 +45,12 @@ class HostnameAdmin(admin.ModelAdmin):
         'create_time'
     )
 
+class DeviceAdmin(admin.ModelAdmin):
+    model = Device
 
+class TicketAdmin(admin.ModelAdmin):
+    model = Ticket
 
 admin.site.register(Hostname, HostnameAdmin)
+admin.site.register(Device, DeviceAdmin)
+admin.site.register(Ticket, TicketAdmin)

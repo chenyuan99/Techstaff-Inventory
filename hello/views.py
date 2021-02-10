@@ -94,17 +94,17 @@ def faq(request):
 def privacy(request):
     return render(request, "main/privacy-policy.html")
 
-def event(request):
+def ticket(request):
     username = request.user.get_username()
     # print(username)
     if request.method == 'POST':
-        form = AddEventForm(request.POST)
+        form = AddTicketForm(request.POST)
         if form.is_valid():
             address = form.cleaned_data['address']
-            Event.objects.create(address=address)
+            Ticket.objects.create(address=address)
             return render(request, "check-in.html", {"user": username, "form": form, "success": "Clock In Successfully!"})
     else:
-        form = AddEventForm()
+        form = AddTicketForm()
 
     return render(request, "check-in.html", {"user": username, "form": form})
 
@@ -115,7 +115,7 @@ def add_guest(request):
         form = AddGuestForm(request.POST)
 
         if form.is_valid():
-            event = form.cleaned_data['event']
+            ticket = form.cleaned_data['ticket']
             realname = form.cleaned_data['realname']
             phone = form.cleaned_data['phone']
             email = form.cleaned_data['email']
@@ -125,7 +125,7 @@ def add_guest(request):
             # else:
             #     sign = 0
 
-            Guest.objects.create(event=event, realname=realname,
+            Guest.objects.create(ticket=ticket, realname=realname,
                                  phone=phone, email=email, sign=sign)
             return render(request, "add-guest.html", {"user": username, "form": form, "success": "Add Guest Successfully"})
 
@@ -138,39 +138,28 @@ def check_out(request):
     return render(request, "check-out.html")
 
 def account(request):
-    query_results = Event.objects.all()
+    query_results = Ticket.objects.all()
     return render(request, "main/account.html",{'query_results':query_results})
     # return render(request, "main/account.html")
 
 
-def display_laptops(request):
-	items = Laptop.objects.all()
+def display_devices(request):
+	items = Device.objects.all()
 	context = {
 		'items': items,
-		'header': 'Laptops'
+		'header': 'Device'
 	}
 
 	return render(request, 'index.html', context)
 
-
-def display_desktops(request):
-	items = Desktop.objects.all()
+def display_tickets(request):
+	items = Ticket.objects.all()
 	context = {
 		'items': items,
-		'header': 'Desktops'
+		'header': 'Ticket'
 	}
 
-	return render(request, 'index.html', context)
-
-
-def display_mobiles(request):
-	items = Mobile.objects.all()
-	context = {
-		'items': items,
-		'header': 'Mobiles'
-	}
-
-	return render(request, 'index.html', context)
+	return render(request, 'main/account.html', context)
 
 
 def add_device(request, cls):
@@ -186,14 +175,8 @@ def add_device(request, cls):
 		return render(request, 'add_new.html', {'form': form})
 
 
-def add_laptop(request):
-	return add_device(request, LaptopForm)
-
-def add_desktop(request):
-	return add_device(request, DesktopForm)
-
-def add_mobile(request):
-	return add_device(request, MobileForm)
+def add_device(request):
+	return add_device(request, deviceForm)
 
 
 
@@ -212,21 +195,15 @@ def edit_device(request, pk, model, cls):
 		return render(request, 'edit_item.html', {'form': form})
 
 
-def edit_laptop(request, pk):
-	return edit_device(request, pk, Laptop, LaptopForm)
-
-def edit_desktop(request, pk):
-	return edit_device(request, pk, Desktop, DesktopForm)
-
-def edit_mobile(request, pk):
-	return edit_device(request, pk, Mobile, MobileForm)
+def edit_device(request, pk):
+	return edit_device(request, pk, device, deviceForm)
 
 
-def delete_laptop(request, pk):
+def delete_device(request, pk):
 
-	Laptop.objects.filter(id=pk).delete()
+	device.objects.filter(id=pk).delete()
 
-	items = Laptop.objects.all()
+	items = device.objects.all()
 
 	context = {
 		'items': items
@@ -234,31 +211,6 @@ def delete_laptop(request, pk):
 
 	return render(request, 'index.html', context)
 
-
-def delete_desktop(request, pk):
-
-	Desktop.objects.filter(id=pk).delete()
-
-	items = Desktop.objects.all()
-
-	context = {
-		'items': items
-	}
-
-	return render(request, 'index.html', context)
-
-
-def delete_mobile(request, pk):
-
-	Mobile.objects.filter(id=pk).delete()
-
-	items = Mobile.objects.all()
-
-	context = {
-		'items': items
-	}
-
-	return render(request, 'index.html', context)
 
 def some_view(request):
     # Create the HttpResponse object with the appropriate CSV header.

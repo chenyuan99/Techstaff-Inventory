@@ -18,19 +18,10 @@
 
         <div class="button-group">
 
-                <a href="{% url 'display_laptops' %}" class="btn btn-outline-primary btn-md" role="button">Laptops</a>
-                <a href="{% url 'add_laptop' %}" class="btn btn-outline-primary btn-md" role="button"><i
-                                class="fas fa-plus"></i></a>
-
-                <a href="{% url 'display_desktops' %}" class="btn btn-outline-primary btn-md" role="button">Desktops</a>
-                <a href="{% url 'add_desktop' %}" class="btn btn-outline-primary btn-md" role="button"><i
-                                class="fas fa-plus"></i></a>
-
-                <a href="{% url 'display_mobiles' %}" class="btn btn-outline-primary btn-md" role="button">Mobiles</a>
-                <a href="{% url 'add_mobile' %}" class="btn btn-outline-primary btn-md" role="button"><i
-                                class="fas fa-plus"></i></a>
-
-
+                <a href="{% url 'display_devices' %}" class="btn btn-outline-primary btn-md" role="button">Devices</a>
+                <a href="{% url 'add_device' %}" class="btn btn-outline-primary btn-md" role="button">Add Devices</a>
+                <a href="{% url 'display_devices' %}" class="btn btn-outline-primary btn-md" role="button">Hostnames</a>
+                <a href="{% url 'add_device' %}" class="btn btn-outline-primary btn-md" role="button">Add Hostnames</a>
         </div>
 
         <br>
@@ -58,30 +49,14 @@
                                 <td>${{ item.price }}</td>
                                 <td>{{ item.status }}</td>
                                 <td>{{ item.issue }}</td>
-                                {% if header|lower == "laptops" %}
+                                {% if header|lower == "devices" %}
                                 <td>
-                                        <a href="{% url 'edit_laptop' item.pk %}" class="btn btn-outline-info btn-sm"
+                                        <a href="{% url 'edit_device' item.pk %}" class="btn btn-outline-info btn-sm"
                                                 role="button">Edit</a>
-                                        <a href="{% url 'delete_laptop' item.pk %}"
-                                                class="btn btn-outline-danger btn-sm" role="button"><i
-                                                        class="fas fa-trash"></i></a>
+                                        <a href="{% url 'delete_device' item.pk %}"
+                                                class="btn btn-outline-danger btn-sm" role="button">Delete</a>
                                 </td>
-                                {% elif header|lower == "desktops" %}
-                                <td>
-                                        <a href="{% url 'edit_desktop' item.pk %}" class="btn btn-outline-info btn-sm"
-                                                role="button">Edit</a>
-                                        <a href="{% url 'delete_desktop' item.pk %}"
-                                                class="btn btn-outline-danger btn-sm" role="button"><i
-                                                        class="fas fa-trash"></i></a>
-                                </td>
-                                {% else %}
-                                <td>
-                                        <a href="{% url 'edit_mobile' item.pk %}" class="btn btn-outline-info btn-sm"
-                                                role="button">Edit</a>
-                                        <a href="{% url 'delete_mobile' item.pk %}"
-                                                class="btn btn-outline-danger btn-sm" role="button"><i
-                                                        class="fas fa-trash"></i></a>
-                                </td>
+                               
                                 {% endif %}
 
                         </tr>

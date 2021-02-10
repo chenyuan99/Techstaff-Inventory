@@ -2,83 +2,65 @@
 {% load static %}
 {% block content %}
 <div class="jumbotron text-center">
-    <div class="container">
-        <h1>Account</h1>
-        <p>{{user.username|title}}</p>
-    </div>
+  <div class="container">
+    <h1>Account</h1>
+    <p>{{user.username|title}}</p>
+  </div>
 </div>
 <div class="container ">
-    <div class="panel panel-default">
-        <!-- Default panel contents -->
-        <div class="panel-heading text-center"><h3>Saved Places</h3></div>
-
-        <!-- Table -->
-        <table>
-            <tr>
-                <th>Field 1</th>
-                ...
-                <th>Field N</th>
-            </tr>
-            {% for item in query_results %}
-            <tr> 
-                <td>{{ item.field1 }}</td>
-                ...
-                <td>{{ item.fieldN }}</td>
-            </tr>
-            {% endfor %}
-        </table>
+  <div class="panel panel-default">
+    <!-- Default panel contents -->
+    <div class="panel-heading text-center">
+      <h3>Your History</h3>
     </div>
-    <div class="panel panel-default">
-        <!-- Default panel contents -->
-        <div class="panel-heading text-center"><h3>Your History</h3></div>
 
-        <!-- Table -->
-        <table>
-            <tr>
-                <th>Field 1</th>
-                ...
-                <th>Field N</th>
-            </tr>
-            {% for item in query_results %}
-            <tr> 
-                <td>{{ item.field1 }}</td>
-                ...
-                <td>{{ item.fieldN }}</td>
-            </tr>
-            {% endfor %}
-        </table>
+    <!-- Table -->
+    <br>
+
+    <div class="button-group">
+      <a href="{% url 'display_tickets' %}" class="btn btn-outline-primary btn-md" role="button">Tickets</a>
     </div>
-</div>
-<div class="container ">
-<table class="table table-hover">
-    <thead>
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">First</th>
-        <th scope="col">Last</th>
-        <th scope="col">Handle</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <th scope="row">1</th>
-        <td>Mark</td>
-        <td>Otto</td>
-        <td>@mdo</td>
-      </tr>
-      <tr>
-        <th scope="row">2</th>
-        <td>Jacob</td>
-        <td>Thornton</td>
-        <td>@fat</td>
-      </tr>
-      <tr>
-        <th scope="row">3</th>
-        <td>Larry</td>
-        <td>the Bird</td>
-        <td>@twitter</td>
-      </tr>
-    </tbody>
-  </table>
+
+    <br>
+
+    <h4>Currently Viewing {{ header }}</h4>
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>id</th>
+          <th>Model</th>
+          <th>Price</th>
+          <th>Status</th>
+          <th>Issues</th>
+          <th>Edit or Delete</th>
+        </tr>
+      </thead>
+
+      <tbody>
+
+        {% for item in items %}
+
+        <tr>
+          <td>{{ item.pk }}</td>
+          <td>{{ item.type }}</td>
+          <td>${{ item.price }}</td>
+          <td>{{ item.status }}</td>
+          <td>{{ item.issue }}</td>
+          {% if header|lower == "devices" %}
+          <td>
+            <a href="{% url 'edit_device' item.pk %}" class="btn btn-outline-info btn-sm" role="button">Edit</a>
+            <a href="{% url 'delete_device' item.pk %}" class="btn btn-outline-danger btn-sm" role="button">Delete</a>
+          </td>
+
+          {% endif %}
+
+        </tr>
+
+        {% endfor %}
+
+      </tbody>
+
+    </table>
+  </div>
 </div>
 {% endblock %}

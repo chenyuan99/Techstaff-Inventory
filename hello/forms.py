@@ -19,7 +19,7 @@ class NewUserForm(UserCreationForm):
         return user
 
 # add event form
-class AddEventForm(forms.Form):
+class AddTicketForm(forms.Form):
     # name = forms.CharField(max_length=100)           
     # limit = forms.IntegerField()                      # 限制人数
     # status = forms.BooleanField(required=False)       # 状态
@@ -31,23 +31,9 @@ class AddEventForm(forms.Form):
 class AddGuestForm(forms.ModelForm):
     class Meta:
         model = Guest
-        fields = ['event', 'realname', 'phone', 'email', 'sign']
+        fields = ['ticket', 'realname', 'phone', 'email', 'sign']
 
-class LaptopForm(forms.ModelForm):
+class deviceForm(forms.ModelForm):
 	class Meta:
-		model = Laptop
-		fields = ('type', 'price', 'status', 'issue')
-
-
-
-class DesktopForm(forms.ModelForm):
-	class Meta:
-		model = Desktop
-		fields = ('type', 'price', 'status', 'issue')
-
-
-
-class MobileForm(forms.ModelForm):
-	class Meta:
-		model = Mobile
+		model = Device
 		fields = ('type', 'price', 'status', 'issue')
