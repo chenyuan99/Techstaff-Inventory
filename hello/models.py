@@ -91,3 +91,11 @@ class Desktop(Device):
 
 class Mobile(Device):
     pass
+
+class Hostname(models.Model):
+    Hostname = models.ForeignKey(Event, on_delete=models.CASCADE)  # Hostname
+    Aliases = models.CharField(max_length=64)  # Aliases/cnames
+    IP_Address = models.CharField(max_length=64)     # IP Address
+    IPv6_Address = models.EmailField()                 # IPv6 Address
+    MAC_Address = models.CharField(max_length=64)               #  MAC Address
+    create_time = models.DateTimeField(auto_now=True)  # 创建时间（自动获取当前时间）

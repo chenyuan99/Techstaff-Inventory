@@ -19,7 +19,32 @@ class JobApplicationAdmin(admin.ModelAdmin):
     )
     list_display = ('company', 'place', 'job_type', 'created_on', 'updated_on')
 
-# admin.site.register(JobApplication, JobApplicationAdmin)
-@admin.register(Desktop, Laptop, Mobile)
+admin.site.register(JobApplication, JobApplicationAdmin)
+@admin.register(Desktop, Laptop, Mobile,)
 class ViewAdmin(ImportExportModelAdmin):
 	pass
+
+class HostnameAdmin(admin.ModelAdmin):
+    model = Hostname
+
+    list_filter =(
+        'Hostname',
+        'Aliases',
+        'IP_Address',
+        'IPv6_Address',
+        'MAC_Address',
+        'create_time'
+    )
+
+    list_display = (
+        'Hostname',
+        'Aliases',
+        'IP_Address',
+        'IPv6_Address',
+        'MAC_Address',
+        'create_time'
+    )
+
+
+
+admin.site.register(Hostname, HostnameAdmin)
