@@ -37,3 +37,8 @@ class deviceForm(forms.ModelForm):
 	class Meta:
 		model = Device
 		fields = ('type', 'price', 'status', 'issue')
+
+class AddHostnameForm(forms.ModelForm):
+	class Meta:
+		model = Hostname
+		fields = ('Hostname', 'Aliases', 'IP_Address', 'IPv6_Address', 'MAC_Address')

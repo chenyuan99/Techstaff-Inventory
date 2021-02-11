@@ -152,6 +152,15 @@ def display_devices(request):
 
 	return render(request, 'index.html', context)
 
+def display_hostnames(request):
+	items = Hostname.objects.all()
+	context = {
+		'items': items,
+		'header': 'Hostname'
+	}
+
+	return render(request, 'index.html', context)
+
 def display_tickets(request):
 	items = Ticket.objects.all()
 	context = {
@@ -162,7 +171,7 @@ def display_tickets(request):
 	return render(request, 'main/account.html', context)
 
 
-def add_device(request, cls):
+def add_item(request, cls):
 	if request.method == 'POST':
 		form = cls(request.POST)
 
@@ -176,9 +185,10 @@ def add_device(request, cls):
 
 
 def add_device(request):
-	return add_device(request, deviceForm)
+	return add_item(request, deviceForm)
 
-
+def add_hostname(request):
+	return add_item(request, AddHostnameForm)
 
 def edit_device(request, pk, model, cls):
 	item = get_object_or_404(model, pk=pk)
@@ -200,15 +210,19 @@ def edit_device(request, pk):
 
 
 def delete_device(request, pk):
-
 	device.objects.filter(id=pk).delete()
-
 	items = device.objects.all()
-
 	context = {
 		'items': items
 	}
+	return render(request, 'index.html', context)
 
+def delete_hostname(request, pk):
+	Hostname.objects.filter(id=pk).delete()
+	items = Hostname.objects.all()
+	context = {
+		'items': items
+	}
 	return render(request, 'index.html', context)
 
 
