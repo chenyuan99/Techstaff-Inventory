@@ -99,9 +99,10 @@ class Device(models.Model):
 #     pass
 
 class Hostname(models.Model):
-    Hostname = models.ForeignKey(Ticket, on_delete=models.CASCADE)  # Hostname
+    Hostname = models.CharField(max_length=64)
+    # models.ForeignKey(Ticket, on_delete=models.CASCADE)  # Hostname
     Aliases = models.CharField(max_length=64)  # Aliases/cnames
     IP_Address = models.CharField(max_length=64)     # IP Address
-    IPv6_Address = models.EmailField()                 # IPv6 Address
+    IPv6_Address = models.CharField(max_length=64)   # IPv6 Address
     MAC_Address = models.CharField(max_length=64)               #  MAC Address
     create_time = models.DateTimeField(auto_now=True)  # create time (automatic)
