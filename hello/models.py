@@ -1,13 +1,17 @@
 from django.db import models
 
 # Create your models here.
-# class Greeting(models.Model):
-#     when = models.DateTimeField("date created", auto_now_add=True)
 
 class Ticket(models.Model):
     address = models.CharField(max_length=200)        
     start_time = models.DateTimeField(auto_now=True)   
-    create_time = models.DateTimeField(auto_now=True)  
+    create_time = models.DateTimeField(auto_now=True)
+
+    choices = (
+        ('AVAILABLE', 'Item ready to be purchased'),
+        ('SOLD', 'Item Sold'),
+        ('RESTOCKING', 'Item restocking in few days')
+    )
     
     def __str__(self):
         return self.address
