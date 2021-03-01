@@ -1,37 +1,57 @@
-## Welcome to GitHub Pages
+# Techstaff Inventory
 
-You can use the [editor on GitHub](https://github.com/chenyuan99/Techstaff-Inventory/edit/master/docs/index.md) to maintain and preview the content for your website in Markdown files.
+## Project Team: OJBK
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+## Team Member
 
-### Markdown
+- Weikai Liang (Prooduct Manager)
+- Yuan Chen, Jun Chen, Kai Lynn
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+## Guidance
+- Before running the server, install the requirements:
+    In the project directory, type in ```pip install -r requirements.txt``` in terminal.
+    
+- Run server by:
+    In the project directory, type in ```python manage.py runserver``` in terminal.
+    
+- Create an admin account:
+    In the project directory, type in ```python manage.py createsuperuser``` in terminal.
 
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
+## Dockerfile
 ```
+FROM python:3.8
+ENV PYTHONUNBUFFERED 1
+WORKDIR /app
+COPY requirements.txt /app/requirements.txt
+RUN pip install -r requirements.txt
+COPY . /app
+```
+## docker-compose.yml
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/chenyuan99/Techstaff-Inventory/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+```
+version: '3'
+services:
+  db:
+    image: mysql:8
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_DATABASE='mydatabase'
+      - MYSQL_USER='root'
+      - MYSQL_PASSWORD='some_password'
+      - MYSQL_ROOT_PASSWORD='some_password'
+      - MYSQL_HOST=''
+    volumes:
+      - /tmp/app/mysqld:/var/run/mysqld
+      - ./db:/var/lib/mysql
+  web:
+    build: .
+    command: python manage.py runserver 0.0.0.0:8000
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+      - /tmp/app/mysqld:/run/mysqld
+    depends_on:
+      - db
+```
