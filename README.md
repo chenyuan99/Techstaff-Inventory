@@ -1,5 +1,12 @@
 # Techstaff Inventory
 
+## Project Team: OJBK
+
+## Team Member
+
+- Weikai Liang (Prooduct Manager)
+
+## Guidance
 - Before running the server, install the requirements:
     In the project directory, type in [pip install -r requirements.txt] in terminal.
     
