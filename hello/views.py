@@ -170,6 +170,8 @@ def display_tickets(request):
 
 	return render(request, 'main/account.html', context)
 
+def display_equipment_checkout_form(request):
+	return render(request, "check-out.html")
 
 def add_item(request, cls):
 	if request.method == 'POST':
