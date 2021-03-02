@@ -76,15 +76,6 @@ def register(request):
                   template_name = "main/register.html",
                   context={"form":form})
 
-def allbuilding(request):
-    return render(request, "building/all-building.html")
-
-def newmanlibrary(request):
-    return render(request, "building/newman-library.html")
-
-def togressonhall(request):
-    return render(request, "building/togresson-hall.html")
-
 def mcbrydehall(request):
     return render(request, "building/mcbryde-hall.html")
 

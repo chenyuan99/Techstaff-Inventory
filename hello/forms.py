@@ -22,7 +22,7 @@ class NewUserForm(UserCreationForm):
 class AddTicketForm(forms.Form):
     # name = forms.CharField(max_length=100)           
     # limit = forms.IntegerField()                      # 限制人数
-    # status = forms.BooleanField(required=False)       # 状态
+    sign = forms.BooleanField(required=False)       # 状态
     address = forms.CharField(max_length=200)         # 地址
     # start_time = forms.DateTimeField()                # 发布会时间
 
@@ -31,7 +31,7 @@ class AddTicketForm(forms.Form):
 class AddGuestForm(forms.ModelForm):
     class Meta:
         model = Guest
-        fields = ['ticket', 'realname', 'phone', 'email', 'sign']
+        fields = ['realname', 'phone', 'email', 'sign']
 
 class deviceForm(forms.ModelForm):
 	class Meta:
