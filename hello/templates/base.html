@@ -67,7 +67,7 @@
 <body>
   <nav class="navbar navbar-expand-lg navbar-light" style="background-color: white;">
     <div class="container">
-      <a class="navbar-brand" href="/">Techstaff Inventory</a>
+        <a class="navbar-brand" href="/"><button type="button" class="btn btn-outline-info">Techstaff Inventory</button></a>
       <div class="navbar-header">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
           aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -88,13 +88,14 @@
             </ul>
           </li>
           {% if user.is_authenticated %}
-          <li class="nav-item"><a class="nav-link" href="/account">{{user.username|title}}</a></li>
-          <li class="nav-item"><a class="nav-link" href="/logout">logout</a></li>
+          <li class="nav-item"><a class="nav-link" href="/account"><button type="button" class="btn btn-light">
+              {{user.username|title}}</button></a></li>
+              <li class="nav-item"><a class="nav-link" href="/logout"><button type="button" class="btn btn-danger">logout</button></a></li>
           {% else %}
           <!-- <button class="btn btn-default" type="button" data-toggle="modal" data-target="#loginModal">login</button>
           <button class="btn btn-default" type="button" data-toggle="modal" data-target="#registerModal">register</button> -->
-          <li><a class="nav-link" href="/login"><span class="glyphicon glyphicon-user"></span> Login</a></li>
-          <li><a class="nav-link" href="/register">Register</a></li>
+              <li><a class="nav-link" href="/login"><button type="button" class="btn btn-success"> Login</button></a></li>
+              <li><a class="nav-link" href="/register"><button type="button" class="btn btn-secondary">Register</button></a></li>
           {% endif %}
         </ul>
       </div>
