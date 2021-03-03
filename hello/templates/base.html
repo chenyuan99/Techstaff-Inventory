@@ -61,19 +61,68 @@
       text-align: center;
     }
 
-    .sidenav {
-  position: fixed;
-  z-index: 1;
-  top: 100px;
-  left: 10px;
-  overflow-x: hidden;
-  padding: 80px 0;
-}
+    /* The side navigation menu */
+    .sidebar {
+      margin: 0;
+      padding: 0;
+      width: 200px;
+      background-color: #f1f1f1;
+      position: fixed;
+      height: 100%;
+      overflow: auto;
+    }
 
-.sidenav a {
-  padding: 6px 8px 6px 16px;
-  color: #2196F3;
-}
+    /* Sidebar links */
+    .sidebar a {
+      display: block;
+      color: black;
+      padding: 16px;
+      text-decoration: none;
+    }
+
+    /* Active/current link */
+    .sidebar a.active {
+      background-color: #4CAF50;
+      color: white;
+    }
+
+    /* Links on mouse-over */
+    .sidebar a:hover:not(.active) {
+      background-color: #555;
+      color: white;
+    }
+
+    /* Page content. The value of the margin-left property should match the value of the sidebar's width property */
+    div.content {
+      margin-left: 200px;
+      padding: 1px 16px;
+      height: 1000px;
+    }
+
+    /* On screens that are less than 700px wide, make the sidebar into a topbar */
+    @media screen and (max-width: 700px) {
+      .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+      }
+
+      .sidebar a {
+        float: left;
+      }
+
+      div.content {
+        margin-left: 0;
+      }
+    }
+
+    /* On screens that are less than 400px, display the bar vertically, instead of horizontally */
+    @media screen and (max-width: 400px) {
+      .sidebar a {
+        text-align: center;
+        float: none;
+      }
+    }
   </style>
 
 </head>
@@ -81,7 +130,8 @@
 <body>
   <nav class="navbar sticky-top navbar-expand-lg navbar-light" style="background-color: white;">
     <div class="container-fluid">
-        <a class="navbar-brand" href="/"><button type="button" class="btn btn-outline-info">Techstaff Inventory</button></a>
+      <a class="navbar-brand" href="/"><button type="button" class="btn btn-outline-info">Techstaff
+          Inventory</button></a>
       <div class="navbar-header">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
           aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -99,19 +149,21 @@
           </li>
           {% if user.is_authenticated %}
           <li class="nav-item"><a class="nav-link" href="/dashboard"><button type="button" class="btn btn-light">
-            Dashboard</button></a></li>
+                Dashboard</button></a></li>
           <li class="nav-item"><a class="nav-link" href="/account"><button type="button" class="btn btn-light">
-              {{user.username|title}}</button></a></li>
-              <li class="nav-item"><a class="nav-link" href="/logout"><button type="button" class="btn btn-danger">logout</button></a></li>
+                {{user.username|title}}</button></a></li>
+          <li class="nav-item"><a class="nav-link" href="/logout"><button type="button"
+                class="btn btn-danger">logout</button></a></li>
           {% else %}
-              <li><a class="nav-link" href="/login"><button type="button" class="btn btn-success"> Login</button></a></li>
-              <li><a class="nav-link" href="/register"><button type="button" class="btn btn-secondary">Register</button></a></li>
+          <li><a class="nav-link" href="/login"><button type="button" class="btn btn-success"> Login</button></a></li>
+          <li><a class="nav-link" href="/register"><button type="button" class="btn btn-secondary">Register</button></a>
+          </li>
           {% endif %}
         </ul>
       </div>
     </div>
   </nav>
-  
+
 
 
   {% block content %}{% endblock %}
