@@ -28,8 +28,10 @@
       <thead>
         <tr>
           <th>id</th>
-          <th>Model</th>
-          <th>Price</th>
+          <th>Address</th>
+          <th>Device</th>
+          <th>Faculty</th>
+          <th>Action</th>
           <th>Status</th>
           <th>Issues</th>
           <th>Edit or Delete</th>
@@ -42,11 +44,13 @@
 
         <tr>
           <td>{{ item.pk }}</td>
-          <td>{{ item.type }}</td>
-          <td>${{ item.price }}</td>
+          <td>{{ item.address }}</td>
+          <td>{{ item.device }}</td>
+          <td>{{ item.faculty }}</td>
+          <td>{{ item.action }}</td>
           <td>{{ item.status }}</td>
           <td>{{ item.issue }}</td>
-          {% if header|lower == "devices" %}
+          {% if header|lower == "ticket" %}
           <td>
             <a href="{% url 'edit_device' item.pk %}" class="btn btn-outline-info btn-sm" role="button">Edit</a>
             <a href="{% url 'delete_device' item.pk %}" class="btn btn-outline-danger btn-sm" role="button">Delete</a>

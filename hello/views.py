@@ -183,7 +183,7 @@ def add_device(request):
 def add_hostname(request):
 	return add_item(request, AddHostnameForm)
 
-def edit_device(request, pk, model, cls):
+def edit_item(request, pk, model, cls):
 	item = get_object_or_404(model, pk=pk)
 
 	if request.method == 'POST':
@@ -199,7 +199,7 @@ def edit_device(request, pk, model, cls):
 
 
 def edit_device(request, pk):
-	return edit_device(request, pk, device, deviceForm)
+	return edit_item(request, pk, Device, deviceForm)
 
 
 def delete_device(request, pk):
