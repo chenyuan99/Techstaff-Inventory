@@ -1,20 +1,20 @@
 {% extends "base.html" %}
 {% block content %}
-<div class="jumbotron text-center">
-    <div class="container">
-        <h1>Techstaff Inventory</h1>
-        <br>
-        <h2>Log in</h2>
-    </div>
-</div>
+	<div class="jumbotron text-center">
+		<div class="container">
+			<h1>Techstaff Inventory</h1>
+			<br>
+			<h2>Log in</h2>
+		</div>
+	</div>
 
-    <div class="center" >
-        <form method="POST">
-        {% csrf_token %}
-        {{form.as_p}}
-            <button class="btn btn-lg btn-success" type="submit">Login</button>
-        </form>
-        <br>
-        Don't have an account? <a href="/register" target="blank"><strong>register here</strong></a>!
-    </div>
+	<div class="center">
+		<form method="POST">
+			{% csrf_token %}
+			{{ form.as_p }}
+			<button class="btn btn-lg btn-success" type="submit">Login</button>
+		</form>
+		<br>
+		Don't have an account? <a href="/register" target="blank"><strong>register here</strong></a>!
+	</div>
 {% endblock %}
