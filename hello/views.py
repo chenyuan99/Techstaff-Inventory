@@ -127,6 +127,8 @@ def add_guest(request):
     return render(request, "add-guest.html", {"user": username, "form": form})
 
 def check_out(request):
+    if not request.user.is_authenticated:
+        raise PermissionDenied
     context = {
         'VT_Property': "VT000320684",
         'CS_Property': "CS0002824",
