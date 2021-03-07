@@ -3,7 +3,6 @@
 <html lang="en">
 
 <head>
-<<<<<<< HEAD
   <meta name="viewport"
     content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=yes" />
   <title>Virginia Tech Techstaff Inventory</title>
@@ -151,149 +150,10 @@
 
     }
   </style>
-=======
-	<meta name="viewport"
-		  content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=yes"/>
-	<title>Virginia Tech Techstaff Inventory</title>
-	<link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}"/>
-	<link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
-	<!-- <link rel="stylesheet" type="text/css" href="./hello/static/root.min.css" /> -->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/4.1.3/jquery.min.js"></script>
-	<script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-	<style type="text/css">
-        .jumbotron {
-            background: #861F41;
-            color: white;
-            padding-bottom: 80px
-        }
-
-        .jumbotron .btn-primary {
-            background: #C64600;
-            border-color: #C64600
-        }
-
-        .jumbotron .btn-primary:hover {
-            background: #E87722
-        }
-
-        .jumbotron p {
-            color: #FFFFFF;
-            max-width: 75%;
-            margin: 1em auto 2em
-        }
-
-        .navbar + .jumbotron {
-            margin-top: -20px
-        }
-
-        .jumbotron .lang-logo {
-            display: block;
-            background: #b01302;
-            border-radius: 50%;
-            overflow: hidden;
-            width: 100px;
-            height: 100px;
-            margin: auto;
-            border: 2px solid white
-        }
-
-        .jumbotron .lang-logo img {
-            max-width: 100%
-        }
-
-        .center {
-            margin: auto;
-            text-align: center;
-        }
-
-        .footer {
-            margin: auto;
-            text-align: center;
-        }
-
-        /* The side navigation menu */
-        .sidebar {
-            margin: 0;
-            padding: 0;
-            width: 200px;
-            background-color: #f1f1f1;
-            position: fixed;
-            height: 100%;
-            overflow: auto;
-        }
-
-        /* Sidebar links */
-        .sidebar a {
-            display: block;
-            color: black;
-            padding: 16px;
-            text-decoration: none;
-        }
-
-        /* Active/current link */
-        .sidebar a.active {
-            background-color: #4CAF50;
-            color: white;
-        }
-
-        /* Links on mouse-over */
-        .sidebar a:hover:not(.active) {
-            background-color: #555;
-            color: white;
-        }
-
-        /* Page content. The value of the margin-left property should match the value of the sidebar's width property */
-        div.content {
-            margin-left: 200px;
-            padding: 1px 16px;
-            height: 1000px;
-        }
-
-        .navbar-brand {
-            width: 150px;
-            font-size: 24px;
-        }
-
-        .navbar-brand img {
-            height: 50px;
-            /* put value of image height as your need */
-            float: left;
-            margin-right: 7px;
-        }
-
-        /* On screens that are less than 700px wide, make the sidebar into a topbar */
-        @media screen and (max-width: 700px) {
-            .sidebar {
-                width: 100%;
-                height: auto;
-                position: relative;
-            }
-
-            .sidebar a {
-                float: left;
-            }
-
-            div.content {
-                margin-left: 0;
-            }
-        }
-
-        /* On screens that are less than 400px, display the bar vertically, instead of horizontally */
-        @media screen and (max-width: 400px) {
-            .sidebar a {
-                text-align: center;
-                float: none;
-            }
-
-
-        }
-	</style>
->>>>>>> 25785417abe927c2b2af3230ac76598e4da0b461
 
 </head>
 
 <body>
-<<<<<<< HEAD
   <nav class="navbar sticky-top navbar-expand-lg  navbar-light" style="background-color: white;">
     <div class="container-fluid">
       <a class="navbar-brand " href="/">
@@ -344,65 +204,6 @@
   {% block content %}{% endblock %}
 
   {% include 'footer.html' %}
-=======
-	<nav class="navbar sticky-top navbar-expand-lg  navbar-light" style="background-color: white;">
-		<div class="container-fluid">
-			<a class="navbar-brand" href="/"><img alt="" class="vt-logo-image"
-												  src="https://www.assets.cms.vt.edu/images/maroonVTonWhite.svg"
-												  focusable="false" aria-hidden="true">
-
-			</a>
-			<a class="navbar-brand" href="/">
-				<button	type="button" class="btn btn-outline-info">Techstaff Inventory</button></a>
-			<div class="navbar-header">
-				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-						aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-					<span class="sr-only">Toggle navigation</span>
-					<span class="navbar-toggler-icon"></span>
-				</button>
-			</div>
-			<div class="collapse navbar-collapse" id="navbarSupportedContent">
-				<ul class="navbar-nav mr-auto">
-				</ul>
-				<ul class="nav navbar-nav navbar-right">
-					<li class="nav-item dropdown">
-						<ul class="dropdown-menu" role="menu">
-						</ul>
-					</li>
-					{% if user.is_authenticated %}
-						<li class="nav-item"><a class="nav-link" href="/dashboard">
-							<button type="button" class="btn btn-light">
-								Dashboard
-							</button>
-						</a></li>
-						<li class="nav-item"><a class="nav-link" href="/account">
-							<button type="button" class="btn btn-light">
-								{{ user.username|title }}</button>
-						</a></li>
-						<li class="nav-item"><a class="nav-link" href="/logout">
-							<button type="button"
-									class="btn btn-danger">logout
-							</button>
-						</a></li>
-					{% else %}
-						<li><a class="nav-link" href="/login">
-							<button type="button" class="btn btn-success"> Login</button>
-						</a></li>
-						<li><a class="nav-link" href="/register">
-							<button type="button" class="btn btn-secondary">Register</button>
-						</a>
-						</li>
-					{% endif %}
-				</ul>
-			</div>
-		</div>
-	</nav>
-
-
-{% block content %}{% endblock %}
-
-{% include 'footer.html' %}
->>>>>>> 25785417abe927c2b2af3230ac76598e4da0b461
 
 </body>
 
