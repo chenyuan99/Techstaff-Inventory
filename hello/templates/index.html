@@ -7,7 +7,7 @@
 	<div class="jumbotron text-center">
 		<div class="container">
 			<h1>Techstaff Inventory</h1>
-			<p>A CS4704 Project</p>
+
 		</div>
 	</div>
 	<div class="container ">
@@ -17,9 +17,10 @@
 		<div class="button-group">
 
 			<a href="{% url 'display_devices' %}" class="btn btn-outline-primary btn-md" role="button">Devices</a>
-			<a href="{% url 'add_device' %}" class="btn btn-outline-primary btn-md" role="button">Add Devices</a>
+{#			<a href="{% url 'add_device' %}" class="btn btn-outline-primary btn-md" role="button">Add Devices</a>#}
 			<a href="{% url 'display_hostnames' %}" class="btn btn-outline-primary btn-md" role="button">Hostnames</a>
-			<a href="{% url 'add_hostname' %}" class="btn btn-outline-primary btn-md" role="button">Add Hostnames</a>
+{#			<a href="{% url 'add_hostname' %}" class="btn btn-outline-primary btn-md" role="button">Add Hostnames</a>#}
+			<a href="{% url 'display_hostnames' %}" class="btn btn-outline-primary btn-md" role="button">Guest look up</a>
 		</div>
 
 		<br>
@@ -39,7 +40,7 @@
 					<th>Serial_Number</th>
 					<th>Status</th>
 					<th>Issues</th>
-					<th>Edit or Delete</th>
+{#					<th>Edit or Delete</th>#}
 				</tr>
 			{% endif %}
 			{% if header|lower == "hostname" %}
@@ -49,7 +50,7 @@
 				<th>IP_Address</th>
 				<th>IPv6_Address</th>
 				<th>MAC_Address</th>
-				<th>Edit or Delete</th>
+{#				<th>Edit or Delete</th>#}
 
 			{% endif %}
 			</thead>
@@ -70,11 +71,11 @@
 						<td>{{ item.Serial_Number }}</td>
 						<td>{{ item.status }}</td>
 						<td>{{ item.issue }}</td>
-						<td>
-							<a href="{% url 'edit_device' item.pk %}" class="btn btn-outline-info btn-sm" role="button">Edit</a>
-							<a href="{% url 'delete_device' item.pk %}" class="btn btn-outline-danger btn-sm"
-							   role="button">Delete</a>
-						</td>
+{#						<td>#}
+{#							<a href="{% url 'edit_device' item.pk %}" class="btn btn-outline-info btn-sm" role="button">Edit</a>#}
+{#							<a href="{% url 'delete_device' item.pk %}" class="btn btn-outline-danger btn-sm"#}
+{#							   role="button">Delete</a>#}
+{#						</td>#}
 
 					{% endif %}
 
@@ -82,16 +83,15 @@
 
 						<td>{{ item.pk }}</td>
 						<td>{{ item.Hostname }}</td>
-						<td>${{ item.Aliases }}</td>
-						<td>{{ item.Manufacturer }}</td>
+						<td>{{ item.Aliases }}</td>
 						<td>{{ item.IP_Address }}</td>
 						<td>{{ item.IPv6_Address }}</td>
 						<td>{{ item.MAC_Address }}</td>
-						<td>
-							<a href="{% url 'edit_device' item.pk %}" class="btn btn-outline-info btn-sm" role="button">Edit</a>
-							<a href="{% url 'delete_device' item.pk %}" class="btn btn-outline-danger btn-sm"
-							   role="button">Delete</a>
-						</td>
+{#						<td>#}
+{#							<a href="{% url 'edit_device' item.pk %}" class="btn btn-outline-info btn-sm" role="button">Edit</a>#}
+{#							<a href="{% url 'delete_device' item.pk %}" class="btn btn-outline-danger btn-sm"#}
+{#							   role="button">Delete</a>#}
+{#						</td>#}
 
 					{% endif %}
 
