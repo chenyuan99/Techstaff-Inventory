@@ -26,6 +26,10 @@ class AddTicketForm(forms.Form):
     address = forms.CharField(max_length=200)         # 地址
     # start_time = forms.DateTimeField()                # 发布会时间
 
+    class Meta:
+        model = Ticket
+        fields = ('Hostname', 'Aliases', 'IP_Address', 'IPv6_Address', 'MAC_Address')
+
 
 # add guest
 class AddGuestForm(forms.ModelForm):
@@ -34,11 +38,11 @@ class AddGuestForm(forms.ModelForm):
         fields = ['realname', 'phone', 'email', 'sign']
 
 class deviceForm(forms.ModelForm):
-	class Meta:
-		model = Device
-		fields = ('type', 'price', 'status', 'issue')
+    class Meta:
+        model = Device
+        fields = ('type', 'price', 'status', 'issue')
 
 class AddHostnameForm(forms.ModelForm):
-	class Meta:
-		model = Hostname
-		fields = ('Hostname', 'Aliases', 'IP_Address', 'IPv6_Address', 'MAC_Address')
+    class Meta:
+        model = Hostname
+        fields = ('Hostname', 'Aliases', 'IP_Address', 'IPv6_Address', 'MAC_Address')

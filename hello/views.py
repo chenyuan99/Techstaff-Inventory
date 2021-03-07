@@ -127,7 +127,21 @@ def add_guest(request):
     return render(request, "add-guest.html", {"user": username, "form": form})
 
 def check_out(request):
-    return render(request, "check-out.html")
+    context = {
+        'VT_Property': "VT000320684",
+        'CS_Property': "CS0002824",
+        "is_student_user": False,
+    }
+
+    # Render the HTML template index.html with the data in the context variable
+    return render(request, "check-out.html", context=context)
+
+# def checkout_item(request, pk, model, cls):
+
+
+#     else:
+#         form = cls(instance=item)
+#         return render(request, 'check-out.html', context=context)
 
 def account(request):
     query_results = Ticket.objects.all()
@@ -191,6 +205,9 @@ def add_device(request):
 def add_hostname(request):
     return add_item(request, AddHostnameForm)
 
+def add_ticket(request):
+    return add_item(request, AddTicketForm)
+
 def edit_item(request, pk, model, cls):
     if not request.user.is_authenticated:
         raise PermissionDenied
@@ -231,6 +248,13 @@ def delete_hostname(request, pk):
     }
     return render(request, 'index.html', context)
 
+def delete_ticket(request, pk):
+    Ticket.objects.filter(id=pk).delete()
+    items = Hostname.objects.all()
+    context = {
+        'items': items
+    }
+    return render(request, 'main/account.html', context)
 
 def some_view(request):
     # Create the HttpResponse object with the appropriate CSV header.
