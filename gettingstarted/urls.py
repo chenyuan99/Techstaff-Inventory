@@ -39,13 +39,7 @@ urlpatterns = [
     url(r'^display_tickets$', hello.views.display_tickets, name='display_tickets'),
     url(r'^add_device$', hello.views.add_device, name='add_device'),
     url(r'^add_hostname$', hello.views.add_hostname, name='add_hostname'),
-
-
-
     url(r'^edit_device/(?P<pk>\d+)$', hello.views.edit_device, name='edit_device'),
-
-
-
     url(r'^delete_device/(?P<pk>\d+)$', hello.views.delete_device, name='delete_device'),
     url(r'^some_view$', hello.views.some_view, name='some_view'),
 ]

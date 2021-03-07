@@ -1,35 +1,180 @@
-{% extends "base.html" %}
-{% load static %}
-{% block content %}
 
-	<div class="jumbotron text-center">
-		<div class="container">
-			<h1>Visitor Clock out</h1>
-		</div>
-	</div>
-	<div class="container text-center">
-		<div class="row">
-			<form class="form-horizontal" role="form" method="post">
-				<div class="form-group">
-					<label for="lastname" class="col-sm-2 control-label">Building:</label>
-					<div class="col-sm-10">
-						{% csrf_token %}
-						{{ form.address }}
-					</div>
-				</div>
-				<div class="form-group">
-					<label for="lastname" class="col-sm-2 control-label"></label>
-					<div class="col-sm-10">
-						<p style="color:green">{{ success }}</p>
-					</div>
-				</div>
-				<div class="form-group">
-					<div class="col-sm-offset-2 col-sm-10">
-						<button type="submit" class="btn btn-default">Clock Out</button>
-					</div>
-				</div>
-
-			</form>
-		</div>
-	</div>
-{% endblock %}
+<HTML>
+	<HEAD>
+	  <TITLE>
+		Computer Science Checkout Form
+	  </TITLE>
+	</HEAD>
+	<BODY BGCOLOR=FFFFFF TEXT=000000>
+	<CENTER>
+		<img width = 322 src="../static/vt_inline_computer_science.png">
+	  <H2>
+		Equipment Checkout Form
+	  </H2>
+	  All equipment checked out is property of the CS Dept. and should be returned in 
+	  exactly the same condition.  All equipment is inventoried.  By signing below, you
+	  agree that you are responisble for this equipment and its return.  Faculty/Staff
+	  loaner machines must be returned.
+	  <P>
+	  </center>
+	  <table cellpadding=2 cellspacing=2 border=0>
+	  <tr>
+		<td colspan=2>
+		  <b>VT Property #:</b>
+		</td>
+		<td>
+		  <u>VT000320683</u>
+		</td>
+	  </tr>
+	  <tr>
+		<td colspan=2> 
+		  <b>CS Property #:</b>
+		</td>
+		<td>
+		  <u>CS0002824</u>
+		</td>
+	  </tr>
+	  <tr>
+		<td colspan=2>
+		  <b>Serial #:</b>
+		</td>
+		<td>
+		  <u>10HSNL1</u>
+		</td>
+	  </tr>
+	  <tr>
+		<td colspan=2>
+		  <b>Description:</b>
+		</td>
+		<td>
+		  <u>DELL PowerEdge R410</u>
+		</td>
+	  </tr>
+	  <tr>
+		<td colspan=2>
+		  <b>Purchase Order:</b>
+		</td>
+		<td>
+		  <u>P1089595</u>
+		</td>
+	  </tr>
+	  <tr>
+		<td colspan=3>
+		  <b>Checked Out To (Faculty/Staff Member):</b>
+		</td>
+	  </tr>
+	  <tr>
+		<td width=50>
+		</td>
+		<td>
+		  Name:
+		</td>
+		<td>
+		  <u></u>
+		</td>
+	  </tr>
+	  <tr>
+		<td width=50>
+		</td>
+		<td>
+		  Office:
+		</td>
+		<td>
+		  <u> </u>
+		</td>
+	  </tr>
+	  <tr>
+		<td width=50>
+		</td>
+		<td>
+		  Email/Phone:
+		</td>
+		<td>
+		  <u></b>
+		</td>
+	  </tr>
+	  <tr>
+		<td colspan=3>
+		   <b>For Use By (Faculty/Staff/Grad Student):</b>
+		</td>
+	  </tr>
+	  <tr>
+		<td width=50>
+		</td>
+		<td>
+		  Name:
+		</td>
+		<td>
+		  <u></u>
+		</td>
+	  </tr>
+	  <tr>
+		<td width=50>
+		</td>
+		<td>
+		  Email/Phone:
+		</td>
+		<td>
+		  <u></u>
+		</td>
+	  </tr>
+	  <tr>
+		<td colspan=3>
+		  <b>Check one:</b>
+		</td>
+	  </tr>
+	  <tr>
+		<td width=50>
+		</td>
+		<td> 
+		  <img width=70 height=30 src=../static/underline.gif valign=bottom> 
+		</td>
+		<td width=700>
+		  This device will remain within the United States while in my care.
+		</td>
+	  </tr>
+	  <tr>
+		<td width=50>
+		</td>
+		<td>
+		  <img width=70 height=30 src=../static/underline.gif valign=bottom> 
+		</td>
+		<td>This device may be shipped or transported during international
+  travel by myself or my students. I have attended OESRC training and understand I must contact that office for current regulations review and to file appropriate documents before the device leaves the US.
+		</td>
+	  </tr>
+	  <tr>
+		<td colspan=2>
+		  <b>Signature:</b>
+		</td>
+		<td>
+		  <img width=300 height=30 src=../static/underline.gif valign=bottom>
+		</td>
+	  </tr>
+	  <tr>
+		<td colspan=2>
+		  <b>Date Checked Out:</b>
+		</td>
+		<td height=30>
+		  <u>Sun. Mar. 7, 2021</u>
+		</td>
+	  </tr>
+	  <tr>
+		<td colspan=2>
+		  <b>Date Checked In:</b>
+		</td>
+		<td>
+		  <img width=300 height=30 src=../static/underline.gif valign=bottom>
+		</td>
+	  </tr>
+	  <tr>
+		<td colspan=2>
+		  <b>Department Head/Designee Signature:</b>
+		</td>
+		<td>
+		  <img width=300 height=30 src=../static/underline.gif valign=bottom>
+		</td>
+	  </tr>
+	  </table>
+	</BODY>
+</HTML>  
