@@ -156,6 +156,10 @@ def dashboard(request):
     query_results = Ticket.objects.all()
     return render(request, "main/dashboard.html",{'query_results':query_results})
 
+def guest_dashboard(request):
+    query_results = Ticket.objects.all()
+    return render(request, "main/guest-dashboard.html",{'query_results':query_results})
+
 def display_devices(request):
     items = Device.objects.all()
     context = {
