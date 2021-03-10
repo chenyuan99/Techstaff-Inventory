@@ -5,233 +5,240 @@
 <body>
 
 	<div class="collapsed-page-wrapper">
-			<div class="data-manager-wrapper">
-				<div class="data-manager-wrapper-2">
-					<div class="button-group">
-						<a href="{% url 'display_devices' %}" class="btn btn-outline-primary btn-md" role="button">Devices</a>
-			{#			<a href="{% url 'add_device' %}" class="btn btn-outline-primary btn-md" role="button">Add Devices</a>#}
-						<a href="{% url 'display_hostnames' %}" class="btn btn-outline-primary btn-md" role="button">Hostnames</a>
-			{#			<a href="{% url 'add_hostname' %}" class="btn btn-outline-primary btn-md" role="button">Add Hostnames</a>#}
-					</div>
+		<div class="data-manager-wrapper">
+			<div class="data-manager-wrapper-2">
+				<div class="button-group">
+					<a href="{% url 'display_devices' %}" class="btn btn-outline-primary btn-md"
+						role="button">Devices</a>
+					{% if user.is_authenticated %}
+					<a href="{% url 'add_device' %}" class="btn btn-outline-primary btn-md" role="button">Add
+						Devices</a>
+					{% endif %}
+					<a href="{% url 'display_hostnames' %}" class="btn btn-outline-primary btn-md"
+						role="button">Hostnames</a>
+					{% if user.is_authenticated %}
+					<a href="{% url 'add_hostname' %}" class="btn btn-outline-primary btn-md" role="button">Add
+						Hostnames</a>
+					{% endif %}
+				</div>
 
 
 
-					<div vhid="dtmgr">
-						<div data-v-362f319e="" class="data-manager-div data-manager-stacked-div">
-							<h2 data-v-362f319e="" class="sr-only">Filters</h2>
-							<div data-v-362f319e="" vhid="cont">
-								<div data-v-362f319e="" class="data-filter-cont-div">
-									<div>
-										<!---->
-										<div class="inline">
-											<div vhid="filter[Academic Year]">
-												<div data-v-a7c0b98e="">
-													<div data-v-a7c0b98e="" class="filter-wrapper stacked">
-														<div data-v-a7c0b98e="" role="group"
-															aria-labelledby="DataFilter1" class="filter-div">
-															<div data-v-a7c0b98e="" class="inline">
-																<div data-v-a7c0b98e="" class="filter-header">
-																	<h3 data-v-a7c0b98e="" id="DataFilter1" title=""
-																		class="filter-title">
-																		Time
-																	</h3> <button data-v-a7c0b98e=""
-																		title="Set As Chart Series"
-																		aria-label="Set group as Chart Series"
-																		class="chart-series-button transparent-button"
-																		style="display: none;"><i data-v-a7c0b98e=""
-																			class="fa fa-bar-chart fa-disabled"></i></button>
-																	<!---->
-																</div>
-															</div> <br data-v-a7c0b98e="" class="clearBoth">
-															<div data-v-a7c0b98e="" class="filter-seperator"></div>
-															<div data-v-a7c0b98e="" class="filter-body inline">
-																<div data-v-a7c0b98e="">
-																	<div data-v-a7c0b98e="" vhid="slct">
-																		<div data-v-a7c0b98e="">
-																			<div vhid="yearRangePicker">
-																				<div data-v-51642fe6=""
-																					class="year-range-picker-div">
-																					<div data-v-51642fe6=""><select
-																							data-v-51642fe6=""
-																							class="year-range-picker inline">
-																						</select> <span
-																							data-v-51642fe6=""
-																							class="inline"> To </span>
-																						<select data-v-51642fe6=""
-																							class="year-range-picker inline">
-																						</select> <br
-																							data-v-51642fe6=""></div>
+				<div vhid="dtmgr">
+					<div data-v-362f319e="" class="data-manager-div data-manager-stacked-div">
+						<h2 data-v-362f319e="" class="sr-only">Filters</h2>
+						<div data-v-362f319e="" vhid="cont">
+							<div data-v-362f319e="" class="data-filter-cont-div">
+								<div>
+									<!---->
+									<div class="inline">
+										<div vhid="filter[Academic Year]">
+											<div data-v-a7c0b98e="">
+												<div data-v-a7c0b98e="" class="filter-wrapper stacked">
+													<div data-v-a7c0b98e="" role="group" aria-labelledby="DataFilter1"
+														class="filter-div">
+														<div data-v-a7c0b98e="" class="inline">
+															<div data-v-a7c0b98e="" class="filter-header">
+																<h3 data-v-a7c0b98e="" id="DataFilter1" title=""
+																	class="filter-title">
+																	Time
+																</h3> <button data-v-a7c0b98e=""
+																	title="Set As Chart Series"
+																	aria-label="Set group as Chart Series"
+																	class="chart-series-button transparent-button"
+																	style="display: none;"><i data-v-a7c0b98e=""
+																		class="fa fa-bar-chart fa-disabled"></i></button>
+																<!---->
+															</div>
+														</div> <br data-v-a7c0b98e="" class="clearBoth">
+														<div data-v-a7c0b98e="" class="filter-seperator"></div>
+														<div data-v-a7c0b98e="" class="filter-body inline">
+															<div data-v-a7c0b98e="">
+																<div data-v-a7c0b98e="" vhid="slct">
+																	<div data-v-a7c0b98e="">
+																		<div vhid="yearRangePicker">
+																			<div data-v-51642fe6=""
+																				class="year-range-picker-div">
+																				<div data-v-51642fe6=""><select
+																						data-v-51642fe6=""
+																						class="year-range-picker inline">
+																					</select> <span data-v-51642fe6=""
+																						class="inline"> To </span>
+																					<select data-v-51642fe6=""
+																						class="year-range-picker inline">
+																					</select> <br data-v-51642fe6="">
 																				</div>
 																			</div>
 																		</div>
 																	</div>
 																</div>
-																<!---->
 															</div>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div> <br class="clearBoth">
-									</div>
-									<div>
-										<!---->
-										<div class="inline">
-											<div vhid="filter[College]">
-												<div data-v-a7c0b98e="">
-													<div data-v-a7c0b98e="" class="filter-wrapper stacked">
-														<div data-v-a7c0b98e="" role="group"
-															aria-labelledby="DataFilter3" class="filter-div">
-															<div data-v-a7c0b98e="" class="inline">
-																<div data-v-a7c0b98e="" class="filter-header">
-																	<h3 data-v-a7c0b98e="" id="DataFilter3" title=""
-																		class="filter-title">
-																		College
-																	</h3> <button data-v-a7c0b98e=""
-																		title="Set As Chart Series"
-																		aria-label="Set group as Chart Series"
-																		class="chart-series-button transparent-button"
-																		style="display: none;"><i data-v-a7c0b98e=""
-																			class="fa fa-bar-chart fa-disabled"></i></button>
-																	<!---->
-																</div>
-															</div> <br data-v-a7c0b98e="" class="clearBoth">
 															<!---->
-															<div data-v-a7c0b98e="" class="filter-body inline">
-																<div data-v-a7c0b98e="">
-																	<div data-v-a7c0b98e="" vhid="slct">
-																		<div data-v-a7c0b98e="">
-																			<div vhid="dropdown">
-																				<div data-v-0f2a14df=""
-																					class="dropdown-div">
-																					<div data-v-0f2a14df=""><select
-																							data-v-0f2a14df=""
-																							class="form-control dropdown cursor-pointer">
-																						</select></div>
-																				</div>
-																			</div>
-																		</div>
-																	</div>
-																</div>
-																<!---->
-															</div>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div> <br class="clearBoth">
-									</div>
-									<div>
-										<!---->
-										<div class="inline">
-											<div vhid="filter[Subject]">
-												<div data-v-a7c0b98e="">
-													<div data-v-a7c0b98e="" class="filter-wrapper stacked">
-														<div data-v-a7c0b98e="" role="group"
-															aria-labelledby="DataFilter4" class="filter-div">
-															<div data-v-a7c0b98e="" class="inline">
-																<div data-v-a7c0b98e="" class="filter-header">
-																	<h3 data-v-a7c0b98e="" id="DataFilter4" title=""
-																		class="filter-title">
-																		Device
-																	</h3> <button data-v-a7c0b98e=""
-																		title="Set As Chart Series"
-																		aria-label="Set group as Chart Series"
-																		class="chart-series-button transparent-button"
-																		style="display: none;"><i data-v-a7c0b98e=""
-																			class="fa fa-bar-chart fa-disabled"></i></button>
-																	<!---->
-																</div>
-															</div> <br data-v-a7c0b98e="" class="clearBoth">
-															<!---->
-															<div data-v-a7c0b98e="" class="filter-body inline">
-																<div data-v-a7c0b98e="">
-																	<div data-v-a7c0b98e="" vhid="slct">
-																		<div data-v-a7c0b98e="">
-																			<div vhid="dropdown">
-																				<div data-v-0f2a14df=""
-																					class="dropdown-div">
-																					<div data-v-0f2a14df=""><select
-																							data-v-0f2a14df=""
-																							class="form-control dropdown cursor-pointer">
-																						</select></div>
-																				</div>
-																			</div>
-																		</div>
-																	</div>
-																</div>
-																<!---->
-															</div>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div> <br class="clearBoth">
-									</div>
-									<div>
-										<!---->
-										<div class="inline">
-											<div vhid="filter[Course]">
-												<div data-v-a7c0b98e="">
-													<div data-v-a7c0b98e="" class="filter-wrapper stacked">
-														<div data-v-a7c0b98e="" role="group"
-															aria-labelledby="DataFilter5" class="filter-div">
-															<div data-v-a7c0b98e="" class="inline">
-																<div data-v-a7c0b98e="" class="filter-header">
-																	<h3 data-v-a7c0b98e="" id="DataFilter5" title=""
-																		class="filter-title">
-																		Hostname
-																	</h3> <button data-v-a7c0b98e=""
-																		title="Set As Chart Series"
-																		aria-label="Set group as Chart Series"
-																		class="chart-series-button transparent-button"
-																		style="display: none;"><i data-v-a7c0b98e=""
-																			class="fa fa-bar-chart fa-disabled"></i></button>
-																	<!---->
-																</div>
-															</div> <br data-v-a7c0b98e="" class="clearBoth">
-															<!---->
-															<div data-v-a7c0b98e="" class="filter-body inline">
-																<div data-v-a7c0b98e="">
-																	<div data-v-a7c0b98e="" vhid="slct">
-																		<div data-v-a7c0b98e="">
-																			<div vhid="dropdown">
-																				<div data-v-0f2a14df=""
-																					class="dropdown-div">
-																					<div data-v-0f2a14df=""><select
-																							data-v-0f2a14df=""
-																							class="form-control dropdown cursor-pointer">
-																						</select></div>
-																				</div>
-																			</div>
-																		</div>
-																	</div>
-																</div>
-																<!---->
-															</div>
 														</div>
 													</div>
 												</div>
 											</div>
 										</div>
-										<!---->
+									</div> <br class="clearBoth">
+								</div>
+								<div>
+									<!---->
+									<div class="inline">
+										<div vhid="filter[College]">
+											<div data-v-a7c0b98e="">
+												<div data-v-a7c0b98e="" class="filter-wrapper stacked">
+													<div data-v-a7c0b98e="" role="group" aria-labelledby="DataFilter3"
+														class="filter-div">
+														<div data-v-a7c0b98e="" class="inline">
+															<div data-v-a7c0b98e="" class="filter-header">
+																<h3 data-v-a7c0b98e="" id="DataFilter3" title=""
+																	class="filter-title">
+																	College
+																</h3> <button data-v-a7c0b98e=""
+																	title="Set As Chart Series"
+																	aria-label="Set group as Chart Series"
+																	class="chart-series-button transparent-button"
+																	style="display: none;"><i data-v-a7c0b98e=""
+																		class="fa fa-bar-chart fa-disabled"></i></button>
+																<!---->
+															</div>
+														</div> <br data-v-a7c0b98e="" class="clearBoth">
+														<!---->
+														<div data-v-a7c0b98e="" class="filter-body inline">
+															<div data-v-a7c0b98e="">
+																<div data-v-a7c0b98e="" vhid="slct">
+																	<div data-v-a7c0b98e="">
+																		<div vhid="dropdown">
+																			<div data-v-0f2a14df=""
+																				class="dropdown-div">
+																				<div data-v-0f2a14df=""><select
+																						data-v-0f2a14df=""
+																						class="form-control dropdown cursor-pointer">
+																					</select></div>
+																			</div>
+																		</div>
+																	</div>
+																</div>
+															</div>
+															<!---->
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div> <br class="clearBoth">
+								</div>
+								<div>
+									<!---->
+									<div class="inline">
+										<div vhid="filter[Subject]">
+											<div data-v-a7c0b98e="">
+												<div data-v-a7c0b98e="" class="filter-wrapper stacked">
+													<div data-v-a7c0b98e="" role="group" aria-labelledby="DataFilter4"
+														class="filter-div">
+														<div data-v-a7c0b98e="" class="inline">
+															<div data-v-a7c0b98e="" class="filter-header">
+																<h3 data-v-a7c0b98e="" id="DataFilter4" title=""
+																	class="filter-title">
+																	Device
+																</h3> <button data-v-a7c0b98e=""
+																	title="Set As Chart Series"
+																	aria-label="Set group as Chart Series"
+																	class="chart-series-button transparent-button"
+																	style="display: none;"><i data-v-a7c0b98e=""
+																		class="fa fa-bar-chart fa-disabled"></i></button>
+																<!---->
+															</div>
+														</div> <br data-v-a7c0b98e="" class="clearBoth">
+														<!---->
+														<div data-v-a7c0b98e="" class="filter-body inline">
+															<div data-v-a7c0b98e="">
+																<div data-v-a7c0b98e="" vhid="slct">
+																	<div data-v-a7c0b98e="">
+																		<div vhid="dropdown">
+																			<div data-v-0f2a14df=""
+																				class="dropdown-div">
+																				<div data-v-0f2a14df=""><select
+																						data-v-0f2a14df=""
+																						class="form-control dropdown cursor-pointer">
+																					</select></div>
+																			</div>
+																		</div>
+																	</div>
+																</div>
+															</div>
+															<!---->
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div> <br class="clearBoth">
+								</div>
+								<div>
+									<!---->
+									<div class="inline">
+										<div vhid="filter[Course]">
+											<div data-v-a7c0b98e="">
+												<div data-v-a7c0b98e="" class="filter-wrapper stacked">
+													<div data-v-a7c0b98e="" role="group" aria-labelledby="DataFilter5"
+														class="filter-div">
+														<div data-v-a7c0b98e="" class="inline">
+															<div data-v-a7c0b98e="" class="filter-header">
+																<h3 data-v-a7c0b98e="" id="DataFilter5" title=""
+																	class="filter-title">
+																	Hostname
+																</h3> <button data-v-a7c0b98e=""
+																	title="Set As Chart Series"
+																	aria-label="Set group as Chart Series"
+																	class="chart-series-button transparent-button"
+																	style="display: none;"><i data-v-a7c0b98e=""
+																		class="fa fa-bar-chart fa-disabled"></i></button>
+																<!---->
+															</div>
+														</div> <br data-v-a7c0b98e="" class="clearBoth">
+														<!---->
+														<div data-v-a7c0b98e="" class="filter-body inline">
+															<div data-v-a7c0b98e="">
+																<div data-v-a7c0b98e="" vhid="slct">
+																	<div data-v-a7c0b98e="">
+																		<div vhid="dropdown">
+																			<div data-v-0f2a14df=""
+																				class="dropdown-div">
+																				<div data-v-0f2a14df=""><select
+																						data-v-0f2a14df=""
+																						class="form-control dropdown cursor-pointer">
+																					</select></div>
+																			</div>
+																		</div>
+																	</div>
+																</div>
+															</div>
+															<!---->
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
 									</div>
 									<!---->
 								</div>
+								<!---->
 							</div>
-							<!---->
-							<!---->
 						</div>
+						<!---->
+						<!---->
 					</div>
 				</div>
 			</div>
+		</div>
 
 		<!-- </nav> -->
 		<div class="data-display-wrapper">
 			<h4>Currently Viewing {{ header }}</h4>
 			<table class="table table-hover">
 				<thead>
-				{% if header|lower == "device" %}
+					{% if header|lower == "device" %}
 					<tr>
 						<th>id</th>
 						<th>Model</th>
@@ -243,71 +250,80 @@
 						<th>Serial_Number</th>
 						<th>Status</th>
 						<th>Issues</th>
-	{#					<th>Edit or Delete</th>#}
+						{% if user.is_authenticated %}
+						<th>Edit or Delete</th>
+						{% endif %}
 					</tr>
-				{% endif %}
-				{% if header|lower == "hostname" %}
+					{% endif %}
+					{% if header|lower == "hostname" %}
 					<th>id</th>
 					<th>Hostname</th>
 					<th>Aliases</th>
 					<th>IP_Address</th>
 					<th>IPv6_Address</th>
 					<th>MAC_Address</th>
-	{#				<th>Edit or Delete</th>#}
-	
-				{% endif %}
+					{% if user.is_authenticated %}
+					<th>Edit or Delete</th>
+					{% endif %}
+
+					{% endif %}
 				</thead>
-	
+
 				<tbody>
-	
-				{% for item in items %}
-	
+
+					{% for item in items %}
+
 					<tr>
 						{% if header|lower == "device" %}
-							<td>{{ item.pk }}</td>
-							<td>{{ item.type }}</td>
-							<td>${{ item.price }}</td>
-							<td>{{ item.Manufacturer }}</td>
-							<td>{{ item.Model }}</td>
-							<td>{{ item.VT_Tag }}</td>
-							<td>{{ item.CS_Tag }}</td>
-							<td>{{ item.Serial_Number }}</td>
-							<td>{{ item.status }}</td>
-							<td>{{ item.issue }}</td>
-	{#						<td>#}
-	{#							<a href="{% url 'edit_device' item.pk %}" class="btn btn-outline-info btn-sm" role="button">Edit</a>#}
-	{#							<a href="{% url 'delete_device' item.pk %}" class="btn btn-outline-danger btn-sm"#}
-	{#							   role="button">Delete</a>#}
-	{#						</td>#}
-	
+						<td>{{ item.pk }}</td>
+						<td>{{ item.type }}</td>
+						<td>${{ item.price }}</td>
+						<td>{{ item.Manufacturer }}</td>
+						<td>{{ item.Model }}</td>
+						<td>{{ item.VT_Tag }}</td>
+						<td>{{ item.CS_Tag }}</td>
+						<td>{{ item.Serial_Number }}</td>
+						<td>{{ item.status }}</td>
+						<td>{{ item.issue }}</td>
+						{% if user.is_authenticated %}
+						<th>Edit or Delete</th>
+						
+						<td>
+							<a href="{% url 'edit_device' item.pk %}" class="btn btn-outline-info btn-sm"
+								role="button">Edit</a>
+							<a href="{% url 'delete_device' item.pk %}" class="btn btn-outline-danger btn-sm"
+								role="button">Delete</a>
+						</td>
 						{% endif %}
-	
+						{% endif %}
+
 						{% if header|lower == "hostname" %}
-	
-							<td>{{ item.pk }}</td>
-							<td>{{ item.Hostname }}</td>
-							<td>{{ item.Aliases }}</td>
-							<td>{{ item.IP_Address }}</td>
-							<td>{{ item.IPv6_Address }}</td>
-							<td>{{ item.MAC_Address }}</td>
-	{#						<td>#}
-	{#							<a href="{% url 'edit_device' item.pk %}" class="btn btn-outline-info btn-sm" role="button">Edit</a>#}
-	{#							<a href="{% url 'delete_device' item.pk %}" class="btn btn-outline-danger btn-sm"#}
-	{#							   role="button">Delete</a>#}
-	{#						</td>#}
-	
+
+						<td>{{ item.pk }}</td>
+						<td>{{ item.Hostname }}</td>
+						<td>{{ item.Aliases }}</td>
+						<td>{{ item.IP_Address }}</td>
+						<td>{{ item.IPv6_Address }}</td>
+						<td>{{ item.MAC_Address }}</td>
+						<td>
+							<a href="{% url 'edit_device' item.pk %}" class="btn btn-outline-info btn-sm"
+								role="button">Edit</a>
+							<a href="{% url 'delete_device' item.pk %}" class="btn btn-outline-danger btn-sm"
+								role="button">Delete</a>
+						</td>
+
 						{% endif %}
-	
+
 					</tr>
-	
-				{% endfor %}
-	
+
+					{% endfor %}
+
 				</tbody>
-	
+
 			</table>
-				</div>
-			<!-- </main> -->
 		</div>
+		<!-- </main> -->
+	</div>
 	</div>
 	</div>
 

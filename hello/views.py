@@ -45,7 +45,7 @@ def login_request(request):
             if user is not None:
                 login(request, user)
                 messages.info(request, f"You are now logged in as {username}")
-                return redirect('/')
+                return redirect('guest/dashboard')
             else:
                 messages.error(request, "Invalid username or password.")
         else:
@@ -261,6 +261,17 @@ def delete_ticket(request, pk):
         'items': items
     }
     return render(request, 'main/account.html', context)
+
+def checkout_device(request, pk):
+    if request.user.is_authenticated:
+        Device.objects.filter(id=pk).status = 'Item Sold'
+        items = Device.objects.all()
+        context = {
+            'items': items
+        }
+        return render(request, 'checkout.html', context)
+    else:
+        raise PermissionDenied
 
 def some_view(request):
     # Create the HttpResponse object with the appropriate CSV header.
