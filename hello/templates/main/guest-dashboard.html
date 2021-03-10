@@ -5,25 +5,19 @@
 <body>
 
 	<div class="collapsed-page-wrapper">
-		<!-- <div class="container"> -->
-			<!-- <nav class="col-md-2 d-none d-md-block bg-light sidebar"> -->
 			<div class="data-manager-wrapper">
 				<div class="data-manager-wrapper-2">
+					<div class="button-group">
+						<a href="{% url 'display_devices' %}" class="btn btn-outline-primary btn-md" role="button">Devices</a>
+			{#			<a href="{% url 'add_device' %}" class="btn btn-outline-primary btn-md" role="button">Add Devices</a>#}
+						<a href="{% url 'display_hostnames' %}" class="btn btn-outline-primary btn-md" role="button">Hostnames</a>
+			{#			<a href="{% url 'add_hostname' %}" class="btn btn-outline-primary btn-md" role="button">Add Hostnames</a>#}
+					</div>
+
+
+
 					<div vhid="dtmgr">
 						<div data-v-362f319e="" class="data-manager-div data-manager-stacked-div">
-							<div data-v-362f319e="">
-								<div data-v-362f319e="" class="toolbar-div">
-									<div data-v-362f319e="" class="inline"><button data-v-362f319e=""
-											title="Data Settings" aria-label="Data Settings"
-											class="toolbar-btn transparent-button"><span data-feather="settings"></span></button>
-										<!---->
-									</div>
-									<div data-v-362f319e="" title="Reset Data Filters" class="inline"><button
-											data-v-362f319e="" aria-label="Reset Data Filters"
-											class="toolbar-btn transparent-button"><span data-feather="delete"></span></button></div>
-									<!---->
-								</div>
-							</div>
 							<h2 data-v-362f319e="" class="sr-only">Filters</h2>
 							<div data-v-362f319e="" vhid="cont">
 								<div data-v-362f319e="" class="data-filter-cont-div">
@@ -39,7 +33,7 @@
 																<div data-v-a7c0b98e="" class="filter-header">
 																	<h3 data-v-a7c0b98e="" id="DataFilter1" title=""
 																		class="filter-title">
-																		Academic Year
+																		Time
 																	</h3> <button data-v-a7c0b98e=""
 																		title="Set As Chart Series"
 																		aria-label="Set group as Chart Series"
@@ -67,96 +61,6 @@
 																							class="year-range-picker inline">
 																						</select> <br
 																							data-v-51642fe6=""></div>
-																				</div>
-																			</div>
-																		</div>
-																	</div>
-																</div>
-																<!---->
-															</div>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div> <br class="clearBoth">
-									</div>
-									<div>
-										<!---->
-										<div class="inline">
-											<div vhid="filter[Term]">
-												<div data-v-a7c0b98e="">
-													<div data-v-a7c0b98e="" class="filter-wrapper stacked">
-														<div data-v-a7c0b98e="" role="group"
-															aria-labelledby="DataFilter2" class="filter-div">
-															<div data-v-a7c0b98e="" class="inline">
-																<div data-v-a7c0b98e="" class="filter-header">
-																	<h3 data-v-a7c0b98e="" id="DataFilter2" title=""
-																		class="filter-title">
-																		Term
-																	</h3> <button data-v-a7c0b98e=""
-																		title="Set As Chart Series"
-																		aria-label="Set group as Chart Series"
-																		class="chart-series-button transparent-button"
-																		style="display: none;"><i data-v-a7c0b98e=""
-																			class="fa fa-bar-chart fa-disabled"></i></button>
-																	<!---->
-																</div>
-															</div> <br data-v-a7c0b98e="" class="clearBoth">
-															<div data-v-a7c0b98e="" class="filter-seperator"></div>
-															<div data-v-a7c0b98e="" class="filter-body inline">
-																<div data-v-a7c0b98e="">
-																	<div data-v-a7c0b98e="" vhid="slct">
-																		<div data-v-a7c0b98e="">
-																			<div vhid="checkbox">
-																				<div data-v-868900c4="">
-																					<div data-v-868900c4=""
-																						class="stacked">
-																						<div data-v-868900c4=""
-																							class="checkbox"><label
-																								data-v-868900c4=""
-																								class="option-label"><input
-																									data-v-868900c4=""
-																									type="checkbox"><span
-																									data-v-868900c4=""
-																									class=""> Fall
-																								</span></label></div>
-																						<div data-v-868900c4=""
-																							class="checkbox"><label
-																								data-v-868900c4=""
-																								class="option-label"><input
-																									data-v-868900c4=""
-																									type="checkbox"><span
-																									data-v-868900c4=""
-																									class=""> Spring
-																								</span></label></div>
-																						<div data-v-868900c4=""
-																							class="checkbox"><label
-																								data-v-868900c4=""
-																								class="option-label"><input
-																									data-v-868900c4=""
-																									type="checkbox"><span
-																									data-v-868900c4=""
-																									class=""> Winter
-																								</span></label></div>
-																						<div data-v-868900c4=""
-																							class="checkbox"><label
-																								data-v-868900c4=""
-																								class="option-label"><input
-																									data-v-868900c4=""
-																									type="checkbox"><span
-																									data-v-868900c4=""
-																									class=""> Summer I
-																								</span></label></div>
-																						<div data-v-868900c4=""
-																							class="checkbox"><label
-																								data-v-868900c4=""
-																								class="option-label"><input
-																									data-v-868900c4=""
-																									type="checkbox"><span
-																									data-v-868900c4=""
-																									class=""> Summer II
-																								</span></label></div>
-																					</div>
 																				</div>
 																			</div>
 																		</div>
@@ -229,7 +133,7 @@
 																<div data-v-a7c0b98e="" class="filter-header">
 																	<h3 data-v-a7c0b98e="" id="DataFilter4" title=""
 																		class="filter-title">
-																		Subject
+																		Device
 																	</h3> <button data-v-a7c0b98e=""
 																		title="Set As Chart Series"
 																		aria-label="Set group as Chart Series"
@@ -276,7 +180,7 @@
 																<div data-v-a7c0b98e="" class="filter-header">
 																	<h3 data-v-a7c0b98e="" id="DataFilter5" title=""
 																		class="filter-title">
-																		Course
+																		Hostname
 																	</h3> <button data-v-a7c0b98e=""
 																		title="Set As Chart Series"
 																		aria-label="Set group as Chart Series"
@@ -324,50 +228,83 @@
 
 		<!-- </nav> -->
 		<div class="data-display-wrapper">
-				<h2>All Tickets</h2>
-				<div class="table-responsive">
-					<table class="table table-hover">
-						<thead>
-							<tr>
-								<th>id</th>
-								<th>Address</th>
-								<th>Device</th>
-								<th>Faculty</th>
-								<th>Action</th>
-								<th>Status</th>
-								<th>Issues</th>
-								<th>Edit or Delete</th>
-							</tr>
-						</thead>
-
-						<tbody>
-
-							{% for item in items %}
-
-							<tr>
-								<td>{{ item.pk }}</td>
-								<td>{{ item.address }}</td>
-								<td>{{ item.device }}</td>
-								<td>{{ item.faculty }}</td>
-								<td>{{ item.action }}</td>
-								<td>{{ item.status }}</td>
-								<td>{{ item.issue }}</td>
-								{% if header|lower == "ticket" %}
-								<td>
-									<a href="{% url 'edit_device' item.pk %}" class="btn btn-outline-info btn-sm"
-										role="button">Edit</a>
-									<a href="{% url 'delete_device' item.pk %}" class="btn btn-outline-danger btn-sm"
-										role="button">Delete</a>
-								</td>
-
-								{% endif %}
-
-							</tr>
-
-							{% endfor %}
-
-						</tbody>
-					</table>
+			<h4>Currently Viewing {{ header }}</h4>
+			<table class="table table-hover">
+				<thead>
+				{% if header|lower == "device" %}
+					<tr>
+						<th>id</th>
+						<th>Model</th>
+						<th>Price</th>
+						<th>Manufacturer</th>
+						<th>Model</th>
+						<th>VT_Tag</th>
+						<th>CS_Tag</th>
+						<th>Serial_Number</th>
+						<th>Status</th>
+						<th>Issues</th>
+	{#					<th>Edit or Delete</th>#}
+					</tr>
+				{% endif %}
+				{% if header|lower == "hostname" %}
+					<th>id</th>
+					<th>Hostname</th>
+					<th>Aliases</th>
+					<th>IP_Address</th>
+					<th>IPv6_Address</th>
+					<th>MAC_Address</th>
+	{#				<th>Edit or Delete</th>#}
+	
+				{% endif %}
+				</thead>
+	
+				<tbody>
+	
+				{% for item in items %}
+	
+					<tr>
+						{% if header|lower == "device" %}
+							<td>{{ item.pk }}</td>
+							<td>{{ item.type }}</td>
+							<td>${{ item.price }}</td>
+							<td>{{ item.Manufacturer }}</td>
+							<td>{{ item.Model }}</td>
+							<td>{{ item.VT_Tag }}</td>
+							<td>{{ item.CS_Tag }}</td>
+							<td>{{ item.Serial_Number }}</td>
+							<td>{{ item.status }}</td>
+							<td>{{ item.issue }}</td>
+	{#						<td>#}
+	{#							<a href="{% url 'edit_device' item.pk %}" class="btn btn-outline-info btn-sm" role="button">Edit</a>#}
+	{#							<a href="{% url 'delete_device' item.pk %}" class="btn btn-outline-danger btn-sm"#}
+	{#							   role="button">Delete</a>#}
+	{#						</td>#}
+	
+						{% endif %}
+	
+						{% if header|lower == "hostname" %}
+	
+							<td>{{ item.pk }}</td>
+							<td>{{ item.Hostname }}</td>
+							<td>{{ item.Aliases }}</td>
+							<td>{{ item.IP_Address }}</td>
+							<td>{{ item.IPv6_Address }}</td>
+							<td>{{ item.MAC_Address }}</td>
+	{#						<td>#}
+	{#							<a href="{% url 'edit_device' item.pk %}" class="btn btn-outline-info btn-sm" role="button">Edit</a>#}
+	{#							<a href="{% url 'delete_device' item.pk %}" class="btn btn-outline-danger btn-sm"#}
+	{#							   role="button">Delete</a>#}
+	{#						</td>#}
+	
+						{% endif %}
+	
+					</tr>
+	
+				{% endfor %}
+	
+				</tbody>
+	
+			</table>
 				</div>
 			<!-- </main> -->
 		</div>

@@ -20,21 +20,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b56e6bd6-b008-43bd-b67c-75ea4ace249c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hello/templates/add-guest.html" beforeDir="false" afterPath="$PROJECT_DIR$/hello/templates/add-guest.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hello/templates/add_new.html" beforeDir="false" afterPath="$PROJECT_DIR$/hello/templates/add_new.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hello/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/hello/templates/base.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hello/templates/check-in.html" beforeDir="false" afterPath="$PROJECT_DIR$/hello/templates/check-in.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hello/templates/check-out.html" beforeDir="false" afterPath="$PROJECT_DIR$/hello/templates/check-out.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hello/templates/db.html" beforeDir="false" afterPath="$PROJECT_DIR$/hello/templates/db.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hello/templates/edit_item.html" beforeDir="false" afterPath="$PROJECT_DIR$/hello/templates/edit_item.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hello/templates/footer.html" beforeDir="false" afterPath="$PROJECT_DIR$/hello/templates/footer.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hello/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/hello/templates/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hello/templates/main/account.html" beforeDir="false" afterPath="$PROJECT_DIR$/hello/templates/main/account.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hello/templates/main/dashboard.html" beforeDir="false" afterPath="$PROJECT_DIR$/hello/templates/main/dashboard.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hello/templates/main/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/hello/templates/main/login.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hello/templates/main/register.html" beforeDir="false" afterPath="$PROJECT_DIR$/hello/templates/main/register.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -99,6 +85,7 @@
       <workItem from="1614557001525" duration="3290000" />
       <workItem from="1614711820131" duration="513000" />
       <workItem from="1615070724232" duration="754000" />
+      <workItem from="1615225409750" duration="90000" />
     </task>
     <servers />
   </component>
@@ -115,11 +102,6 @@
         </entry>
       </map>
     </option>
-  </component>
-  <component name="WindowStateProjectService">
-    <state x="461" y="165" key="SettingsEditor" timestamp="1615070917723">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="461" y="165" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1615070917723" />
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
 </project>

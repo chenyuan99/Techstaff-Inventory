@@ -3,7 +3,7 @@ from django.views.generic.base import RedirectView
 from django.contrib import admin
 from django.urls import include, re_path
 from django.conf.urls import url
-
+from django.views.generic import TemplateView
 admin.autodiscover()
 
 import hello.views
@@ -25,7 +25,6 @@ urlpatterns = [
     path("register/", hello.views.register, name="register"),
     path("logout", hello.views.logout_request, name="logout"),
     path("login", hello.views.login_request, name="login"),
-    # re_path(r'^favicon\.ico$', favicon_view),
     path("about", hello.views.about, name="about"),
     path("faq", hello.views.faq, name="faq"),
     path("privacy-policy", hello.views.privacy, name="privacy-policy"),

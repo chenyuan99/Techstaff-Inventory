@@ -167,7 +167,7 @@ def display_devices(request):
         'header': 'Device'
     }
 
-    return render(request, 'index.html', context)
+    return render(request, 'main/guest-dashboard.html', context)
 
 def display_hostnames(request):
     items = Hostname.objects.all()
@@ -176,7 +176,7 @@ def display_hostnames(request):
         'header': 'Hostname'
     }
 
-    return render(request, 'index.html', context)
+    return render(request, 'main/guest-dashboard.html', context)
 
 def display_tickets(request):
     items = Ticket.objects.all()
