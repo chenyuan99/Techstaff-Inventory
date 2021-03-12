@@ -45,7 +45,7 @@ def login_request(request):
             if user is not None:
                 login(request, user)
                 messages.info(request, f"You are now logged in as {username}")
-                return redirect('guest/dashboard')
+                return redirect('/')
             else:
                 messages.error(request, "Invalid username or password.")
         else:
@@ -162,12 +162,13 @@ def guest_dashboard(request):
 
 def display_devices(request):
     items = Device.objects.all()
+    # .filter()
     context = {
         'items': items,
         'header': 'Device'
     }
 
-    return render(request, 'main/guest-dashboard.html', context)
+    return render(request, 'index.html', context)
 
 def display_hostnames(request):
     items = Hostname.objects.all()
@@ -176,9 +177,18 @@ def display_hostnames(request):
         'header': 'Hostname'
     }
 
-    return render(request, 'main/guest-dashboard.html', context)
+    return render(request, 'index.html', context)
 
 def display_tickets(request):
+    items = Ticket.objects.all()
+    context = {
+        'items': items,
+        'header': 'Ticket'
+    }
+
+    return render(request, 'main/account.html', context)
+
+def display_faculty(request):
     items = Ticket.objects.all()
     context = {
         'items': items,
@@ -213,6 +223,9 @@ def add_hostname(request):
 
 def add_ticket(request):
     return add_item(request, AddTicketForm)
+
+def add_faculty(request):
+    return add_item(request, AddGuestForm)
 
 def edit_item(request, pk, model, cls):
     if not request.user.is_authenticated:
