@@ -194,7 +194,6 @@ def display_faculty(request):
         'items': items,
         'header': 'Ticket'
     }
-
     return render(request, 'main/account.html', context)
 
 def display_equipment_checkout_form(request):
