@@ -58,6 +58,9 @@
     }
 
     .footer {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
       margin: auto;
       text-align: center;
     }
@@ -216,42 +219,39 @@
 
 <body>
   <nav class="navbar sticky-top navbar-expand-lg  navbar-light" style="background-color: white;">
-    <div class="container-fluid">
-      <a class="navbar-brand " href="/">
-        <img alt="" class="vt-logo-image" src="https://www.assets.cms.vt.edu/images/maroonVTonWhite.svg"
-          focusable="false" aria-hidden="true">
-        <span class="vt-logo-divider" focusable="false" aria-hidden="true"></span>
-        <span style="color:#861F41;">Techstaff
-          Inventory</span></a>
+    <a class="navbar-brand " href="/">
+      <img alt="" class="vt-logo-image" src="https://www.assets.cms.vt.edu/images/maroonVTonWhite.svg" focusable="false"
+        aria-hidden="true">
+      <span class="vt-logo-divider" focusable="false" aria-hidden="true"></span>
+      <span style="color:#861F41;">Techstaff
+        Inventory</span></a>
 
-      <div class="navbar-header">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="navbar-toggler-icon"></span>
-        </button>
-      </div>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-        </ul>
-        <ul class="nav navbar-nav navbar-right">
-          <li class="nav-item dropdown">
-            <ul class="dropdown-menu" role="menu">
-            </ul>
-            {% if user.is_authenticated %}
-          <li class="nav-item"><a class="nav-link" href="/staff/dashboard"><button type="button" class="btn btn-light">
-                Dashboard</button></a></li>
-          <li class="nav-item"><a class="nav-link" href="/account"><button type="button" class="btn btn-light">
-                {{user.username|title}}</button></a></li>
-          <li class="nav-item"><a class="nav-link" href="/logout"><button type="button"
-                class="btn btn-danger">logout</button></a></li>
-          {% else %}
-          <li><a class="nav-link" href="/login"><button type="button" class="btn btn-success"> Login</button></a></li>
-          <li><a class="nav-link" href="/register"><button type="button" class="btn btn-secondary">Register</button></a>
-          </li>
-          {% endif %}
-        </ul>
-      </div>
+    <form class="form-inline" action="{% url 'search_results' %}" method="get">
+      <input class="form-control mr-sm-2" name="q" type="text" placeholder="Search...">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
+      aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+
+    <div class="collapse navbar-collapse" id="navbarText">
+      <ul class="navbar-nav mr-auto">
+        {% if user.is_authenticated %}
+        <li class="nav-link"><a class="nav-link" href="/staff/dashboard"><button type="button" class="btn btn-light">
+              Dashboard</button></a></li>
+        <li class="nav-link"><a class="nav-link" href="/account"><button type="button" class="btn btn-light">
+              {{user.username|title}}</button></a></li>
+        <li class="nav-link"><a class="nav-link" href="/logout"><button type="button"
+              class="btn btn-danger">logout</button></a></li>
+        {% else %}
+        <li><a class="nav-link" href="/login"><button type="button" class="btn btn-success"> Login</button></a></li>
+        <li><a class="nav-link" href="/register"><button type="button" class="btn btn-secondary">Register</button></a>
+        </li>
+        {% endif %}
+      </ul>
     </div>
   </nav>
 

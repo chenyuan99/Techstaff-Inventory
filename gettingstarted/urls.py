@@ -4,6 +4,7 @@ from django.contrib import admin
 from django.urls import include, re_path
 from django.conf.urls import url
 from django.views.generic import TemplateView
+from hello.views import HomePageView, SearchResultsView
 admin.autodiscover()
 
 import hello.views
@@ -51,4 +52,5 @@ urlpatterns = [
     url(r'^display_faculty$', hello.views.display_faculty, name='display_faculty'),
     # 其他 url 配置
     # url(r'^search/$', hello.views.search, name='search'),
+    path('search/', SearchResultsView.as_view(), name='search_results'),
 ]

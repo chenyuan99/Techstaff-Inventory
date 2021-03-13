@@ -1,0 +1,49 @@
+<!-- templates/search_results.html -->
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<div class="container ">
+    <h1>Search Results</h1>
+
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>Model</th>
+                <th>Price</th>
+                <th>Manufacturer</th>
+                <th>Model</th>
+                <th>VT_Tag</th>
+                <th>CS_Tag</th>
+                <th>Serial_Number</th>
+                <th>Status</th>
+                <th>Issues</th>
+                <th>Edit or Delete</th>
+            </tr>
+
+
+        <tbody>
+
+            {% for item in object_list %}
+
+            <tr>
+                <td>{{ item.pk }}</td>
+                <td>{{ item.type }}</td>
+                <td>${{ item.price }}</td>
+                <td>{{ item.Manufacturer }}</td>
+                <td>{{ item.Model }}</td>
+                <td>{{ item.VT_Tag }}</td>
+                <td>{{ item.CS_Tag }}</td>
+                <td>{{ item.Serial_Number }}</td>
+                <td>{{ item.status }}</td>
+                <td>{{ item.issue }}</td>
+
+            </tr>
+
+            {% endfor %}
+
+        </tbody>
+
+    </table>
+</div>
+{% endblock %}

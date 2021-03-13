@@ -46,7 +46,7 @@ class TicketAdmin(admin.ModelAdmin):
 
 class GuestAdmin(admin.ModelAdmin):
     model = Guest
-
+    search_fields = ("realname","phone","email")
     list_filter =("realname","phone","email")
     list_display =("realname","phone","email")
 
@@ -59,9 +59,9 @@ class FacultyAdmin(GuestAdmin):
 
 class StudentAdmin(admin.ModelAdmin):
     model = Student
-
     list_filter =("realname","phone","email")
     list_display =("realname","phone","email")
+    search_fields = ("realname","phone","email")
 
 class StaffAdmin(admin.ModelAdmin):
     model = Staff

@@ -7,7 +7,16 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.core.exceptions import PermissionDenied
+from django.views.generic import TemplateView, ListView
 import logging
+
+
+class HomePageView(TemplateView):
+    template_name = 'home.html'
+
+class SearchResultsView(ListView):
+    model = Device
+    template_name = 'main/search_results.html'
 
 # This retrieves a Python logging instance (or creates it)
 logger = logging.getLogger(__name__)
