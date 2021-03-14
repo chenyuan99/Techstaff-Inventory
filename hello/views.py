@@ -105,46 +105,6 @@ def faq(request):
 def privacy(request):
     return render(request, "main/privacy-policy.html")
 
-def ticket(request):
-    username = request.user.get_username()
-    # print(username)
-    if request.method == 'POST':
-        form = AddTicketForm(request.POST)
-        if form.is_valid():
-            address = form.cleaned_data['address']
-            Ticket.objects.create(address=address)
-            return render(request, "check-in.html", {"user": username, "form": form, "success": "Clock In Successfully!"})
-    else:
-        form = AddTicketForm()
-
-    return render(request, "check-in.html", {"user": username, "form": form})
-
-
-def add_guest(request):
-    username = request.session.get('user', '')
-    if request.method == 'POST':
-        form = AddGuestForm(request.POST)
-
-        if form.is_valid():
-            ticket = form.cleaned_data['ticket']
-            realname = form.cleaned_data['realname']
-            phone = form.cleaned_data['phone']
-            email = form.cleaned_data['email']
-            sign = form.cleaned_data['sign']
-            # if sign is True:
-            #     sign = 1
-            # else:
-            #     sign = 0
-
-            Guest.objects.create(ticket=ticket, realname=realname,
-                                 phone=phone, email=email, sign=sign)
-            return render(request, "add-guest.html", {"user": username, "form": form, "success": "Add Guest Successfully"})
-
-    else:
-        form = AddGuestForm()
-
-    return render(request, "add-guest.html", {"user": username, "form": form})
-
 def check_out(request):
     if not request.user.is_authenticated:
         raise PermissionDenied
@@ -157,26 +117,19 @@ def check_out(request):
     # Render the HTML template index.html with the data in the context variable
     return render(request, "check-out.html", context=context)
 
-# def checkout_item(request, pk, model, cls):
-
-
-#     else:
-#         form = cls(instance=item)
-#         return render(request, 'check-out.html', context=context)
-
 def account(request):
-    query_results = Ticket.objects.all()
+    query_results = UserDevice.objects.all()
     return render(request, "main/account.html",{'query_results':query_results})
     # return render(request, "main/account.html")
 
 def dashboard(request):
     if not request.user.is_authenticated:
         raise PermissionDenied
-    query_results = Ticket.objects.all()
+    query_results = UserDevice.objects.all()
     return render(request, "main/dashboard.html",{'query_results':query_results})
 
 def guest_dashboard(request):
-    query_results = Ticket.objects.all()
+    query_results = UserDevice.objects.all()
     return render(request, "main/guest-dashboard.html",{'query_results':query_results})
 
 def display_devices(request):
@@ -208,10 +161,10 @@ def display_tickets(request):
     return render(request, 'main/account.html', context)
 
 def display_faculty(request):
-    items = Ticket.objects.all()
+    items = UserDevice.objects.all()
     context = {
         'items': items,
-        'header': 'Ticket'
+        'header': 'UserDevice'
     }
     return render(request, 'main/account.html', context)
 

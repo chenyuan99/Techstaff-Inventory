@@ -7,36 +7,39 @@ from import_export.admin import ImportExportModelAdmin
 class ViewAdmin(ImportExportModelAdmin):
 	pass
 
-# class HostnameAdmin(admin.ModelAdmin):
-#     model = Hostname
+class HostnameAdmin(admin.ModelAdmin):
+    model = NetworkInterface
 
-#     list_filter =(
-#         'Hostname',
-#         'Aliases',
-#         'IP_Address',
-#         'IPv6_Address',
-#         'MAC_Address',
-#         'create_time'
-#     )
+    list_filter =(
+        'Hostname',
+        'Aliases',
+        'IPv4',
+        'IPv6',
+        'create_Date',
+            'DeviceID',
+    'BuildingID',
+    )
 
-#     search_fields = (
-#         'Hostname',
-#         'Aliases',
-#         'IP_Address',
-#         'IPv6_Address',
-#         'MAC_Address',
-#         'create_time'
-#     )
+    search_fields =(
+        'Hostname',
+        'Aliases',
+        'IPv4',
+        'IPv6',
+        'create_Date',
+            'DeviceID',
+    'BuildingID',
+    )
 
 
-#     list_display = (
-#         'Hostname',
-#         'Aliases',
-#         'IP_Address',
-#         'IPv6_Address',
-#         'MAC_Address',
-#         'create_time'
-#     )
+    list_display = (
+        'Hostname',
+        'Aliases',
+        'IPv4',
+        'IPv6',
+        'create_Date',
+            'DeviceID',
+    'BuildingID',
+    )
 
 class DeviceAdmin(admin.ModelAdmin):
     model = Device
@@ -75,3 +78,4 @@ class LogEntryAdmin(admin.ModelAdmin):
 
 admin.site.register(Device, DeviceAdmin)
 admin.site.register(Faculty, FacultyAdmin)
+admin.site.register(NetworkInterface, HostnameAdmin)
