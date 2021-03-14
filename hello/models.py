@@ -6,7 +6,8 @@ class Staff(User):
     pass
 
 class Faculty(User):
-    assigned_student = models.ForeignKey(User, on_delete=models.CASCADE)
+    PID = models.CharField(max_length=100, blank=False, primary_key = True)
+    Office_Addr = models.CharField(max_length=100, blank=False)
 
 class Device(models.Model):
     type = models.CharField(max_length=100, blank=False)
@@ -34,14 +35,16 @@ class Device(models.Model):
     def _str_(self):
         return 'Type : {0} Price : {1}'.format(self.type, self.price)
 
-
-class Hostname(models.Model):
-    Hostname = models.CharField(max_length=64)
-    Aliases = models.CharField(max_length=64)  # Aliases/cnames
-    IP_Address = models.CharField(max_length=64)     # IP Address
-    IPv6_Address = models.CharField(max_length=64)   # IPv6 Address
-    MAC_Address = models.CharField(max_length=64)               #  MAC Address
-    create_time = models.DateTimeField(auto_now=True)  # create time (automatic)
+class UserDevice(models.Model):
+    UserPID =  models.ForeignKey(Faculty, on_delete=models.CASCADE) 
+    DeviceID =  models.ForeignKey(Device, on_delete=models.CASCADE)  # 关联发布会id
+    CheckoutDate = models.DateField()  # create time (automatic)
+    ReturnDate = models.DateField()  # create time (automatic)
+    
+class Building(models.Model):
+    BuildingID = models.IntegerField(primary_key = True)
+    Building_Name = models.CharField(max_length=64)  # Aliases/cnames
+    Building_Addr = models.CharField(max_length=64)  # Aliases/cnames
     
 
 class NetworkInterface(models.Model):
@@ -53,8 +56,3 @@ class NetworkInterface(models.Model):
     IPv6 = models.GenericIPAddressField()    # IPv6 Address
     BuildingID = models.ForeignKey(Building, on_delete=models.CASCADE)  # 关联发布会id
     create_Date = models.DateField(auto_now=True)  # create time (automatic)
-
-class Building(models.Model):
-    BuildingID = models.IntegerField(primary_key = True)
-    Building_Name = models.CharField(max_length=64)  # Aliases/cnames
-    Building_Addr = models.CharField(max_length=64)  # Aliases/cnames
