@@ -11,11 +11,13 @@
 		<div class="button-group">
 
 			<a href="{% url 'display_devices' %}" class="btn btn-outline-primary btn-md" role="button">Devices</a>
-			<a href="{% url 'add_device' %}" class="btn btn-outline-primary btn-md" role="button">Add Devices</a>
 			<a href="{% url 'display_hostnames' %}" class="btn btn-outline-primary btn-md" role="button">Hostnames</a>
-			<a href="{% url 'add_hostname' %}" class="btn btn-outline-primary btn-md" role="button">Add Hostnames</a>
 			<a href="{% url 'display_faculty' %}" class="btn btn-outline-primary btn-md" role="button">Faculty</a>
+			{% if user.is_authenticated %}
+			<a href="{% url 'add_device' %}" class="btn btn-outline-primary btn-md" role="button">Add Devices</a>
+			<a href="{% url 'add_hostname' %}" class="btn btn-outline-primary btn-md" role="button">Add Hostnames</a>
 			<a href="{% url 'add_faculty' %}" class="btn btn-outline-primary btn-md" role="button">Add Faculty</a>
+			{% endif %}
 		</div>
 
 		<br>
