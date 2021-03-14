@@ -20,21 +20,16 @@ class NewUserForm(UserCreationForm):
 
 # add event form
 class AddTicketForm(forms.Form):
-    # name = forms.CharField(max_length=100)           
-    # limit = forms.IntegerField()                      # 限制人数
-    sign = forms.BooleanField(required=False)       # 状态
-    address = forms.CharField(max_length=200)         # 地址
-    # start_time = forms.DateTimeField()                # 发布会时间
 
     class Meta:
-        model = Ticket
-        fields = ('Hostname', 'Aliases', 'IP_Address', 'IPv6_Address', 'MAC_Address')
+        model = UserDevice
+        fields = '__all__'
 
 
 # add guest
 class AddGuestForm(forms.ModelForm):
     class Meta:
-        model = Guest
+        model = Faculty
         fields = '__all__'
 
 class deviceForm(forms.ModelForm):
@@ -44,7 +39,7 @@ class deviceForm(forms.ModelForm):
 
 class AddHostnameForm(forms.ModelForm):
     class Meta:
-        model = Hostname
+        model = NetworkInterface
         fields = '__all__'
 
 

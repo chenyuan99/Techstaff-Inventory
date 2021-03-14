@@ -2,15 +2,13 @@ from django.db import models
 from django.contrib.auth.models import User
 
 # Create your models here.
-class Staff(User):
-    pass
 
-class Faculty(User):
-    PID = models.CharField(max_length=100, blank=False, primary_key = True)
-    Office_Addr = models.CharField(max_length=100, blank=False)
+class Faculty(models.Model):
+    PID = models.CharField(max_length=100, default = '',editable=False)
+    Office_Addr = models.CharField(max_length=100, default = '')
 
 class Device(models.Model):
-    type = models.CharField(max_length=100, blank=False)
+    type = models.CharField(max_length=100, default = '')
     price = models.IntegerField()
     Manufacturer = models.CharField(max_length=100, default = '')     # Manufacturer
     Model = models.CharField(max_length=100, default = '')
@@ -40,7 +38,7 @@ class UserDevice(models.Model):
     DeviceID =  models.ForeignKey(Device, on_delete=models.CASCADE)  # 关联发布会id
     CheckoutDate = models.DateField()  # create time (automatic)
     ReturnDate = models.DateField()  # create time (automatic)
-    
+
 class Building(models.Model):
     BuildingID = models.IntegerField(primary_key = True)
     Building_Name = models.CharField(max_length=64)  # Aliases/cnames

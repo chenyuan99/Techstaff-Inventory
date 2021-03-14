@@ -7,64 +7,46 @@ from import_export.admin import ImportExportModelAdmin
 class ViewAdmin(ImportExportModelAdmin):
 	pass
 
-class HostnameAdmin(admin.ModelAdmin):
-    model = Hostname
+# class HostnameAdmin(admin.ModelAdmin):
+#     model = Hostname
 
-    list_filter =(
-        'Hostname',
-        'Aliases',
-        'IP_Address',
-        'IPv6_Address',
-        'MAC_Address',
-        'create_time'
-    )
+#     list_filter =(
+#         'Hostname',
+#         'Aliases',
+#         'IP_Address',
+#         'IPv6_Address',
+#         'MAC_Address',
+#         'create_time'
+#     )
 
-    search_fields = (
-        'Hostname',
-        'Aliases',
-        'IP_Address',
-        'IPv6_Address',
-        'MAC_Address',
-        'create_time'
-    )
+#     search_fields = (
+#         'Hostname',
+#         'Aliases',
+#         'IP_Address',
+#         'IPv6_Address',
+#         'MAC_Address',
+#         'create_time'
+#     )
 
 
-    list_display = (
-        'Hostname',
-        'Aliases',
-        'IP_Address',
-        'IPv6_Address',
-        'MAC_Address',
-        'create_time'
-    )
+#     list_display = (
+#         'Hostname',
+#         'Aliases',
+#         'IP_Address',
+#         'IPv6_Address',
+#         'MAC_Address',
+#         'create_time'
+#     )
 
 class DeviceAdmin(admin.ModelAdmin):
     model = Device
 
-class TicketAdmin(admin.ModelAdmin):
-    model = Ticket
 
-class GuestAdmin(admin.ModelAdmin):
-    model = Guest
-    search_fields = ("realname","phone","email")
-    list_filter =("realname","phone","email")
-    list_display =("realname","phone","email")
-
-class FacultyAdmin(GuestAdmin):
+class FacultyAdmin(admin.ModelAdmin):
     model = Faculty
-
-    list_filter =("realname","phone","email","assigned_student")
-    list_display =("realname","phone","email","assigned_student")
-    search_fields =("realname","phone","email","assigned_student")
-
-class StudentAdmin(admin.ModelAdmin):
-    model = Student
-    list_filter =("realname","phone","email")
-    list_display =("realname","phone","email")
-    search_fields = ("realname","phone","email")
-
-class StaffAdmin(admin.ModelAdmin):
-    model = Staff
+    list_filter =("PID","Office_Addr")
+    list_display =("PID","Office_Addr")
+    search_fields =("PID","Office_Addr")
 
 @admin.register(LogEntry)
 class LogEntryAdmin(admin.ModelAdmin):
@@ -91,11 +73,5 @@ class LogEntryAdmin(admin.ModelAdmin):
         'action_flag',
     ]
 
-
-admin.site.register(Hostname, HostnameAdmin)
 admin.site.register(Device, DeviceAdmin)
-admin.site.register(Ticket, TicketAdmin)
-admin.site.register(Guest, GuestAdmin)
 admin.site.register(Faculty, FacultyAdmin)
-admin.site.register(Student, StudentAdmin)
-admin.site.register(Staff, StaffAdmin)
