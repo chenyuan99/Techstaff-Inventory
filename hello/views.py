@@ -30,7 +30,10 @@ logger = logging.getLogger(__name__)
 
 # Create your views here.
 def index(request):
-    return render(request, "index.html")
+    if not request.user.is_authenticated:
+        return login_request(request)
+    else:
+        return render(request, "index.html")
 
 def about(request):
     return render(request, "main/about.html")
@@ -228,6 +231,7 @@ def add_item(request, cls):
     else:
         form = cls()
         return render(request, 'add_new.html', {'form': form})
+
 
 
 def add_device(request):
