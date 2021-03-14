@@ -8,6 +8,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.core.exceptions import PermissionDenied
 from django.views.generic import TemplateView, ListView
+from django.db.models import Q 
 import logging
 
 
@@ -16,7 +17,13 @@ class HomePageView(TemplateView):
 
 class SearchResultsView(ListView):
     model = Device
-    template_name = 'main/search_results.html'
+    template_name = 'main/search_results.html'  
+    def get_queryset(self): # new
+        query = self.request.GET.get('q')
+        object_list = Device.objects.filter(
+            Q(CS_Tag__icontains=query) | Q(VT_Tag__icontains=query)
+        )
+        return object_list
 
 # This retrieves a Python logging instance (or creates it)
 logger = logging.getLogger(__name__)

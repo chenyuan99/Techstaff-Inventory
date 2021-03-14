@@ -37,6 +37,11 @@
                 <td>{{ item.Serial_Number }}</td>
                 <td>{{ item.status }}</td>
                 <td>{{ item.issue }}</td>
+                <td>
+                    <a href="{% url 'edit_device' item.pk %}" class="btn btn-outline-info btn-sm" role="button">Edit</a>
+                    <a href="{% url 'delete_device' item.pk %}" class="btn btn-outline-danger btn-sm"
+                        role="button">Delete</a>
+                </td>
 
             </tr>
 
