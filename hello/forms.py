@@ -19,8 +19,7 @@ class NewUserForm(UserCreationForm):
         return user
 
 # add event form
-class AddTicketForm(forms.Form):
-
+class AddTicketForm(forms.ModelForm):
     class Meta:
         model = UserDevice
         fields = '__all__'

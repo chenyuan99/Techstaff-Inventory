@@ -147,7 +147,7 @@ def display_devices(request):
     return render(request, 'index.html', context)
 
 def display_hostnames(request):
-    items = Hostname.objects.all()
+    items = NetworkInterface.objects.all()
     context = {
         'items': items,
         'header': 'Hostname'
@@ -156,10 +156,10 @@ def display_hostnames(request):
     return render(request, 'index.html', context)
 
 def display_tickets(request):
-    items = Ticket.objects.all()
+    items = UserDevice.objects.all()
     context = {
         'items': items,
-        'header': 'Ticket'
+        'header': 'UserDevice'
     }
 
     return render(request, 'main/account.html', context)

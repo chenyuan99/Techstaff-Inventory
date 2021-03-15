@@ -34,8 +34,8 @@ class Device(models.Model):
         return 'Type : {0} Price : {1}'.format(self.type, self.price)
 
 class UserDevice(models.Model):
-    UserPID =  models.ForeignKey(Faculty, on_delete=models.CASCADE) 
-    DeviceID =  models.ForeignKey(Device, on_delete=models.CASCADE)  # 关联发布会id
+    UserPID =  models.CharField(max_length=100, default = '')
+    DeviceID = models.CharField(max_length=100, default = '')
     CheckoutDate = models.DateField()  # create time (automatic)
     ReturnDate = models.DateField()  # create time (automatic)
 
@@ -47,10 +47,10 @@ class Building(models.Model):
 
 class NetworkInterface(models.Model):
     NetworkID = models.IntegerField(primary_key = True)
-    DeviceID =  models.ForeignKey(Device, on_delete=models.CASCADE)  # 关联发布会id
+    DeviceID =  models.CharField(max_length=100, default = '')  # 关联发布会id
     Hostname = models.CharField(max_length=64)
     Aliases = models.CharField(max_length=64)  # Aliases/cnames
     IPv4 = models.GenericIPAddressField()      # IPv6 Address
     IPv6 = models.GenericIPAddressField()    # IPv6 Address
-    BuildingID = models.ForeignKey(Building, on_delete=models.CASCADE)  # 关联发布会id
+    BuildingID = models.IntegerField()  # 关联发布会id
     create_Date = models.DateField(auto_now=True)  # create time (automatic)

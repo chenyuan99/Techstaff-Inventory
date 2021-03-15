@@ -44,6 +44,8 @@ class HostnameAdmin(admin.ModelAdmin):
 class DeviceAdmin(admin.ModelAdmin):
     model = Device
 
+class UserDeviceAdmin(admin.ModelAdmin):
+    model = UserDevice
 
 class FacultyAdmin(admin.ModelAdmin):
     model = Faculty
@@ -77,5 +79,6 @@ class LogEntryAdmin(admin.ModelAdmin):
     ]
 
 admin.site.register(Device, DeviceAdmin)
+admin.site.register(UserDevice, UserDeviceAdmin)
 admin.site.register(Faculty, FacultyAdmin)
 admin.site.register(NetworkInterface, HostnameAdmin)
