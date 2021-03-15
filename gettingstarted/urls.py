@@ -37,6 +37,7 @@ urlpatterns = [
     url(r'^add_device$', hello.views.add_device, name='add_device'),
     url(r'^add_ticket$', hello.views.add_ticket, name='add_ticket'),
     url(r'^add_hostname$', hello.views.add_hostname, name='add_hostname'),
+    # url(r'^add_userDevice$', hello.views.add_userDevice, name='add_userDevice'),
     url(r'^edit_device/(?P<pk>\d+)$', hello.views.edit_device, name='edit_device'),
     url(r'^delete_device/(?P<pk>\d+)$', hello.views.delete_device, name='delete_device'),
     url(r'^some_view$', hello.views.some_view, name='some_view'),
@@ -47,4 +48,5 @@ urlpatterns = [
     url(r'^display_faculty$', hello.views.display_faculty, name='display_faculty'),
     # 其他 url 配置
     path('search/', SearchResultsView.as_view(), name='search_results'),
+    # url(r'^$', hello.views.display_devices, name='display_devices'),
 ]

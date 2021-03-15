@@ -8,7 +8,8 @@ from django.contrib.auth import authenticate, login, logout
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.core.exceptions import PermissionDenied
 from django.views.generic import TemplateView, ListView
-from django.db.models import Q 
+from django.db.models import Q
+from .filters import orderFilter
 import logging
 
 
@@ -17,7 +18,7 @@ class HomePageView(TemplateView):
 
 class SearchResultsView(ListView):
     model = Device
-    template_name = 'main/search_results.html'  
+    template_name = 'main/search_results.html'
     def get_queryset(self): # new
         query = self.request.GET.get('q')
         object_list = Device.objects.filter(
@@ -71,8 +72,8 @@ def login_request(request):
             messages.error(request, "Invalid username or password.")
     form = AuthenticationForm()
     return render(request = request,
-                    template_name = "main/login.html",
-                    context={"form":form})    
+                  template_name = "main/login.html",
+                  context={"form":form})
 
 def register(request):
     if request.method == "POST":
@@ -135,9 +136,12 @@ def guest_dashboard(request):
 def display_devices(request):
     items = Device.objects.all()
     # .filter()
+    myFilter = orderFilter(request.GET, queryset=items)
+    items = myFilter.qs
     context = {
         'items': items,
-        'header': 'Device'
+        'header': 'Device',
+        'myFilter': myFilter,
     }
 
     return render(request, 'index.html', context)
@@ -173,7 +177,7 @@ def display_equipment_checkout_form(request):
 
 def add_item(request, cls):
     if not request.user.is_authenticated:
-        raise PermissionDenied    
+        raise PermissionDenied
     if request.method == 'POST':
         form = cls(request.POST)
 
@@ -189,6 +193,9 @@ def add_item(request, cls):
 
 def add_device(request):
     return add_item(request, deviceForm)
+
+# def add_userDevice(request):
+#     return add_item(request, userDeviceForm)
 
 def add_hostname(request):
     return add_item(request, AddHostnameForm)
@@ -274,3 +281,9 @@ def some_view(request):
     c = {'data': csv_data}
     response.write(t.render(c))
     return response
+
+
+
+
+
+

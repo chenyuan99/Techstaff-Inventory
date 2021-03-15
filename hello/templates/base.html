@@ -8,6 +8,7 @@
 	<title>Virginia Tech Techstaff Inventory</title>
 	<link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}" />
 	<link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
@@ -237,8 +238,7 @@
         Inventory</span></a>
 		<ul class="navbar-nav">
 			{% if user.is_authenticated %}
-				<li class="nav-link"><a class="nav-link" href="/staff/dashboard"><button type="button" class="btn btn-light">
-					Dashboard</button></a></li>
+
 				<li class="nav-link"><a class="nav-link" href="/account"><button type="button" class="btn btn-light">
 					{{user.username|title}}</button></a></li>
 				<li class="nav-link"><a class="nav-link" href="/logout"><button type="button"

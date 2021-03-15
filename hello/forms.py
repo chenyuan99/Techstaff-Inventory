@@ -37,12 +37,23 @@ class deviceForm(forms.ModelForm):
         model = Device
         fields = '__all__'
 
+# class userDeviceForm(forms.ModelForm):
+#     class Meta:
+#         model = UserDevice
+#         field = '__all__'
+
 class AddHostnameForm(forms.ModelForm):
     class Meta:
         model = NetworkInterface
         fields = '__all__'
 
 
+
+
+
 #search
-#class deviceSearchFrom(forms.ModelForm):
+# class deviceSearchFrom(forms.ModelForm):
+#     class Meta:
+#         model = Device
+#         fields = '__all__'
 
