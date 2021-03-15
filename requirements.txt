@@ -4,3 +4,4 @@ django-heroku
 django-mobile
 django-import-export
 django-filter
+django-crispy-forms

@@ -1,116 +1,114 @@
 {% extends "base.html" %}
-
 {% load static %}
-
 {% block content %}
+{% load crispy_forms_tags %}
+<div class="container ">
 
-	<div class="container ">
+	<br>
+	<a href="{% url 'display_devices' %}" class="btn btn-outline-primary btn-md" role="button">Devices</a>
+	<a href="{% url 'display_hostnames' %}" class="btn btn-outline-primary btn-md" role="button">Hostnames</a>
+	<a href="{% url 'display_faculty' %}" class="btn btn-outline-primary btn-md" role="button">Faculty</a>
+	{% if user.is_authenticated %}
+	<a href="{% url 'add_device' %}" class="btn btn-outline-primary btn-md" role="button">Add Devices</a>
+	<a href="{% url 'add_hostname' %}" class="btn btn-outline-primary btn-md" role="button">Add Hostnames</a>
+	<a href="{% url 'add_faculty' %}" class="btn btn-outline-primary btn-md" role="button">Add Faculty</a>
+	{% endif %}
+	<a href="/" class="btn btn-outline-primary btn-md" role="button">Search Devices</a>
+	<a href="/" class="btn btn-outline-primary btn-md" role="button">Search Hostnames</a>
+	<a href="/" class="btn btn-outline-primary btn-md" role="button">Search Faculty</a>
 
-		<br>
-		<a href="{% url 'display_devices' %}" class="btn btn-outline-primary btn-md" role="button">Devices</a>
-		<a href="{% url 'display_hostnames' %}" class="btn btn-outline-primary btn-md" role="button">Hostnames</a>
-		<a href="{% url 'display_faculty' %}" class="btn btn-outline-primary btn-md" role="button">Faculty</a>
-		{% if user.is_authenticated %}
-			<a href="{% url 'add_device' %}" class="btn btn-outline-primary btn-md" role="button">Add Devices</a>
-			<a href="{% url 'add_hostname' %}" class="btn btn-outline-primary btn-md" role="button">Add Hostnames</a>
-			<a href="{% url 'add_faculty' %}" class="btn btn-outline-primary btn-md" role="button">Add Faculty</a>
-		{% endif %}
-		<a href="/" class="btn btn-outline-primary btn-md" role="button">Search Devices</a>
-		<a href="/" class="btn btn-outline-primary btn-md" role="button">Search Hostnames</a>
-		<a href="/" class="btn btn-outline-primary btn-md" role="button">Search Faculty</a>
+	<div class="row">
+		<div class="col">
+			<div class="card card-body">
+				<form method="get">
+					{{myFilter.form|crispy}}
+					<button class="btn btn-primary" type="submit">Search</button>
+				</form>
 
-		<div class="row">
-			<div class="col">
-				<div class="card card-body">
-					<form method="get">
-						{{myFilter.form}}
-						<button class="btn btn-primary" type="submit">Search</button>
-					</form>
-
-				</div>
 			</div>
 		</div>
-		<br>
-		<br>
-		<br>
-		<h4>Currently Viewing {{ header }}</h4>
-		<table class="table table-hover">
-			<thead>
+	</div>
+	<br>
+	<br>
+	<br>
+	<h4>Currently Viewing {{ header }}</h4>
+	<table class="table table-hover">
+		<thead>
 			{% if header|lower == "device" %}
-				<tr>
-					<th>id</th>
-					<th>Model</th>
-					<th>Price</th>
-					<th>Manufacturer</th>
-					<th>Model</th>
-					<th>VT_Tag</th>
-					<th>CS_Tag</th>
-					<th>Serial_Number</th>
-					<th>Status</th>
-					<th>Issues</th>
-					<th>Edit or Delete</th>
-				</tr>
+			<tr>
+				<th>id</th>
+				<th>Model</th>
+				<th>Price</th>
+				<th>Manufacturer</th>
+				<th>Model</th>
+				<th>VT_Tag</th>
+				<th>CS_Tag</th>
+				<th>Serial_Number</th>
+				<th>Status</th>
+				<th>Issues</th>
+				<th>Edit or Delete</th>
+			</tr>
 			{% endif %}
 			{% if header|lower == "hostname" %}
-				<th>id</th>
-				<th>Hostname</th>
-				<th>Aliases</th>
-				<th>IP_Address</th>
-				<th>IPv6_Address</th>
-				<th>MAC_Address</th>
-				<th>Edit or Delete</th>
+			<th>id</th>
+			<th>Hostname</th>
+			<th>Aliases</th>
+			<th>IP_Address</th>
+			<th>IPv6_Address</th>
+			<th>MAC_Address</th>
+			<th>Edit or Delete</th>
 
 			{% endif %}
-			</thead>
+		</thead>
 
-			<tbody>
+		<tbody>
 
 			{% for item in items %}
 
-				<tr>
-					{% if header|lower == "device" %}
-						<td>{{ item.pk }}</td>
-						<td>{{ item.type }}</td>
-						<td>${{ item.price }}</td>
-						<td>{{ item.Manufacturer }}</td>
-						<td>{{ item.Model }}</td>
-						<td>{{ item.VT_Tag }}</td>
-						<td>{{ item.CS_Tag }}</td>
-						<td>{{ item.Serial_Number }}</td>
-						<td>{{ item.status }}</td>
-						<td>{{ item.issue }}</td>
-						<td>
-							<a href="{% url 'edit_device' item.pk %}" class="btn btn-outline-info btn-sm" role="button">Edit</a>
-							<a href="{% url 'delete_device' item.pk %}" class="btn btn-outline-danger btn-sm"
-							   role="button">Delete</a>
-						</td>
+			<tr>
+				{% if header|lower == "device" %}
+				<td>{{ item.pk }}</td>
+				<td>{{ item.type }}</td>
+				<td>${{ item.price }}</td>
+				<td>{{ item.Manufacturer }}</td>
+				<td>{{ item.Model }}</td>
+				<td>{{ item.VT_Tag }}</td>
+				<td>{{ item.CS_Tag }}</td>
+				<td>{{ item.Serial_Number }}</td>
+				<td>{{ item.status }}</td>
+				<td>{{ item.issue }}</td>
+				<td>
+					<a href="{% url 'edit_device' item.pk %}" class="btn btn-outline-info btn-sm" role="button">Edit</a>
+					<a href="{% url 'delete_device' item.pk %}" class="btn btn-outline-danger btn-sm"
+						role="button">Delete</a>
+				</td>
 
-					{% endif %}
+				{% endif %}
 
-					{% if header|lower == "hostname" %}
+				{% if header|lower == "hostname" %}
 
-						<td>{{ item.pk }}</td>
-						<td>{{ item.Hostname }}</td>
-						<td>{{ item.Aliases }}</td>
-						<td>{{ item.IP_Address }}</td>
-						<td>{{ item.IPv6_Address }}</td>
-						<td>{{ item.MAC_Address }}</td>
-						<td>
-							<a href="{% url 'edit_device' item.pk %}" class="btn btn-outline-info btn-sm" role="button">Edit</a>
-							<a href="{% url 'delete_device' item.pk %}" class="btn btn-outline-danger btn-sm"
-							   role="button">Delete</a>
-						</td>
+				<td>{{ item.pk }}</td>
+				<td>{{ item.Hostname }}</td>
+				<td>{{ item.Aliases }}</td>
+				<td>{{ item.IP_Address }}</td>
+				<td>{{ item.IPv6_Address }}</td>
+				<td>{{ item.MAC_Address }}</td>
+				<td>
+					<a href="{% url 'edit_device' item.pk %}" class="btn btn-outline-info btn-sm" role="button">Edit</a>
+					<a href="{% url 'delete_device' item.pk %}" class="btn btn-outline-danger btn-sm"
+						role="button">Delete</a>
+				</td>
 
-					{% endif %}
+				{% endif %}
 
-				</tr>
+			</tr>
 
 			{% endfor %}
 
-			</tbody>
+		</tbody>
 
-		</table>
+	</table>
 
-	</div>
+</div>
 
 {% endblock %}
