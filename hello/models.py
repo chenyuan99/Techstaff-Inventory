@@ -38,7 +38,7 @@ class UserDevice(models.Model):
     DeviceID = models.CharField(max_length=100, default = '')
     Note = models.CharField(max_length=100, default = '')
     Custodian = models.CharField(max_length=64, default = '')
-    isHomeUse = models.BinaryField()
+    isHomeUse = models.BooleanField(default=False)
     CheckoutDate = models.DateField()  # create time (automatic)
     ReturnDate = models.DateField()  # create time (automatic)
 
