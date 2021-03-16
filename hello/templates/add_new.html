@@ -1,8 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
-
 {% block content %}
-
+{% load crispy_forms_tags %}
 	<div class="container">
 		<form method="POST">
 			<br>
@@ -10,9 +9,9 @@
 
 			{% for field in form %}
 				<div class="form-group row">
-					<label for="id_{{ field.name }}" class="col-2 col-form-label"> {{ field.label }}</label>
+					<!-- <label for="id_{{ field.name }}" class="col-2 col-form-label"> {{ field.label }}</label> -->
 					<div class="col-10">
-						{{ field }}
+						{{ field|as_crispy_field }}
 					</div>
 				</div>
 			{% endfor %}
