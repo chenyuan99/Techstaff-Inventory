@@ -48,5 +48,5 @@ urlpatterns = [
     url(r'^display_faculty$', hello.views.display_faculty, name='display_faculty'),
     # 其他 url 配置
     path('search/', SearchResultsView.as_view(), name='search_results'),
-    # url(r'^$', hello.views.display_devices, name='display_devices'),
+
 ]

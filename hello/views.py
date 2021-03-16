@@ -9,7 +9,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.core.exceptions import PermissionDenied
 from django.views.generic import TemplateView, ListView
 from django.db.models import Q
-from .filters import orderFilter
+from .filters import *
 import logging
 
 
@@ -136,7 +136,7 @@ def guest_dashboard(request):
 def display_devices(request):
     items = Device.objects.all()
     # .filter()
-    myFilter = orderFilter(request.GET, queryset=items)
+    myFilter = deviceFilter(request.GET, queryset=items)
     items = myFilter.qs
     context = {
         'items': items,
@@ -192,19 +192,53 @@ def add_item(request, cls):
 
 
 def add_device(request):
-    return add_item(request, deviceForm)
+    if not request.user.is_authenticated:
+        raise PermissionDenied
+    if request.method == 'POST':
+        form = deviceForm(request.POST)
+
+        if form.is_valid():
+            form.save()
+            return display_devices(request)
+
+    else:
+        form = deviceForm
+        return render(request, 'add_new.html', {'form': form})
+
 
 # def add_userDevice(request):
 #     return add_item(request, userDeviceForm)
 
 def add_hostname(request):
-    return add_item(request, AddHostnameForm)
+    if not request.user.is_authenticated:
+        raise PermissionDenied
+    if request.method == 'POST':
+        form = AddHostnameForm(request.POST)
+
+        if form.is_valid():
+            form.save()
+            return display_hostnames(request)
+
+    else:
+        form = AddHostnameForm
+        return render(request, 'add_new.html', {'form': form})
 
 def add_ticket(request):
     return add_item(request, AddTicketForm)
 
 def add_faculty(request):
-    return add_item(request, AddGuestForm)
+    if not request.user.is_authenticated:
+        raise PermissionDenied
+    if request.method == 'POST':
+        form = AddGuestForm(request.POST)
+
+        if form.is_valid():
+            form.save()
+            return display_faculty(request)
+
+    else:
+        form = AddGuestForm
+        return render(request, 'add_new.html', {'form': form})
 
 def edit_item(request, pk, model, cls):
     if not request.user.is_authenticated:
