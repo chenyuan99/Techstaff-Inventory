@@ -36,6 +36,9 @@ class Device(models.Model):
 class UserDevice(models.Model):
     UserPID =  models.CharField(max_length=100, default = '')
     DeviceID = models.CharField(max_length=100, default = '')
+    Note = models.CharField(max_length=100, default = '')
+    Custodian = models.CharField(max_length=64, default = '')
+    isHomeUse = models.BinaryField()
     CheckoutDate = models.DateField()  # create time (automatic)
     ReturnDate = models.DateField()  # create time (automatic)
 
@@ -47,10 +50,10 @@ class Building(models.Model):
 
 class NetworkInterface(models.Model):
     NetworkID = models.IntegerField(primary_key = True)
-    DeviceID =  models.CharField(max_length=100, default = '')  # 关联发布会id
+    DeviceID =  models.CharField(max_length=100, default = '')  
     Hostname = models.CharField(max_length=64)
     Aliases = models.CharField(max_length=64)  # Aliases/cnames
     IPv4 = models.GenericIPAddressField()      # IPv6 Address
     IPv6 = models.GenericIPAddressField()    # IPv6 Address
-    BuildingID = models.IntegerField()  # 关联发布会id
+    BuildingID = models.IntegerField()  
     create_Date = models.DateField(auto_now=True)  # create time (automatic)
