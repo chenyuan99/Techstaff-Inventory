@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
+{% load crispy_forms_tags %}
 	<div class="jumbotron text-center">
 		<div class="container">
 			<h1>Techstaff Inventory</h1>
@@ -7,10 +8,10 @@
 			<h2>Log in</h2>
 		</div>
 	</div>
-	<div class="center">
+	<div class="container text-center">
 		<form  method="POST">
 			{% csrf_token %}
-			{{ form.as_p }}
+			{{ form|crispy }}
 			<button class="btn btn-lg btn-success" type="submit">Login</button>
 		</form>
 		<br>
