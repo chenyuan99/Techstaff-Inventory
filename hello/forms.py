@@ -3,6 +3,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from hello.models import *
 from django.forms import ModelForm
+from crispy_forms.helper import FormHelper
 
 class NewUserForm(UserCreationForm):
     email = forms.EmailField(required=True)
@@ -35,6 +36,11 @@ class deviceForm(forms.ModelForm):
     class Meta:
         model = Device
         fields = '__all__'
+
+    helper = FormHelper()
+
+    
+        
 
 # class userDeviceForm(forms.ModelForm):
 #     class Meta:
