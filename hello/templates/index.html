@@ -40,6 +40,7 @@
 		{% endif %}
 		<table class="table table-hover">
 			<thead>
+			{# DEVICE #}
 			{% if header|lower == "device" %}
 				<tr>
 					<th>ID</th>
@@ -55,26 +56,28 @@
 					<th>Action</th>
 				</tr>
 			{% endif %}
+			{# HOSTNAME #}
 			{% if header|lower == "hostname" %}
-				<th>id</th>
+				<th>ID</th>
 				<th>Hostname</th>
 				<th>Aliases</th>
 				<th>IP_Address</th>
 				<th>IPv6_Address</th>
-				<th>MAC_Address</th>
-				<th>Edit or Delete</th>
+{#				<th>MAC_Address</th>#}
+				<th>Action</th>
 
 			{% endif %}
-			{% if header|lower == "UserDevice" %}
-				<th>id</th>
-				<th>Hostname</th>
-				<th>Aliases</th>
-				<th>IP_Address</th>
-				<th>IPv6_Address</th>
-				<th>MAC_Address</th>
-				<th>Edit or Delete</th>
-
-			{% endif %}
+			{# User Device #}
+{#			{% if header|lower == "UserDevice" %}#}
+{#				<th>id</th>#}
+{#				<th>Hostname</th>#}
+{#				<th>Aliases</th>#}
+{#				<th>IP_Address</th>#}
+{#				<th>IPv6_Address</th>#}
+{#				<th>MAC_Address</th>#}
+{#				<th>Edit or Delete</th>#}
+{##}
+{#			{% endif %}#}
 			</thead>
 
 			<tbody>
@@ -103,13 +106,13 @@
 
 					{% if header|lower == "hostname" %}
 
-						<td>{{ item.pk }}</td>
-						<td>{{ item.Hostname }}</td>
-						<td>{{ item.Aliases }}</td>
-						<td>{{ item.IP_Address }}</td>
-						<td>{{ item.IPv6_Address }}</td>
-						<td>{{ item.MAC_Address }}</td>
-						<td>
+						<td data-label="ID">{{ item.pk }}</td>
+						<td data-label="Hostname">{{ item.Hostname }}</td>
+						<td data-label="Aliases">{{ item.Aliases }}</td>
+						<td data-label="IP_Address">{{ item.IPv4 }}</td>
+						<td data-label="IPv6_Address">{{ item.IPv6 }}</td>
+{#						<td>{{ item.MAC_Address }}</td>#}
+						<td data-label="Action">
 							<a href="{% url 'edit_device' item.pk %}" class="btn btn-outline-info btn-sm" role="button">Edit</a>
 							<a href="{% url 'delete_device' item.pk %}" class="btn btn-outline-danger btn-sm"
 							   role="button">Delete</a>
