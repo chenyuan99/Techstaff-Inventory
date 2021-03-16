@@ -148,14 +148,17 @@ def display_devices(request):
 
 def display_hostnames(request):
     items = NetworkInterface.objects.all()
+    myFilter = networkFilter(request.GET, queryset=items)
+    items = myFilter.qs
     context = {
         'items': items,
-        'header': 'Hostname'
+        'header': 'Hostname',
+        'myFilter': myFilter,
     }
 
     return render(request, 'index.html', context)
 
-def display_tickets(request):
+def display_userDevice(request):
     items = UserDevice.objects.all()
     context = {
         'items': items,
@@ -165,29 +168,32 @@ def display_tickets(request):
     return render(request, 'main/account.html', context)
 
 def display_faculty(request):
-    items = UserDevice.objects.all()
+    items = Faculty.objects.all()
+    myFilter = facultyFilter(request.GET, queryset=items)
+    items = myFilter.qs
     context = {
         'items': items,
-        'header': 'UserDevice'
+        'header': 'Faculty',
+        'myFilter': myFilter
     }
     return render(request, 'main/account.html', context)
 
 def display_equipment_checkout_form(request):
     return render(request, "check-out.html")
 
-def add_item(request, cls):
-    if not request.user.is_authenticated:
-        raise PermissionDenied
-    if request.method == 'POST':
-        form = cls(request.POST)
-
-        if form.is_valid():
-            form.save()
-            return redirect('index')
-
-    else:
-        form = cls()
-        return render(request, 'add_new.html', {'form': form})
+# def add_item(request, cls):
+#     if not request.user.is_authenticated:
+#         raise PermissionDenied
+#     if request.method == 'POST':
+#         form = cls(request.POST)
+#
+#         if form.is_valid():
+#             form.save()
+#             return redirect('index')
+#
+#     else:
+#         form = cls()
+#         return render(request, 'add_new.html', {'form': form})
 
 
 
@@ -213,31 +219,42 @@ def add_hostname(request):
     if not request.user.is_authenticated:
         raise PermissionDenied
     if request.method == 'POST':
-        form = AddHostnameForm(request.POST)
+        form = AddNetworkForm(request.POST)
 
         if form.is_valid():
             form.save()
             return display_hostnames(request)
 
     else:
-        form = AddHostnameForm
+        form = AddNetworkForm
         return render(request, 'add_new.html', {'form': form})
 
-def add_ticket(request):
-    return add_item(request, AddTicketForm)
-
-def add_faculty(request):
+def add_userDevice(request):
     if not request.user.is_authenticated:
         raise PermissionDenied
     if request.method == 'POST':
-        form = AddGuestForm(request.POST)
+        form = AddUserDeviceForm(request.POST)
 
         if form.is_valid():
             form.save()
             return display_faculty(request)
 
     else:
-        form = AddGuestForm
+        form = AddUserDeviceForm
+        return render(request, 'add_new.html', {'form': form})
+
+def add_faculty(request):
+    if not request.user.is_authenticated:
+        raise PermissionDenied
+    if request.method == 'POST':
+        form = AddFacultyForm(request.POST)
+
+        if form.is_valid():
+            form.save()
+            return display_faculty(request)
+
+    else:
+        form = AddFacultyForm
         return render(request, 'add_new.html', {'form': form})
 
 def edit_item(request, pk, model, cls):
@@ -317,7 +334,12 @@ def some_view(request):
     return response
 
 
-
+# def device(request, pk):
+#     device = Device.objects.get(id=pk)
+#     context = {
+#         'device': device,
+#     }
+#     return render(request, "device_detail.html", context)
 
 
 

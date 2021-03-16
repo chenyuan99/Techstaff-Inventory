@@ -19,14 +19,14 @@ class NewUserForm(UserCreationForm):
         return user
 
 # add event form
-class AddTicketForm(forms.ModelForm):
+class AddUserDeviceForm(forms.ModelForm):
     class Meta:
         model = UserDevice
         fields = '__all__'
 
 
 # add guest
-class AddGuestForm(forms.ModelForm):
+class AddFacultyForm(forms.ModelForm):
     class Meta:
         model = Faculty
         fields = '__all__'
@@ -41,7 +41,7 @@ class deviceForm(forms.ModelForm):
 #         model = UserDevice
 #         field = '__all__'
 
-class AddHostnameForm(forms.ModelForm):
+class AddNetworkForm(forms.ModelForm):
     class Meta:
         model = NetworkInterface
         fields = '__all__'

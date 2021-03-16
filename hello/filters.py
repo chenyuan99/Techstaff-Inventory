@@ -21,3 +21,9 @@ class networkFilter(django_filters.FilterSet):
     class Meta:
         model = NetworkInterface
         fields = '__all__'
+
+class facultyFilter(django_filters.FilterSet):
+
+    class Meta:
+        model = UserDevice
+        fields = '__all__'
