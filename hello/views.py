@@ -33,8 +33,12 @@ logger = logging.getLogger(__name__)
 def index(request):
     if not request.user.is_authenticated:
         return login_request(request)
-    else:
+    elif request.user.is_staff:
         return render(request, "index.html")
+    else:
+        query_results = UserDevice.objects.all()
+        return render(request, "main/account.html",{'query_results':query_results})
+
 
 def about(request):
     return render(request, "main/about.html")
