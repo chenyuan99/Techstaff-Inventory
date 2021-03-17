@@ -66,32 +66,44 @@ TEMPLATES = [
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-#     }
-# }
 
-DATABASES = {
+if os.getenv('GAE_APPLICATION', None):
+    # Running on AppEngine, connect to CloudSQL:
+    DATABASES = {
+        'default':{
+            'ENGINE': 'django.db.backends.mysql',
+            'HOST': '/cloudsql/ml-vps:us-central1:techstaff-db',
+            'USER': 'techstaff',
+            'PASSWORD': 'nYlenIldpqKdneo8Ndqjkc28J',
+            'NAME': 'techstaff'
+        }
+    }
 
-    'default': {
+else:
+    DATABASES = {
 
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'default': {
 
-        'NAME': 'dcor75c08ep5v',
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
 
-        'USER': 'shvavxjzucmbod',
+            'NAME': 'dcor75c08ep5v',
 
-        'PASSWORD': '1bed704e7a1ba22d18a2d1ca3b3965d9d8b59aa38219ed2115609b40a46a8e6a',
+            'USER': 'shvavxjzucmbod',
 
-        'HOST': 'ec2-34-192-106-123.compute-1.amazonaws.com',
+            'PASSWORD': '1bed704e7a1ba22d18a2d1ca3b3965d9d8b59aa38219ed2115609b40a46a8e6a',
 
-        'PORT': '5432',
+            'HOST': 'ec2-34-192-106-123.compute-1.amazonaws.com',
+
+            'PORT': '5432',
+
+        }
 
     }
 
-}
+
+
+
+
 
 # Password validation
 # https://docs.djangoproject.com/en/2.0/ref/settings/#auth-password-validators
