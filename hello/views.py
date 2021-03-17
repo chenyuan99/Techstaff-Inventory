@@ -58,7 +58,7 @@ def login_request(request):
         if userobj is not None:
             login(request, userobj)
             messages.success(request, 'You are Logged in !')
-            return redirect('/')                       
+            return redirect('/')
         else:
             messages.success(request, 'Wrong credentials', extra_tags='red')
             return redirect('/')
@@ -69,7 +69,7 @@ def login_request(request):
         else:
             form = LoginForm()
             context = {'form': form}
-            return render(request, 'main/login.html', context) 
+            return render(request, 'main/login.html', context)
 
 def register(request):
     if request.method == "POST":
@@ -258,15 +258,18 @@ def edit_device(request, pk):
 
 
 def delete_device(request, pk):
-    if request.user.is_authenticated:
-        Device.objects.filter(id=pk).delete()
-        items = Device.objects.all()
-        context = {
-            'items': items
-        }
-        return render(request, 'index.html', context)
-    else:
-        raise PermissionDenied
+
+    device = Device.objects.get(id=pk)
+    if request.method == "POST":
+        device.delete()
+        return display_devices(request)
+
+    form = deviceForm(request.POST, instance=device)
+    for fieldname in form.fields:
+        form.fields[fieldname].disabled = True
+
+    return render(request, 'delete_itme.html', {'form': form})
+
 
 def delete_hostname(request, pk):
     Hostname.objects.filter(id=pk).delete()
