@@ -31,6 +31,7 @@ class LoginForm(AuthenticationForm):
         self.helper.field_class = 'col-lg-8'
 
 class AddUserDeviceForm(forms.ModelForm):
+    # ReturnDate = forms.DateField(widget=SelectDateWidget(empty_label="Nothing"))
     def __init__(self, *args, **kwargs):
         super(AddUserDeviceForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper(self)

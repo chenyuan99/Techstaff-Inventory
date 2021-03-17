@@ -3,7 +3,7 @@
 {% block content %}
 <div class="jumbotron text-center">
 	<div class="container">
-		<p>{{user.username|title}}'s History</p>
+		<h4>{{user.username|title}}'s History</h4>
 	</div>
 </div>
 <div class="container ">
@@ -50,13 +50,13 @@
 				ReturnDate = models.DateField()  # create time (automatic) -->
 
 				<tr>
+					{% if item.UserPID == user.username %}
 					<td>{{ item.UserPID }}</td>
 					<td>{{ item.DeviceID }}</td>
 					<!-- <td>{{ item.Custodian }}</td> -->
 					<!-- <td>{{ item.isHomeUse }}</td> -->
 					<td>{{ item.CheckoutDate }}</td>
 					<!-- <td>{{ item.ReturnDate }}</td> -->
-					{% if header|lower == "UserDevice" %}
 					<td>
 						<a href="{% url 'edit_device' item.pk %}" class="btn btn-outline-info btn-sm"
 							role="button">Edit</a>
