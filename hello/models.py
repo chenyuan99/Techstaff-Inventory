@@ -37,9 +37,9 @@ class UserDevice(models.Model):
     UserPID =  models.CharField(max_length=100, default = '')
     DeviceID = models.CharField(max_length=100, default = '')
     Note = models.CharField(max_length=100, default = '')
-    Custodian = models.CharField(max_length=64, default = '')
+    # Custodian = models.CharField(max_length=64, default = '')
     isHomeUse = models.BooleanField(default=False)
-    CheckoutDate = models.DateField()  # create time (automatic)
+    CheckoutDate = models.DateField(auto_now=True)  # create time (automatic)
     ReturnDate = models.DateField()  # create time (automatic)
 
 class Building(models.Model):

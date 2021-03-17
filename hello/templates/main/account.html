@@ -42,15 +42,22 @@
 
 				{% for item in items %}
 
+				<!-- UserPID =  models.CharField(max_length=100, default = '')
+				DeviceID = models.CharField(max_length=100, default = '')
+				Note = models.CharField(max_length=100, default = '')
+				Custodian = models.CharField(max_length=64, default = '')
+				isHomeUse = models.BooleanField(default=False)
+				CheckoutDate = models.DateField()  # create time (automatic)
+				ReturnDate = models.DateField()  # create time (automatic) -->
+
 				<tr>
-					<td>{{ item.pk }}</td>
-					<td>{{ item.address }}</td>
-					<td>{{ item.device }}</td>
-					<td>{{ item.faculty }}</td>
-					<td>{{ item.action }}</td>
-					<td>{{ item.status }}</td>
-					<td>{{ item.issue }}</td>
-					{% if header|lower == "ticket" %}
+					<td>{{ item.UserPID }}</td>
+					<td>{{ item.DeviceID }}</td>
+					<!-- <td>{{ item.Custodian }}</td> -->
+					<td>{{ item.isHomeUse }}</td>
+					<td>{{ item.CheckoutDate }}</td>
+					<td>{{ item.ReturnDate }}</td>
+					{% if header|lower == "UserDevice" %}
 					<td>
 						<a href="{% url 'edit_device' item.pk %}" class="btn btn-outline-info btn-sm"
 							role="button">Edit</a>

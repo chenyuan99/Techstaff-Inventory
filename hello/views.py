@@ -39,11 +39,6 @@ def index(request):
 def about(request):
     return render(request, "main/about.html")
 
-# def homepage(request):
-#     return render(request = request,
-#                   template_name='main/home.html',
-#                   context = {"tutorials":Tutorial.objects.all})
-
 def db(request):
     greeting = Greeting()
     greeting.save()
@@ -54,26 +49,6 @@ def logout_request(request):
     logout(request)
     messages.info(request, "Logged out successfully!")
     return redirect("index")
-
-# def login_request(request):
-#     if request.method == 'POST':
-#         form = AuthenticationForm(request=request, data=request.POST)
-#         if form.is_valid():
-#             username = form.cleaned_data.get('username')
-#             password = form.cleaned_data.get('password')
-#             user = authenticate(username=username, password=password)
-#             if user is not None:
-#                 login(request, user)
-#                 messages.info(request, f"You are now logged in as {username}")
-#                 return redirect('/')
-#             else:
-#                 messages.error(request, "Invalid username or password.")
-#         else:
-#             messages.error(request, "Invalid username or password.")
-#     form = AuthenticationForm()
-#     return render(request = request,
-#                   template_name = "main/login.html",
-#                   context={"form":form})
 
 def login_request(request):
     if request.method == 'POST':
@@ -181,11 +156,13 @@ def display_hostnames(request):
 
 def display_userDevice(request):
     items = UserDevice.objects.all()
+    myFilter = facultyFilter(request.GET, queryset=items)
+    items = myFilter.qs
     context = {
         'items': items,
-        'header': 'UserDevice'
+        'header': 'UserDevice',
+        'myFilter': myFilter
     }
-
     return render(request, 'main/account.html', context)
 
 def display_faculty(request):
@@ -202,22 +179,6 @@ def display_faculty(request):
 def display_equipment_checkout_form(request):
     return render(request, "check-out.html")
 
-# def add_item(request, cls):
-#     if not request.user.is_authenticated:
-#         raise PermissionDenied
-#     if request.method == 'POST':
-#         form = cls(request.POST)
-#
-#         if form.is_valid():
-#             form.save()
-#             return redirect('index')
-#
-#     else:
-#         form = cls()
-#         return render(request, 'add_new.html', {'form': form})
-
-
-
 def add_device(request):
     if not request.user.is_authenticated:
         raise PermissionDenied
@@ -232,9 +193,6 @@ def add_device(request):
         form = deviceForm
         return render(request, 'add_new.html', {'form': form})
 
-
-# def add_userDevice(request):
-#     return add_item(request, userDeviceForm)
 
 def add_hostname(request):
     if not request.user.is_authenticated:
