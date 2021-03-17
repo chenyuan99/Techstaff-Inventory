@@ -3,16 +3,22 @@
 {% load crispy_forms_tags %}
 	<div class="jumbotron text-center">
 		<div class="container">
-			<h1>Techstaff Inventory</h1>
-			<br>
-			<h2>Log in</h2>
+			<!-- <h1>Techstaff Inventory</h1>
+			<br> -->
+			<h2>Log In</h2>
 		</div>
 	</div>
 	<div class="container text-center">
 		<form  method="POST">
 			{% csrf_token %}
-			{{ form|crispy }}
-			<button class="btn btn-lg btn-success" type="submit">Login</button>
+			{% for field in form %}
+			<div class="form-group row">
+				<div class="col-10">
+					{{ field |as_crispy_field}}
+				</div>
+			</div>
+			{% endfor %}
+			<button class="btn btn-primary" type="submit">Login</button>
 		</form>
 		<br>
 		Don't have an account? <a href="/register" target="blank"><strong>register here</strong></a>!

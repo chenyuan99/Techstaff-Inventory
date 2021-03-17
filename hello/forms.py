@@ -1,5 +1,5 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
 from hello.models import *
 from django.forms import ModelForm
@@ -19,8 +19,24 @@ class NewUserForm(UserCreationForm):
             user.save()
         return user
 
-# add event form
+class LoginForm(AuthenticationForm):
+    username = forms.CharField() 
+    password = forms.PasswordInput()
+
+    def __init__(self, *args, **kwargs):
+        super(LoginForm, self).__init__(*args, **kwargs)
+        self.helper = FormHelper(self)
+        self.helper.form_class = 'form-horizontal'
+        self.helper.label_class = 'col-lg-2'
+        self.helper.field_class = 'col-lg-8'
+
 class AddUserDeviceForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(AddUserDeviceForm, self).__init__(*args, **kwargs)
+        self.helper = FormHelper(self)
+        self.helper.form_class = 'form-horizontal'
+        self.helper.label_class = 'col-lg-2'
+        self.helper.field_class = 'col-lg-8'
     class Meta:
         model = UserDevice
         fields = '__all__'
@@ -28,16 +44,26 @@ class AddUserDeviceForm(forms.ModelForm):
 
 # add guest
 class AddFacultyForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(AddFacultyForm, self).__init__(*args, **kwargs)
+        self.helper = FormHelper(self)
+        self.helper.form_class = 'form-horizontal'
+        self.helper.label_class = 'col-lg-2'
+        self.helper.field_class = 'col-lg-8'
     class Meta:
         model = Faculty
         fields = '__all__'
 
 class deviceForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(deviceForm, self).__init__(*args, **kwargs)
+        self.helper = FormHelper(self)
+        self.helper.form_class = 'form-horizontal'
+        self.helper.label_class = 'col-lg-2'
+        self.helper.field_class = 'col-lg-8'
     class Meta:
         model = Device
         fields = '__all__'
-
-    helper = FormHelper()
 
     
         
@@ -48,6 +74,12 @@ class deviceForm(forms.ModelForm):
 #         field = '__all__'
 
 class AddNetworkForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(AddNetworkForm, self).__init__(*args, **kwargs)
+        self.helper = FormHelper(self)
+        self.helper.form_class = 'form-horizontal'
+        self.helper.label_class = 'col-lg-2'
+        self.helper.field_class = 'col-lg-8'
     class Meta:
         model = NetworkInterface
         fields = '__all__'

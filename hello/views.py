@@ -55,25 +55,46 @@ def logout_request(request):
     messages.info(request, "Logged out successfully!")
     return redirect("index")
 
+# def login_request(request):
+#     if request.method == 'POST':
+#         form = AuthenticationForm(request=request, data=request.POST)
+#         if form.is_valid():
+#             username = form.cleaned_data.get('username')
+#             password = form.cleaned_data.get('password')
+#             user = authenticate(username=username, password=password)
+#             if user is not None:
+#                 login(request, user)
+#                 messages.info(request, f"You are now logged in as {username}")
+#                 return redirect('/')
+#             else:
+#                 messages.error(request, "Invalid username or password.")
+#         else:
+#             messages.error(request, "Invalid username or password.")
+#     form = AuthenticationForm()
+#     return render(request = request,
+#                   template_name = "main/login.html",
+#                   context={"form":form})
+
 def login_request(request):
     if request.method == 'POST':
-        form = AuthenticationForm(request=request, data=request.POST)
-        if form.is_valid():
-            username = form.cleaned_data.get('username')
-            password = form.cleaned_data.get('password')
-            user = authenticate(username=username, password=password)
-            if user is not None:
-                login(request, user)
-                messages.info(request, f"You are now logged in as {username}")
-                return redirect('/')
-            else:
-                messages.error(request, "Invalid username or password.")
+        user_name = request.POST['username']
+        pass_word = request.POST['password']
+        userobj = authenticate(request, username = user_name, password=pass_word)
+        if userobj is not None:
+            login(request, userobj)
+            messages.success(request, 'You are Logged in !')
+            return redirect('/')                       
         else:
-            messages.error(request, "Invalid username or password.")
-    form = AuthenticationForm()
-    return render(request = request,
-                  template_name = "main/login.html",
-                  context={"form":form})
+            messages.success(request, 'Wrong credentials', extra_tags='red')
+            return redirect('/')
+    else:
+
+        if request.user.is_authenticated:
+            return redirect('/')
+        else:
+            form = LoginForm()
+            context = {'form': form}
+            return render(request, 'main/login.html', context) 
 
 def register(request):
     if request.method == "POST":
