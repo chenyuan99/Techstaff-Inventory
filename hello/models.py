@@ -17,9 +17,9 @@ class Device(models.Model):
     Serial_Number = models.CharField(max_length=100, default = '')
     #
     choices = (
-        ('InUse', 'In Use'),
-        ('InStorage', 'In Storage'),
-        ('OnLoan', 'On Loan'),
+        ('In Use', 'In Use'),
+        ('In Storage', 'In Storage'),
+        ('On Loan', 'On Loan'),
         ('Damaged', 'Damaged'),
         ('Missing', 'Missing'),
         ('Surplused', 'Surplused'),
@@ -28,7 +28,7 @@ class Device(models.Model):
         ('Orphaned', 'Orphaned')
     )
 
-    status = models.CharField(max_length=15, choices=choices, default="InUse") #Available, Sold, Restocking
+    status = models.CharField(max_length=15, choices=choices, default='In Use') #Available, Sold, Restocking
     issue = models.CharField(max_length=100, default="No issues")
 
     class Meta:
