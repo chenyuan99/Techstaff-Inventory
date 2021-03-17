@@ -1,24 +1,26 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-<!-- <div class="jumbotron text-center">
-		<div class="container">
-			<p>{{user.username|title}}</p>
-		</div>
-	</div> -->
+<div class="jumbotron text-center">
+	<div class="container">
+		<p>{{user.username|title}}'s History</p>
+	</div>
+</div>
 <div class="container ">
 	<div class="panel panel-default">
 		<!-- Default panel contents -->
-		<div class="panel-heading text-center">
+		<!-- <div class="panel-heading text-center">
 			<h3>Your History</h3>
-		</div>
+		</div> -->
 
 		<!-- Table -->
 		<br>
 
 		<div class="button-group">
-			<a href="{% url 'display_userDevice' %}" class="btn btn-outline-primary btn-md" role="button">UserDevices</a>
-			<a href="{% url 'add_userDevice' %}" class="btn btn-outline-primary btn-md" role="button">Add UserDevices</a>
+			<a href="{% url 'display_userDevice' %}" class="btn btn-outline-primary btn-md"
+				role="button">UserDevices</a>
+			<a href="{% url 'add_userDevice' %}" class="btn btn-outline-primary btn-md" role="button">Add
+				UserDevices</a>
 		</div>
 
 		<br>
@@ -27,13 +29,10 @@
 		<table class="table table-hover">
 			<thead>
 				<tr>
-					<th>id</th>
-					<th>Address</th>
-					<th>Device</th>
-					<th>Faculty</th>
-					<th>Action</th>
-					<th>Status</th>
-					<th>Issues</th>
+					<th>Custodian Pid</th>
+					<th>DeviceID</th>
+					<th>Checkout Date</th>
+					<!-- <th>Faculty</th> -->
 					<th>Edit or Delete</th>
 				</tr>
 			</thead>
@@ -54,9 +53,9 @@
 					<td>{{ item.UserPID }}</td>
 					<td>{{ item.DeviceID }}</td>
 					<!-- <td>{{ item.Custodian }}</td> -->
-					<td>{{ item.isHomeUse }}</td>
+					<!-- <td>{{ item.isHomeUse }}</td> -->
 					<td>{{ item.CheckoutDate }}</td>
-					<td>{{ item.ReturnDate }}</td>
+					<!-- <td>{{ item.ReturnDate }}</td> -->
 					{% if header|lower == "UserDevice" %}
 					<td>
 						<a href="{% url 'edit_device' item.pk %}" class="btn btn-outline-info btn-sm"
