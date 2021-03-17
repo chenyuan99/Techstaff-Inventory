@@ -31,16 +31,25 @@ urlpatterns = [
     path("privacy-policy", hello.views.privacy, name="privacy-policy"),
     path("check-out", hello.views.check_out, name="check-out"),
     path("account", hello.views.account, name="account"),
+
     url(r'^display_devices$', hello.views.display_devices, name='display_devices'),
     url(r'^display_hostnames$', hello.views.display_hostnames, name='display_hostnames'),
     url(r'^display_userDevice$', hello.views.display_userDevice, name='display_userDevice'),
+    url(r'^display_buildings$', hello.views.display_buildings, name='display_buildings'),
     url(r'^display_faculty$', hello.views.display_faculty, name='display_faculty'),
+
     url(r'^add_device$', hello.views.add_device, name='add_device'),
     url(r'^add_faculty$', hello.views.add_faculty, name='add_faculty'),
     url(r'^add_hostname$', hello.views.add_hostname, name='add_hostname'),
+    url(r'^add_building$', hello.views.add_building, name='add_building'),
     url(r'^add_userDevice$', hello.views.add_userDevice, name='add_userDevice'),
+
     url(r'^edit_device/(?P<pk>\d+)$', hello.views.edit_device, name='edit_device'),
     url(r'^delete_device/(?P<pk>\d+)$', hello.views.delete_device, name='delete_device'),
+    url(r'^edit_network/(?P<pk>\d+)$', hello.views.edit_network, name='edit_network'),
+    url(r'^delete_network/(?P<pk>\d+)$', hello.views.delete_network, name='delete_network'),
+    url(r'^edit_building/(?P<pk>\d+)$', hello.views.edit_building, name='edit_building'),
+    url(r'^delete_building/(?P<pk>\d+)$', hello.views.delete_building, name='delete_building'),
     url(r'^some_view$', hello.views.some_view, name='some_view'),
     # Faculty
     url(r'^add_faculty$', hello.views.add_faculty, name='add_faculty'),

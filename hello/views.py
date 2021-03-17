@@ -16,18 +16,22 @@ import logging
 class HomePageView(TemplateView):
     template_name = 'home.html'
 
+
 class SearchResultsView(ListView):
     model = Device
     template_name = 'main/search_results.html'
-    def get_queryset(self): # new
+
+    def get_queryset(self):  # new
         query = self.request.GET.get('q')
         object_list = Device.objects.filter(
             Q(CS_Tag__icontains=query) | Q(VT_Tag__icontains=query)
         )
         return object_list
 
+
 # This retrieves a Python logging instance (or creates it)
 logger = logging.getLogger(__name__)
+
 
 # Create your views here.
 def index(request):
@@ -37,11 +41,12 @@ def index(request):
         return render(request, "index.html")
     else:
         query_results = UserDevice.objects.all()
-        return render(request, "main/account.html",{'query_results':query_results})
+        return render(request, "main/account.html", {'query_results': query_results})
 
 
 def about(request):
     return render(request, "main/about.html")
+
 
 def db(request):
     greeting = Greeting()
@@ -49,16 +54,18 @@ def db(request):
     greetings = Greeting.objects.all()
     return render(request, "db.html", {"greetings": greetings})
 
+
 def logout_request(request):
     logout(request)
     messages.info(request, "Logged out successfully!")
     return redirect("index")
 
+
 def login_request(request):
     if request.method == 'POST':
         user_name = request.POST['username']
         pass_word = request.POST['password']
-        userobj = authenticate(request, username = user_name, password=pass_word)
+        userobj = authenticate(request, username=user_name, password=pass_word)
         if userobj is not None:
             login(request, userobj)
             messages.success(request, 'You are Logged in !')
@@ -75,6 +82,7 @@ def login_request(request):
             context = {'form': form}
             return render(request, 'main/login.html', context)
 
+
 def register(request):
     if request.method == "POST":
         form = UserCreationForm(request.POST)
@@ -88,23 +96,27 @@ def register(request):
             for msg in form.error_messages:
                 print(form.error_messages[msg])
 
-            return render(request = request,
-                          template_name = "main/register.html",
-                          context={"form":form})
+            return render(request=request,
+                          template_name="main/register.html",
+                          context={"form": form})
 
     form = UserCreationForm
-    return render(request = request,
-                  template_name = "main/register.html",
-                  context={"form":form})
+    return render(request=request,
+                  template_name="main/register.html",
+                  context={"form": form})
+
 
 def mcbrydehall(request):
     return render(request, "building/mcbryde-hall.html")
 
+
 def faq(request):
     return render(request, "main/faq.html")
 
+
 def privacy(request):
     return render(request, "main/privacy-policy.html")
+
 
 def check_out(request):
     if not request.user.is_authenticated:
@@ -118,21 +130,26 @@ def check_out(request):
     # Render the HTML template index.html with the data in the context variable
     return render(request, "check-out.html", context=context)
 
+
 def account(request):
     query_results = UserDevice.objects.all()
-    return render(request, "main/account.html",{'query_results':query_results})
+    return render(request, "main/account.html", {'query_results': query_results})
     # return render(request, "main/account.html")
+
 
 def dashboard(request):
     if not request.user.is_authenticated:
         raise PermissionDenied
     query_results = UserDevice.objects.all()
-    return render(request, "main/dashboard.html",{'query_results':query_results})
+    return render(request, "main/dashboard.html", {'query_results': query_results})
+
 
 def guest_dashboard(request):
     query_results = UserDevice.objects.all()
-    return render(request, "main/guest-dashboard.html",{'query_results':query_results})
+    return render(request, "main/guest-dashboard.html", {'query_results': query_results})
 
+
+# -------------------------display-----------------------------------
 def display_devices(request):
     items = Device.objects.all()
     # .filter()
@@ -146,6 +163,7 @@ def display_devices(request):
 
     return render(request, 'index.html', context)
 
+
 def display_hostnames(request):
     items = NetworkInterface.objects.all()
     myFilter = networkFilter(request.GET, queryset=items)
@@ -158,6 +176,20 @@ def display_hostnames(request):
 
     return render(request, 'index.html', context)
 
+
+def display_buildings(request):
+    items = Building.objects.all()
+    myFilter = buildingFilter(request.GET, queryset=items)
+    items = myFilter.qs
+    context = {
+        'items': items,
+        'header': 'building',
+        'myFilter': myFilter,
+    }
+
+    return render(request, 'index.html', context)
+
+
 def display_faculty(request):
     items = Faculty.objects.all()
     myFilter = Faculty(request.GET, queryset=items)
@@ -169,6 +201,7 @@ def display_faculty(request):
     }
     return render(request, 'index.html', context)
 
+
 def display_userDevice(request):
     items = UserDevice.objects.all()
     myFilter = facultyFilter(request.GET, queryset=items)
@@ -179,6 +212,7 @@ def display_userDevice(request):
         'myFilter': myFilter
     }
     return render(request, 'main/account.html', context)
+
 
 # def display_faculty(request):
 #     items = Faculty.objects.all()
@@ -194,6 +228,8 @@ def display_userDevice(request):
 def display_equipment_checkout_form(request):
     return render(request, "check-out.html")
 
+
+# -------------------------add-----------------------------------
 def add_device(request):
     if not request.user.is_authenticated:
         raise PermissionDenied
@@ -223,6 +259,22 @@ def add_hostname(request):
         form = AddNetworkForm
         return render(request, 'add_new.html', {'form': form})
 
+
+def add_building(request):
+    if not request.user.is_authenticated:
+        raise PermissionDenied
+    if request.method == 'POST':
+        form = buildingForm(request.POST)
+
+        if form.is_valid():
+            form.save()
+            return display_buildings(request)
+
+    else:
+        form = buildingForm
+        return render(request, 'add_new.html', {'form': form})
+
+
 def add_userDevice(request):
     if not request.user.is_authenticated:
         raise PermissionDenied
@@ -236,6 +288,7 @@ def add_userDevice(request):
     else:
         form = AddUserDeviceForm
         return render(request, 'add_new.html', {'form': form})
+
 
 def add_faculty(request):
     if not request.user.is_authenticated:
@@ -251,6 +304,8 @@ def add_faculty(request):
         form = AddFacultyForm
         return render(request, 'add_new.html', {'form': form})
 
+
+# -------------------------edit-----------------------------------
 def edit_item(request, pk, model, cls):
     if not request.user.is_authenticated:
         raise PermissionDenied
@@ -269,11 +324,55 @@ def edit_item(request, pk, model, cls):
 
 
 def edit_device(request, pk):
-    return edit_item(request, pk, Device, deviceForm)
+    if not request.user.is_authenticated:
+        raise PermissionDenied
+    item = get_object_or_404(Device, pk=pk)
+
+    if request.method == 'POST':
+        form = deviceForm(request.POST, instance=item)
+        if form.is_valid():
+            form.save()
+            return display_devices(request)
+
+    else:
+        form = deviceForm(instance=item)
+        return render(request, 'edit_item.html', {'form': form})
 
 
+def edit_network(request, pk):
+    if not request.user.is_authenticated:
+        raise PermissionDenied
+    item = get_object_or_404(NetworkInterface, pk=pk)
+
+    if request.method == 'POST':
+        form = AddNetworkForm(request.POST, instance=item)
+        if form.is_valid():
+            form.save()
+            return display_hostnames(request)
+
+    else:
+        form = AddNetworkForm(instance=item)
+        return render(request, 'edit_item.html', {'form': form})
+
+
+def edit_building(request, pk):
+    if not request.user.is_authenticated:
+        raise PermissionDenied
+    item = get_object_or_404(Building, pk=pk)
+
+    if request.method == 'POST':
+        form = buildingForm(request.POST, instance=item)
+        if form.is_valid():
+            form.save()
+            return display_buildings(request)
+
+    else:
+        form = buildingForm(instance=item)
+        return render(request, 'edit_item.html', {'form': form})
+
+
+# -------------------------delete-----------------------------------
 def delete_device(request, pk):
-
     device = Device.objects.get(id=pk)
     if request.method == "POST":
         device.delete()
@@ -283,16 +382,34 @@ def delete_device(request, pk):
     for fieldname in form.fields:
         form.fields[fieldname].disabled = True
 
-    return render(request, 'delete_itme.html', {'form': form})
+    return render(request, 'delete_item.html', {'form': form})
 
 
-def delete_hostname(request, pk):
-    Hostname.objects.filter(id=pk).delete()
-    items = Hostname.objects.all()
-    context = {
-        'items': items
-    }
-    return render(request, 'index.html', context)
+def delete_network(request, pk):
+    network = NetworkInterface.objects.get(pk=pk)
+    if request.method == "POST":
+        network.delete()
+        return display_hostnames(request)
+
+    form = AddNetworkForm(request.POST, instance=network)
+    for fieldname in form.fields:
+        form.fields[fieldname].disabled = True
+
+    return render(request, 'delete_item.html', {'form': form})
+
+
+def delete_building(request, pk):
+    building = Building.objects.get(pk=pk)
+    if request.method == "POST":
+        building.delete()
+        return display_buildings(request)
+
+    form = buildingForm(request.POST, instance=building)
+    for fieldname in form.fields:
+        form.fields[fieldname].disabled = True
+
+    return render(request, 'delete_item.html', {'form': form})
+
 
 def delete_ticket(request, pk):
     Ticket.objects.filter(id=pk).delete()
@@ -302,6 +419,8 @@ def delete_ticket(request, pk):
     }
     return render(request, 'main/account.html', context)
 
+
+#-------------------------    ------------------
 def checkout_device(request, pk):
     if request.user.is_authenticated:
         Device.objects.filter(id=pk).status = 'Item Sold'
@@ -312,6 +431,7 @@ def checkout_device(request, pk):
         return render(request, 'checkout.html', context)
     else:
         raise PermissionDenied
+
 
 def some_view(request):
     # Create the HttpResponse object with the appropriate CSV header.
@@ -330,13 +450,9 @@ def some_view(request):
     response.write(t.render(c))
     return response
 
-
 # def device(request, pk):
 #     device = Device.objects.get(id=pk)
 #     context = {
 #         'device': device,
 #     }
 #     return render(request, "device_detail.html", context)
-
-
-

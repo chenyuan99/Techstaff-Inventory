@@ -20,7 +20,7 @@ class NewUserForm(UserCreationForm):
         return user
 
 class LoginForm(AuthenticationForm):
-    username = forms.CharField() 
+    username = forms.CharField()
     password = forms.PasswordInput()
 
     def __init__(self, *args, **kwargs):
@@ -66,8 +66,8 @@ class deviceForm(forms.ModelForm):
         model = Device
         fields = '__all__'
 
-    
-        
+
+
 
 # class userDeviceForm(forms.ModelForm):
 #     class Meta:
@@ -83,6 +83,18 @@ class AddNetworkForm(forms.ModelForm):
         self.helper.field_class = 'col-lg-8'
     class Meta:
         model = NetworkInterface
+        fields = '__all__'
+
+
+class buildingForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(buildingForm, self).__init__(*args, **kwargs)
+        self.helper = FormHelper(self)
+        self.helper.form_class = 'form-horizontal'
+        self.helper.label_class = 'col-lg-2'
+        self.helper.field_class = 'col-lg-8'
+    class Meta:
+        model = Building
         fields = '__all__'
 
 
