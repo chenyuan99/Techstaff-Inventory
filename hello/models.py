@@ -45,7 +45,7 @@ class UserDevice(models.Model):
     # Note = models.CharField(max_length=100, default = '')
     # isHomeUse = models.BooleanField(default=False)
     CheckoutDate = models.DateField(auto_now=True)  # create time (automatic)
-    ReturnDate = models.DateField()  # create time (automatic)
+    ReturnDate = models.DateField(default='YYYY-MM-DD')  # create time (automatic)
 
 class Building(models.Model):
     BuildingID = models.IntegerField(primary_key = True)
