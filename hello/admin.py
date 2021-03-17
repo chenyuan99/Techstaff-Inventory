@@ -53,6 +53,9 @@ class FacultyAdmin(admin.ModelAdmin):
     list_display =("PID","Office_Addr")
     search_fields =("PID","Office_Addr")
 
+class BuildingAdmin(admin.ModelAdmin):
+    model = Faculty
+
 @admin.register(LogEntry)
 class LogEntryAdmin(admin.ModelAdmin):
     # to have a date-based drilldown navigation in the admin page
@@ -82,3 +85,4 @@ admin.site.register(Device, DeviceAdmin)
 admin.site.register(UserDevice, UserDeviceAdmin)
 admin.site.register(Faculty, FacultyAdmin)
 admin.site.register(NetworkInterface, HostnameAdmin)
+admin.site.register(Building, BuildingAdmin)

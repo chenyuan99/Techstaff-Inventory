@@ -158,6 +158,17 @@ def display_hostnames(request):
 
     return render(request, 'index.html', context)
 
+def display_faculty(request):
+    items = Faculty.objects.all()
+    myFilter = Faculty(request.GET, queryset=items)
+    items = myFilter.qs
+    context = {
+        'items': items,
+        'header': 'Faculty',
+        'myFilter': myFilter,
+    }
+    return render(request, 'index.html', context)
+
 def display_userDevice(request):
     items = UserDevice.objects.all()
     myFilter = facultyFilter(request.GET, queryset=items)
@@ -169,16 +180,16 @@ def display_userDevice(request):
     }
     return render(request, 'main/account.html', context)
 
-def display_faculty(request):
-    items = Faculty.objects.all()
-    myFilter = facultyFilter(request.GET, queryset=items)
-    items = myFilter.qs
-    context = {
-        'items': items,
-        'header': 'Faculty',
-        'myFilter': myFilter
-    }
-    return render(request, 'main/account.html', context)
+# def display_faculty(request):
+#     items = Faculty.objects.all()
+#     myFilter = facultyFilter(request.GET, queryset=items)
+#     items = myFilter.qs
+#     context = {
+#         'items': items,
+#         'header': 'Faculty',
+#         'myFilter': myFilter
+#     }
+#     return render(request, 'main/account.html', context)
 
 def display_equipment_checkout_form(request):
     return render(request, "check-out.html")

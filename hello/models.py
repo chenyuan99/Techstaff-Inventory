@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 # Create your models here.
 
 class Faculty(models.Model):
-    PID = models.CharField(max_length=100, default = '',editable=False)
+    PID = models.CharField(max_length=100, default = '')
     Office_Addr = models.CharField(max_length=100, default = '')
 
 class Device(models.Model):
