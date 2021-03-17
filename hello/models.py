@@ -38,6 +38,7 @@ class Device(models.Model):
 
     def _str_(self):
         return 'Type : {0} Price : {1}'.format(self.type, self.price)
+        ordering = ['-id']
 
 class UserDevice(models.Model):
     UserPID =  models.CharField(max_length=100, default = '')
@@ -46,6 +47,9 @@ class UserDevice(models.Model):
     # isHomeUse = models.BooleanField(default=False)
     CheckoutDate = models.DateField(auto_now=True)  # create time (automatic)
     ReturnDate = models.DateField(default='YYYY-MM-DD')  # create time (automatic)
+
+    class Meta:
+        unique_together = ('UserPID', 'DeviceID', 'CheckoutDate')
 
 class Building(models.Model):
     BuildingID = models.IntegerField(primary_key = True)

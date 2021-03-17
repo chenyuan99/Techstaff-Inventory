@@ -46,6 +46,9 @@ class DeviceAdmin(admin.ModelAdmin):
 
 class UserDeviceAdmin(admin.ModelAdmin):
     model = UserDevice
+    list_filter =("UserPID","DeviceID","CheckoutDate")
+    list_display =("UserPID","DeviceID","CheckoutDate")
+    search_fields =("UserPID","DeviceID","CheckoutDate")
 
 class FacultyAdmin(admin.ModelAdmin):
     model = Faculty
@@ -54,7 +57,10 @@ class FacultyAdmin(admin.ModelAdmin):
     search_fields =("PID","Office_Addr")
 
 class BuildingAdmin(admin.ModelAdmin):
-    model = Faculty
+    model = Building
+    list_filter =("BuildingID","Building_Name","Building_Addr")
+    list_display =("BuildingID","Building_Name","Building_Addr")
+    search_fields =("BuildingID","Building_Name","Building_Addr")
 
 @admin.register(LogEntry)
 class LogEntryAdmin(admin.ModelAdmin):
