@@ -8,7 +8,7 @@
 		<a href="{% url 'display_devices' %}" class="btn btn-outline-primary btn-md" role="button">Devices</a>
 		<a href="{% url 'display_hostnames' %}" class="btn btn-outline-primary btn-md" role="button">Hostnames</a>
 		<a href="{% url 'display_buildings' %}" class="btn btn-outline-primary btn-md" role="button">Buildings</a>
-		<a href="{% url 'display_faculty' %}" class="btn btn-outline-primary btn-md" role="button">Faculty</a>
+		<!-- <a href="{% url 'display_faculty' %}" class="btn btn-outline-primary btn-md" role="button">Faculty</a> -->
 		{% if user.is_authenticated %}
 			<a href="{% url 'add_device' %}" class="btn btn-outline-danger btn-md" role="button">Add Device</a>
 			<a href="{% url 'add_userDevice' %}" class="btn btn-outline-danger btn-md" role="button">Add userDevice</a>
@@ -37,7 +37,7 @@
 									</div>
 								</div>
 							{% endfor %}
-							<button class="btn btn-primary" type="submit">Search</button>
+							<button class="btn btn-primary" type="submit"><i class="bi-search"></i> Search</button>
 						</form>
 
 					</div>
