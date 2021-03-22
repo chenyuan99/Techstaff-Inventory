@@ -4,8 +4,7 @@ from .models import *
 
 
 class deviceFilter(django_filters.FilterSet):
-    Manufacturer = CharFilter(field_name='Manufacturer', lookup_expr='icontains')
-    Model = CharFilter(field_name='Model', lookup_expr='icontains')
+    description = CharFilter(field_name='description', lookup_expr='icontains')
     VT_Tag = CharFilter(field_name='VT_Tag', lookup_expr='icontains')
     CS_Tag = CharFilter(field_name='CS_Tag', lookup_expr='icontains')
     Serial_Number = CharFilter(field_name='Serial_Number', lookup_expr='icontains')
