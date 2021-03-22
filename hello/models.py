@@ -4,19 +4,19 @@ from django.contrib.auth.models import User
 # Create your models here.
 
 class Faculty(models.Model):
-    PID = models.CharField(max_length=100, default = '')
+    PID = models.CharField(max_length=100, default = '', primary_key=True)
     Office_Addr = models.CharField(max_length=100, default = '')
-    # FirstName = models.CharField(max_length=100, default = '')
-    # LastName = models.CharField(max_length=100, default = '')
+    FirstName = models.CharField(max_length=100, default = 'First name')
+    LastName = models.CharField(max_length=100, default = 'Last name')
 
 class Device(models.Model):
+    Serial_Number = models.CharField(max_length=100, default = '')
     type = models.CharField(max_length=100, default = '')
     price = models.IntegerField()
-    Manufacturer = models.CharField(max_length=100, default = '')     # Manufacturer
-    Model = models.CharField(max_length=100, default = '')
+    description = models.CharField(max_length=100, default = '')
     VT_Tag = models.CharField(max_length=100, default = '')
     CS_Tag = models.CharField(max_length=100, default = '')
-    Serial_Number = models.CharField(max_length=100, default = '')
+    acq_date = models.DateField(default='YYYY-MM-DD')
     #
     choices = (
         ('In Use', 'In Use'),
@@ -45,8 +45,8 @@ class Device(models.Model):
 class UserDevice(models.Model):
     UserPID =  models.CharField(max_length=100, default = '')
     DeviceID = models.CharField(max_length=100, default = '')
-    # Note = models.CharField(max_length=100, default = '')
-    # isHomeUse = models.BooleanField(default=False)
+    Note = models.CharField(max_length=100, default = '')
+    isHomeUse = models.BooleanField(default=False)
     CheckoutDate = models.DateField(auto_now=True)  # create time (automatic)
     ReturnDate = models.DateField(default='YYYY-MM-DD')  # create time (automatic)
 
@@ -55,8 +55,8 @@ class UserDevice(models.Model):
 
 class Building(models.Model):
     BuildingID = models.IntegerField(primary_key = True)
-    Building_Name = models.CharField(max_length=64)  # Aliases/cnames
-    Building_Addr = models.CharField(max_length=64)  # Aliases/cnames
+    Building_Name = models.CharField(max_length=64)  
+    Building_Addr = models.CharField(max_length=64)  
     
 
 class NetworkInterface(models.Model):
