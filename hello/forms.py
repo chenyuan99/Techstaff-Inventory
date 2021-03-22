@@ -101,9 +101,3 @@ class buildingForm(forms.ModelForm):
 
 
 
-#search
-# class deviceSearchFrom(forms.ModelForm):
-#     class Meta:
-#         model = Device
-#         fields = '__all__'
-
