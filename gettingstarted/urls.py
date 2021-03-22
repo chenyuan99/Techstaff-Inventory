@@ -29,7 +29,7 @@ urlpatterns = [
     path("about", hello.views.about, name="about"),
     path("faq", hello.views.faq, name="faq"),
     path("privacy-policy", hello.views.privacy, name="privacy-policy"),
-    path("check-out", hello.views.check_out, name="check-out"),
+    # path("check-out", hello.views.check_out, name="check-out"),
     path("account", hello.views.account, name="account"),
 
     url(r'^display_devices$', hello.views.display_devices, name='display_devices'),
@@ -50,6 +50,9 @@ urlpatterns = [
     url(r'^delete_network/(?P<pk>\d+)$', hello.views.delete_network, name='delete_network'),
     url(r'^edit_building/(?P<pk>\d+)$', hello.views.edit_building, name='edit_building'),
     url(r'^delete_building/(?P<pk>\d+)$', hello.views.delete_building, name='delete_building'),
+
+
+    url(r'^check-out/(?P<pk>\d+)$', hello.views.check_out, name="check-out"),
     url(r'^some_view$', hello.views.some_view, name='some_view'),
     # Faculty
     url(r'^add_faculty$', hello.views.add_faculty, name='add_faculty'),
