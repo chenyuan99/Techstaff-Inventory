@@ -80,6 +80,15 @@ if os.getenv('GAE_APPLICATION', None):
 
 else:
     DATABASES = {
+        'default':{
+            'ENGINE': 'django.db.backends.mysql',
+            'HOST': '35.192.209.96',
+            'USER': 'techstaff',
+            'PASSWORD': 'nYlenIldpqKdneo8Ndqjkc28J',
+            'NAME': 'techstaff'
+        }
+    }
+    """ DATABASES = {
 
         'default': {
 
@@ -97,11 +106,20 @@ else:
 
         }
 
+    } """
+
+""" 
+# Running on local VM, connect to CloudSQL:
+DATABASES = {
+    'default':{
+        'ENGINE': 'django.db.backends.mysql',
+        'HOST': '35.192.209.96',
+        'USER': 'techstaff',
+        'PASSWORD': 'nYlenIldpqKdneo8Ndqjkc28J',
+        'NAME': 'techstaff'
     }
-
-
-
-
+}
+ """
 
 
 # Password validation
