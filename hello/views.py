@@ -118,17 +118,37 @@ def privacy(request):
     return render(request, "main/privacy-policy.html")
 
 
-def check_out(request):
+def check_out(request,pk):
     if not request.user.is_authenticated:
         raise PermissionDenied
+    userdevice = get_object_or_404(UserDevice, pk=pk)
+    # device = get_object_or_404(Device, pk=userdevice.DeviceID)
+    user = get_object_or_404(Faculty, PID=userdevice.UserPID)
     context = {
         'VT_Property': "VT000320684",
         'CS_Property': "CS0002824",
         "is_student_user": False,
+        "Office_Addr": user.Office_Addr,
+        "pid": user.PID,
     }
 
     # Render the HTML template index.html with the data in the context variable
     return render(request, "check-out.html", context=context)
+
+# def edit_device(request, pk):
+#     if not request.user.is_authenticated:
+#         raise PermissionDenied
+#     item = get_object_or_404(Device, pk=pk)
+
+#     if request.method == 'POST':
+#         form = deviceForm(request.POST, instance=item)
+#         if form.is_valid():
+#             form.save()
+#             return display_devices(request)
+
+#     else:
+#         form = deviceForm(instance=item)
+#         return render(request, 'edit_item.html', {'form': form})
 
 
 def account(request):
@@ -431,6 +451,22 @@ def checkout_device(request, pk):
         return render(request, 'checkout.html', context)
     else:
         raise PermissionDenied
+
+
+# def edit_device(request, pk):
+#     if not request.user.is_authenticated:
+#         raise PermissionDenied
+#     item = get_object_or_404(Device, pk=pk)
+
+#     if request.method == 'POST':
+#         form = deviceForm(request.POST, instance=item)
+#         if form.is_valid():
+#             form.save()
+#             return display_devices(request)
+
+#     else:
+#         form = deviceForm(instance=item)
+#         return render(request, 'edit_item.html', {'form': form})
 
 
 def some_view(request):
