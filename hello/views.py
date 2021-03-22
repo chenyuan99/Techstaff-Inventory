@@ -122,11 +122,11 @@ def check_out(request, pk):
     if not request.user.is_authenticated:
         raise PermissionDenied
     userdevice = get_object_or_404(UserDevice, pk=pk)
-    # device = get_object_or_404(Device, pk=userdevice.DeviceID)
+    device = get_object_or_404(Device, pk=userdevice.DeviceID)
     user = get_object_or_404(Faculty, PID=userdevice.UserPID)
     context = {
-        'VT_Property': "VT000320684",
-        'CS_Property': "CS0002824",
+        'VT_Property': device.VT_Tag,
+        'CS_Property': device.CS_Tag,
         "is_student_user": False,
         "Office_Addr": user.Office_Addr,
         "pid": user.PID,
