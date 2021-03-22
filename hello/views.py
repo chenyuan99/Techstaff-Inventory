@@ -118,7 +118,7 @@ def privacy(request):
     return render(request, "main/privacy-policy.html")
 
 
-def check_out(request,pk):
+def check_out(request, pk):
     if not request.user.is_authenticated:
         raise PermissionDenied
     userdevice = get_object_or_404(UserDevice, pk=pk)
@@ -134,6 +134,7 @@ def check_out(request,pk):
 
     # Render the HTML template index.html with the data in the context variable
     return render(request, "check-out.html", context=context)
+
 
 # def edit_device(request, pk):
 #     if not request.user.is_authenticated:
@@ -212,11 +213,11 @@ def display_buildings(request):
 
 def display_faculty(request):
     items = Faculty.objects.all()
-    myFilter = Faculty(request.GET, queryset=items)
+    myFilter = facultyFilter(request.GET, queryset=items)
     items = myFilter.qs
     context = {
         'items': items,
-        'header': 'Faculty',
+        'header': 'faculty',
         'myFilter': myFilter,
     }
     return render(request, 'index.html', context)
@@ -224,7 +225,7 @@ def display_faculty(request):
 
 def display_userDevice(request):
     items = UserDevice.objects.all()
-    myFilter = facultyFilter(request.GET, queryset=items)
+    myFilter = UserDeviceFilter(request.GET, queryset=items)
     items = myFilter.qs
     context = {
         'items': items,
@@ -303,7 +304,7 @@ def add_userDevice(request):
 
         if form.is_valid():
             form.save()
-            return display_faculty(request)
+            return display_userDevice(request)
 
     else:
         form = AddUserDeviceForm
@@ -375,6 +376,22 @@ def edit_network(request, pk):
         return render(request, 'edit_item.html', {'form': form})
 
 
+def edit_faculty(request, PID):
+    if not request.user.is_authenticated:
+        raise PermissionDenied
+    item = get_object_or_404(Faculty, PID=PID)
+
+    if request.method == 'POST':
+        form = AddFacultyForm(request.POST, instance=item)
+        if form.is_valid():
+            form.save()
+            return display_faculty(request)
+
+    else:
+        form = AddFacultyForm(instance=item)
+        return render(request, 'edit_item.html', {'form': form})
+
+
 def edit_building(request, pk):
     if not request.user.is_authenticated:
         raise PermissionDenied
@@ -418,6 +435,19 @@ def delete_network(request, pk):
     return render(request, 'delete_item.html', {'form': form})
 
 
+def delete_faculty(request, PID):
+    faculty = Faculty.objects.get(PID=PID)
+    if request.method == "POST":
+        faculty.delete()
+        return display_faculty(request)
+
+    form = AddFacultyForm(request.POST, instance=faculty)
+    for fieldname in form.fields:
+        form.fields[fieldname].disabled = True
+
+    return render(request, 'delete_item.html', {'form': form})
+
+
 def delete_building(request, pk):
     building = Building.objects.get(pk=pk)
     if request.method == "POST":
@@ -440,7 +470,7 @@ def delete_ticket(request, pk):
     return render(request, 'main/account.html', context)
 
 
-#-------------------------    ------------------
+# -------------------------    ------------------
 def checkout_device(request, pk):
     if request.user.is_authenticated:
         Device.objects.filter(id=pk).status = 'Item Sold'

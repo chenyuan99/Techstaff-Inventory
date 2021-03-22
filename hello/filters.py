@@ -20,7 +20,7 @@ class networkFilter(django_filters.FilterSet):
         fields = '__all__'
 
 
-class facultyFilter(django_filters.FilterSet):
+class UserDeviceFilter(django_filters.FilterSet):
     class Meta:
         model = UserDevice
         fields = '__all__'
@@ -29,4 +29,10 @@ class facultyFilter(django_filters.FilterSet):
 class buildingFilter(django_filters.FilterSet):
     class Meta:
         model = Building
+        fields = '__all__'
+
+
+class facultyFilter(django_filters.FilterSet):
+    class Meta:
+        model = Faculty
         fields = '__all__'

@@ -50,15 +50,13 @@ urlpatterns = [
     url(r'^delete_network/(?P<pk>\d+)$', hello.views.delete_network, name='delete_network'),
     url(r'^edit_building/(?P<pk>\d+)$', hello.views.edit_building, name='edit_building'),
     url(r'^delete_building/(?P<pk>\d+)$', hello.views.delete_building, name='delete_building'),
-
+    url(r'^edit_faculty/(?P<PID>[-\w]+)$', hello.views.edit_faculty, name='edit_faculty'),
+    url(r'^delete_faculty/(?P<PID>[-\w]+)$', hello.views.delete_faculty, name='delete_faculty'),
 
     url(r'^check-out/(?P<pk>\d+)$', hello.views.check_out, name="check-out"),
     url(r'^some_view$', hello.views.some_view, name='some_view'),
     # Faculty
-    url(r'^add_faculty$', hello.views.add_faculty, name='add_faculty'),
-    url(r'^edit_faculty/(?P<pk>\d+)$', hello.views.edit_device, name='edit_device'),
-    url(r'^delete_faculty/(?P<pk>\d+)$', hello.views.delete_device, name='delete_device'),
-    url(r'^display_faculty$', hello.views.display_faculty, name='display_faculty'),
+
     # 其他 url 配置
     path('search/', SearchResultsView.as_view(), name='search_results'),
     # path("device/<str:pk>/", hello.views.device),
