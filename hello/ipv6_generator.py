@@ -15,5 +15,4 @@ def ipv6_generator(addr):
 	"""
 	return str(randomIP)
 
-
 #ipv6_generator('2001:db8:abcd:0012::0/64')
