@@ -43,6 +43,9 @@ class HostnameAdmin(admin.ModelAdmin):
 
 class DeviceAdmin(admin.ModelAdmin):
     model = Device
+    list_filter =("VT_Tag","CS_Tag","Serial_Number","type","status","issue")
+    list_display =("VT_Tag","CS_Tag","Serial_Number","type","status","issue")
+    search_fields =("VT_Tag","CS_Tag","Serial_Number","type","status","issue")
 
 class UserDeviceAdmin(admin.ModelAdmin):
     model = UserDevice
