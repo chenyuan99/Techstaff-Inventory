@@ -5,6 +5,7 @@ from django.urls import include, re_path
 from django.conf.urls import url
 from django.views.generic import TemplateView
 from hello.views import HomePageView, SearchResultsView
+from django.contrib.staticfiles.storage import staticfiles_storage
 admin.autodiscover()
 
 import hello.views
@@ -18,7 +19,7 @@ import hello.views
 # Learn more here: https://docs.djangoproject.com/en/2.1/topics/http/urls/
 
 app_name = 'main'  # here for namespacing of urls.
-favicon_view = RedirectView.as_view(url='/static/favicon.ico', permanent=True)
+#favicon_view = RedirectView.as_view(url='/static/favicon.ico', permanent=True)
 urlpatterns = [
     path("", hello.views.index, name="index"),
     path("db/", hello.views.db, name="db"),
@@ -60,4 +61,6 @@ urlpatterns = [
     # 其他 url 配置
     path('search/', SearchResultsView.as_view(), name='search_results'),
     # path("device/<str:pk>/", hello.views.device),
+    # favicon path:
+    path('favicon.ico', RedirectView.as_view(url=staticfiles_storage.url('img/favicon.ico')))
 ]
