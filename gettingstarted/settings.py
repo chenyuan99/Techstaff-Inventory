@@ -108,20 +108,6 @@ else:
 
     } """
 
-""" 
-# Running on local VM, connect to CloudSQL:
-DATABASES = {
-    'default':{
-        'ENGINE': 'django.db.backends.mysql',
-        'HOST': '35.192.209.96',
-        'USER': 'techstaff',
-        'PASSWORD': 'nYlenIldpqKdneo8Ndqjkc28J',
-        'NAME': 'techstaff'
-    }
-}
- """
-
-
 # Password validation
 # https://docs.djangoproject.com/en/2.0/ref/settings/#auth-password-validators
 
