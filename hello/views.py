@@ -130,6 +130,7 @@ def check_out(request, pk):
         "is_student_user": False,
         "Office_Addr": user.Office_Addr,
         "pid": user.PID,
+        "full_name": user.FirstName + ' '+ user.LastName,
     }
 
     # Render the HTML template index.html with the data in the context variable

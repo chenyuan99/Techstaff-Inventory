@@ -253,7 +253,7 @@
             <ul class="navbar-nav">
                 {% if user.is_authenticated %}
 
-                <li class="nav-link"><a class="nav-link" href="/account"><button type="button" class="btn btn-light"><i
+                <li class="nav-link"><a class="nav-link" href="{% url 'display_userDevice' %}"><button type="button" class="btn btn-light"><i
                                 class="bi-list"></i>
                             {{user.username|title}}</button></a></li>
                 <li class="nav-link"><a class="nav-link" href="/logout"><button type="button" class="btn btn-danger"><i
