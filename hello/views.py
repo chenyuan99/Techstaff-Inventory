@@ -12,6 +12,7 @@ from django.views.generic import TemplateView, ListView
 from django.db.models import Q
 from .filters import *
 import logging
+from tablib import Dataset
 
 
 class HomePageView(TemplateView):
@@ -503,23 +504,6 @@ def checkout_device(request, pk):
 #         return render(request, 'edit_item.html', {'form': form})
 
 
-def some_view(request):
-    # Create the HttpResponse object with the appropriate CSV header.
-    response = HttpResponse(content_type='text/csv')
-    response['Content-Disposition'] = 'attachment; filename="somefilename.csv"'
-
-    # The data is hard-coded here, but you could load it from a database or
-    # some other source.
-    csv_data = (
-        ('First row', 'Foo', 'Bar', 'Baz'),
-        ('Second row', 'A', 'B', 'C', '"Testing"', "Here's a quote"),
-    )
-
-    t = loader.get_template('my_template_name.txt')
-    c = {'data': csv_data}
-    response.write(t.render(c))
-    return response
-
 # def device(request, pk):
 #     device = Device.objects.get(id=pk)
 #     context = {
@@ -533,3 +517,17 @@ def export_devices(request):
     response = HttpResponse(dataset.csv, content_type='text/csv')
     response['Content-Disposition'] = 'attachment; filename="deivices.csv"'
     return response
+
+def simple_upload(request):
+    if request.method == 'POST':
+        person_resource = DeviceResource()
+        dataset = Dataset()
+        new_persons = request.FILES['myfile']
+
+        imported_data = dataset.load(new_persons.read())
+        result = person_resource.import_data(dataset, dry_run=True)  # Test the data import
+
+        if not result.has_errors():
+            person_resource.import_data(dataset, dry_run=False)  # Actually import now
+
+    return render(request, 'import/import.html')

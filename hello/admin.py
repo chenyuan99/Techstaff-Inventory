@@ -1,13 +1,11 @@
 from django.contrib import admin
 from django.contrib.admin.models import LogEntry
-
-# Register your models here.
 from .models import *
 from import_export.admin import ImportExportModelAdmin
 class ViewAdmin(ImportExportModelAdmin):
 	pass
 
-class HostnameAdmin(admin.ModelAdmin):
+class HostnameAdmin(ImportExportModelAdmin):
     model = NetworkInterface
 
     list_filter =(
@@ -41,32 +39,32 @@ class HostnameAdmin(admin.ModelAdmin):
     'BuildingID',
     )
 
-class DeviceAdmin(admin.ModelAdmin):
+class DeviceAdmin(ImportExportModelAdmin):
     model = Device
     list_filter =("VT_Tag","CS_Tag","Serial_Number","type","status","issue")
     list_display =("VT_Tag","CS_Tag","Serial_Number","type","status","issue")
     search_fields =("VT_Tag","CS_Tag","Serial_Number","type","status","issue")
 
-class UserDeviceAdmin(admin.ModelAdmin):
+class UserDeviceAdmin(ImportExportModelAdmin):
     model = UserDevice
     list_filter =("UserPID","DeviceID","CheckoutDate")
     list_display =("UserPID","DeviceID","CheckoutDate")
     search_fields =("UserPID","DeviceID","CheckoutDate")
 
-class FacultyAdmin(admin.ModelAdmin):
+class FacultyAdmin(ImportExportModelAdmin):
     model = Faculty
     list_filter =("PID","Office_Addr")
     list_display =("PID","Office_Addr")
     search_fields =("PID","Office_Addr")
 
-class BuildingAdmin(admin.ModelAdmin):
+class BuildingAdmin(ImportExportModelAdmin):
     model = Building
     list_filter =("BuildingID","Building_Name","Building_Addr")
     list_display =("BuildingID","Building_Name","Building_Addr")
     search_fields =("BuildingID","Building_Name","Building_Addr")
 
 @admin.register(LogEntry)
-class LogEntryAdmin(admin.ModelAdmin):
+class LogEntryAdmin(ImportExportModelAdmin):
     # to have a date-based drilldown navigation in the admin page
     date_hierarchy = 'action_time'
 
@@ -89,6 +87,7 @@ class LogEntryAdmin(admin.ModelAdmin):
         'content_type',
         'action_flag',
     ]
+
 
 admin.site.register(Device, DeviceAdmin)
 admin.site.register(UserDevice, UserDeviceAdmin)

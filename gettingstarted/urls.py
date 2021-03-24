@@ -57,6 +57,7 @@ urlpatterns = [
     url(r'^check-out/(?P<pk>\d+)$', hello.views.check_out, name="check-out"),
 
     url(r'^export_devices$', hello.views.export_devices, name='export_devices'),
+    url(r'^simple_upload$', hello.views.simple_upload, name='simple_upload'),
     # Faculty
 
     # 其他 url 配置
