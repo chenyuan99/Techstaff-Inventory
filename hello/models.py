@@ -17,7 +17,7 @@ class Device(models.Model):
     VT_Tag = models.CharField(max_length=100, default = '')
     CS_Tag = models.CharField(max_length=100, default = '')
     acq_date = models.DateField(default='YYYY-MM-DD')
-    #
+    #purchase_order =  models.CharField(max_length=100, default = '')
     choices = (
         ('In Use', 'In Use'),
         ('In Storage', 'In Storage'),
