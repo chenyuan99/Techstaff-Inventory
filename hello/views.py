@@ -3,6 +3,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from hello.forms import *
 from hello.models import *
+from hello.resources import *
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
@@ -525,3 +526,10 @@ def some_view(request):
 #         'device': device,
 #     }
 #     return render(request, "device_detail.html", context)
+
+def export_devices(request):
+    device_resource = DeviceResource()
+    dataset = device_resource.export()
+    response = HttpResponse(dataset.csv, content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="deivices.csv"'
+    return response

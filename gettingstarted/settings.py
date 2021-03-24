@@ -19,7 +19,7 @@ DEBUG = True
 ALLOWED_HOSTS = ['*']
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
-
+IMPORT_EXPORT_USE_TRANSACTIONS = True
 # Application definition
 
 INSTALLED_APPS = [
@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     "django_filters",
     'crispy_forms',
     "hello",
+    'import_export',
 ]
 
 MIDDLEWARE = [

@@ -30,9 +30,9 @@ urlpatterns = [
     path("about", hello.views.about, name="about"),
     path("faq", hello.views.faq, name="faq"),
     path("privacy-policy", hello.views.privacy, name="privacy-policy"),
-    # path("check-out", hello.views.check_out, name="check-out"),
     path("account", hello.views.account, name="account"),
-
+    # path('accounts/', include('django.contrib.auth.urls')),
+    
     url(r'^display_devices$', hello.views.display_devices, name='display_devices'),
     url(r'^display_hostnames$', hello.views.display_hostnames, name='display_hostnames'),
     url(r'^display_userDevice$', hello.views.display_userDevice, name='display_userDevice'),
@@ -55,7 +55,8 @@ urlpatterns = [
     url(r'^delete_faculty/(?P<PID>[-\w]+)$', hello.views.delete_faculty, name='delete_faculty'),
 
     url(r'^check-out/(?P<pk>\d+)$', hello.views.check_out, name="check-out"),
-    url(r'^some_view$', hello.views.some_view, name='some_view'),
+
+    url(r'^export_devices$', hello.views.export_devices, name='export_devices'),
     # Faculty
 
     # 其他 url 配置
