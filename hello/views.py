@@ -488,7 +488,7 @@ def delete_userDevice(request, pk):
         userDevice.delete()
         return display_userDevice(request)
 
-    form = buildingForm(request.POST, instance=userDevice)
+    form = AddUserDeviceForm(request.POST, instance=userDevice)
     for fieldname in form.fields:
         form.fields[fieldname].disabled = True
 
