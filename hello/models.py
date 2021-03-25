@@ -54,13 +54,13 @@ class UserDevice(models.Model):
         unique_together = ('UserPID', 'DeviceID', 'CheckoutDate')
 
 class Building(models.Model):
-    BuildingID = models.IntegerField(primary_key = True)
+    BuildingID = models.AutoField(primary_key = True)
     Building_Name = models.CharField(max_length=64)  
     Building_Addr = models.CharField(max_length=64)  
     
 
 class NetworkInterface(models.Model):
-    NetworkID = models.IntegerField(primary_key = True)
+    NetworkID = models.AutoField(primary_key = True)
     DeviceID =  models.CharField(max_length=100, default = '')  
     Hostname = models.CharField(max_length=64)
     Aliases = models.CharField(max_length=64)  # Aliases/cnames
