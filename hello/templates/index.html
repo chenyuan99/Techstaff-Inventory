@@ -4,7 +4,7 @@
 	{% load crispy_forms_tags %}
 	<div class="container-fluid ">
 		<nav class="navbar navbar-expand-sm mb-3s flex-column flex-md-row bd-navbar border-top border-left border-right border-bottom shadow-sm ">
-		
+
 			<div class="container ">
 				<div class='nav-column'>
 					<br>
@@ -14,7 +14,7 @@
 					<a href="{% url 'display_faculty' %}" class="btn btn-outline-primary btn-md" role="button">Faculty</a>
 					<!-- {% if user.is_authenticated %} -->
 						<a href="{% url 'add_device' %}" class="btn btn-outline-danger btn-md" role="button">Add Device</a>
-						<a href="{% url 'add_userDevice' %}" class="btn btn-outline-danger btn-md" role="button">Add userDevice</a>
+{#						<a href="{% url 'add_userDevice' %}" class="btn btn-outline-danger btn-md" role="button">Add userDevice</a>#}
 						<a href="{% url 'add_hostname' %}" class="btn btn-outline-danger btn-md" role="button">Add Hostname</a>
 						<a href="{% url 'add_building' %}" class="btn btn-outline-danger btn-md" role="button">Add Building</a>
 						<a href="{% url 'add_faculty' %}" class="btn btn-outline-danger btn-md" role="button">Add Faculty</a>
@@ -24,14 +24,14 @@
 					{# <a href="/" class="btn btn-outline-primary btn-md" role="button">Search Faculty</a>#}
 				</div>
 				<style>
-					.nav-column
-					{
-						display: flex;
-						flex-flow: row wrap;
-						align-items: center;
-						gap: 10px;
-						justify-content: space-around;
-					}
+                    .nav-column
+                    {
+                        display: flex;
+                        flex-flow: row wrap;
+                        align-items: center;
+                        gap: 10px;
+                        justify-content: space-around;
+                    }
 				</style>
 			</div>
 		</nav>
@@ -118,6 +118,11 @@
 						<td data-label="ID">{{ item.pk }}</td>
 						<td data-label="Type">{{ item.type }}</td>
 						<td data-label="Price">${{ item.price }}</td>
+{#						{% if item.description|length > 5 %}#}
+{#							 <td class="text-center"><span class="text-right"><button class="btn btn-xs btn-warning" data-toggle="collapse" data-target="#note-0"><span class="glyphicon glyphicon-triangle-bottom"> </span> Note</button></span></td>#}
+{#						{% else %}#}
+{##}
+{#						{% endif %}#}
 						<td data-label="Description">{{ item.description }}</td>
 						<td data-label="VT_Tag">{{ item.VT_Tag }}</td>
 						<td data-label="CS_Tag">{{ item.CS_Tag }}</td>
@@ -129,6 +134,7 @@
 							<a href="{% url 'delete_device' item.pk %}" class="btn btn-outline-danger btn-sm"
 							   role="button">Delete</a>
 						</td>
+
 
 					{% endif %}
 
@@ -178,6 +184,16 @@
 					{% endif %}
 
 				</tr>
+{#				<tr id="note-0" class="collapse">#}
+{#					<td></td>#}
+{#					<td colspan="5">#}
+{#						<div class="well">#}
+{#							<h3>Doing Laundary</h3>#}
+{#							<div>I need to get quarters first at Kroger.</div>#}
+{#						</div>#}
+{#					</td>#}
+{#				</tr>#}
+
 
 			{% endfor %}
 

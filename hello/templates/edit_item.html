@@ -1,25 +1,25 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-{% load crispy_forms_tags %}
-<div class="container">
-	<form method="POST">
-		<br>
-		{% csrf_token %}
+	{% load crispy_forms_tags %}
+	<div class="container">
+		<form method="POST">
+			<br>
+			{% csrf_token %}
 
-		<h4>Editing Item</h4>
-		{% for field in form %}
-		<div class="form-group row">
-			<div class="col-10">
-				{{ field|as_crispy_field }}
-			</div>
-		</div>
-		{% endfor %}
-		<button type="submit" class="btn btn-primary" name="button">Edit</button>
-</div>
+			<h4>Editing Item</h4>
+			{% for field in form %}
+				<div class="form-group row">
+					<div class="col-10">
+						{{ field|as_crispy_field }}
+					</div>
+				</div>
+			{% endfor %}
+			<button type="submit" class="btn btn-primary" name="button">Edit</button>
+		</form>
+	</div>
 
-</form>
-</div>
+
 
 
 {% endblock %}

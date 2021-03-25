@@ -132,9 +132,9 @@ def check_out(request, pk):
         "is_student_user": False,
         "Office_Addr": user.Office_Addr,
         "pid": user.PID,
-        "full_name": user.FirstName + ' '+ user.LastName,
-        "description":device.description,
-        "serial":device.Serial_Number,
+        "full_name": user.FirstName + ' ' + user.LastName,
+        "description": device.description,
+        "serial": device.Serial_Number,
     }
 
     # Render the HTML template index.html with the data in the context variable
@@ -413,6 +413,22 @@ def edit_building(request, pk):
         return render(request, 'edit_item.html', {'form': form})
 
 
+def edit_userDevice(request, pk):
+    if not request.user.is_authenticated:
+        raise PermissionDenied
+    item = get_object_or_404(UserDevice, pk=pk)
+
+    if request.method == 'POST':
+        form = AddUserDeviceForm(request.POST, instance=item)
+        if form.is_valid():
+            form.save()
+            return display_userDevice(request)
+
+    else:
+        form = AddUserDeviceForm(instance=item)
+        return render(request, 'edit_item.html', {'form': form})
+
+
 # -------------------------delete-----------------------------------
 def delete_device(request, pk):
     device = Device.objects.get(id=pk)
@@ -466,14 +482,17 @@ def delete_building(request, pk):
     return render(request, 'delete_item.html', {'form': form})
 
 
-def delete_ticket(request, pk):
-    Ticket.objects.filter(id=pk).delete()
-    items = Hostname.objects.all()
-    context = {
-        'items': items
-    }
-    return render(request, 'main/account.html', context)
+def delete_userDevice(request, pk):
+    userDevice = UserDevice.objects.get(pk=pk)
+    if request.method == "POST":
+        userDevice.delete()
+        return display_userDevice(request)
 
+    form = buildingForm(request.POST, instance=userDevice)
+    for fieldname in form.fields:
+        form.fields[fieldname].disabled = True
+
+    return render(request, 'delete_item.html', {'form': form})
 
 # -------------------------    ------------------
 def checkout_device(request, pk):
@@ -517,6 +536,7 @@ def export_devices(request):
     response = HttpResponse(dataset.csv, content_type='text/csv')
     response['Content-Disposition'] = 'attachment; filename="deivices.csv"'
     return response
+
 
 def simple_upload(request):
     if request.method == 'POST':

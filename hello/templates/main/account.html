@@ -59,9 +59,9 @@
 					<td>{{ item.CheckoutDate }}</td>
 					<!-- <td>{{ item.ReturnDate }}</td> -->
 					<td>
-						<a href="{% url 'edit_device' item.pk %}" class="btn btn-outline-info btn-sm"
+						<a href="{% url 'edit_userDevice' item.pk %}" class="btn btn-outline-info btn-sm"
 							role="button">Edit</a>
-						<a href="{% url 'delete_device' item.pk %}" class="btn btn-outline-danger btn-sm"
+						<a href="{% url 'delete_userDevice' item.pk %}" class="btn btn-outline-danger btn-sm"
 							role="button">Delete</a>
 					</td>
 					<td>
