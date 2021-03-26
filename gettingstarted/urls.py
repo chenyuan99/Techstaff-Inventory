@@ -32,7 +32,7 @@ urlpatterns = [
     path("privacy-policy", hello.views.privacy, name="privacy-policy"),
     path("account", hello.views.account, name="account"),
     # path('accounts/', include('django.contrib.auth.urls')),
-    
+    path("legacy", hello.views.legacy, name="legacy"),
     url(r'^display_devices$', hello.views.display_devices, name='display_devices'),
     url(r'^display_hostnames$', hello.views.display_hostnames, name='display_hostnames'),
     url(r'^display_userDevice$', hello.views.display_userDevice, name='display_userDevice'),

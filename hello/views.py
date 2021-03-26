@@ -49,6 +49,10 @@ def index(request):
 def about(request):
     return render(request, "main/about.html")
 
+def legacy(request):
+    if not request.user.is_authenticated:
+        raise PermissionDenied
+    return render(request, "main/legacy.html")
 
 def db(request):
     greeting = Greeting()

@@ -75,93 +75,93 @@
 
 				<canvas class="my-4" id="myChart" width="900" height="100"></canvas>
 
-				<<h4>Currently Viewing {{ header }}</h4>
-					<table class="table table-hover">
-						<thead>
-							{% if header|lower == "device" %}
-							<tr>
-								<th>id</th>
-								<th>Model</th>
-								<th>Price</th>
-								<th>Manufacturer</th>
-								<th>Model</th>
-								<th>VT_Tag</th>
-								<th>CS_Tag</th>
-								<th>Serial_Number</th>
-								<th>Status</th>
-								<th>Issues</th>
-								{% if user.is_authenticated %}
-								<th>Edit or Delete</th>
-								{% endif %}
-							</tr>
-							{% endif %}
-							{% if header|lower == "hostname" %}
+				<h4>Currently Viewing {{ header }}</h4>
+				<table class="table table-hover">
+					<thead>
+						{% if header|lower == "device" %}
+						<tr>
 							<th>id</th>
-							<th>Hostname</th>
-							<th>Aliases</th>
-							<th>IP_Address</th>
-							<th>IPv6_Address</th>
-							<th>MAC_Address</th>
+							<th>Model</th>
+							<th>Price</th>
+							<th>Manufacturer</th>
+							<th>Model</th>
+							<th>VT_Tag</th>
+							<th>CS_Tag</th>
+							<th>Serial_Number</th>
+							<th>Status</th>
+							<th>Issues</th>
 							{% if user.is_authenticated %}
 							<th>Edit or Delete</th>
 							{% endif %}
+						</tr>
+						{% endif %}
+						{% if header|lower == "hostname" %}
+						<th>id</th>
+						<th>Hostname</th>
+						<th>Aliases</th>
+						<th>IP_Address</th>
+						<th>IPv6_Address</th>
+						<th>MAC_Address</th>
+						{% if user.is_authenticated %}
+						<th>Edit or Delete</th>
+						{% endif %}
 
+						{% endif %}
+					</thead>
+
+					<tbody>
+
+						{% for item in items %}
+
+						<tr>
+							{% if header|lower == "device" %}
+							<td>{{ item.pk }}</td>
+							<td>{{ item.type }}</td>
+							<td>${{ item.price }}</td>
+							<td>{{ item.Manufacturer }}</td>
+							<td>{{ item.Model }}</td>
+							<td>{{ item.VT_Tag }}</td>
+							<td>{{ item.CS_Tag }}</td>
+							<td>{{ item.Serial_Number }}</td>
+							<td>{{ item.status }}</td>
+							<td>{{ item.issue }}</td>
+							{% if user.is_authenticated %}
+							<th>Edit or Delete</th>
+
+							<td>
+								<a href="{% url 'edit_device' item.pk %}" class="btn btn-outline-info btn-sm"
+									role="button">Edit</a>
+								<a href="{% url 'delete_device' item.pk %}" class="btn btn-outline-danger btn-sm"
+									role="button">Delete</a>
+							</td>
 							{% endif %}
-						</thead>
+							{% endif %}
 
-						<tbody>
+							{% if header|lower == "hostname" %}
 
-							{% for item in items %}
+							<td>{{ item.pk }}</td>
+							<td>{{ item.Hostname }}</td>
+							<td>{{ item.Aliases }}</td>
+							<td>{{ item.IP_Address }}</td>
+							<td>{{ item.IPv6_Address }}</td>
+							<td>{{ item.MAC_Address }}</td>
+							{% if user.is_authenticated %}
+							<td>
+								<a href="{% url 'edit_device' item.pk %}" class="btn btn-outline-info btn-sm"
+									role="button">Edit</a>
+								<a href="{% url 'delete_device' item.pk %}" class="btn btn-outline-danger btn-sm"
+									role="button">Delete</a>
+							</td>
+							{% endif %}
+							{% endif %}
 
-							<tr>
-								{% if header|lower == "device" %}
-								<td>{{ item.pk }}</td>
-								<td>{{ item.type }}</td>
-								<td>${{ item.price }}</td>
-								<td>{{ item.Manufacturer }}</td>
-								<td>{{ item.Model }}</td>
-								<td>{{ item.VT_Tag }}</td>
-								<td>{{ item.CS_Tag }}</td>
-								<td>{{ item.Serial_Number }}</td>
-								<td>{{ item.status }}</td>
-								<td>{{ item.issue }}</td>
-								{% if user.is_authenticated %}
-								<th>Edit or Delete</th>
+						</tr>
 
-								<td>
-									<a href="{% url 'edit_device' item.pk %}" class="btn btn-outline-info btn-sm"
-										role="button">Edit</a>
-									<a href="{% url 'delete_device' item.pk %}" class="btn btn-outline-danger btn-sm"
-										role="button">Delete</a>
-								</td>
-								{% endif %}
-								{% endif %}
+						{% endfor %}
 
-								{% if header|lower == "hostname" %}
+					</tbody>
 
-								<td>{{ item.pk }}</td>
-								<td>{{ item.Hostname }}</td>
-								<td>{{ item.Aliases }}</td>
-								<td>{{ item.IP_Address }}</td>
-								<td>{{ item.IPv6_Address }}</td>
-								<td>{{ item.MAC_Address }}</td>
-								{% if user.is_authenticated %}
-								<td>
-									<a href="{% url 'edit_device' item.pk %}" class="btn btn-outline-info btn-sm"
-										role="button">Edit</a>
-									<a href="{% url 'delete_device' item.pk %}" class="btn btn-outline-danger btn-sm"
-										role="button">Delete</a>
-								</td>
-								{% endif %}
-								{% endif %}
-
-							</tr>
-
-							{% endfor %}
-
-						</tbody>
-
-					</table>
+				</table>
 		</div>
 		</main>
 	</div>

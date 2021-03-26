@@ -1,0 +1,421 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<div class="container-fluid">
+<center>
+    <font size=-1>
+        <a href="/invdev1/index.pl?action=addnew">Add New Item</a> |
+        <a href="/invdev1/index.pl?action=default">Default</a> |
+        <a href="/invdev1/index.pl?action=hci">HCI</a> |
+        <a href="/invdev1/index.pl?action=network">Network</a> |
+        <a href="/invdev1/index.pl?action=missing">Missing</a> |
+        <a href="/invdev1/index.pl?action=storage">In Storage</a>
+    </font>
+    <form action="/invdev1/index.pl" method=post ENCTYPE="multipart/form-data">
+        <input type=hidden name="old_cstag" value="">
+        <table width=90% border=3 cellpadding=5>
+            <tr>
+                <td align=left>
+                    <input type="checkbox" name="dept_check" value="CHECKED">
+                    <b>Dept. Code: </b>
+                    <select name="dept" size=1>
+                        <OPTION SELECTED></OPTION>
+                        <OPTION></OPTION>
+                        <OPTION></OPTION>
+                        <OPTION>004100</OPTION>
+
+                    </select>
+                    <br>
+                    <input type=text size=20 name="dept_custom" maxlength=10 value="">
+                    <br>
+                    <input type="checkbox" name="status_check" value="CHECKED">
+                    <b>Status: </b>
+                    <select name="status" size=1>
+                        <OPTION SELECTED>In Use</OPTION>
+                        <OPTION></OPTION>
+                        <OPTION>In Use</OPTION>
+                        <OPTION>In Storage</OPTION>
+                        <OPTION>On Loan</OPTION>
+                        <OPTION>Damaged</OPTION>
+                        <OPTION>Missing</OPTION>
+                        <OPTION>Surplused</OPTION>
+                        <OPTION>Transferred</OPTION>
+                        <OPTION>Written Off</OPTION>
+                        <OPTION>Orphaned</OPTION>
+
+                    </select>
+                </td>
+                <td align=left>
+                    <input type="checkbox" name="location_check" value="CHECKED" CHECKED>
+                    <b>Location: </b>
+                    <select name="location" size=1>
+                        <OPTION SELECTED></OPTION>
+                        <OPTION></OPTION>
+                        <OPTION></OPTION>
+                        <OPTION>2229 KW2</OPTION>
+                        <OPTION>2231 KW2</OPTION>
+
+                    </select>
+                    <br>
+                    <input type=text size=30 name="location_custom" maxlength=255 value="">
+                    <br>
+                    <br>
+                </td>
+            </tr>
+            <tr>
+                <td align=left>
+                    <input type="checkbox" name="vttag_check" value="CHECKED" CHECKED>
+                    <b>VT Tag: </b>
+                    <br>
+                    <input type=text size=20 name="vttag" maxlength=255 value="">
+                    <br>
+                    <input type="checkbox" name="cstag_check" value="CHECKED" CHECKED>
+                    <b>CS Tag: </b>
+                    <br>
+                    <input type=text size=20 name="cstag" maxlength=255 value="">
+                    <br>
+                    <input type="checkbox" name="serial_check" value="CHECKED">
+                    <b>Serial Num: </b>
+                    <br>
+                    <input type=text size=30 name="serial" maxlength=255 value="">
+                </td>
+                <td align=left>
+                    <input type="checkbox" name="description_check" value="CHECKED" CHECKED>
+                    <b>Description: </b>
+                    <br>
+                    <input type=text size=30 name="description" maxlength=255 value="">
+                </td>
+            </tr>
+            <tr>
+                <td align=left colspan=2>
+                    <input type="checkbox" name="description_check" value="CHECKED" 0>
+                    <b>Notes: </b>
+                    <br>
+                    <input type=text size=100 name="description" maxlength=255 value="">
+                </td>
+            </tr>
+            <tr>
+                <td align=left>
+                    <input type="checkbox" name="custodian_check" value="CHECKED" CHECKED>
+                    <b>Custodian: </b>
+                    <select name="custodian" size=1>
+                        <OPTION SELECTED></OPTION>
+                        <OPTION></OPTION>
+                        <OPTION></OPTION>
+                        <OPTION>abc</OPTION>
+                        <OPTION>carnold</OPTION>
+
+                    </select>
+                    <br>
+                    <input type=text size=30 name="custodian_custom" maxlength=255 value="">
+                    <br>
+                    <input type="checkbox" name="porder_check" value="CHECKED" 0>
+                    <b>Purchase Order: </b>
+                    <br>
+                    <input type=text size=30 name="porder" maxlength=255 value="">
+                </td>
+                <td align=left>
+                    <input type="checkbox" name="pdate_check" value="CHECKED" 0>
+                    <b>Acquistion Date</b> (YYYY/MM/DD):
+                    <br>
+                    <SELECT name="pdate_year" size=1>
+                        <OPTION SELECTED></OPTION>
+                        <OPTION>1900</OPTION>
+                        <OPTION></OPTION>
+                        <OPTION>2014</OPTION>
+                        <OPTION>2015</OPTION>
+                        <OPTION>2016</OPTION>
+                        <OPTION>2017</OPTION>
+                        <OPTION>2018</OPTION>
+                        <OPTION>2019</OPTION>
+                        <OPTION>2020</OPTION>
+                        <OPTION>2021</OPTION>
+                        <OPTION>2022</OPTION>
+                        <OPTION>2023</OPTION>
+                        <OPTION>2024</OPTION>
+                        <OPTION>2025</OPTION>
+                    </SELECT>/<SELECT name="pdate_month" size=1>
+                        <OPTION SELECTED></OPTION>
+                        <OPTION></OPTION>
+                        <OPTION>01</OPTION>
+                        <OPTION>02</OPTION>
+                        <OPTION>03</OPTION>
+                        <OPTION>04</OPTION>
+                        <OPTION>05</OPTION>
+                        <OPTION>06</OPTION>
+                        <OPTION>07</OPTION>
+                        <OPTION>08</OPTION>
+                        <OPTION>09</OPTION>
+                        <OPTION>10</OPTION>
+                        <OPTION>11</OPTION>
+                        <OPTION>12</OPTION>
+                    </SELECT>/<SELECT name="pdate_day" size=1>
+                        <OPTION SELECTED></OPTION>
+                        <OPTION></OPTION>
+                        <OPTION>01</OPTION>
+                        <OPTION>02</OPTION>
+                        <OPTION>03</OPTION>
+                        <OPTION>04</OPTION>
+                        <OPTION>05</OPTION>
+                        <OPTION>06</OPTION>
+                        <OPTION>07</OPTION>
+                        <OPTION>08</OPTION>
+                        <OPTION>09</OPTION>
+                        <OPTION>10</OPTION>
+                        <OPTION>11</OPTION>
+                        <OPTION>12</OPTION>
+                        <OPTION>13</OPTION>
+                        <OPTION>14</OPTION>
+                        <OPTION>15</OPTION>
+                        <OPTION>16</OPTION>
+                        <OPTION>17</OPTION>
+                        <OPTION>18</OPTION>
+                        <OPTION>19</OPTION>
+                        <OPTION>20</OPTION>
+                        <OPTION>21</OPTION>
+                        <OPTION>22</OPTION>
+                        <OPTION>23</OPTION>
+                        <OPTION>24</OPTION>
+                        <OPTION>25</OPTION>
+                        <OPTION>26</OPTION>
+                        <OPTION>27</OPTION>
+                        <OPTION>28</OPTION>
+                        <OPTION>29</OPTION>
+                        <OPTION>30</OPTION>
+                        <OPTION>31</OPTION>
+                    </SELECT>
+
+                    <br>
+                    <input type="checkbox" name="pvalue_check" value="CHECKED" 0>
+                    <b>Value: </b>
+                    <br>
+                    $<input type=text size=20 name="pvalue" maxlength=30 value="">
+                </td>
+            </tr>
+
+            <tr>
+                <td align=left>
+                    <b>Checkout To Information:</b>
+                    <br>
+                    <input type="checkbox" name="checkout_name_check" value="CHECKED">
+                    Name:
+                    <br>
+                    <input type=text size=30 name="checkout_name" maxlength=255 value="">
+                    <br>
+                    <input type="checkbox" name="checkout_office_check" value="CHECKED">
+                    Office:
+                    <br>
+                    <input type=text size=30 name="checkout_office" maxlength=255 value="">
+                    <br>
+                    <input type="checkbox" name="checkout_contact_check" value="CHECKED">
+                    Email/Phone:
+                    <br>
+                    <input type=text size=30 name="checkout_contact" maxlength=255 value="">
+                </td>
+                <td align=left>
+                    <b>Checkout Used By Information:</b>
+                    <br>
+                    <input type="checkbox" name="checkuse_name_check" value="CHECKED">
+                    Name:
+                    <br>
+                    <input type=text size=30 name="checkuse_name" maxlength=255 value="">
+                    <br>
+                    <input type="checkbox" name="checkuse_contact_check" value="CHECKED">
+                    Email/Phone:
+                    <br>
+                    <input type=text size=30 name="checkuse_contact" maxlength=255 value="">
+                </td>
+            </tr>
+
+            <tr>
+                <td align=left>
+                    <input type="checkbox" name="ip_check" value="CHECKED" 0>
+                    <b>IP Address: </b>
+                    <br>
+                    <input type=text size=20 name="ip" maxlength=15 value="">
+                    <br>
+                    <input type="checkbox" name="ipv6_check" value="CHECKED">
+                    <b>IPv6 Address: </b>
+                    <br>
+                    <input type=text size=60 name="ipv6" maxlength=255 value="">
+
+                    <br>
+                </td>
+                <td align=left>
+                    <input type="checkbox" name="hostname_check" value="CHECKED" CHECKED>
+                    <b>Hostname: </b>
+                    <br>
+                    <input type=text size=30 name="hostname" maxlength=255 value="">
+                    <br>
+                    <input type="checkbox" name="cnames_check" value="CHECKED" 0>
+                    <b>Aliases/cnames: </b>
+                    <br>
+                    <input type=text size=50 name="cnames" value="">
+                </td>
+            </tr>
+            <td align=lef>
+                <table width=100%>
+                    <tr>
+                        <td colspan=2>
+                            <b>Action:</b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type=radio name=action value="search" CHECKED> Search
+                        </td>
+                        <td>
+                            <input type=radio name=action value="networkform" ###moveform###> Network Form
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type=radio name=action value="edit"> Edit
+                        </td>
+                        <td>
+                            <input type=radio name=action value="moveform" ###moveform###> Move Form
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type=radio name=action value="add"> Add
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type=radio name=action value="print"> Printable Report
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type=radio name=action value="ip">Assign/Release IP Address
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type=radio name=action value="checkout">Checkout Form
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type=radio name=action value="delete">Permanently Delete
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type=submit value="Do the Needful">
+                        </td>
+                    </tr>
+                </table>
+            </td>
+            <td align=left>
+                <b>Display Options: </b>
+                <br>
+                Sort by:
+                <select name="sort" size=1>
+                    <OPTION SELECTED>Location</OPTION>
+                    <OPTION>Checkout To</OPTION>
+                    <OPTION>Dept. Code</OPTION>
+                    <OPTION>Custodian</OPTION>
+                    <OPTION>Photo</OPTION>
+                    <OPTION>Status</OPTION>
+                    <OPTION>IP Address</OPTION>
+                    <OPTION>Model</OPTION>
+                    <OPTION>Hostname</OPTION>
+                    <OPTION>VT Tag</OPTION>
+                    <OPTION>Aliases/cnames</OPTION>
+                    <OPTION>CS Tag</OPTION>
+                    <OPTION>Value</OPTION>
+                    <OPTION>Checkout Used By Contact</OPTION>
+                    <OPTION>Checkout Used By</OPTION>
+                    <OPTION>MAC Address</OPTION>
+                    <OPTION>Checkout To Contact</OPTION>
+                    <OPTION>IPv6 Address</OPTION>
+                    <OPTION>Location</OPTION>
+                    <OPTION>Serial Num.</OPTION>
+                    <OPTION>Aquistion Date</OPTION>
+                    <OPTION>Purchase Order</OPTION>
+                    <OPTION>Notes</OPTION>
+                    <OPTION>Checkout To Office</OPTION>
+                    <OPTION>Manufacturer</OPTION>
+
+                </select>
+                <br>
+                Limit results to
+                <input type=text size=6 name="limit" maxlength=6 value="200">
+                item(s).
+            </td>
+            </tr>
+        </table>
+    </form>
+</center>
+<a href="/invdev1/index.pl?action=clear">Refresh the same.</a>
+<BR>
+</div>
+
+
+<div class="container-fluid">
+    <h4>Search returned 5 item(s)</h4><BR>
+    <table class="table table-hover">
+        <thead>
+            <TD></TD>
+            <TD><B>CS Tag</B></TD>
+            <TD><B>Custodian</B></TD>
+            <TD><B>Hostname</B></TD>
+            <TD><B>Location</B></TD>
+            <TD><B>Description</B></TD>
+            <TD><B>VT Tag</B></TD>
+        </thead>
+
+        <tbody>
+
+            {% for item in items %}
+
+            <tr>
+                {% if header|lower == "device" %}
+                <td>{{ item.pk }}</td>
+                <td>{{ item.type }}</td>
+                <td>${{ item.price }}</td>
+                <td>{{ item.Manufacturer }}</td>
+                <td>{{ item.Model }}</td>
+                <td>{{ item.VT_Tag }}</td>
+                <td>{{ item.CS_Tag }}</td>
+                <td>{{ item.Serial_Number }}</td>
+                <td>{{ item.status }}</td>
+                <td>{{ item.issue }}</td>
+                {% if user.is_authenticated %}
+                <th>Edit or Delete</th>
+
+                <td>
+                    <a href="{% url 'edit_device' item.pk %}" class="btn btn-outline-info btn-sm" role="button">Edit</a>
+                    <a href="{% url 'delete_device' item.pk %}" class="btn btn-outline-danger btn-sm"
+                        role="button">Delete</a>
+                </td>
+                {% endif %}
+                {% endif %}
+
+                {% if header|lower == "hostname" %}
+
+                <td>{{ item.pk }}</td>
+                <td>{{ item.Hostname }}</td>
+                <td>{{ item.Aliases }}</td>
+                <td>{{ item.IP_Address }}</td>
+                <td>{{ item.IPv6_Address }}</td>
+                <td>{{ item.MAC_Address }}</td>
+                <td>
+                    <a href="{% url 'edit_device' item.pk %}" class="btn btn-outline-info btn-sm" role="button">Edit</a>
+                    <a href="{% url 'delete_device' item.pk %}" class="btn btn-outline-danger btn-sm"
+                        role="button">Delete</a>
+                </td>
+                {% endif %}
+
+            </tr>
+
+            {% endfor %}
+
+        </tbody>
+
+    </table>
+    <!-- Total value: $2987 -->
+</div>
+{% endblock %}
