@@ -134,9 +134,11 @@
                         </div>
                     </div>
                     <div class="col">
-                        <input class="form-check-input" type="checkbox" name="pdate_check" value="CHECKED" 0>
-                        <b>Acquistion Date</b>
-                        <div class="form-group">
+                        <div class="input-group mb-3">
+                            <input class="form-check-input" type="checkbox" name="pdate_check" value="CHECKED" 0>
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><b>Acquistion Date</b></span>
+                            </div>
                             <input type="date" name="bday" max="3000-12-31" min="1000-01-01" class="form-control">
                         </div>
                         <input class="form-check-input" type="checkbox" name="pvalue_check" value="CHECKED" 0>
@@ -244,17 +246,19 @@
                 </div>
                 <div class="row">
                     <div class="col">
-                        <div class="row"><input type=radio name=action value="search" CHECKED> Search</div>
-                        <div class="row"><input type=radio name=action value="networkform" ###moveform###> Network Form
+                        <div class="form-check"><input type=radio name=action value="search" CHECKED> Search</div>
+                        <div class="form-check"><input type=radio name=action value="networkform" ###moveform###>
+                            Network Form
                         </div>
-                        <div class="row"><input type=radio name=action value="edit"> Edit</div>
-                        <div class="row"><input type=radio name=action value="moveform" ###moveform###> Move Form</div>
-                        <div class="row"><input type=radio name=action value="add"> Add</div>
-                        <div class="row"><input type=radio name=action value="print"> Printable Report</div>
-                        <div class="row"><input type=radio name=action value="ip">Assign/Release IP Address</div>
-                        <div class="row"><input type=radio name=action value="checkout">Checkout Form</div>
-                        <div class="row"><input type=radio name=action value="delete">Permanently Delete</div>
-                        <div class="row"><Button type=submit>Do the Needful</Button></div>
+                        <div class="form-check"><input type=radio name=action value="edit"> Edit</div>
+                        <div class="form-check"><input type=radio name=action value="moveform" ###moveform###> Move Form
+                        </div>
+                        <div class="form-check"><input type=radio name=action value="add"> Add</div>
+                        <div class="form-check"><input type=radio name=action value="print"> Printable Report</div>
+                        <div class="form-check"><input type=radio name=action value="ip">Assign/Release IP Address</div>
+                        <div class="form-check"><input type=radio name=action value="checkout">Checkout Form</div>
+                        <div class="form-check"><input type=radio name=action value="delete">Permanently Delete</div>
+                        <button class="btn btn-primary" type="submit">Do the Needful</Button>
                     </div>
                     <div class="col">
                         <b>Display Options: </b>
@@ -307,17 +311,20 @@
 </div>
 
 
-<!-- <div class="container-fluid">
+<div class="container text-center">
     <h4>Search returned 5 item(s)</h4>
     <table class="table table-hover">
         <thead>
-            <div class="col"></div >
-            <div class="col"><B>CS Tag</B></div >
-            <div class="col"><B>Custodian</B></div >
-            <div class="col"><B>Hostname</B></div >
-            <div class="col"><B>Location</B></div >
-            <div class="col"><B>Description</B></div >
-            <div class="col"><B>VT Tag</B></div >
+            <td>
+            </td>
+            <td><B>CS Tag</B>
+            </td>
+            <td><B>Custodian</B>
+            </td>
+            <td><B>Hostname</B></td>
+            <td><B>Location</B></td>
+            <td><B>Description</B></td>
+            <td><B>VT Tag</B></td>
         </thead>
 
         <tbody>
@@ -326,49 +333,49 @@
 
             <div class="row">
                 {% if header|lower == "device" %}
-                <td>{{ item.pk }}</div>
-                <td>{{ item.type }}</div>
-                <td>${{ item.price }}</div>
-                <td>{{ item.Manufacturer }}</div>
-                <td>{{ item.Model }}</div>
-                <td>{{ item.VT_Tag }}</div>
-                <td>{{ item.CS_Tag }}</div>
-                <td>{{ item.Serial_Number }}</div>
-                <td>{{ item.status }}</div>
-                <td>{{ item.issue }}</div>
-                {% if user.is_authenticated %}
-                <th>Edit or Delete</th>
-
-                <td>
-                    <a href="{% url 'edit_device' item.pk %}" class="btn btn-outline-info btn-sm" role="button">Edit</a>
-                    <a href="{% url 'delete_device' item.pk %}" class="btn btn-outline-danger btn-sm"
-                        role="button">Delete</a>
-                </div>
-                {% endif %}
-                {% endif %}
-
-                {% if header|lower == "hostname" %}
-
-                <td>{{ item.pk }}</div>
-                <td>{{ item.Hostname }}</div>
-                <td>{{ item.Aliases }}</div>
-                <td>{{ item.IP_Address }}</div>
-                <td>{{ item.IPv6_Address }}</div>
-                <td>{{ item.MAC_Address }}</div>
-                <td>
-                    <a href="{% url 'edit_device' item.pk %}" class="btn btn-outline-info btn-sm" role="button">Edit</a>
-                    <a href="{% url 'delete_device' item.pk %}" class="btn btn-outline-danger btn-sm"
-                        role="button">Delete</a>
-                </div>
-                {% endif %}
-
+                <td>{{ item.pk }}
             </div>
+            <td>{{ item.type }}
+</div>
+<td>${{ item.price }}</div>
+<td>{{ item.Manufacturer }}</div>
+<td>{{ item.Model }}</div>
+<td>{{ item.VT_Tag }}</div>
+<td>{{ item.CS_Tag }}</div>
+<td>{{ item.Serial_Number }}</div>
+<td>{{ item.status }}</div>
+<td>{{ item.issue }}</div>
+    {% if user.is_authenticated %}
+<th>Edit or Delete</th>
 
-            {% endfor %}
+<td>
+    <a href="{% url 'edit_device' item.pk %}" class="btn btn-outline-info btn-sm" role="button">Edit</a>
+    <a href="{% url 'delete_device' item.pk %}" class="btn btn-outline-danger btn-sm" role="button">Delete</a>
+    </div>
+    {% endif %}
+    {% endif %}
 
-        </tbody>
+    {% if header|lower == "hostname" %}
 
-    </table>
-    Total value: $2987
-</div> -->
+<td>{{ item.pk }}</td>
+<td>{{ item.Hostname }}</td>
+<td>{{ item.Aliases }}</td>
+<td>{{ item.IP_Address }}</td>
+<td>{{ item.IPv6_Address }}</td>
+<td>{{ item.MAC_Address }}</td>
+<td>
+    <a href="{% url 'edit_device' item.pk %}" class="btn btn-outline-info btn-sm" role="button">Edit</a>
+    <a href="{% url 'delete_device' item.pk %}" class="btn btn-outline-danger btn-sm" role="button">Delete</a>
+</td>
+{% endif %}
+
+</div>
+
+{% endfor %}
+
+</tbody>
+
+</table>
+Total value: $2987
+</div>
 {% endblock %}
