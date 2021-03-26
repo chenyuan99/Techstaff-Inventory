@@ -255,9 +255,10 @@
                         </div>
                         <div class="form-check"><input type=radio name=action value="add"> Add</div>
                         <div class="form-check"><input type=radio name=action value="print"> Printable Report</div>
-                        <div class="form-check"><input type=radio name=action value="ip">Assign/Release IP Address</div>
-                        <div class="form-check"><input type=radio name=action value="checkout">Checkout Form</div>
-                        <div class="form-check"><input type=radio name=action value="delete">Permanently Delete</div>
+                        <div class="form-check"><input type=radio name=action value="ip"> Assign/Release IP Address
+                        </div>
+                        <div class="form-check"><input type=radio name=action value="checkout"> Checkout Form</div>
+                        <div class="form-check"><input type=radio name=action value="delete"> Permanently Delete</div>
                         <button class="btn btn-primary" type="submit">Do the Needful</Button>
                     </div>
                     <div class="col">
@@ -315,67 +316,33 @@
     <h4>Search returned 5 item(s)</h4>
     <table class="table table-hover">
         <thead>
-            <td>
-            </td>
-            <td><B>CS Tag</B>
-            </td>
-            <td><B>Custodian</B>
-            </td>
+            <td><B>CS Tag</B></td>
+            <td><B>Custodian</B></td>
             <td><B>Hostname</B></td>
             <td><B>Location</B></td>
             <td><B>Description</B></td>
             <td><B>VT Tag</B></td>
         </thead>
-
         <tbody>
-
             {% for item in items %}
+            <tr>
+                <td>{{ item.price }}</td>
+                <td>{{ item.Manufacturer }}</td>
+                <td>{{ item.Model }}</td>
+                <td>{{ item.VT_Tag }}</td>
+                <td>{{ item.CS_Tag }}</td>
+                <td>{{ item.Serial_Number }}</td>
+                <td>
+                    <a href="{% url 'edit_device' item.pk %}" class="btn btn-outline-info btn-sm" role="button">Edit</a>
+                    <a href="{% url 'delete_device' item.pk %}" class="btn btn-outline-danger btn-sm"
+                        role="button">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
 
-            <div class="row">
-                {% if header|lower == "device" %}
-                <td>{{ item.pk }}
-            </div>
-            <td>{{ item.type }}
-</div>
-<td>${{ item.price }}</div>
-<td>{{ item.Manufacturer }}</div>
-<td>{{ item.Model }}</div>
-<td>{{ item.VT_Tag }}</div>
-<td>{{ item.CS_Tag }}</div>
-<td>{{ item.Serial_Number }}</div>
-<td>{{ item.status }}</div>
-<td>{{ item.issue }}</div>
-    {% if user.is_authenticated %}
-<th>Edit or Delete</th>
+        </tbody>
 
-<td>
-    <a href="{% url 'edit_device' item.pk %}" class="btn btn-outline-info btn-sm" role="button">Edit</a>
-    <a href="{% url 'delete_device' item.pk %}" class="btn btn-outline-danger btn-sm" role="button">Delete</a>
-    </div>
-    {% endif %}
-    {% endif %}
-
-    {% if header|lower == "hostname" %}
-
-<td>{{ item.pk }}</td>
-<td>{{ item.Hostname }}</td>
-<td>{{ item.Aliases }}</td>
-<td>{{ item.IP_Address }}</td>
-<td>{{ item.IPv6_Address }}</td>
-<td>{{ item.MAC_Address }}</td>
-<td>
-    <a href="{% url 'edit_device' item.pk %}" class="btn btn-outline-info btn-sm" role="button">Edit</a>
-    <a href="{% url 'delete_device' item.pk %}" class="btn btn-outline-danger btn-sm" role="button">Delete</a>
-</td>
-{% endif %}
-
-</div>
-
-{% endfor %}
-
-</tbody>
-
-</table>
-Total value: $2987
+    </table>
+    Total value: $2987
 </div>
 {% endblock %}

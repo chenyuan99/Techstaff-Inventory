@@ -52,7 +52,11 @@ def about(request):
 def legacy(request):
     if not request.user.is_authenticated:
         raise PermissionDenied
-    return render(request, "main/legacy.html")
+    items = Device.objects.all()
+    context = {
+        'items': items,
+    }
+    return render(request, "main/legacy.html",context)
 
 def db(request):
     greeting = Greeting()
