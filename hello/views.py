@@ -272,6 +272,8 @@ def add_device(request):
 
         if form.is_valid():
             form.save()
+            # extract username from HttpRequest.user: 
+            # request.user.username
             return display_devices(request)
 
     else:

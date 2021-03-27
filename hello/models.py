@@ -57,7 +57,7 @@ class Building(models.Model):
     BuildingID = models.AutoField(primary_key = True)
     Building_Name = models.CharField(max_length=64)  
     Building_Addr = models.CharField(max_length=64)  
-    
+    # TODO: add IPv6_prefix
 
 class NetworkInterface(models.Model):
     NetworkID = models.AutoField(primary_key = True)
