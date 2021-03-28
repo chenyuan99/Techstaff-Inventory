@@ -23,6 +23,7 @@ IMPORT_EXPORT_USE_TRANSACTIONS = True
 # Application definition
 
 INSTALLED_APPS = [
+    'simpleui', 
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
