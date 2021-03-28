@@ -144,3 +144,4 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = 'static'
 django_heroku.settings(locals())
+SIMPLEUI_LOGO = 'https://www.assets.cms.vt.edu/images/maroon-shield.png'
