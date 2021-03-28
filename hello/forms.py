@@ -26,9 +26,9 @@ class LoginForm(AuthenticationForm):
     def __init__(self, *args, **kwargs):
         super(LoginForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper(self)
-        self.helper.form_class = 'form-horizontal'
-        self.helper.label_class = 'col-lg-2'
-        self.helper.field_class = 'col-lg-8'
+        # self.helper.form_class = 'form-horizontal'
+        # self.helper.label_class = "input"
+        # self.helper.field_class = "form-control"
 
 class AddUserDeviceForm(forms.ModelForm):
     # ReturnDate = forms.DateField(widget=SelectDateWidget(empty_label="Nothing"))

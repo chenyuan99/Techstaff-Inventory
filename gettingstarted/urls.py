@@ -31,6 +31,7 @@ urlpatterns = [
     path("faq", hello.views.faq, name="faq"),
     path("privacy-policy", hello.views.privacy, name="privacy-policy"),
     path("account", hello.views.account, name="account"),
+    path('accounts/', include('django.contrib.auth.urls')),
     # path('accounts/', include('django.contrib.auth.urls')),
     path("legacy", hello.views.legacy, name="legacy"),
     url(r'^display_devices$', hello.views.display_devices, name='display_devices'),
