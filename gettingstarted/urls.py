@@ -23,6 +23,7 @@ app_name = 'main'  # here for namespacing of urls.
 urlpatterns = [
     path("", hello.views.index, name="index"),
     path("db/", hello.views.db, name="db"),
+    path('admin/doc/', include('django.contrib.admindocs.urls')),
     path("admin/", admin.site.urls),
     path("register/", hello.views.register, name="register"),
     path("logout", hello.views.logout_request, name="logout"),
