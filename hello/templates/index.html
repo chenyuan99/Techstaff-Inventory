@@ -2,56 +2,47 @@
 {% load static %}
 {% block content %}
 {% load crispy_forms_tags %}
-	<nav
-		class="navbar navbar-expand-sm mb-3s flex-column flex-md-row bd-navbar shadow-sm ">
-		<div class="container-fluid ">
-			<div class='nav-column'>
-				<br>
-				<a href="{% url 'display_devices' %}" class="btn btn-outline-primary btn-md" role="button">Devices</a>
-				<a href="{% url 'display_hostnames' %}" class="btn btn-outline-primary btn-md"
-					role="button">Hostnames</a>
-				<a href="{% url 'display_buildings' %}" class="btn btn-outline-primary btn-md"
-					role="button">Buildings</a>
-				<a href="{% url 'display_faculty' %}" class="btn btn-outline-primary btn-md" role="button">Faculty</a>
-				<a href="{% url 'add_device' %}" class="btn btn-outline-danger btn-md" role="button">Add Device</a>
-				<a href="{% url 'add_hostname' %}" class="btn btn-outline-danger btn-md" role="button">Add Hostname</a>
-				<a href="{% url 'add_building' %}" class="btn btn-outline-danger btn-md" role="button">Add Building</a>
-				<a href="{% url 'add_faculty' %}" class="btn btn-outline-danger btn-md" role="button">Add Faculty</a>
-				<a href="{% url 'add_userDevice' %}" class="btn btn-outline-danger btn-md" role="button">Asign Device</a>
-			</div>
-			<style>
-				.nav-column {
-					display: flex;
-					flex-flow: row wrap;
-					align-items: center;
-					gap: 10px;
-					justify-content: space-around;
-				}
-			</style>
-		</div>
-	</nav>
+<nav class="navbar navbar-expand-sm mb-3s flex-column flex-md-row bd-navbar shadow-sm ">
 	<div class="container-fluid ">
-	{% if header %}
-
-	<div class="row">
-		<div class="col">
+		<div class='nav-column'>
 			<br>
-			<div class="card card-body shadow-sm">
-				<form method="get">
-					<table>
-					<tr>
-						{% for field in myFilter.form %}
-							<td>
-								{{ field|as_crispy_field }}
-							</td>
-						{% endfor %}
-					</tr>
-				</table>
-					<button class="btn btn-primary" type="submit"><i class="bi-search"></i> Search</button>
-				</form>
-
-			</div>
+			<a href="{% url 'display_devices' %}" class="btn btn-outline-primary btn-md" role="button">Devices</a>
+			<a href="{% url 'display_hostnames' %}" class="btn btn-outline-primary btn-md" role="button">Hostnames</a>
+			<a href="{% url 'display_buildings' %}" class="btn btn-outline-primary btn-md" role="button">Buildings</a>
+			<a href="{% url 'display_faculty' %}" class="btn btn-outline-primary btn-md" role="button">Faculty</a>
+			<a href="{% url 'add_device' %}" class="btn btn-outline-danger btn-md" role="button">Add Device</a>
+			<a href="{% url 'add_hostname' %}" class="btn btn-outline-danger btn-md" role="button">Add Hostname</a>
+			<a href="{% url 'add_building' %}" class="btn btn-outline-danger btn-md" role="button">Add Building</a>
+			<a href="{% url 'add_faculty' %}" class="btn btn-outline-danger btn-md" role="button">Add Faculty</a>
+			<a href="{% url 'add_userDevice' %}" class="btn btn-outline-danger btn-md" role="button">Asign Device</a>
 		</div>
+		<style>
+			.nav-column {
+				display: flex;
+				flex-flow: row wrap;
+				align-items: center;
+				gap: 10px;
+				justify-content: space-around;
+			}
+		</style>
+	</div>
+</nav>
+<div class="container-fluid ">
+	{% if header %}
+	<div class="container-fluid">
+		<br>
+		<form method="get">
+			<table>
+				<tr>
+					{% for field in myFilter.form %}
+					<td>
+						{{ field|as_crispy_field }}
+					</td>
+					{% endfor %}
+				</tr>
+			</table>
+			<button class="btn btn-primary" type="submit"><i class="bi-search"></i> Search</button>
+		</form>
 	</div>
 	<br>
 	<br>
