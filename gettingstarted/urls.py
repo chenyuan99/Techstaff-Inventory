@@ -50,6 +50,7 @@ urlpatterns = [
     # url(r'^edit_device/(?P<pk>\d+)$', hello.views.edit_device, name='edit_device'),
     url(r'^edit_device/(?P<CS_Tag>[-\w]+)$', hello.views.edit_device, name='edit_device'),
     url(r'^delete_device/(?P<CS_Tag>[-\w]+)$', hello.views.delete_device, name='delete_device'),
+    url(r'^view_device/(?P<CS_Tag>[-\w]+)$', hello.views.view_device, name='view_device'),
     # url(r'^delete_device/(?P<pk>\d+)$', hello.views.delete_device, name='delete_device'),
     url(r'^edit_network/(?P<pk>\d+)$', hello.views.edit_network, name='edit_network'),
     url(r'^delete_network/(?P<pk>\d+)$', hello.views.delete_network, name='delete_network'),

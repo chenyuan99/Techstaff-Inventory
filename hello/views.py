@@ -514,11 +514,10 @@ def edit_device(request, CS_Tag):
         return render(request, 'edit_item.html', {'form': form})
 
 
-
 def view_device(request, CS_Tag):
     device = Device.objects.get(CS_Tag=CS_Tag)
-    userdevice = get_object_or_404(UserDevice, DeviceID=device.pk)
-    user = get_object_or_404(Faculty, PID=userdevice.UserPID)
+    # userdevice = get_object_or_404(UserDevice, DeviceID=device.pk)
+    # user = get_object_or_404(Faculty, PID=userdevice.UserPID)
     context = {
         'device': device,
     }

@@ -2,7 +2,23 @@
 {% load static %}
 {% block content %}
 
+{% for item in items %}
 
+<tr>
+    <td data-label="Type">{{ item.type }}</td>
+    <td data-label="Price">${{ item.price }}</td>
+    <td data-label="Description">{{ item.description }}</td>
+    <td data-label="VT_Tag">{{ item.VT_Tag }}</td>
+    <td data-label="CS_Tag">{{ item.CS_Tag }}</td>
+    <td data-label="Serial_Number">{{ item.Serial_Number }}</td>
+    <td data-label="Status">{{ item.status }}</td>
+    <td data-label="Action">
+        <a href="{% url 'edit_device' item.CS_Tag %}" class="btn btn-outline-info btn-sm" role="button">Edit</a>
+        <a href="{% url 'view_device' item.CS_Tag %}" class="btn btn-outline-info btn-sm" role="button">View</a>
+        <a href="{% url 'delete_device' item.CS_Tag %}" class="btn btn-outline-danger btn-sm" role="button">Delete</a>
+    </td>
+</tr>
 
+{% endfor %}
 
 {% endblock %}
