@@ -149,22 +149,6 @@ def check_out(request, pk):
     return render(request, "check-out.html", context=context)
 
 
-# def edit_device(request, pk):
-#     if not request.user.is_authenticated:
-#         raise PermissionDenied
-#     item = get_object_or_404(Device, pk=pk)
-
-#     if request.method == 'POST':
-#         form = deviceForm(request.POST, instance=item)
-#         if form.is_valid():
-#             form.save()
-#             return display_devices(request)
-
-#     else:
-#         form = deviceForm(instance=item)
-#         return render(request, 'edit_item.html', {'form': form})
-
-
 def account(request):
     query_results = UserDevice.objects.all()
     return render(request, "main/account.html", {'query_results': query_results})
@@ -359,22 +343,6 @@ def edit_item(request, pk, model, cls):
         return render(request, 'edit_item.html', {'form': form})
 
 
-def edit_device(request, pk):
-    if not request.user.is_authenticated:
-        raise PermissionDenied
-    item = get_object_or_404(Device, pk=pk)
-
-    if request.method == 'POST':
-        form = deviceForm(request.POST, instance=item)
-        if form.is_valid():
-            form.save()
-            return display_devices(request)
-
-    else:
-        form = deviceForm(instance=item)
-        return render(request, 'edit_item.html', {'form': form})
-
-
 def edit_network(request, pk):
     if not request.user.is_authenticated:
         raise PermissionDenied
@@ -440,8 +408,21 @@ def edit_userDevice(request, pk):
 
 
 # -------------------------delete-----------------------------------
-def delete_device(request, pk):
-    device = Device.objects.get(id=pk)
+# def delete_device(request, pk):
+#     device = Device.objects.get(id=pk)
+#     if request.method == "POST":
+#         device.delete()
+#         return display_devices(request)
+
+#     form = deviceForm(request.POST, instance=device)
+#     for fieldname in form.fields:
+#         form.fields[fieldname].disabled = True
+
+#     return render(request, 'delete_item.html', {'form': form})
+
+
+def delete_device(request, CS_Tag):
+    device = Device.objects.get(CS_Tag=CS_Tag)
     if request.method == "POST":
         device.delete()
         return display_devices(request)
@@ -517,28 +498,31 @@ def checkout_device(request, pk):
         raise PermissionDenied
 
 
-# def edit_device(request, pk):
-#     if not request.user.is_authenticated:
-#         raise PermissionDenied
-#     item = get_object_or_404(Device, pk=pk)
+def edit_device(request, CS_Tag):
+    if not request.user.is_authenticated:
+        raise PermissionDenied
+    item = get_object_or_404(Device, CS_Tag=CS_Tag)
 
-#     if request.method == 'POST':
-#         form = deviceForm(request.POST, instance=item)
-#         if form.is_valid():
-#             form.save()
-#             return display_devices(request)
+    if request.method == 'POST':
+        form = deviceForm(request.POST, instance=item)
+        if form.is_valid():
+            form.save()
+            return display_devices(request)
 
-#     else:
-#         form = deviceForm(instance=item)
-#         return render(request, 'edit_item.html', {'form': form})
+    else:
+        form = deviceForm(instance=item)
+        return render(request, 'edit_item.html', {'form': form})
 
 
-# def device(request, pk):
-#     device = Device.objects.get(id=pk)
-#     context = {
-#         'device': device,
-#     }
-#     return render(request, "device_detail.html", context)
+
+def view_device(request, CS_Tag):
+    device = Device.objects.get(CS_Tag=CS_Tag)
+    userdevice = get_object_or_404(UserDevice, DeviceID=device.pk)
+    user = get_object_or_404(Faculty, PID=userdevice.UserPID)
+    context = {
+        'device': device,
+    }
+    return render(request, "device_detail.html", context)
 
 def export_devices(request):
     device_resource = DeviceResource()

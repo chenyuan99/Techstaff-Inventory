@@ -46,9 +46,11 @@ urlpatterns = [
     url(r'^add_hostname$', hello.views.add_hostname, name='add_hostname'),
     url(r'^add_building$', hello.views.add_building, name='add_building'),
     url(r'^add_userDevice$', hello.views.add_userDevice, name='add_userDevice'),
-    # edit delete
-    url(r'^edit_device/(?P<pk>\d+)$', hello.views.edit_device, name='edit_device'),
-    url(r'^delete_device/(?P<pk>\d+)$', hello.views.delete_device, name='delete_device'),
+    # edit delete device
+    # url(r'^edit_device/(?P<pk>\d+)$', hello.views.edit_device, name='edit_device'),
+    url(r'^edit_device/(?P<CS_Tag>[-\w]+)$', hello.views.edit_device, name='edit_device'),
+    url(r'^delete_device/(?P<CS_Tag>[-\w]+)$', hello.views.delete_device, name='delete_device'),
+    # url(r'^delete_device/(?P<pk>\d+)$', hello.views.delete_device, name='delete_device'),
     url(r'^edit_network/(?P<pk>\d+)$', hello.views.edit_network, name='edit_network'),
     url(r'^delete_network/(?P<pk>\d+)$', hello.views.delete_network, name='delete_network'),
     url(r'^edit_building/(?P<pk>\d+)$', hello.views.edit_building, name='edit_building'),

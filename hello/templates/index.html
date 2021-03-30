@@ -32,158 +32,161 @@
 	<div class="card bg-light">
 		<div class="card-body text-center">
 			<!-- <div class="container-fluid"> -->
-				<br>
-				<form method="get">
-					<table>
-						<tr>
-							{% for field in myFilter.form %}
-							<td>
-								{{ field|as_crispy_field }}
-							</td>
-							{% endfor %}
-						</tr>
-					</table>
-					<button class="btn btn-primary" type="submit"><i class="bi-search"></i> Search {{ header }}</button>
-				</form>
+			<br>
+			<form method="get">
+				<table>
+					<tr>
+						{% for field in myFilter.form %}
+						<td>
+							{{ field|as_crispy_field }}
+						</td>
+						{% endfor %}
+					</tr>
+				</table>
+				<button class="btn btn-primary" type="submit"><i class="bi-search"></i> Search {{ header }}</button>
+			</form>
 			<!-- </div> -->
 		</div>
 	</div>
 	<br>
 	<br>
 	<br>
-	<h4>Currently Viewing {{ header }}</h4>
-	{% endif %}
-	<table class="table table-hover">
-		<thead>
-			{# DEVICE #}
-			{% if header|lower == "device" %}
-			<tr>
-				<th>ID</th>
-				<th>Type</th>
-				<th>Price</th>
-				<th>Description</th>
-				<th>VT_Tag</th>
-				<th>CS_Tag</th>
-				<th>Serial_Number</th>
-				<th>Status</th>
-				<th>Action</th>
-			</tr>
-			{% endif %}
-			{# HOSTNAME #}
-			{% if header|lower == "hostname" %}
-			<th>ID</th>
-			<th>Hostname</th>
-			<th>Aliases</th>
-			<th>IP_Address</th>
-			<th>IPv6_Address</th>
-			<th>Action</th>
-
-			{% endif %}
-			{# FACULTY #}
-			{% if header|lower == "faculty" %}
-			<th>PID</th>
-			<th>Office Address</th>
-			<th>Firstname</th>
-			<th>Lastname</th>
-			<th>Action</th>
-
-			{% endif %}
-			{% if header|lower == "building" %}
-			<th>ID</th>
-			<th>Building Name</th>
-			<th>Building Address</th>
-			<th>Action</th>
-
-			{% endif %}
-		</thead>
-
-		<tbody>
-
-			{% for item in items %}
-
-			<tr>
+	<div class="container text-center">
+		<h4> Search {{ header }} Results</h4>
+		{% endif %}
+		<table class="table table-hover">
+			<thead>
+				{# DEVICE #}
 				{% if header|lower == "device" %}
-				<td data-label="ID">{{ item.pk }}</td>
-				<td data-label="Type">{{ item.type }}</td>
-				<td data-label="Price">${{ item.price }}</td>
-				<td data-label="Description">{{ item.description }}</td>
-				<td data-label="VT_Tag">{{ item.VT_Tag }}</td>
-				<td data-label="CS_Tag">{{ item.CS_Tag }}</td>
-				<td data-label="Serial_Number">{{ item.Serial_Number }}</td>
-				<td data-label="Status">{{ item.status }}</td>
-				{# <td data-label="Serial_Number">{{ item.issue }}</td>#}
-				<td data-label="Action">
-					<a href="{% url 'edit_device' item.pk %}" class="btn btn-outline-info btn-sm" role="button">Edit</a>
-					<a href="{% url 'delete_device' item.pk %}" class="btn btn-outline-danger btn-sm"
-						role="button">Delete</a>
-				</td>
-
+				<tr>
+					<!-- <th>ID</th> -->
+					<th>Type</th>
+					<th>Price</th>
+					<th>Description</th>
+					<th>VT_Tag</th>
+					<th>CS_Tag</th>
+					<th>Serial_Number</th>
+					<th>Status</th>
+					<th>Action</th>
+				</tr>
+				{% endif %}
+				{# HOSTNAME #}
+				{% if header|lower == "hostname" %}
+				<th>ID</th>
+				<th>Hostname</th>
+				<th>Aliases</th>
+				<th>IP_Address</th>
+				<th>IPv6_Address</th>
+				<th>Action</th>
 
 				{% endif %}
-
-				{% if header|lower == "hostname" %}
-
-				<td data-label="ID">{{ item.NetworkID }}</td>
-				<td data-label="Hostname">{{ item.Hostname }}</td>
-				<td data-label="Aliases">{{ item.Aliases }}</td>
-				<td data-label="IP_Address">{{ item.IPv4 }}</td>
-				<td data-label="IPv6_Address">{{ item.IPv6 }}</td>
-				{# <td>{{ item.MAC_Address }}</td>#}
-				<td data-label="Action">
-					<a href="{% url 'edit_network' item.pk %}" class="btn btn-outline-info btn-sm"
-						role="button">Edit</a>
-					<a href="{% url 'delete_network' item.pk %}" class="btn btn-outline-danger btn-sm"
-						role="button">Delete</a>
-				</td>
+				{# FACULTY #}
+				{% if header|lower == "faculty" %}
+				<th>PID</th>
+				<th>Office Address</th>
+				<th>Firstname</th>
+				<th>Lastname</th>
+				<th>Action</th>
 
 				{% endif %}
 				{% if header|lower == "building" %}
-
-				<td data-label="Building ID">{{ item.BuildingID }}</td>
-				<td data-label="Hostname">{{ item.Building_Name }}</td>
-				<td data-label="Aliases">{{ item.Building_Addr }}</td>
-				{# <td>{{ item.MAC_Address }}</td>#}
-				<td data-label="Action">
-					<a href="{% url 'edit_building' item.pk %}" class="btn btn-outline-info btn-sm"
-						role="button">Edit</a>
-					<a href="{% url 'delete_building' item.pk %}" class="btn btn-outline-danger btn-sm"
-						role="button">Delete</a>
-				</td>
+				<th>ID</th>
+				<th>Building Name</th>
+				<th>Building Address</th>
+				<th>Action</th>
 
 				{% endif %}
-				{% if header|lower == "faculty" %}
+			</thead>
 
-				<td data-label="PID">{{ item.PID }}</td>
-				<td data-label="Office Address">{{ item.Office_Addr }}</td>
-				<td data-label="Firstname">{{ item.FirstName }}</td>
-				<td data-label="Lastname">{{ item.LastName }}</td>
-				<td data-label="Action">
-					<a href="{% url 'edit_faculty' item.PID %}" class="btn btn-outline-info btn-sm"
-						role="button">Edit</a>
-					<a href="{% url 'delete_faculty' item.PID %}" class="btn btn-outline-danger btn-sm"
-						role="button">Delete</a>
-				</td>
+			<tbody>
 
-				{% endif %}
+				{% for item in items %}
 
-			</tr>
-			{# <tr id="note-0" class="collapse">#}
-				{# <td></td>#}
-				{# <td colspan="5">#}
-					{# <div class="well">#}
-						{# <h3>Doing Laundary</h3>#}
-						{# <div>I need to get quarters first at Kroger.</div>#}
-						{# </div>#}
-					{# </td>#}
-				{# </tr>#}
+				<tr>
+					{% if header|lower == "device" %}
+					<!-- <td data-label="ID">{{ item.pk }}</td> -->
+					<td data-label="Type">{{ item.type }}</td>
+					<td data-label="Price">${{ item.price }}</td>
+					<td data-label="Description">{{ item.description }}</td>
+					<td data-label="VT_Tag">{{ item.VT_Tag }}</td>
+					<td data-label="CS_Tag">{{ item.CS_Tag }}</td>
+					<td data-label="Serial_Number">{{ item.Serial_Number }}</td>
+					<td data-label="Status">{{ item.status }}</td>
+					<td data-label="Action">
+						<a href="{% url 'edit_device' item.CS_Tag %}" class="btn btn-outline-info btn-sm"
+							role="button">Edit</a>
+						<a href="{% url 'edit_device' item.CS_Tag %}" class="btn btn-outline-info btn-sm"
+							role="button">View</a>
+						<a href="{% url 'delete_device' item.CS_Tag %}" class="btn btn-outline-danger btn-sm"
+							role="button">Delete</a>
+					</td>
 
 
-			{% endfor %}
+					{% endif %}
 
-		</tbody>
+					{% if header|lower == "hostname" %}
 
-	</table>
+					<td data-label="ID">{{ item.NetworkID }}</td>
+					<td data-label="Hostname">{{ item.Hostname }}</td>
+					<td data-label="Aliases">{{ item.Aliases }}</td>
+					<td data-label="IP_Address">{{ item.IPv4 }}</td>
+					<td data-label="IPv6_Address">{{ item.IPv6 }}</td>
+					{# <td>{{ item.MAC_Address }}</td>#}
+					<td data-label="Action">
+						<a href="{% url 'edit_network' item.pk %}" class="btn btn-outline-info btn-sm"
+							role="button">Edit</a>
+						<a href="{% url 'delete_network' item.pk %}" class="btn btn-outline-danger btn-sm"
+							role="button">Delete</a>
+					</td>
 
+					{% endif %}
+					{% if header|lower == "building" %}
+
+					<td data-label="Building ID">{{ item.BuildingID }}</td>
+					<td data-label="Hostname">{{ item.Building_Name }}</td>
+					<td data-label="Aliases">{{ item.Building_Addr }}</td>
+					{# <td>{{ item.MAC_Address }}</td>#}
+					<td data-label="Action">
+						<a href="{% url 'edit_building' item.pk %}" class="btn btn-outline-info btn-sm"
+							role="button">Edit</a>
+						<a href="{% url 'delete_building' item.pk %}" class="btn btn-outline-danger btn-sm"
+							role="button">Delete</a>
+					</td>
+
+					{% endif %}
+					{% if header|lower == "faculty" %}
+
+					<td data-label="PID">{{ item.PID }}</td>
+					<td data-label="Office Address">{{ item.Office_Addr }}</td>
+					<td data-label="Firstname">{{ item.FirstName }}</td>
+					<td data-label="Lastname">{{ item.LastName }}</td>
+					<td data-label="Action">
+						<a href="{% url 'edit_faculty' item.PID %}" class="btn btn-outline-info btn-sm"
+							role="button">Edit</a>
+						<a href="{% url 'delete_faculty' item.PID %}" class="btn btn-outline-danger btn-sm"
+							role="button">Delete</a>
+					</td>
+
+					{% endif %}
+
+				</tr>
+				{# <tr id="note-0" class="collapse">#}
+					{# <td></td>#}
+					{# <td colspan="5">#}
+						{# <div class="well">#}
+							{# <h3>Doing Laundary</h3>#}
+							{# <div>I need to get quarters first at Kroger.</div>#}
+							{# </div>#}
+						{# </td>#}
+					{# </tr>#}
+
+
+				{% endfor %}
+
+			</tbody>
+
+		</table>
+	</div>
 	<br>
 	<br>
 	<br>
