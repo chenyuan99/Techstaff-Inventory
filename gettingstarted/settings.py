@@ -23,6 +23,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     "hello",
     'import_export',
+    'simple_history'
 ]
 
 MIDDLEWARE = [

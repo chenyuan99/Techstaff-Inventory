@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-
+from simple_history.models import HistoricalRecords
 # Create your models here.
 
 class Faculty(models.Model):
@@ -8,6 +8,7 @@ class Faculty(models.Model):
     Office_Addr = models.CharField(max_length=100, default = '')
     FirstName = models.CharField(max_length=100, default = 'First name')
     LastName = models.CharField(max_length=100, default = 'Last name')
+    history = HistoricalRecords()
 
 class Device(models.Model):
     Serial_Number = models.CharField(max_length=100, default = '')
@@ -31,9 +32,9 @@ class Device(models.Model):
 
     status = models.CharField(max_length=15, choices=choices, default='In Use') #Available, Sold, Restocking
     issue = models.CharField(max_length=100, default="No issues")
+    history = HistoricalRecords()
 
     class Meta:
-        #unique_together = ('VT_Tag', 'CS_Tag')
         ordering = ['CS_Tag']
 
 
@@ -46,17 +47,21 @@ class UserDevice(models.Model):
     DeviceID = models.CharField(max_length=100, default = '')
     Note = models.CharField(max_length=100, default = '')
     isHomeUse = models.BooleanField(default=False)
+    isCheckedOut = models.BooleanField(default=False)
+    Address = models.CharField(max_length=100, default = '')
     CheckoutDate = models.DateField(auto_now=True)  # create time (automatic)
     ReturnDate = models.DateField(default='YYYY-MM-DD')  # create time (automatic)
-
+    
     class Meta:
         unique_together = ('UserPID', 'DeviceID', 'CheckoutDate')
+    history = HistoricalRecords()
 
 class Building(models.Model):
     BuildingID = models.AutoField(primary_key = True)
     Building_Name = models.CharField(max_length=64)
     Building_Addr = models.CharField(max_length=64)
     IPv6_prefix = models.GenericIPAddressField(null=True)
+    history = HistoricalRecords()
     
 
 class NetworkInterface(models.Model):
@@ -68,3 +73,4 @@ class NetworkInterface(models.Model):
     IPv6 = models.GenericIPAddressField()    # IPv6 Address
     BuildingID = models.IntegerField()  
     create_Date = models.DateField(auto_now=True)  # create time (automatic)
+    history = HistoricalRecords()
