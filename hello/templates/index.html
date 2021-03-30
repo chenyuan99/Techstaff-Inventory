@@ -2,7 +2,7 @@
 {% load static %}
 {% block content %}
 {% load crispy_forms_tags %}
-<nav class="navbar navbar-expand-sm mb-3s flex-column flex-md-row bd-navbar shadow-sm ">
+<nav class="navbar navbar-expand-sm mb-3s flex-column flex-md-row bd-navbar">
 	<div class="container-fluid ">
 		<div class='nav-column'>
 			<br>
@@ -29,20 +29,24 @@
 </nav>
 <div class="container-fluid ">
 	{% if header %}
-	<div class="container-fluid">
-		<br>
-		<form method="get">
-			<table>
-				<tr>
-					{% for field in myFilter.form %}
-					<td>
-						{{ field|as_crispy_field }}
-					</td>
-					{% endfor %}
-				</tr>
-			</table>
-			<button class="btn btn-primary" type="submit"><i class="bi-search"></i> Search</button>
-		</form>
+	<div class="card bg-light">
+		<div class="card-body text-center">
+			<!-- <div class="container-fluid"> -->
+				<br>
+				<form method="get">
+					<table>
+						<tr>
+							{% for field in myFilter.form %}
+							<td>
+								{{ field|as_crispy_field }}
+							</td>
+							{% endfor %}
+						</tr>
+					</table>
+					<button class="btn btn-primary" type="submit"><i class="bi-search"></i> Search {{ header }}</button>
+				</form>
+			<!-- </div> -->
+		</div>
 	</div>
 	<br>
 	<br>
