@@ -516,10 +516,10 @@ def edit_device(request, CS_Tag):
 
 def view_device(request, CS_Tag):
     device = Device.objects.get(CS_Tag=CS_Tag)
-    # userdevice = get_object_or_404(UserDevice, DeviceID=device.pk)
-    # user = get_object_or_404(Faculty, PID=userdevice.UserPID)
+    userdevices = list(UserDevice.objects.filter(DeviceID=device.CS_Tag))
     context = {
         'item': device,
+        'userdevices':userdevices,
     }
     return render(request, "device_detail.html", context)
 
