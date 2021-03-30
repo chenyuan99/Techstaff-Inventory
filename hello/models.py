@@ -15,9 +15,8 @@ class Device(models.Model):
     price = models.IntegerField()
     description = models.CharField(max_length=100, default = '')
     VT_Tag = models.CharField(max_length=100, default = '')
-    CS_Tag = models.CharField(max_length=100, default = '')
+    CS_Tag = models.CharField(max_length=100, default = '', primary_key=True)
     acq_date = models.DateField(default='YYYY-MM-DD')
-    #purchase_order =  models.CharField(max_length=100, default = '')
     choices = (
         ('In Use', 'In Use'),
         ('In Storage', 'In Storage'),
@@ -34,13 +33,13 @@ class Device(models.Model):
     issue = models.CharField(max_length=100, default="No issues")
 
     class Meta:
-        unique_together = ('VT_Tag', 'CS_Tag')
-        ordering = ['-id']
+        #unique_together = ('VT_Tag', 'CS_Tag')
+        ordering = ['CS_Tag']
 
 
     def _str_(self):
         return 'Type : {0} Price : {1}'.format(self.type, self.price)
-        ordering = ['-id']
+        ordering = ['CS_Tag']
 
 class UserDevice(models.Model):
     UserPID =  models.CharField(max_length=100, default = '')
@@ -55,9 +54,10 @@ class UserDevice(models.Model):
 
 class Building(models.Model):
     BuildingID = models.AutoField(primary_key = True)
-    Building_Name = models.CharField(max_length=64)  
-    Building_Addr = models.CharField(max_length=64)  
-    # TODO: add IPv6_prefix
+    Building_Name = models.CharField(max_length=64)
+    Building_Addr = models.CharField(max_length=64)
+    IPv6_prefix = models.GenericIPAddressField(null=True)
+    
 
 class NetworkInterface(models.Model):
     NetworkID = models.AutoField(primary_key = True)
