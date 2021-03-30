@@ -519,7 +519,7 @@ def view_device(request, CS_Tag):
     # userdevice = get_object_or_404(UserDevice, DeviceID=device.pk)
     # user = get_object_or_404(Faculty, PID=userdevice.UserPID)
     context = {
-        'device': device,
+        'item': device,
     }
     return render(request, "device_detail.html", context)
 

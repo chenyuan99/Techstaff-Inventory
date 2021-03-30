@@ -2,8 +2,7 @@
 {% load static %}
 {% block content %}
 
-{% for item in items %}
-
+<div class="container-fluid">
 <tr>
     <td data-label="Type">{{ item.type }}</td>
     <td data-label="Price">${{ item.price }}</td>
@@ -18,7 +17,6 @@
         <a href="{% url 'delete_device' item.CS_Tag %}" class="btn btn-outline-danger btn-sm" role="button">Delete</a>
     </td>
 </tr>
-
-{% endfor %}
+</div>
 
 {% endblock %}
