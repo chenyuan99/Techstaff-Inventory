@@ -6,35 +6,35 @@
     <h2>Device {{item.CS_Tag}} Detail Page</h2>
     <table class="table table-striped text-left">
         <tr>
-            <td align=left>CS_Tag</td>
+            <td align=left><b>CS_Tag</b></td>
             <td data-label="CS_Tag">{{ item.CS_Tag }}</td>
         </tr>
         <tr>
-            <td align=left>Type</td>
+            <td align=left><b>Type</b></td>
             <td data-label="Type">{{ item.type }}</td>
         </tr>
         <tr>
-            <td align=left>Price</td>
+            <td align=left><b>Price</b></td>
             <td data-label="Price">${{ item.price }}</td>
         </tr>
         <tr>
-            <td align=left>Description</td>
+            <td align=left><b>Description</b></td>
             <td data-label="Description">{{ item.description }}</td>
         </tr>
         <tr>
-            <td align=left>VT_Tag</td>
+            <td align=left><b>VT_Tag</b></td>
             <td data-label="VT_Tag">{{ item.VT_Tag }}</td>
         </tr>
         <tr>
-            <td align=left>Serial_Number</td>
+            <td align=left><b>Serial_Number</b></td>
             <td data-label="Serial_Number">{{ item.Serial_Number }}</td>
         </tr>
         <tr>
-            <td align=left>Status</td>
+            <td align=left><b>Status</b></td>
             <td data-label="Status">{{ item.status }}</td>
         </tr>
         <tr>
-            <td align=left>Action</td>
+            <td align=left>Device Action</td>
             <td data-label="Action">
                 <a href="{% url 'edit_device' item.CS_Tag %}" class="btn btn-outline-info btn-sm" role="button">Edit</a>
                 <a href="{% url 'view_device' item.CS_Tag %}" class="btn btn-outline-info btn-sm" role="button">View</a>
@@ -42,44 +42,24 @@
                     role="button">Delete</a>
             </td>
         </tr>
-    </table>
-</div>
-
-<div class="container-fluid text-center">
-    <h4>Custodian History</h4>
-    <table id="info-table" class="table table-bordered">
-        <thead>
-            <tr>
-                <th>Custodian Pid</th>
-                <th>DeviceID</th>
-                <th>Checkout Date</th>
-                <th>Faculty</th>
-                <th>Edit or Delete</th>
-                <th>View</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for item in userdevices %}
-            <tr>
-                {% if item.UserPID == user.username %}
-                <td>{{ item.UserPID }}</td>
-                <td>{{ item.DeviceID }}</td>
-                <td>{{ item.Custodian }}</td>
-                <td>{{ item.isHomeUse }}</td>
-                <td>{{ item.CheckoutDate }}</td>
-                <td>{{ item.ReturnDate }}</td>
-                <td>
-                    <a href="{% url 'check-out' item.pk %}"> View Checkout</a>
-                </td>
-
-                {% endif %}
-
-            </tr>
-
-            {% endfor %}
-
-        </tbody>
-
+        {% for item in userdevices %}
+        <tr>
+            <td>Custodian Pid</td>
+            <td>{{ item.UserPID }}</td>
+        </tr>
+        <!-- <tr>
+            <td>Faculty</td>
+            <td>{{ item.FirstName }} {{ item.LastName }}</td>
+        </tr> -->
+        <tr>
+            <td>Checkout Date</td>
+            <td>{{ item.CheckoutDate }}</td>
+        </tr>
+        <tr>
+            <td> Home Use</td>
+            <td>{{ item.isHomeUse }}</td>
+        </tr>
+        {% endfor %}
     </table>
 </div>
 
