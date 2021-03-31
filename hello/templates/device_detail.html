@@ -34,17 +34,16 @@
             <td data-label="Status">{{ item.status }}</td>
         </tr>
         <tr>
-            <td align=left>Device Action</td>
+            <td align=left><b>Device Action</b></td>
             <td data-label="Action">
                 <a href="{% url 'edit_device' item.CS_Tag %}" class="btn btn-outline-info btn-sm" role="button">Edit</a>
-                <a href="{% url 'view_device' item.CS_Tag %}" class="btn btn-outline-info btn-sm" role="button">View</a>
                 <a href="{% url 'delete_device' item.CS_Tag %}" class="btn btn-outline-danger btn-sm"
                     role="button">Delete</a>
             </td>
         </tr>
         {% for item in userdevices %}
         <tr>
-            <td>Custodian Pid</td>
+            <td><b>Custodian Pid</b></td>
             <td>{{ item.UserPID }}</td>
         </tr>
         <!-- <tr>
@@ -52,13 +51,16 @@
             <td>{{ item.FirstName }} {{ item.LastName }}</td>
         </tr> -->
         <tr>
-            <td>Checkout Date</td>
+            <td><b>Checkout Date</b></td>
             <td>{{ item.CheckoutDate }}</td>
         </tr>
         <tr>
-            <td> Home Use</td>
+            <td><b>Home Use</b> </td>
             <td>{{ item.isHomeUse }}</td>
         </tr>
+        {% endfor %}
+        {% for item in networks %}
+
         {% endfor %}
     </table>
 </div>
@@ -88,7 +90,6 @@
             <td data-label="Status">{{ item.status }}</td>
             <td data-label="Action">
                 <a href="{% url 'edit_device' item.CS_Tag %}" class="btn btn-outline-info btn-sm" role="button">Edit</a>
-                <a href="{% url 'view_device' item.CS_Tag %}" class="btn btn-outline-info btn-sm" role="button">View</a>
                 <a href="{% url 'delete_device' item.CS_Tag %}" class="btn btn-outline-danger btn-sm"
                     role="button">Delete</a>
             </td>
