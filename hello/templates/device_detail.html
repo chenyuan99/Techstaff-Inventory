@@ -2,99 +2,121 @@
 {% load static %}
 {% block content %}
 
-<div class="container text-center">
-    <h2>Device {{item.CS_Tag}} Detail Page</h2>
-    <table class="table table-striped text-left">
-        <tr>
-            <td align=left><b>CS_Tag</b></td>
-            <td data-label="CS_Tag">{{ item.CS_Tag }}</td>
-        </tr>
-        <tr>
-            <td align=left><b>Type</b></td>
-            <td data-label="Type">{{ item.type }}</td>
-        </tr>
-        <tr>
-            <td align=left><b>Price</b></td>
-            <td data-label="Price">${{ item.price }}</td>
-        </tr>
-        <tr>
-            <td align=left><b>Description</b></td>
-            <td data-label="Description">{{ item.description }}</td>
-        </tr>
-        <tr>
-            <td align=left><b>VT_Tag</b></td>
-            <td data-label="VT_Tag">{{ item.VT_Tag }}</td>
-        </tr>
-        <tr>
-            <td align=left><b>Serial_Number</b></td>
-            <td data-label="Serial_Number">{{ item.Serial_Number }}</td>
-        </tr>
-        <tr>
-            <td align=left><b>Status</b></td>
-            <td data-label="Status">{{ item.status }}</td>
-        </tr>
-        <tr>
-            <td align=left><b>Device Action</b></td>
-            <td data-label="Action">
-                <a href="{% url 'edit_device' item.CS_Tag %}" class="btn btn-outline-info btn-sm" role="button">Edit</a>
-                <a href="{% url 'delete_device' item.CS_Tag %}" class="btn btn-outline-danger btn-sm"
-                    role="button">Delete</a>
-            </td>
-        </tr>
-        {% for item in userdevices %}
-        <tr>
-            <td><b>Custodian Pid</b></td>
-            <td>{{ item.UserPID }}</td>
-        </tr>
-        <!-- <tr>
+	<div class="container text-center">
+		<h2>Device {{item.CS_Tag}} Detail Page</h2>
+		<table class="table table-striped text-left">
+			<tr>
+				<td align=left><b>CS_Tag</b></td>
+				<td data-label="CS_Tag">{{ item.CS_Tag }}</td>
+			</tr>
+			<tr>
+				<td align=left><b>Type</b></td>
+				<td data-label="Type">{{ item.type }}</td>
+			</tr>
+			<tr>
+				<td align=left><b>Price</b></td>
+				<td data-label="Price">${{ item.price }}</td>
+			</tr>
+			<tr>
+				<td align=left><b>Description</b></td>
+				<td data-label="Description">{{ item.description }}</td>
+			</tr>
+			<tr>
+				<td align=left><b>VT_Tag</b></td>
+				<td data-label="VT_Tag">{{ item.VT_Tag }}</td>
+			</tr>
+			<tr>
+				<td align=left><b>Serial_Number</b></td>
+				<td data-label="Serial_Number">{{ item.Serial_Number }}</td>
+			</tr>
+			<tr>
+				<td align=left><b>Status</b></td>
+				<td data-label="Status">{{ item.status }}</td>
+			</tr>
+			<tr>
+				<td align=left><b>Device Action</b></td>
+				<td data-label="Action">
+					<a href="{% url 'edit_device' item.CS_Tag %}" class="btn btn-outline-info btn-sm" role="button">Edit</a>
+					<a href="{% url 'delete_device' item.CS_Tag %}" class="btn btn-outline-danger btn-sm"
+					   role="button">Delete</a>
+				</td>
+			</tr>
+			{% for item in userdevices %}
+				<tr>
+					<td><b>Custodian Pid</b></td>
+					<td>{{ item.UserPID }}</td>
+				</tr>
+				<!-- <tr>
             <td>Faculty</td>
             <td>{{ item.FirstName }} {{ item.LastName }}</td>
         </tr> -->
-        <tr>
-            <td><b>Checkout Date</b></td>
-            <td>{{ item.CheckoutDate }}</td>
-        </tr>
-        <tr>
-            <td><b>Home Use</b> </td>
-            <td>{{ item.isHomeUse }}</td>
-        </tr>
-        {% endfor %}
-        {% for item in networks %}
+				<tr>
+					<td><b>Checkout Date</b></td>
+					<td>{{ item.CheckoutDate }}</td>
+				</tr>
+				<tr>
+					<td><b>Home Use</b> </td>
+					<td>{{ item.isHomeUse }}</td>
+				</tr>
+			{% endfor %}
+			{% for item in networks %}
 
-        {% endfor %}
-    </table>
-</div>
+			{% endfor %}
+		</table>
+	</div>
 
-<div class="container-fluid text-center">
-    <h6>Network History</h6>
-    <table id="info-table" class="table table-bordered">
-        <thread>
-            <tr>
-                <th>CS_Tag</th>
-                <th>Type</th>
-                <th>Price</th>
-                <th>Description</th>
-                <th>VT_Tag</th>
-                <th>Serial_Number</th>
-                <th>Status</th>
-                <th>Action</th>
-            </tr>
-        </thread>
-        <tr>
-            <td data-label="Type">{{ item.type }}</td>
-            <td data-label="Price">${{ item.price }}</td>
-            <td data-label="Description">{{ item.description }}</td>
-            <td data-label="VT_Tag">{{ item.VT_Tag }}</td>
-            <td data-label="CS_Tag">{{ item.CS_Tag }}</td>
-            <td data-label="Serial_Number">{{ item.Serial_Number }}</td>
-            <td data-label="Status">{{ item.status }}</td>
-            <td data-label="Action">
-                <a href="{% url 'edit_device' item.CS_Tag %}" class="btn btn-outline-info btn-sm" role="button">Edit</a>
-                <a href="{% url 'delete_device' item.CS_Tag %}" class="btn btn-outline-danger btn-sm"
-                    role="button">Delete</a>
-            </td>
-        </tr>
-    </table>
-</div>
+	<div class="container-fluid text-center">
+		<h6>Network History</h6>
+		<table id="info-table" class="table table-bordered">
+			<thread>
+				<tr>
+					<th>CS_Tag</th>
+					<th>Type</th>
+					<th>Price</th>
+					<th>Description</th>
+					<th>VT_Tag</th>
+					<th>Serial_Number</th>
+					<th>Status</th>
+					<th>Action</th>
+				</tr>
+			</thread>
+			<tr>
+				<td data-label="Type">{{ item.type }}</td>
+				<td data-label="Price">${{ item.price }}</td>
+				<td data-label="Description">{{ item.description }}</td>
+				<td data-label="VT_Tag">{{ item.VT_Tag }}</td>
+				<td data-label="CS_Tag">{{ item.CS_Tag }}</td>
+				<td data-label="Serial_Number">{{ item.Serial_Number }}</td>
+				<td data-label="Status">{{ item.status }}</td>
+				<td data-label="Action">
+					<a href="{% url 'edit_device' item.CS_Tag %}" class="btn btn-outline-info btn-sm" role="button">Edit</a>
+					<a href="{% url 'delete_device' item.CS_Tag %}" class="btn btn-outline-danger btn-sm"
+					   role="button">Delete</a>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div class="container">
+		<table class="table table-bordered">
+		<tr>
+			<td>
+				{% for e in history %}
+					User: {{ e.history_user }} {{ e.history_type }} on {{ e.history_date }}
+					<br>
+				{% endfor %}
+			</td>
+			<td>
+				{% for item in delta %}
+					//For read
+					{% for change in item.changes %}
+						{{ change.field }} changed from {{ change.old }} to {{ change.new }}
+
+					{% endfor %}
+					<br>
+				{% endfor %}
+			</td>
+		</tr>
+		</table>
+	</div>
 
 {% endblock %}

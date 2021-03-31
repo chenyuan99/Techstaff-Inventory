@@ -518,10 +518,20 @@ def view_device(request, CS_Tag):
     device = Device.objects.get(CS_Tag=CS_Tag)
     userdevices = list(UserDevice.objects.filter(DeviceID=device.CS_Tag))
     networks = list(NetworkInterface.objects.filter(DeviceID=device.CS_Tag))
+    history = device.history.all()
+    delta = list()
+    for i in range(0, history.count() - 1):
+
+        delta.append(history[i].diff_against(history[i+1]))
+
+
     context = {
         'item': device,
         'userdevices':userdevices,
         'networks':networks,
+        'history': history,
+        'delta': delta
+
     }
     return render(request, "device_detail.html", context)
 
