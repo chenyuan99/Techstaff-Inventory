@@ -2,29 +2,39 @@
 {% load static %}
 {% block content %}
 
-<div class="container-fluid text-center">
+<div class="container text-center">
     <h2>Device {{item.CS_Tag}} Detail Page</h2>
-    <table id="info-table" class="table table-hover">
-        <thread>
-            <tr>
-                <th>CS_Tag</th>
-                <th>Type</th>
-                <th>Price</th>
-                <th>Description</th>
-                <th>VT_Tag</th>
-                <th>Serial_Number</th>
-                <th>Status</th>
-                <th>Action</th>
-            </tr>
-        </thread>
+    <table class="table table-striped text-left">
         <tr>
-            <td data-label="Type">{{ item.type }}</td>
-            <td data-label="Price">${{ item.price }}</td>
-            <td data-label="Description">{{ item.description }}</td>
-            <td data-label="VT_Tag">{{ item.VT_Tag }}</td>
+            <td align=left>CS_Tag</td>
             <td data-label="CS_Tag">{{ item.CS_Tag }}</td>
+        </tr>
+        <tr>
+            <td align=left>Type</td>
+            <td data-label="Type">{{ item.type }}</td>
+        </tr>
+        <tr>
+            <td align=left>Price</td>
+            <td data-label="Price">${{ item.price }}</td>
+        </tr>
+        <tr>
+            <td align=left>Description</td>
+            <td data-label="Description">{{ item.description }}</td>
+        </tr>
+        <tr>
+            <td align=left>VT_Tag</td>
+            <td data-label="VT_Tag">{{ item.VT_Tag }}</td>
+        </tr>
+        <tr>
+            <td align=left>Serial_Number</td>
             <td data-label="Serial_Number">{{ item.Serial_Number }}</td>
+        </tr>
+        <tr>
+            <td align=left>Status</td>
             <td data-label="Status">{{ item.status }}</td>
+        </tr>
+        <tr>
+            <td align=left>Action</td>
             <td data-label="Action">
                 <a href="{% url 'edit_device' item.CS_Tag %}" class="btn btn-outline-info btn-sm" role="button">Edit</a>
                 <a href="{% url 'view_device' item.CS_Tag %}" class="btn btn-outline-info btn-sm" role="button">View</a>
@@ -37,7 +47,7 @@
 
 <div class="container-fluid text-center">
     <h4>Custodian History</h4>
-    <table id="info-table" class="table table-hover">
+    <table id="info-table" class="table table-bordered">
         <thead>
             <tr>
                 <th>Custodian Pid</th>
@@ -75,7 +85,7 @@
 
 <div class="container-fluid text-center">
     <h6>Network History</h6>
-    <table id="info-table" class="table table-hover">
+    <table id="info-table" class="table table-bordered">
         <thread>
             <tr>
                 <th>CS_Tag</th>

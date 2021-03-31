@@ -517,9 +517,11 @@ def edit_device(request, CS_Tag):
 def view_device(request, CS_Tag):
     device = Device.objects.get(CS_Tag=CS_Tag)
     userdevices = list(UserDevice.objects.filter(DeviceID=device.CS_Tag))
+    networks = list(NetworkInterface.objects.filter(DeviceID=device.CS_Tag))
     context = {
         'item': device,
         'userdevices':userdevices,
+        'networks':networks,
     }
     return render(request, "device_detail.html", context)
 
