@@ -128,3 +128,10 @@ SIMPLEUI_LOGO = 'https://www.assets.cms.vt.edu/images/maroon-shield.png'
 SIMPLEUI_ANALYSIS = False
 SIMPLEUI_LOGIN_PARTICLES = False
 SIMPLEUI_HOME_INFO = False
+SIMPLEUI_ICON = {
+    'Facultys': 'fas fa-address-card',
+    'Devices': 'fab fa-apple',
+    'Network interfaces': 'fas fa-at',
+    'Buildings': 'fas fa-building',
+    'User devices': 'fas fa-check-circle'
+}
