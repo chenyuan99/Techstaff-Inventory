@@ -2,6 +2,9 @@ from django.contrib import admin
 from django.contrib.admin.models import LogEntry
 from .models import *
 from import_export.admin import ImportExportModelAdmin
+from simple_history.admin import SimpleHistoryAdmin
+
+
 class ViewAdmin(ImportExportModelAdmin):
 	pass
 
@@ -39,11 +42,12 @@ class HostnameAdmin(ImportExportModelAdmin):
     'BuildingID',
     )
 
-class DeviceAdmin(ImportExportModelAdmin):
+class DeviceAdmin(ImportExportModelAdmin,SimpleHistoryAdmin):
     model = Device
     list_filter =("VT_Tag","CS_Tag","Serial_Number","type","status","issue")
     list_display =("VT_Tag","CS_Tag","Serial_Number","type","status","issue")
     search_fields =("VT_Tag","CS_Tag","Serial_Number","type","status","issue")
+    history_list_display = ["status"]
 
 class UserDeviceAdmin(ImportExportModelAdmin):
     model = UserDevice
