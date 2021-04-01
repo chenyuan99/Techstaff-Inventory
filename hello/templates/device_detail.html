@@ -46,10 +46,6 @@
 			<td><b>Custodian Pid</b></td>
 			<td>{{ item.UserPID }}</td>
 		</tr>
-		<!-- <tr>
-            <td>Faculty</td>
-            <td>{{ item.FirstName }} {{ item.LastName }}</td>
-        </tr> -->
 		<tr>
 			<td><b>Checkout Date</b></td>
 			<td>{{ item.CheckoutDate }}</td>
@@ -58,6 +54,14 @@
 			<td><b>Home Use</b> </td>
 			<td>{{ item.isHomeUse }}</td>
 		</tr>
+		<tr>
+			<td><b>UserDevice Action</b> </td>
+			<td data-label="Action">
+				<a href="" class="btn btn-outline-info btn-sm" role="button">Edit</a>
+				<a href="" class="btn btn-outline-danger btn-sm"
+					role="button">Delete</a>
+			</td>
+		</tr>
 		{% endfor %}
 		{% for item in networks %}
 
@@ -65,39 +69,8 @@
 	</table>
 </div>
 
-<div class="container-fluid text-center">
-	<h6>Network History</h6>
-	<table id="info-table" class="table table-bordered">
-		<thread>
-			<tr>
-				<th>CS_Tag</th>
-				<th>Type</th>
-				<th>Price</th>
-				<th>Description</th>
-				<th>VT_Tag</th>
-				<th>Serial_Number</th>
-				<th>Status</th>
-				<th>Action</th>
-			</tr>
-		</thread>
-		<tr>
-			<td data-label="Type">{{ item.type }}</td>
-			<td data-label="Price">${{ item.price }}</td>
-			<td data-label="Description">{{ item.description }}</td>
-			<td data-label="VT_Tag">{{ item.VT_Tag }}</td>
-			<td data-label="CS_Tag">{{ item.CS_Tag }}</td>
-			<td data-label="Serial_Number">{{ item.Serial_Number }}</td>
-			<td data-label="Status">{{ item.status }}</td>
-			<td data-label="Action">
-				<a href="{% url 'edit_device' item.CS_Tag %}" class="btn btn-outline-info btn-sm" role="button">Edit</a>
-				<a href="{% url 'delete_device' item.CS_Tag %}" class="btn btn-outline-danger btn-sm"
-					role="button">Delete</a>
-			</td>
-		</tr>
-	</table>
-</div>
-<div class="container">
-	<div class="">
+<div class="container text-center">
+	<div class="row">
 		<div class="col">
 			{% for e in history %}
 			<li>
