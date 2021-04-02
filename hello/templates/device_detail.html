@@ -56,9 +56,10 @@
 		</tr>
 		<tr>
 			<td><b>UserDevice Action</b> </td>
-			<td data-label="Action">
-				<a href="" class="btn btn-outline-info btn-sm" role="button">Edit</a>
-				<a href="" class="btn btn-outline-danger btn-sm"
+			<td>
+				<a href="{% url 'edit_userDevice' item.pk %}" class="btn btn-outline-info btn-sm"
+					role="button">Edit</a>
+				<a href="{% url 'delete_userDevice' item.pk %}" class="btn btn-outline-danger btn-sm"
 					role="button">Delete</a>
 			</td>
 		</tr>

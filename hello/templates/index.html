@@ -3,7 +3,7 @@
 {% block content %}
 {% load crispy_forms_tags %}
 <!-- <nav class="navbar navbar-expand-sm mb-3s flex-column flex-md-row bd-navbar"> -->
-	<div class="container-fluid text-center">
+	<div class="container-fluid sticky-top text-center">
 		<nav class='navbar nav-column'>
 			<br>
 			<a href="{% url 'display_devices' %}" class="btn btn-outline-primary btn-md" role="button"><i class="bi bi-tablet-fill"></i> Devices</a>
@@ -23,6 +23,7 @@
 				align-items: center;
 				gap: 10px;
 				justify-content: space-around;
+				background-color:white;
 			}
 		</style>
 	</div>

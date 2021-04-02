@@ -13,6 +13,7 @@ from django.db.models import Q
 from .filters import *
 import logging
 from tablib import Dataset
+import hello.ipv6_generator
 
 
 class HomePageView(TemplateView):
@@ -101,7 +102,6 @@ def register(request):
             username = form.cleaned_data.get('username')
             login(request, user)
             return redirect("index")
-
         else:
             for msg in form.error_messages:
                 print(form.error_messages[msg])
@@ -109,15 +109,10 @@ def register(request):
             return render(request=request,
                           template_name="main/register.html",
                           context={"form": form})
-
     form = UserCreationForm
     return render(request=request,
                   template_name="main/register.html",
                   context={"form": form})
-
-
-def mcbrydehall(request):
-    return render(request, "building/mcbryde-hall.html")
 
 
 def faq(request):
@@ -144,15 +139,18 @@ def check_out(request, pk):
         "description": device.description,
         "serial": device.Serial_Number,
     }
-
     # Render the HTML template index.html with the data in the context variable
     return render(request, "check-out.html", context=context)
 
-
+# display different userdevices based on their permissions
 def account(request):
-    query_results = UserDevice.objects.all()
+    if not request.user.is_authenticated:
+        return login_request(request)
+    if not request.user.is_staff:
+        query_results = list(UserDevice.objects.filter(UserPID=request.username))
+    else:
+        query_results = UserDevice.objects.all()
     return render(request, "main/account.html", {'query_results': query_results})
-    # return render(request, "main/account.html")
 
 
 def dashboard(request):
