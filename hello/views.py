@@ -23,7 +23,6 @@ class HomePageView(TemplateView):
 class SearchResultsView(ListView):
     model = Device
     template_name = 'main/search_results.html'
-
     def get_queryset(self):  # new
         query = self.request.GET.get('q')
         object_list = Device.objects.filter(
@@ -105,7 +104,6 @@ def register(request):
         else:
             for msg in form.error_messages:
                 print(form.error_messages[msg])
-
             return render(request=request,
                           template_name="main/register.html",
                           context={"form": form})
@@ -229,22 +227,6 @@ def display_userDevice(request):
     }
     return render(request, 'main/account.html', context)
 
-
-# def display_faculty(request):
-#     items = Faculty.objects.all()
-#     myFilter = facultyFilter(request.GET, queryset=items)
-#     items = myFilter.qs
-#     context = {
-#         'items': items,
-#         'header': 'Faculty',
-#         'myFilter': myFilter
-#     }
-#     return render(request, 'main/account.html', context)
-
-def display_equipment_checkout_form(request):
-    return render(request, "check-out.html")
-
-
 # -------------------------add-----------------------------------
 def add_device(request):
     if not request.user.is_authenticated:
@@ -254,8 +236,6 @@ def add_device(request):
 
         if form.is_valid():
             form.save()
-            # extract username from HttpRequest.user: 
-            # request.user.username
             return display_devices(request)
 
     else:
