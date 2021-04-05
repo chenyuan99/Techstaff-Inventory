@@ -57,7 +57,7 @@ class UserDevice(models.Model):
     history = HistoricalRecords()
 
 class Building(models.Model):
-    BuildingID = models.AutoField(primary_key = True)
+    Building_Abbr = models.CharField(primary_key = True, max_length=64)
     Building_Name = models.CharField(max_length=64)
     Building_Addr = models.CharField(max_length=64)
     IPv6_prefix = models.GenericIPAddressField(null=True)
@@ -69,8 +69,20 @@ class NetworkInterface(models.Model):
     DeviceID =  models.CharField(max_length=100, default = '')  
     Hostname = models.CharField(max_length=64)
     Aliases = models.CharField(max_length=64)  # Aliases/cnames
-    IPv4 = models.GenericIPAddressField()      # IPv6 Address
-    IPv6 = models.GenericIPAddressField()    # IPv6 Address
-    BuildingID = models.IntegerField()  
+    Building_Abbr = models.CharField(max_length=64)  
     create_Date = models.DateField(auto_now=True)  # create time (automatic)
+    history = HistoricalRecords()
+
+class IPAddr(models.Model):
+    IPID = models.AutoField(primary_key = True)
+    NetworkID = models.IntegerField()
+    Building_Abbr = models.CharField(max_length=64)
+    IPv4 = models.GenericIPAddressField(null=True)
+    IPv6 = models.GenericIPAddressField(null=True)
+    choices = (
+        ('Assigned', 'Assigned'),
+        ('Available', 'Available')
+    )
+
+    status = models.CharField(max_length=20, choices=choices, default='Available') 
     history = HistoricalRecords()
