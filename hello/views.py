@@ -497,21 +497,21 @@ def view_device(request, CS_Tag):
     userdevices = list(UserDevice.objects.filter(DeviceID=device.CS_Tag))
     networks = list(NetworkInterface.objects.filter(DeviceID=device.CS_Tag))
     history = device.history.all()
-    # diffHistory = list()
+    diffHistory = list()
     delta = list()
+    diffHistory.append(history[0])
     for i in range(0, history.count() - 1):
         nextHistory = history[i+1]
         tempDiff = history[i].diff_against(nextHistory)
-        if tempDiff is not None:
+        if len(tempDiff.changes) is not 0:
              delta.append(tempDiff)
-             # diffHistory.append(nextHistory)
-
-
+             diffHistory.append(nextHistory)
+             print(tempDiff.changes)
     context = {
         'item': device,
         'userdevices':userdevices,
         'networks':networks,
-        'history': history,
+        'history': diffHistory,
         'delta': delta
 
     }
