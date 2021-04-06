@@ -14,32 +14,26 @@ class HostnameAdmin(ImportExportModelAdmin):
     list_filter =(
         'Hostname',
         'Aliases',
-        'IPv4',
-        'IPv6',
+        'Building_Abbr',
         'create_Date',
-            'DeviceID',
-    'BuildingID',
+            'DeviceID'    
     )
 
     search_fields =(
         'Hostname',
         'Aliases',
-        'IPv4',
-        'IPv6',
+        'Building_Abbr',
         'create_Date',
-            'DeviceID',
-    'BuildingID',
+            'DeviceID'    
     )
 
 
     list_display = (
         'Hostname',
         'Aliases',
-        'IPv4',
-        'IPv6',
+        'Building_Abbr',
         'create_Date',
-            'DeviceID',
-    'BuildingID',
+            'DeviceID'
     )
 
 class DeviceAdmin(ImportExportModelAdmin,SimpleHistoryAdmin):
@@ -63,9 +57,9 @@ class FacultyAdmin(ImportExportModelAdmin):
 
 class BuildingAdmin(ImportExportModelAdmin):
     model = Building
-    list_filter =("BuildingID","Building_Name","Building_Addr")
-    list_display =("BuildingID","Building_Name","Building_Addr")
-    search_fields =("BuildingID","Building_Name","Building_Addr")
+    list_filter =("Building_Abbr","Building_Name","Building_Addr", "IPv6_prefix")
+    list_display =("Building_Abbr","Building_Name","Building_Addr", "IPv6_prefix")
+    search_fields =("Building_Abbr","Building_Name","Building_Addr", "IPv6_prefix")
 
 @admin.register(LogEntry)
 class LogEntryAdmin(ImportExportModelAdmin):
