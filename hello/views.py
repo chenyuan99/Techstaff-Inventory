@@ -508,6 +508,20 @@ def edit_device(request, CS_Tag):
         form = deviceForm(instance=item)
         return render(request, 'edit_item.html', {'form': form})
 
+def assignip_to_device(request, CS_Tag):
+    if not request.user.is_authenticated:
+        raise PermissionDenied
+    item = get_object_or_404(Device, CS_Tag=CS_Tag)
+    if request.method == 'POST':
+        form = deviceForm(request.POST, instance=item)
+    if form.is_valid():
+        form.save()
+        return display_devices(request)
+
+    else:
+        form = deviceForm(instance=item)
+        return render(request, 'edit_item.html', {'form': form})
+
 
 def view_device(request, CS_Tag):
     device = Device.objects.get(CS_Tag=CS_Tag)
