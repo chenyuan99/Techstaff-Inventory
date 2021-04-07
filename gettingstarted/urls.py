@@ -62,7 +62,8 @@ urlpatterns = [
     url(r'^delete_userDevice/(?P<pk>\d+)$', hello.views.delete_userDevice, name='delete_userDevice'),
 
     url(r'^check-out/(?P<pk>\d+)$', hello.views.check_out, name="check-out"),
-    url(r'^export_devices$', hello.views.export_devices, name='export_devices'),
+    # url(r'^export_devices$', hello.views.export_devices, name='export_devices'),
+    url(r'^export_devices$', hello.views.export_filter_devices, name='export_devices'),
     url(r'^simple_upload$', hello.views.simple_upload, name='simple_upload'),
     # Faculty
     # other url configs

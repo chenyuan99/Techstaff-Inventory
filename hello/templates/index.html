@@ -3,30 +3,38 @@
 {% block content %}
 {% load crispy_forms_tags %}
 <!-- <nav class="navbar navbar-expand-sm mb-3s flex-column flex-md-row bd-navbar"> -->
-	<div class="container-fluid sticky-top text-center">
-		<nav class='navbar nav-column'>
-			<br>
-			<a href="{% url 'display_devices' %}" class="btn btn-outline-primary btn-md" role="button"><i class="bi bi-tablet-fill"></i> Devices</a>
-			<a href="{% url 'display_hostnames' %}" class="btn btn-outline-primary btn-md" role="button"><i class="bi bi-wifi"></i> Network</a>
-			<a href="{% url 'display_buildings' %}" class="btn btn-outline-primary btn-md" role="button"><i class="bi bi-building"></i> Buildings</a>
-			<a href="{% url 'display_faculty' %}" class="btn btn-outline-primary btn-md" role="button"><i class="bi bi-file-person-fill"></i> Faculty</a>
-			<a href="{% url 'add_device' %}" class="btn btn-outline-danger btn-md" role="button"><i class="bi bi-plus"></i> Add Device</a>
-			<a href="{% url 'add_hostname' %}" class="btn btn-outline-danger btn-md" role="button"><i class="bi bi-plus"></i> Add Hostname</a>
-			<a href="{% url 'add_building' %}" class="btn btn-outline-danger btn-md" role="button"><i class="bi bi-plus"></i> Add Building</a>
-			<a href="{% url 'add_faculty' %}" class="btn btn-outline-danger btn-md" role="button"><i class="bi bi-plus"></i> Add Faculty</a>
-			<a href="{% url 'add_userDevice' %}" class="btn btn-outline-danger btn-md" role="button">Assign Device</a>
-		</nav>
-		<style>
-			.nav-column {
-				display: flex;
-				flex-flow: row wrap;
-				align-items: center;
-				gap: 10px;
-				justify-content: space-around;
-				background-color:white;
-			}
-		</style>
-	</div>
+<div class="container-fluid sticky-top text-center">
+	<nav class='navbar nav-column'>
+		<br>
+		<a href="{% url 'display_devices' %}" class="btn btn-outline-primary btn-md" role="button"><i
+				class="bi bi-tablet-fill"></i> Devices</a>
+		<a href="{% url 'display_hostnames' %}" class="btn btn-outline-primary btn-md" role="button"><i
+				class="bi bi-wifi"></i> Network</a>
+		<a href="{% url 'display_buildings' %}" class="btn btn-outline-primary btn-md" role="button"><i
+				class="bi bi-building"></i> Buildings</a>
+		<a href="{% url 'display_faculty' %}" class="btn btn-outline-primary btn-md" role="button"><i
+				class="bi bi-file-person-fill"></i> Faculty</a>
+		<a href="{% url 'add_device' %}" class="btn btn-outline-danger btn-md" role="button"><i class="bi bi-plus"></i>
+			Add Device</a>
+		<a href="{% url 'add_hostname' %}" class="btn btn-outline-danger btn-md" role="button"><i
+				class="bi bi-plus"></i> Add Hostname</a>
+		<a href="{% url 'add_building' %}" class="btn btn-outline-danger btn-md" role="button"><i
+				class="bi bi-plus"></i> Add Building</a>
+		<a href="{% url 'add_faculty' %}" class="btn btn-outline-danger btn-md" role="button"><i class="bi bi-plus"></i>
+			Add Faculty</a>
+		<a href="{% url 'add_userDevice' %}" class="btn btn-outline-danger btn-md" role="button">Assign Device</a>
+	</nav>
+	<style>
+		.nav-column {
+			display: flex;
+			flex-flow: row wrap;
+			align-items: center;
+			gap: 10px;
+			justify-content: space-around;
+			background-color: white;
+		}
+	</style>
+</div>
 <!-- </nav> -->
 <div class="container-fluid ">
 	{% if header %}
@@ -54,6 +62,13 @@
 	<br>
 	<div class="container-fluid text-center">
 		<h4> Search {{ header }} Results</h4>
+		<!-- Button trigger modal -->
+		<a type="button" class="btn btn-primary" href="{% url 'export_devices' %}">
+			Export {{ header }}
+		</a>
+		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exportModal">
+			Import {{ header }}
+		</button>
 		{% endif %}
 		<table id="info-table" class="table table-hover">
 			<thead>

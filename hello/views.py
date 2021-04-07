@@ -14,6 +14,8 @@ from .filters import *
 import logging
 from tablib import Dataset
 import hello.ipv6_generator
+import datetime
+import csv
 
 
 class HomePageView(TemplateView):
@@ -538,3 +540,17 @@ def simple_upload(request):
             person_resource.import_data(dataset, dry_run=False)  # Actually import now
 
     return render(request, 'import/import.html')
+
+def export_filter_devices(request):
+    device = Device.objects.all()
+    filter = deviceFilter(request.GET, queryset=device).qs
+    response = HttpResponse(content_type='text/csv')
+    file_name = "fltred_device_data" + str(datetime.datetime.today()) + ".csv"
+
+    writer = csv.writer(response)
+    fields = ["CS_Tag", "Serial_Number", "VT_Tag", "acq_date", "description", "issue", "price", "status", "type"]
+    writer.writerow(fields)
+    for i in filter.values_list("CS_Tag", "Serial_Number", "VT_Tag", "acq_date", "description", "issue", "price", "status", "type"):
+        writer.writerow(i)
+    response['Content-Disposition'] = 'attachment; filename = "' + file_name + '"'
+    return response
