@@ -229,6 +229,21 @@ def display_userDevice(request):
     }
     return render(request, 'main/account.html', context)
 
+def display_userCase(request):
+    devices = Device.objects.all()
+    faculty = Faculty.objects.all()
+    myFilter1 = useCaseDeviceFilter(request.GET, queryset=devices)
+    myFilter2 = useCaseFacultyFilter(request.GET, queryset=faculty)
+    devs = myFilter1.qs
+    facs = myFilter2.qs
+    content = {
+        'devs': devs,
+        'facs': facs,
+        'myFilter1': myFilter1,
+        'myFilter2': myFilter2,
+
+    }
+    return render(request, 'useCase.html', content)
 # -------------------------add-----------------------------------
 def add_device(request):
     if not request.user.is_authenticated:

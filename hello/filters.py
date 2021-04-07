@@ -36,3 +36,15 @@ class facultyFilter(django_filters.FilterSet):
     class Meta:
         model = Faculty
         fields = '__all__'
+
+
+class useCaseDeviceFilter(django_filters.FilterSet):
+    class Meta:
+        model = Device
+        fields = ['CS_Tag']
+
+
+class useCaseFacultyFilter(django_filters.FilterSet):
+    class Meta:
+        model = Faculty
+        fields = '__all__'
