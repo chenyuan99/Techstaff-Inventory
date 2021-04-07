@@ -506,7 +506,7 @@ def view_device(request, CS_Tag):
         if len(tempDiff.changes) is not 0:
              delta.append(tempDiff)
              diffHistory.append(nextHistory)
-             print(tempDiff.changes)
+            #  print(tempDiff.changes)
     context = {
         'item': device,
         'userdevices':userdevices,
