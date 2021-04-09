@@ -40,6 +40,7 @@ urlpatterns = [
     url(r'^display_userDevice$', hello.views.display_userDevice, name='display_userDevice'),
     url(r'^display_buildings$', hello.views.display_buildings, name='display_buildings'),
     url(r'^display_faculty$', hello.views.display_faculty, name='display_faculty'),
+    url(r'^display_ip$', hello.views.display_ip, name='display_ip'),
     url(r'^usecase$', hello.views.display_userCase, name='display_useCase'),
 # 
     url(r'^add_device$', hello.views.add_device, name='add_device'),
@@ -47,11 +48,15 @@ urlpatterns = [
     url(r'^add_hostname$', hello.views.add_hostname, name='add_hostname'),
     url(r'^add_building$', hello.views.add_building, name='add_building'),
     url(r'^add_userDevice$', hello.views.add_userDevice, name='add_userDevice'),
+    url(r'^add_ip$', hello.views.add_ip, name='add_ip'),
     # edit delete device
     # url(r'^edit_device/(?P<pk>\d+)$', hello.views.edit_device, name='edit_device'),
     url(r'^edit_device/(?P<CS_Tag>[-\w]+)$', hello.views.edit_device, name='edit_device'),
     url(r'^delete_device/(?P<CS_Tag>[-\w]+)$', hello.views.delete_device, name='delete_device'),
     url(r'^view_device/(?P<CS_Tag>[-\w]+)$', hello.views.view_device, name='view_device'),
+
+    url(r'^assign_ip/(?P<CS_Tag>[-\w]+)$', hello.views.assignip_to_device, name='assign_ip'),
+    
     # url(r'^delete_device/(?P<pk>\d+)$', hello.views.delete_device, name='delete_device'),
     url(r'^edit_network/(?P<pk>\d+)$', hello.views.edit_network, name='edit_network'),
     url(r'^delete_network/(?P<pk>\d+)$', hello.views.delete_network, name='delete_network'),
@@ -61,6 +66,8 @@ urlpatterns = [
     url(r'^delete_faculty/(?P<PID>[-\w]+)$', hello.views.delete_faculty, name='delete_faculty'),
     url(r'^edit_userDevice/(?P<pk>\d+)$', hello.views.edit_userDevice, name='edit_userDevice'),
     url(r'^delete_userDevice/(?P<pk>\d+)$', hello.views.delete_userDevice, name='delete_userDevice'),
+    url(r'^edit_ip/(?P<pk>\d+)$', hello.views.edit_ip, name='edit_ip'),
+    url(r'^delete_ip/(?P<pk>\d+)$', hello.views.delete_ip, name='delete_ip'),
 
     url(r'^check-out/(?P<pk>\d+)$', hello.views.check_out, name="check-out"),
     # url(r'^export_devices$', hello.views.export_devices, name='export_devices'),
