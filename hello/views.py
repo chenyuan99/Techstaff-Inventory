@@ -244,6 +244,19 @@ def display_userCase(request):
 
     }
     return render(request, 'useCase.html', content)
+
+def display_ip(request):
+    items = IPAddr.objects.all()
+    myFilter = buildingFilter(request.GET, queryset=items)
+    items = myFilter.qs
+    context = {
+        'items': items,
+        'header': 'ip',
+        'myFilter': myFilter,
+    }
+
+    return render(request, 'index.html', context)
+
 # -------------------------add-----------------------------------
 def add_device(request):
     if not request.user.is_authenticated:
@@ -320,6 +333,20 @@ def add_faculty(request):
         return render(request, 'add_new.html', {'form': form})
 
 
+def add_ip(request):
+    if not request.user.is_authenticated:
+        raise PermissionDenied
+    if request.method == 'POST':
+        form = AddIpAddressForm(request.POST)
+
+        if form.is_valid():
+            form.save()
+            return display_ip(request)
+
+    else:
+        form = AddIpAddressForm
+        return render(request, 'add_new.html', {'form': form})
+
 # -------------------------edit-----------------------------------
 def edit_item(request, pk, model, cls):
     if not request.user.is_authenticated:
@@ -353,6 +380,20 @@ def edit_network(request, pk):
         form = AddNetworkForm(instance=item)
         return render(request, 'edit_item.html', {'form': form})
 
+def edit_ip(request, pk):
+    if not request.user.is_authenticated:
+        raise PermissionDenied
+    item = get_object_or_404(IPAddr, pk=pk)
+
+    if request.method == 'POST':
+        form = AddIpAddressForm(request.POST, instance=item)
+        if form.is_valid():
+            form.save()
+            return display_ip(request)
+
+    else:
+        form = AddIpAddressForm(instance=item)
+        return render(request, 'edit_item.html', {'form': form})
 
 def edit_faculty(request, PID):
     if not request.user.is_authenticated:
@@ -480,6 +521,19 @@ def delete_userDevice(request, pk):
 
     return render(request, 'delete_item.html', {'form': form})
 
+def delete_ip(request, pk):
+    ip = IPAddr.objects.get(pk=pk)
+    if request.method == "POST":
+        ip.delete()
+        return display_ip(request)
+
+    form = AddIpAddressForm(request.POST, instance=ip)
+    for fieldname in form.fields:
+        form.fields[fieldname].disabled = True
+
+    return render(request, 'delete_item.html', {'form': form})
+
+
 # -------------------------    ------------------
 def checkout_device(request, pk):
     if request.user.is_authenticated:
@@ -508,20 +562,45 @@ def edit_device(request, CS_Tag):
         form = deviceForm(instance=item)
         return render(request, 'edit_item.html', {'form': form})
 
-def assignip_to_device(request, CS_Tag):
+""" def assignip_to_device(request, CS_Tag):
     if not request.user.is_authenticated:
         raise PermissionDenied
     item = get_object_or_404(Device, CS_Tag=CS_Tag)
     if request.method == 'POST':
         form = deviceForm(request.POST, instance=item)
-    if form.is_valid():
-        form.save()
-        return display_devices(request)
-
+        if form.is_valid():
+            form.save()
+            return display_devices(request)
     else:
+        
         form = deviceForm(instance=item)
-        return render(request, 'edit_item.html', {'form': form})
+        device = Device.objects.get(CS_Tag=CS_Tag)
+        # look for matching network interface
+        network = NetworkInterface.objects.filter(DeviceID = device.CS_Tag)
+        if network:
+            print('found network')
+            ip = IPAddr.objects.filter(NetworkID=network.NetworkID)
+            # found matching IPAddr: go to edit page.
+            if ip: 
+                
+            # create new IPaddr:
+            else: 
 
+
+        else:
+            # add hostname / 'network':
+            print('creating network first')
+            if network:
+            print('found network')
+            ip = IPAddr.objects.filter(NetworkID=network.NetworkID)
+            # found matching IPAddr: go to edit page.
+            if ip: 
+                
+            # create new IPaddr:
+            else: 
+
+        return render(request, 'edit_item.html', {'form': form})
+ """
 
 def view_device(request, CS_Tag):
     device = Device.objects.get(CS_Tag=CS_Tag)

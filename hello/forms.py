@@ -97,9 +97,9 @@ class buildingForm(forms.ModelForm):
         model = Building
         fields = '__all__'
 
-class IpAddressForm(forms.ModelForm):
+class AddIpAddressForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
-        super(buildingForm, self).__init__(*args, **kwargs)
+        super(IpAddressForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper(self)
         self.helper.form_class = 'form-horizontal'
         self.helper.label_class = 'col-lg-2'
@@ -107,6 +107,5 @@ class IpAddressForm(forms.ModelForm):
     class Meta:
         model = IPAddr
         fields = '__all__'
-
 
 
