@@ -337,14 +337,14 @@ def add_ip(request):
     if not request.user.is_authenticated:
         raise PermissionDenied
     if request.method == 'POST':
-        form = AddIpAddressForm(request.POST)
+        form = IpAddressForm(request.POST)
 
         if form.is_valid():
             form.save()
             return display_ip(request)
 
     else:
-        form = AddIpAddressForm
+        form = IpAddressForm
         return render(request, 'add_new.html', {'form': form})
 
 # -------------------------edit-----------------------------------
@@ -386,13 +386,13 @@ def edit_ip(request, pk):
     item = get_object_or_404(IPAddr, pk=pk)
 
     if request.method == 'POST':
-        form = AddIpAddressForm(request.POST, instance=item)
+        form = IpAddressForm(request.POST, instance=item)
         if form.is_valid():
             form.save()
             return display_ip(request)
 
     else:
-        form = AddIpAddressForm(instance=item)
+        form = IpAddressForm(instance=item)
         return render(request, 'edit_item.html', {'form': form})
 
 def edit_faculty(request, PID):
@@ -527,7 +527,7 @@ def delete_ip(request, pk):
         ip.delete()
         return display_ip(request)
 
-    form = AddIpAddressForm(request.POST, instance=ip)
+    form = IpAddressForm(request.POST, instance=ip)
     for fieldname in form.fields:
         form.fields[fieldname].disabled = True
 
@@ -562,8 +562,8 @@ def edit_device(request, CS_Tag):
         form = deviceForm(instance=item)
         return render(request, 'edit_item.html', {'form': form})
 
-""" def assignip_to_device(request, CS_Tag):
-    if not request.user.is_authenticated:
+def assignip_to_device(request, CS_Tag):
+    """ if not request.user.is_authenticated:
         raise PermissionDenied
     item = get_object_or_404(Device, CS_Tag=CS_Tag)
     if request.method == 'POST':
@@ -597,10 +597,10 @@ def edit_device(request, CS_Tag):
             if ip: 
                 
             # create new IPaddr:
-            else: 
+            else:  """
 
-        return render(request, 'edit_item.html', {'form': form})
- """
+    return render(request, 'edit_item.html', {'form': form})
+
 
 def view_device(request, CS_Tag):
     device = Device.objects.get(CS_Tag=CS_Tag)
