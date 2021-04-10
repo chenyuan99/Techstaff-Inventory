@@ -38,6 +38,11 @@ class AddUserDeviceForm(forms.ModelForm):
         self.helper.form_class = 'form-horizontal'
         self.helper.label_class = 'col-lg-2'
         self.helper.field_class = 'col-lg-8'
+
+        for key in self.fields:
+            self.fields[key].required = False
+
+
     class Meta:
         model = UserDevice
         fields = '__all__'
@@ -51,6 +56,9 @@ class AddFacultyForm(forms.ModelForm):
         self.helper.form_class = 'form-horizontal'
         self.helper.label_class = 'col-lg-2'
         self.helper.field_class = 'col-lg-8'
+
+        for key in self.fields:
+            self.fields[key].required = False
     class Meta:
         model = Faculty
         fields = '__all__'
@@ -62,6 +70,11 @@ class deviceForm(forms.ModelForm):
         self.helper.form_class = 'form-horizontal'
         self.helper.label_class = 'col-lg-2'
         self.helper.field_class = 'col-lg-8'
+
+        for key in self.fields:
+            self.fields[key].required = False
+
+
     class Meta:
         model = Device
         fields = '__all__'
@@ -81,6 +94,10 @@ class AddNetworkForm(forms.ModelForm):
         self.helper.form_class = 'form-horizontal'
         self.helper.label_class = 'col-lg-2'
         self.helper.field_class = 'col-lg-8'
+
+        for key in self.fields:
+            self.fields[key].required = False
+
     class Meta:
         model = NetworkInterface
         fields = '__all__'
@@ -93,6 +110,9 @@ class buildingForm(forms.ModelForm):
         self.helper.form_class = 'form-horizontal'
         self.helper.label_class = 'col-lg-2'
         self.helper.field_class = 'col-lg-8'
+
+        for key in self.fields:
+            self.fields[key].required = False
     class Meta:
         model = Building
         fields = '__all__'
@@ -104,6 +124,10 @@ class IpAddressForm(forms.ModelForm):
         self.helper.form_class = 'form-horizontal'
         self.helper.label_class = 'col-lg-2'
         self.helper.field_class = 'col-lg-8'
+
+        for key in self.fields:
+            self.fields[key].required = False
+
     class Meta:
         model = IPAddr
         fields = '__all__'
