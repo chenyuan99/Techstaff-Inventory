@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+{% load crispy_forms_tags %}
+	<div class="container">
+		<form method="POST">
+			<br>
+			{% csrf_token %}
+
+			{% for field in form %}
+				<div class="form-group row">
+					<!-- <label for="id_{{ field.name }}" class="col-2 col-form-label"> {{ field.label }}</label> -->
+					<div class="col-10">
+						{{ field|as_crispy_field }}
+					</div>
+				</div>
+			{% endfor %}
+			<select class="custom-select" id="from-account-list" name="from_account">
+			{% for a in buildings %}
+			<option value="{{ a.Building_Abbr }}">{{ a.Building_Abbr}}</option>
+			{% endfor %}
+			</select>
+
+			<button type="submit" class="btn btn-primary" name="button"><i class="bi-plus-circle"></i> Add New</button>
+{#			<a href="/" class="btn btn-secondary btn-md" role="button">Back</a>#}
+
+		</form>
+	</div>
+	<br>
+	<br>
+
+
+{% endblock %}

@@ -285,7 +285,10 @@ def add_hostname(request):
 
     else:
         form = AddNetworkForm
-        return render(request, 'add_new.html', {'form': form})
+        buildings = Building.objects.all()
+        context={'form': form,
+        'buildings':buildings}
+        return render(request, 'add_hostname.html',context )
 
 
 def add_building(request):
