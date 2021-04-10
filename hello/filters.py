@@ -38,6 +38,12 @@ class facultyFilter(django_filters.FilterSet):
         fields = '__all__'
 
 
+class ipFilter(django_filters.FilterSet):
+    class Meta:
+        model = IPAddr
+        fields = '__all__'
+
+
 class useCaseDeviceFilter(django_filters.FilterSet):
     class Meta:
         model = Device

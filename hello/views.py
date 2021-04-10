@@ -247,7 +247,7 @@ def display_userCase(request):
 
 def display_ip(request):
     items = IPAddr.objects.all()
-    myFilter = buildingFilter(request.GET, queryset=items)
+    myFilter = ipFilter(request.GET, queryset=items)
     items = myFilter.qs
     context = {
         'items': items,
@@ -380,10 +380,10 @@ def edit_network(request, pk):
         form = AddNetworkForm(instance=item)
         return render(request, 'edit_item.html', {'form': form})
 
-def edit_ip(request, pk):
+def edit_ip(request, IPID):
     if not request.user.is_authenticated:
         raise PermissionDenied
-    item = get_object_or_404(IPAddr, pk=pk)
+    item = get_object_or_404(IPAddr, IPID=IPID)
 
     if request.method == 'POST':
         form = IpAddressForm(request.POST, instance=item)
@@ -521,8 +521,8 @@ def delete_userDevice(request, pk):
 
     return render(request, 'delete_item.html', {'form': form})
 
-def delete_ip(request, pk):
-    ip = IPAddr.objects.get(pk=pk)
+def delete_ip(request, IPID):
+    ip = IPAddr.objects.get(IPID=IPID)
     if request.method == "POST":
         ip.delete()
         return display_ip(request)

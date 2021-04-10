@@ -66,8 +66,8 @@ urlpatterns = [
     url(r'^delete_faculty/(?P<PID>[-\w]+)$', hello.views.delete_faculty, name='delete_faculty'),
     url(r'^edit_userDevice/(?P<pk>\d+)$', hello.views.edit_userDevice, name='edit_userDevice'),
     url(r'^delete_userDevice/(?P<pk>\d+)$', hello.views.delete_userDevice, name='delete_userDevice'),
-    url(r'^edit_ip/(?P<pk>\d+)$', hello.views.edit_ip, name='edit_ip'),
-    url(r'^delete_ip/(?P<pk>\d+)$', hello.views.delete_ip, name='delete_ip'),
+    url(r'^edit_ip/(?P<IPID>\d+)$', hello.views.edit_ip, name='edit_ip'),
+    url(r'^delete_ip/(?P<IPID>\d+)$', hello.views.delete_ip, name='delete_ip'),
 
     url(r'^check-out/(?P<pk>\d+)$', hello.views.check_out, name="check-out"),
     # url(r'^export_devices$', hello.views.export_devices, name='export_devices'),

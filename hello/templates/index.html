@@ -1,80 +1,84 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-{% load crispy_forms_tags %}
-<!-- <nav class="navbar navbar-expand-sm mb-3s flex-column flex-md-row bd-navbar"> -->
-<div class="container-fluid sticky-top text-center">
-	<nav class='navbar nav-column'>
-		<br>
-		<a href="{% url 'display_devices' %}" class="btn btn-outline-primary btn-md" role="button"><i
-				class="bi bi-tablet-fill"></i> Devices</a>
-		<a href="{% url 'display_hostnames' %}" class="btn btn-outline-primary btn-md" role="button"><i
-				class="bi bi-wifi"></i> Network</a>
-		<a href="{% url 'display_buildings' %}" class="btn btn-outline-primary btn-md" role="button"><i
-				class="bi bi-building"></i> Buildings</a>
-		<a href="{% url 'display_faculty' %}" class="btn btn-outline-primary btn-md" role="button"><i
-				class="bi bi-file-person-fill"></i> Faculty</a>
-		<a href="{% url 'add_device' %}" class="btn btn-outline-danger btn-md" role="button"><i class="bi bi-plus"></i>
-			Add Device</a>
-		<a href="{% url 'add_hostname' %}" class="btn btn-outline-danger btn-md" role="button"><i
-				class="bi bi-plus"></i> Add Hostname</a>
-		<a href="{% url 'add_building' %}" class="btn btn-outline-danger btn-md" role="button"><i
-				class="bi bi-plus"></i> Add Building</a>
-		<a href="{% url 'add_faculty' %}" class="btn btn-outline-danger btn-md" role="button"><i class="bi bi-plus"></i>
-			Add Faculty</a>
-		<a href="{% url 'add_userDevice' %}" class="btn btn-outline-danger btn-md" role="button">Assign Device</a>
-		<a href="{% url 'display_useCase' %}" target="_blank" class="btn btn-outline-danger btn-md" role="button">TEST</a>
-	</nav>
-	<style>
-		.nav-column {
-			display: flex;
-			flex-flow: row wrap;
-			align-items: center;
-			gap: 10px;
-			justify-content: space-around;
-			background-color: white;
-		}
-	</style>
-</div>
-<!-- </nav> -->
-<div class="container-fluid ">
-	{% if header %}
-	<div class="card bg-light">
-		<div class="card-body text-center">
-			<!-- <div class="container-fluid"> -->
+	{% load crispy_forms_tags %}
+	<!-- <nav class="navbar navbar-expand-sm mb-3s flex-column flex-md-row bd-navbar"> -->
+	<div class="container-fluid sticky-top text-center">
+		<nav class='navbar nav-column'>
 			<br>
-			<form method="get">
-				<table>
-					<tr>
-						{% for field in myFilter.form %}
-						<td>
-							{{ field|as_crispy_field }}
-						</td>
-						{% endfor %}
-					</tr>
-				</table>
-				<button class="btn btn-primary" type="submit"><i class="bi-search"></i> Search {{ header }}</button>
-			</form>
-			<!-- </div> -->
-		</div>
+			<a href="{% url 'display_devices' %}" class="btn btn-outline-primary btn-md" role="button"><i
+					class="bi bi-tablet-fill"></i> Devices</a>
+			<a href="{% url 'display_hostnames' %}" class="btn btn-outline-primary btn-md" role="button"><i
+					class="bi bi-wifi"></i> Network</a>
+			<a href="{% url 'display_buildings' %}" class="btn btn-outline-primary btn-md" role="button"><i
+					class="bi bi-building"></i> Buildings</a>
+			<a href="{% url 'display_faculty' %}" class="btn btn-outline-primary btn-md" role="button"><i
+					class="bi bi-file-person-fill"></i> Faculty</a>
+			<a href="{% url 'display_ip' %}" class="btn btn-outline-primary btn-md" role="button"><i
+					class=""></i> IP Address</a>
+			<a href="{% url 'add_device' %}" class="btn btn-outline-danger btn-md" role="button"><i class="bi bi-plus"></i>
+				Add Device</a>
+			<a href="{% url 'add_hostname' %}" class="btn btn-outline-danger btn-md" role="button"><i
+					class="bi bi-plus"></i> Add Hostname</a>
+			<a href="{% url 'add_building' %}" class="btn btn-outline-danger btn-md" role="button"><i
+					class="bi bi-plus"></i> Add Building</a>
+			<a href="{% url 'add_faculty' %}" class="btn btn-outline-danger btn-md" role="button"><i class="bi bi-plus"></i>
+				Add Faculty</a>
+			<a href="{% url 'add_ip' %}" class="btn btn-outline-danger btn-md" role="button"><i class="bi bi-plus"></i>
+				Add IP Addr</a>
+			<a href="{% url 'add_userDevice' %}" class="btn btn-outline-danger btn-md" role="button">Assign Device</a>
+			<a href="{% url 'display_useCase' %}" target="_blank" class="btn btn-outline-danger btn-md" role="button">TEST</a>
+		</nav>
+		<style>
+            .nav-column {
+                display: flex;
+                flex-flow: row wrap;
+                align-items: center;
+                gap: 10px;
+                justify-content: space-around;
+                background-color: white;
+            }
+		</style>
 	</div>
-	<br>
-	<br>
-	<br>
-	<div class="container-fluid text-center">
-		<h4> Search {{ header }} Results</h4>
-		<!-- Button trigger modal -->
-		<a type="button" class="btn btn-primary" href="{% url 'export_devices' %}">
-			Export {{ header }}
-		</a>
-		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exportModal">
-			Import {{ header }}
-		</button>
+	<!-- </nav> -->
+	<div class="container-fluid ">
+		{% if header %}
+			<div class="card bg-light">
+				<div class="card-body text-center">
+					<!-- <div class="container-fluid"> -->
+					<br>
+					<form method="get">
+						<table>
+							<tr>
+								{% for field in myFilter.form %}
+									<td>
+										{{ field|as_crispy_field }}
+									</td>
+								{% endfor %}
+							</tr>
+						</table>
+						<button class="btn btn-primary" type="submit"><i class="bi-search"></i> Search {{ header }}</button>
+					</form>
+					<!-- </div> -->
+				</div>
+			</div>
+			<br>
+			<br>
+			<br>
+			<div class="container-fluid text-center">
+			<h4> Search {{ header }} Results</h4>
+			<!-- Button trigger modal -->
+			<a type="button" class="btn btn-primary" href="{% url 'export_devices' %}">
+				Export {{ header }}
+			</a>
+			<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exportModal">
+				Import {{ header }}
+			</button>
 		{% endif %}
 		<table id="info-table" class="table table-hover">
 			<thead>
-				{# DEVICE #}
-				{% if header|lower == "device" %}
+			{# DEVICE #}
+			{% if header|lower == "device" %}
 				<tr>
 					<th>CS_Tag</th>
 					<th>Type</th>
@@ -85,127 +89,141 @@
 					<th>Status</th>
 					<th>Action</th>
 				</tr>
-				{% endif %}
-				{# HOSTNAME #}
-				{% if header|lower == "hostname" %}
-				<th>ID</th>
+			{% endif %}
+			{# HOSTNAME #}
+			{% if header|lower == "hostname" %}
+				<th>Device CS TAG</th>
 				<th>Hostname</th>
 				<th>Aliases</th>
-				<th>IP_Address</th>
-				<th>IPv6_Address</th>
+				<th>Building_Abbreviation</th>
 				<th>Action</th>
 
-				{% endif %}
-				{# FACULTY #}
-				{% if header|lower == "faculty" %}
+			{% endif %}
+			{# FACULTY #}
+			{% if header|lower == "faculty" %}
 				<th>PID</th>
 				<th>Office Address</th>
 				<th>Firstname</th>
 				<th>Lastname</th>
 				<th>Action</th>
 
-				{% endif %}
-				{% if header|lower == "building" %}
-				<th>ID</th>
+			{% endif %}
+			{# BUILDING #}
+			{% if header|lower == "building" %}
+				<th>Building_Abbreviation</th>
 				<th>Building Name</th>
 				<th>Building Address</th>
 				<th>Action</th>
 
-				{% endif %}
+			{% endif %}
+			{# IP ADDRESS #}
+			{% if header|lower == "ip" %}
+				<th>Network ID</th>
+				<th>Building Abbreviation</th>
+				<th>IPv4</th>
+				<th>IPv6</th>
+				<th>Network Status</th>
+				<th>Action</th>
+
+			{% endif %}
 			</thead>
 
 			<tbody>
 
-				{% for item in items %}
+			{% for item in items %}
 
 				<tr>
 					{% if header|lower == "device" %}
-					<td data-label="CS_Tag">{{ item.CS_Tag }}</td>
-					<td data-label="Type">{{ item.type }}</td>
-					<td data-label="Price">${{ item.price }}</td>
-					<td data-label="Description">{{ item.description }}</td>
-					<td data-label="VT_Tag">{{ item.VT_Tag }}</td>
-					<td data-label="Serial_Number">{{ item.Serial_Number }}</td>
-					<td data-label="Status">{{ item.status }}</td>
-					<td data-label="Action">
-						<a href="{% url 'view_device' item.CS_Tag %}" class="btn btn-outline-success btn-sm"
-							role="button"><i class="bi bi-sticky-fill"></i> View</a>
-						<a href="{% url 'edit_device' item.CS_Tag %}" class="btn btn-outline-info btn-sm"
-							role="button"><i class="bi bi-pen-fill"></i> Edit</a>
-						<a href="{% url 'delete_device' item.CS_Tag %}" class="btn btn-outline-danger btn-sm"
-							role="button"><i class="bi bi-trash-fill"></i> Delete</a>
-					</td>
+						<td data-label="CS_Tag">{{ item.CS_Tag }}</td>
+						<td data-label="Type">{{ item.type }}</td>
+						<td data-label="Price">${{ item.price }}</td>
+						<td data-label="Description">{{ item.description }}</td>
+						<td data-label="VT_Tag">{{ item.VT_Tag }}</td>
+						<td data-label="Serial_Number">{{ item.Serial_Number }}</td>
+						<td data-label="Status">{{ item.status }}</td>
+						<td data-label="Action">
+							<a href="{% url 'view_device' item.CS_Tag %}" class="btn btn-outline-success btn-sm"
+							   role="button"><i class="bi bi-sticky-fill"></i> View</a>
+							<a href="{% url 'edit_device' item.CS_Tag %}" class="btn btn-outline-info btn-sm"
+							   role="button"><i class="bi bi-pen-fill"></i> Edit</a>
+							<a href="{% url 'delete_device' item.CS_Tag %}" class="btn btn-outline-danger btn-sm"
+							   role="button"><i class="bi bi-trash-fill"></i> Delete</a>
+						</td>
 
 
 					{% endif %}
 
 					{% if header|lower == "hostname" %}
 
-					<td data-label="ID">{{ item.NetworkID }}</td>
-					<td data-label="Hostname">{{ item.Hostname }}</td>
-					<td data-label="Aliases">{{ item.Aliases }}</td>
-					<td data-label="IP_Address">{{ item.IPv4 }}</td>
-					<td data-label="IPv6_Address">{{ item.IPv6 }}</td>
-					{# <td>{{ item.MAC_Address }}</td>#}
-					<td data-label="Action">
-						<a href="{% url 'edit_network' item.pk %}" class="btn btn-outline-info btn-sm"
-							role="button">Edit</a>
-						<a href="{% url 'delete_network' item.pk %}" class="btn btn-outline-danger btn-sm"
-							role="button">Delete</a>
-					</td>
+						<td data-label="Device CS TAG">{{ item.DeviceID }}</td>
+						<td data-label="Hostname">{{ item.Hostname }}</td>
+						<td data-label="Aliases">{{ item.Aliases }}</td>
+						<td data-label="Building_Abbr">{{ item.Building_Abbr }}</td>
+						<td data-label="Action">
+							<a href="{% url 'edit_network' item.pk %}" class="btn btn-outline-info btn-sm"
+							   role="button">Edit</a>
+							<a href="{% url 'delete_network' item.pk %}" class="btn btn-outline-danger btn-sm"
+							   role="button">Delete</a>
+						</td>
 
 					{% endif %}
 					{% if header|lower == "building" %}
 
-					<td data-label="Building ID">{{ item.BuildingID }}</td>
-					<td data-label="Hostname">{{ item.Building_Name }}</td>
-					<td data-label="Aliases">{{ item.Building_Addr }}</td>
-					{# <td>{{ item.MAC_Address }}</td>#}
-					<td data-label="Action">
-						<a href="{% url 'edit_building' item.pk %}" class="btn btn-outline-info btn-sm"
-							role="button">Edit</a>
-						<a href="{% url 'delete_building' item.pk %}" class="btn btn-outline-danger btn-sm"
-							role="button">Delete</a>
-					</td>
+						<td data-label="Building_Abbreviation">{{ item.Building_Abbr }}</td>
+						<td data-label="Building Name">{{ item.Building_Name }}</td>
+						<td data-label="Building_Addr">{{ item.Building_Addr }}</td>
+						{# <td>{{ item.MAC_Address }}</td>#}
+						<td data-label="Action">
+							<a href="{% url 'edit_building' item.pk %}" class="btn btn-outline-info btn-sm"
+							   role="button">Edit</a>
+							<a href="{% url 'delete_building' item.pk %}" class="btn btn-outline-danger btn-sm"
+							   role="button">Delete</a>
+						</td>
 
 					{% endif %}
 					{% if header|lower == "faculty" %}
 
-					<td data-label="PID">{{ item.PID }}</td>
-					<td data-label="Office Address">{{ item.Office_Addr }}</td>
-					<td data-label="Firstname">{{ item.FirstName }}</td>
-					<td data-label="Lastname">{{ item.LastName }}</td>
-					<td data-label="Action">
-						<a href="{% url 'edit_faculty' item.PID %}" class="btn btn-outline-info btn-sm"
-							role="button">Edit</a>
-						<a href="{% url 'delete_faculty' item.PID %}" class="btn btn-outline-danger btn-sm"
-							role="button">Delete</a>
-					</td>
+						<td data-label="PID">{{ item.PID }}</td>
+						<td data-label="Office Address">{{ item.Office_Addr }}</td>
+						<td data-label="Firstname">{{ item.FirstName }}</td>
+						<td data-label="Lastname">{{ item.LastName }}</td>
+						<td data-label="Action">
+							<a href="{% url 'edit_faculty' item.PID %}" class="btn btn-outline-info btn-sm"
+							   role="button">Edit</a>
+							<a href="{% url 'delete_faculty' item.PID %}" class="btn btn-outline-danger btn-sm"
+							   role="button">Delete</a>
+						</td>
+
+					{% endif %}
+					{% if header|lower == "ip" %}
+
+						<td data-label="NetWork ID">{{ item.NetworkID }}</td>
+						<td data-label="Building_Abbreviation">{{ item.Building_Abbr }}</td>
+						<td data-label="IPv4">{{ item.IPv4 }}</td>
+						<td data-label="IPv6">{{ item.IPv6 }}</td>
+						<td data-label="Status">{{ item.status }}</td>
+						<td data-label="Action">
+							<a href="{% url 'edit_ip' item.IPID %}" class="btn btn-outline-info btn-sm"
+							   role="button">Edit</a>
+							<a href="{% url 'delete_ip' item.IPID %}" class="btn btn-outline-danger btn-sm"
+							   role="button">Delete</a>
+						</td>
 
 					{% endif %}
 
 				</tr>
-				{# <tr id="note-0" class="collapse">#}
-					{# <td></td>#}
-					{# <td colspan="5">#}
-						{# <div class="well">#}
-							{# <h3>Doing Laundary</h3>#}
-							{# <div>I need to get quarters first at Kroger.</div>#}
-							{# </div>#}
-						{# </td>#}
-					{# </tr>#}
 
 
-				{% endfor %}
+			{% endfor %}
 
 			</tbody>
 
 		</table>
-	</div>
-	<br>
-	<br>
-	<br>
+		</div>
+		<br>
+		<br>
+		<br>
 
-</div>
+	</div>
 
 {% endblock %}
