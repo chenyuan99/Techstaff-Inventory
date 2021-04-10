@@ -5,6 +5,7 @@ from hello.models import *
 from django.forms import ModelForm
 from crispy_forms.helper import FormHelper
 
+
 class NewUserForm(UserCreationForm):
     email = forms.EmailField(required=True)
 
@@ -19,6 +20,7 @@ class NewUserForm(UserCreationForm):
             user.save()
         return user
 
+
 class LoginForm(AuthenticationForm):
     username = forms.CharField()
     password = forms.PasswordInput()
@@ -30,6 +32,7 @@ class LoginForm(AuthenticationForm):
         # self.helper.label_class = "input"
         # self.helper.field_class = "form-control"
 
+
 class AddUserDeviceForm(forms.ModelForm):
     # ReturnDate = forms.DateField(widget=SelectDateWidget(empty_label="Nothing"))
     def __init__(self, *args, **kwargs):
@@ -39,9 +42,9 @@ class AddUserDeviceForm(forms.ModelForm):
         self.helper.label_class = 'col-lg-2'
         self.helper.field_class = 'col-lg-8'
 
-        for key in self.fields:
-            self.fields[key].required = False
-
+        self.fields['Note'].required = False
+        self.fields['Address'].required = False
+        self.fields['ReturnDate'].required = False
 
     class Meta:
         model = UserDevice
@@ -57,11 +60,11 @@ class AddFacultyForm(forms.ModelForm):
         self.helper.label_class = 'col-lg-2'
         self.helper.field_class = 'col-lg-8'
 
-        for key in self.fields:
-            self.fields[key].required = False
+
     class Meta:
         model = Faculty
         fields = '__all__'
+
 
 class deviceForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
@@ -72,14 +75,13 @@ class deviceForm(forms.ModelForm):
         self.helper.field_class = 'col-lg-8'
 
         for key in self.fields:
+            if key == 'CS_Tag':
+                continue
             self.fields[key].required = False
-
 
     class Meta:
         model = Device
         fields = '__all__'
-
-
 
 
 # class userDeviceForm(forms.ModelForm):
@@ -96,6 +98,8 @@ class AddNetworkForm(forms.ModelForm):
         self.helper.field_class = 'col-lg-8'
 
         for key in self.fields:
+            if key == 'DeviceID':
+                continue
             self.fields[key].required = False
 
     class Meta:
@@ -111,11 +115,12 @@ class buildingForm(forms.ModelForm):
         self.helper.label_class = 'col-lg-2'
         self.helper.field_class = 'col-lg-8'
 
-        for key in self.fields:
-            self.fields[key].required = False
+        self.fields['IPv6_prefix'].required = False
+
     class Meta:
         model = Building
         fields = '__all__'
+
 
 class IpAddressForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
@@ -126,10 +131,10 @@ class IpAddressForm(forms.ModelForm):
         self.helper.field_class = 'col-lg-8'
 
         for key in self.fields:
+            if key == 'DeviceID':
+                continue
             self.fields[key].required = False
 
     class Meta:
         model = IPAddr
         fields = '__all__'
-
-
