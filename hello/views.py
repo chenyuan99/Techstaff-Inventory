@@ -138,6 +138,7 @@ def check_out(request, pk):
         "full_name": user.FirstName + ' ' + user.LastName,
         "description": device.description,
         "serial": device.Serial_Number,
+        "checkout_date": userdevice.CheckoutDate,
     }
     # Render the HTML template index.html with the data in the context variable
     return render(request, "check-out.html", context=context)

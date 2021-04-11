@@ -135,12 +135,12 @@
 				<tr>
 					{% if header|lower == "device" %}
 						<td data-label="CS_Tag">{{ item.CS_Tag }}</td>
-						<td data-label="Type">{{ item.type }}</td>
-						<td data-label="Price">${{ item.price }}</td>
-						<td data-label="Description">{{ item.description }}</td>
-						<td data-label="VT_Tag">{{ item.VT_Tag }}</td>
-						<td data-label="Serial_Number">{{ item.Serial_Number }}</td>
-						<td data-label="Status">{{ item.status }}</td>
+						<td data-label="Type">{{ item.type|default_if_none:"" }}</td>
+						<td data-label="Price">{{ item.price|yesno:"$,," }} {{ item.price|default_if_none:"" }}</td>
+						<td data-label="Description">{{ item.description|default_if_none:"" }}</td>
+						<td data-label="VT_Tag">{{ item.VT_Tag|default_if_none:"" }}</td>
+						<td data-label="Serial_Number">{{ item.Serial_Number|default_if_none:"" }}</td>
+						<td data-label="Status">{{ item.status|default_if_none:"" }}</td>
 						<td data-label="Action">
 							<a href="{% url 'view_device' item.CS_Tag %}" class="btn btn-outline-success btn-sm"
 							   role="button"><i class="bi bi-sticky-fill"></i> View</a>

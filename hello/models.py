@@ -11,13 +11,13 @@ class Faculty(models.Model):
     history = HistoricalRecords()
 
 class Device(models.Model):
-    Serial_Number = models.CharField(max_length=100, default = '', null=True)
-    type = models.CharField(max_length=100, default = '', null=True)
-    price = models.IntegerField(null=True)
-    description = models.CharField(max_length=100, default = '', null=True)
-    VT_Tag = models.CharField(max_length=100, default = '', null=True)
+    Serial_Number = models.CharField(max_length=100, default = '', blank=True, null=True)
+    type = models.CharField(max_length=100, default = '', blank=True, null=True)
+    price = models.IntegerField(blank=True, null=True)
+    description = models.CharField(max_length=100, default = '', blank=True, null=True)
+    VT_Tag = models.CharField(max_length=100, default = '', blank=True, null=True)
     CS_Tag = models.CharField(max_length=100, default = '', primary_key=True)
-    acq_date = models.DateField(default='YYYY-MM-DD', null=True)
+    acq_date = models.DateField(default='YYYY-MM-DD', blank=True, null=True)
     choices = (
         ('In Use', 'In Use'),
         ('In Storage', 'In Storage'),
@@ -30,8 +30,8 @@ class Device(models.Model):
         ('Orphaned', 'Orphaned')
     )
 
-    status = models.CharField(max_length=15, choices=choices, default='In Use', null=True) #Available, Sold, Restocking
-    issue = models.CharField(max_length=100, default="No issues", null=True)
+    status = models.CharField(max_length=15, choices=choices, default='In Use', blank=True, null=True) #Available, Sold, Restocking
+    issue = models.CharField(max_length=100, default="No issues", blank=True, null=True)
     history = HistoricalRecords()
 
     class Meta:
@@ -45,12 +45,12 @@ class Device(models.Model):
 class UserDevice(models.Model):
     UserPID =  models.CharField(max_length=100, default = '')
     DeviceID = models.CharField(max_length=100, default = '')
-    Note = models.CharField(max_length=100, default = '', null=True)
+    Note = models.CharField(max_length=100, blank=True, null=True)
     isHomeUse = models.BooleanField(default=False)
     isCheckedOut = models.BooleanField(default=False)
-    Address = models.CharField(max_length=100, default = '', null=True)
+    Address = models.CharField(max_length=100, blank=True, null=True)
     CheckoutDate = models.DateField(auto_now=True)  # create time (automatic)
-    ReturnDate = models.DateField(default='YYYY-MM-DD', null=True)  # create time (automatic)
+    ReturnDate = models.DateField(default='YYYY-MM-DD', blank=True, null=True)  # create time (automatic)
     
     class Meta:
         unique_together = ('UserPID', 'DeviceID', 'CheckoutDate')
@@ -60,25 +60,25 @@ class Building(models.Model):
     Building_Abbr = models.CharField(primary_key = True, max_length=64)
     Building_Name = models.CharField(max_length=64)
     Building_Addr = models.CharField(max_length=64)
-    IPv6_prefix = models.GenericIPAddressField(null=True)
+    IPv6_prefix = models.GenericIPAddressField(blank=True, null=True)
     history = HistoricalRecords()
     
 
 class NetworkInterface(models.Model):
     NetworkID = models.AutoField(primary_key = True)
     DeviceID =  models.CharField(max_length=100, default = '')  
-    Hostname = models.CharField(max_length=64, null=True)
-    Aliases = models.CharField(max_length=64, null=True)  # Aliases/cnames
-    Building_Abbr = models.CharField(max_length=64, null=True)  
-    create_Date = models.DateField(auto_now=True, null=True)  # create time (automatic)
+    Hostname = models.CharField(max_length=64, blank=True)
+    Aliases = models.CharField(max_length=64, blank=True)  # Aliases/cnames
+    Building_Abbr = models.CharField(max_length=64, blank=True)  
+    create_Date = models.DateField(auto_now=True, blank=True)  # create time (automatic)
     history = HistoricalRecords()
 
 class IPAddr(models.Model):
     IPID = models.AutoField(primary_key = True)
-    NetworkID = models.IntegerField()
-    Building_Abbr = models.CharField(max_length=64, null=True)
-    IPv4 = models.GenericIPAddressField(null=True)
-    IPv6 = models.GenericIPAddressField(null=True)
+    NetworkID = models.IntegerField(blank=True)
+    Building_Abbr = models.CharField(max_length=64, blank=True)
+    IPv4 = models.GenericIPAddressField(blank=True, null=True)
+    IPv6 = models.GenericIPAddressField(blank=True, null=True)
     choices = (
         ('Assigned', 'Assigned'),
         ('Available', 'Available')
