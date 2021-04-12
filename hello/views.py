@@ -558,12 +558,14 @@ def edit_device(request, CS_Tag):
 
     if request.method == 'POST':
         form = deviceForm(request.POST, instance=item)
+        
         if form.is_valid():
             form.save()
             return display_devices(request)
 
     else:
         form = deviceForm(instance=item)
+        form.fields['CS_Tag'].disabled = True
         return render(request, 'edit_item.html', {'form': form})
 
 def assignip_to_device(request, CS_Tag):
