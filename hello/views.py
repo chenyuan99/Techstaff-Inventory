@@ -565,7 +565,6 @@ def edit_device(request, CS_Tag):
 
     else:
         form = deviceForm(instance=item)
-        form.fields['CS_Tag'].disabled = True
         return render(request, 'edit_item.html', {'form': form})
 
 def assignip_to_device(request, CS_Tag):
