@@ -581,7 +581,9 @@ def assignip_new_hostname(request, CS_Tag):
         if network_form.is_valid():
             network_form.save()
         if ip_form.is_valid():
-            ip_form.save()
+            ip = ip_form.save(commit=False)
+            ip.status = 'Assigned'
+            ip.save()
         return display_ip(request)
     else:
         networkInitial = {
