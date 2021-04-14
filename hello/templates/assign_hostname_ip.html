@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+{% load crispy_forms_tags %}
+	<div class="container">
+		<h2>Add hostname and assign IP addresses for CS-Tag: {{DeviceID}}</h2>
+		<form method="POST">
+			<br>
+			{% csrf_token %}
+
+				{% for field in network %}
+					<div class="form-group row">
+						<div class="col-10">
+							{{ field|as_crispy_field }}
+						</div>
+					</div>
+				{% endfor %}
+
+				{% for field in assignip %}
+					<div class="form-group row">
+						<div class="col-10">
+							{{ field|as_crispy_field }}
+						</div>
+					</div>
+				{% endfor %}
+
+			<button type="submit" class="btn btn-primary" name="button"><i class="bi-plus-circle"></i> Add New</button>
+{#			<a href="/" class="btn btn-secondary btn-md" role="button">Back</a>#}
+
+		</form>
+	</div>
+	<br>
+	<br>
+
+
+{% endblock %}
