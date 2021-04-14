@@ -348,7 +348,7 @@ def add_ip(request):
 
         if form.is_valid():
             form.save()
-            return display_ip(request)
+            redirect('display_ip')
 
     else:
         form = AddIpAddressForm
@@ -396,7 +396,7 @@ def edit_ip(request, IPID):
         form = EditIpAddressForm(request.POST, instance=item)
         if form.is_valid():
             form.save()
-            return display_ip(request)
+            redirect('display_ip')
 
     else:
         form = EditIpAddressForm(instance=item)
@@ -480,8 +480,15 @@ def delete_device(request, CS_Tag):
 def delete_network(request, pk):
     network = NetworkInterface.objects.get(pk=pk)
     if request.method == "POST":
+        ip = IPAddr.objects.filter(NetworkID=network.NetworkID)
+
+        if ip:
+            # changing IP assignment status
+            ip[0].status = 'Available'
+            ip[0].NetworkID = None
+            ip[0].save()
         network.delete()
-        return display_hostnames(request)
+        return redirect('display_hostnames')
 
     form = AddNetworkForm(request.POST, instance=network)
     for fieldname in form.fields:
@@ -532,7 +539,7 @@ def delete_ip(request, IPID):
     ip = IPAddr.objects.get(IPID=IPID)
     if request.method == "POST":
         ip.delete()
-        return display_ip(request)
+        return redirect('display_ip')
 
     form = EditIpAddressForm(request.POST, instance=ip)
     for fieldname in form.fields:
@@ -571,6 +578,7 @@ def edit_device(request, CS_Tag):
         return render(request, 'edit_item.html', {'form': form})
 
 
+
 def assignip_new_hostname(request, CS_Tag):
     if not request.user.is_authenticated:
         raise PermissionDenied
@@ -580,21 +588,20 @@ def assignip_new_hostname(request, CS_Tag):
         ip_form = AddIpAddressForm(request.POST)
         if network_form.is_valid():
             network_form.save()
+        
         if ip_form.is_valid():
             ip = ip_form.save(commit=False)
             ip.status = 'Assigned'
+            networkID = max([network.NetworkID for network in NetworkInterface.objects.all()])
+            ip.NetworkID = networkID
             ip.save()
-        return display_ip(request)
+        return redirect('display_ip')
     else:
         networkInitial = {
                 'DeviceID' : CS_Tag
             }
         network_form = AddNetwork_assign_ip(initial=networkInitial)
-        id = max([network.NetworkID for network in NetworkInterface.objects.all()])
-        ip_form_initial = {
-                'NetworkID' : id + 1
-            }
-        ip_form = AddIpAddressForm_no_hostname(initial=ip_form_initial)
+        ip_form = AddIpAddressForm_no_hostname()
         return render(request, 'assign_hostname_ip.html', {'network': network_form,
             'assignip' : ip_form, 'DeviceID' : CS_Tag })
 
@@ -607,7 +614,7 @@ def assignip_to_device(request, CS_Tag):
         form = AddIpAddressForm(request.POST)
         if form.is_valid():
             form.save()
-            return display_ip(request)
+            return redirect('display_ip')
     
     else:
         item = get_object_or_404(Device, CS_Tag=CS_Tag)
