@@ -106,6 +106,19 @@ class AddNetworkForm(forms.ModelForm):
         model = NetworkInterface
         fields = '__all__'
 
+class AddNetwork_assign_ip(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(AddNetwork_assign_ip, self).__init__(*args, **kwargs)
+        self.helper = FormHelper(self)
+        self.helper.form_class = 'form-horizontal'
+        self.helper.label_class = 'col-lg-2'
+        self.helper.field_class = 'col-lg-8'
+        self.fields['DeviceID'].widget.attrs['readonly'] = True
+
+    class Meta:
+        model = NetworkInterface
+        fields = '__all__'
+
 
 class buildingForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
@@ -122,19 +135,59 @@ class buildingForm(forms.ModelForm):
         fields = '__all__'
 
 
-class IpAddressForm(forms.ModelForm):
+
+class AddIpAddressForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
-        super(IpAddressForm, self).__init__(*args, **kwargs)
+        super(AddIpAddressForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper(self)
         self.helper.form_class = 'form-horizontal'
         self.helper.label_class = 'col-lg-2'
         self.helper.field_class = 'col-lg-8'
 
-        for key in self.fields:
-            if key == 'DeviceID':
-                continue
-            self.fields[key].required = False
 
     class Meta:
         model = IPAddr
         fields = '__all__'
+
+class AddIpAddressForm_no_hostname(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(AddIpAddressForm_no_hostname, self).__init__(*args, **kwargs)
+        self.helper = FormHelper(self)
+        self.helper.form_class = 'form-horizontal'
+        self.helper.label_class = 'col-lg-2'
+        self.helper.field_class = 'col-lg-8'
+        self.fields['NetworkID'].widget.attrs['readonly'] = True
+
+    class Meta:
+        model = IPAddr
+        fields = '__all__'
+        exclude = ('status','Building_Abbr')
+
+
+
+class AssignIPForm(forms.ModelForm):
+    disabled_fields = ['NetworkID']
+    def __init__(self, *args, **kwargs):
+        super(AssignIPForm, self).__init__(*args, **kwargs)
+        self.helper = FormHelper(self)
+        self.helper.form_class = 'form-horizontal'
+        self.helper.label_class = 'col-lg-2'
+        self.helper.field_class = 'col-lg-8'
+        self.fields['NetworkID'].widget.attrs['readonly'] = True
+
+
+    class Meta:
+        model = IPAddr
+        fields =('IPv4','IPv6','Building_Abbr', 'NetworkID')
+
+class EditIpAddressForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(EditIpAddressForm, self).__init__(*args, **kwargs)
+        self.helper = FormHelper(self)
+        self.helper.form_class = 'form-horizontal'
+        self.helper.label_class = 'col-lg-2'
+        self.helper.field_class = 'col-lg-8'
+
+    class Meta:
+        model = IPAddr
+        fields = ('IPv4','IPv6','Building_Abbr', 'status')

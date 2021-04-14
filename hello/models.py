@@ -66,7 +66,7 @@ class Building(models.Model):
 
 class NetworkInterface(models.Model):
     NetworkID = models.AutoField(primary_key = True)
-    DeviceID =  models.CharField(max_length=100, default = '')  
+    DeviceID =  models.CharField(max_length=100, default = '', unique=True)  
     Hostname = models.CharField(max_length=64, blank=True)
     Aliases = models.CharField(max_length=64, blank=True)  # Aliases/cnames
     Building_Abbr = models.CharField(max_length=64, blank=True)  
@@ -75,7 +75,7 @@ class NetworkInterface(models.Model):
 
 class IPAddr(models.Model):
     IPID = models.AutoField(primary_key = True)
-    NetworkID = models.IntegerField(blank=True)
+    NetworkID = models.IntegerField(blank=True,null=True, unique=True)
     Building_Abbr = models.CharField(max_length=64, blank=True)
     IPv4 = models.GenericIPAddressField(blank=True, null=True)
     IPv6 = models.GenericIPAddressField(blank=True, null=True)
@@ -84,5 +84,5 @@ class IPAddr(models.Model):
         ('Available', 'Available')
     )
 
-    status = models.CharField(max_length=20, choices=choices, default='Available') 
+    status = models.CharField(max_length=20, choices=choices, default='Available', blank=True, null=True) 
     history = HistoricalRecords()

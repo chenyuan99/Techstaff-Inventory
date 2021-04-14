@@ -278,11 +278,14 @@ def add_hostname(request):
     if not request.user.is_authenticated:
         raise PermissionDenied
     if request.method == 'POST':
-        form = AddNetworkForm(request.POST)
-
-        if form.is_valid():
-            form.save()
-            return display_hostnames(request)
+        existing_host = NetworkInterface.objects.filter(DeviceID=request.POST['DeviceID'])
+        if (existing_host):
+            return edit_network(request, existing_host[0].NetworkID)
+        else:
+            form = AddNetworkForm(request.POST)
+            if form.is_valid():
+                form.save()
+                return display_hostnames(request)
 
     else:
         form = AddNetworkForm
@@ -341,14 +344,14 @@ def add_ip(request):
     if not request.user.is_authenticated:
         raise PermissionDenied
     if request.method == 'POST':
-        form = IpAddressForm(request.POST)
+        form = AddIpAddressForm(request.POST)
 
         if form.is_valid():
             form.save()
             return display_ip(request)
 
     else:
-        form = IpAddressForm
+        form = AddIpAddressForm
         return render(request, 'add_new.html', {'form': form})
 
 # -------------------------edit-----------------------------------
@@ -390,13 +393,13 @@ def edit_ip(request, IPID):
     item = get_object_or_404(IPAddr, IPID=IPID)
 
     if request.method == 'POST':
-        form = IpAddressForm(request.POST, instance=item)
+        form = EditIpAddressForm(request.POST, instance=item)
         if form.is_valid():
             form.save()
             return display_ip(request)
 
     else:
-        form = IpAddressForm(instance=item)
+        form = EditIpAddressForm(instance=item)
         return render(request, 'edit_item.html', {'form': form})
 
 def edit_faculty(request, PID):
@@ -531,7 +534,7 @@ def delete_ip(request, IPID):
         ip.delete()
         return display_ip(request)
 
-    form = IpAddressForm(request.POST, instance=ip)
+    form = EditIpAddressForm(request.POST, instance=ip)
     for fieldname in form.fields:
         form.fields[fieldname].disabled = True
 
@@ -567,44 +570,62 @@ def edit_device(request, CS_Tag):
         form = deviceForm(instance=item)
         return render(request, 'edit_item.html', {'form': form})
 
-def assignip_to_device(request, CS_Tag):
-    """ if not request.user.is_authenticated:
+
+def assignip_new_hostname(request, CS_Tag):
+    if not request.user.is_authenticated:
         raise PermissionDenied
-    item = get_object_or_404(Device, CS_Tag=CS_Tag)
+    
     if request.method == 'POST':
-        form = deviceForm(request.POST, instance=item)
+        network_form = AddNetwork_assign_ip(request.POST)
+        ip_form = AddIpAddressForm(request.POST)
+        if network_form.is_valid():
+            network_form.save()
+        if ip_form.is_valid():
+            ip_form.save()
+        return display_ip(request)
+    else:
+        networkInitial = {
+                'DeviceID' : CS_Tag
+            }
+        network_form = AddNetwork_assign_ip(initial=networkInitial)
+        id = max([network.NetworkID for network in NetworkInterface.objects.all()])
+        ip_form_initial = {
+                'NetworkID' : id + 1
+            }
+        ip_form = AddIpAddressForm_no_hostname(initial=ip_form_initial)
+        return render(request, 'assign_hostname_ip.html', {'network': network_form,
+            'assignip' : ip_form, 'DeviceID' : CS_Tag })
+
+
+def assignip_to_device(request, CS_Tag):
+    if not request.user.is_authenticated:
+        raise PermissionDenied
+    
+    if request.method == 'POST':
+        form = AddIpAddressForm(request.POST)
         if form.is_valid():
             form.save()
-            return display_devices(request)
+            return display_ip(request)
+    
     else:
-        
-        form = deviceForm(instance=item)
+        item = get_object_or_404(Device, CS_Tag=CS_Tag)
+        form = EditIpAddressForm(instance=item)
         device = Device.objects.get(CS_Tag=CS_Tag)
-        # look for matching network interface
+        # look for matching hostname/netforkinterface
         network = NetworkInterface.objects.filter(DeviceID = device.CS_Tag)
         if network:
-            print('found network')
-            ip = IPAddr.objects.filter(NetworkID=network.NetworkID)
-            # found matching IPAddr: go to edit page.
+            print('found hostname')
+            ip = IPAddr.objects.filter(NetworkID=network[0].NetworkID)
             if ip: 
-                
-            # create new IPaddr:
-            else: 
-
+                return redirect('edit_ip', ip[0].IPID)
+            else:
+                # adding IP:
+                form = AssignIPForm
+                return render(request, 'assign_ip.html', {'form': form, 'DeviceID': CS_Tag })
 
         else:
-            # add hostname / 'network':
-            print('creating network first')
-            if network:
-            print('found network')
-            ip = IPAddr.objects.filter(NetworkID=network.NetworkID)
-            # found matching IPAddr: go to edit page.
-            if ip: 
-                
-            # create new IPaddr:
-            else:  """
+            return redirect('assignip_new_hostname', CS_Tag)
 
-    return render(request, 'edit_item.html', {'form': form})
 
 
 def view_device(request, CS_Tag):
