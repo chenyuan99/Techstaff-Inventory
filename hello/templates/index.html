@@ -9,7 +9,7 @@
 			<a href="{% url 'display_devices' %}" class="btn btn-outline-primary btn-md" role="button"><i
 					class="bi bi-tablet-fill"></i> Devices</a>
 			<a href="{% url 'display_hostnames' %}" class="btn btn-outline-primary btn-md" role="button"><i
-					class="bi bi-wifi"></i> Network</a>
+					class="bi bi-wifi"></i> Hostnames</a>
 			<a href="{% url 'display_buildings' %}" class="btn btn-outline-primary btn-md" role="button"><i
 					class="bi bi-building"></i> Buildings</a>
 			<a href="{% url 'display_faculty' %}" class="btn btn-outline-primary btn-md" role="button"><i
@@ -68,12 +68,46 @@
 			<div class="container-fluid text-center">
 			<h4> Search {{ header }} Results</h4>
 			<!-- Button trigger modal -->
+		{% if header|lower == "device" %}
 			<a type="button" class="btn btn-primary" href="{% url 'export_devices' %}">
 				Export {{ header }}
 			</a>
-			<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exportModal">
+			<a type="button" class="btn btn-primary" href="{% url 'import_devices' %}">
 				Import {{ header }}
-			</button>
+			</a>
+		{% endif %}
+		{% if header|lower == "hostname" %}
+		<a type="button" class="btn btn-primary" href="{% url 'export_devices' %}">
+			Export {{ header }}
+		</a>
+		<a type="button" class="btn btn-primary" href="{% url 'import_hostnames' %}">
+			Import {{ header }}
+		</a>
+	{% endif %}
+	{% if header|lower == "building" %}
+		<a type="button" class="btn btn-primary" href="{% url 'export_devices' %}">
+			Export {{ header }}
+		</a>
+		<a type="button" class="btn btn-primary" href="{% url 'import_buildings' %}">
+			Import {{ header }}
+		</a>
+	{% endif %}
+	{% if header|lower == "faculty" %}
+	<a type="button" class="btn btn-primary" href="{% url 'export_devices' %}">
+		Export {{ header }}
+	</a>
+	<a type="button" class="btn btn-primary" href="{% url 'import_facultys' %}">
+		Import {{ header }}
+	</a>
+{% endif %}
+{% if header|lower == "ip" %}
+<a type="button" class="btn btn-primary" href="{% url 'export_devices' %}">
+	Export {{ header }}
+</a>
+<a type="button" class="btn btn-primary" href="{% url 'import_ips' %}">
+	Import {{ header }}
+</a>
+{% endif %}
 		{% endif %}
 		<table id="info-table" class="table table-hover">
 			<thead>

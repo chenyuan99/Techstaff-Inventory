@@ -73,7 +73,11 @@ urlpatterns = [
     url(r'^check-out/(?P<pk>\d+)$', hello.views.check_out, name="check-out"),
     # url(r'^export_devices$', hello.views.export_devices, name='export_devices'),
     url(r'^export_devices$', hello.views.export_filter_devices, name='export_devices'),
-    url(r'^simple_upload$', hello.views.simple_upload, name='simple_upload'),
+    url(r'^import_hostnames$', hello.views.upload_hostnames, name='import_hostnames'),
+    url(r'^import_buildings$', hello.views.upload_buildings, name='import_buildings'),
+    url(r'^import_facultys$', hello.views.upload_facultys, name='import_facultys'),
+    url(r'^import_ips$', hello.views.upload_ips, name='import_ips'),
+    url(r'^import_devices$', hello.views.upload_devices, name='import_devices'),
     # Faculty
     # other url configs
     path('search/', SearchResultsView.as_view(), name='search_results'),

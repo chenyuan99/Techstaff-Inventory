@@ -770,6 +770,76 @@ def simple_upload(request):
 
     return render(request, 'import/import.html')
 
+def upload_devices(request):
+    if request.method == 'POST':
+        person_resource = DeviceResource()
+        dataset = Dataset()
+        new_persons = request.FILES['myfile']
+
+        imported_data = dataset.load(new_persons.read())
+        result = person_resource.import_data(dataset, dry_run=True)  # Test the data import
+
+        if not result.has_errors():
+            person_resource.import_data(dataset, dry_run=False)  # Actually import now
+
+    return render(request, 'import/import-devices.html')
+
+def upload_hostnames(request):
+    if request.method == 'POST':
+        person_resource = DeviceResource()
+        dataset = Dataset()
+        new_persons = request.FILES['myfile']
+
+        imported_data = dataset.load(new_persons.read())
+        result = person_resource.import_data(dataset, dry_run=True)  # Test the data import
+
+        if not result.has_errors():
+            person_resource.import_data(dataset, dry_run=False)  # Actually import now
+
+    return render(request, 'import/import-hostnames.html')
+
+def upload_buildings(request):
+    if request.method == 'POST':
+        person_resource = DeviceResource()
+        dataset = Dataset()
+        new_persons = request.FILES['myfile']
+
+        imported_data = dataset.load(new_persons.read())
+        result = person_resource.import_data(dataset, dry_run=True)  # Test the data import
+
+        if not result.has_errors():
+            person_resource.import_data(dataset, dry_run=False)  # Actually import now
+
+    return render(request, 'import/import-buildings.html')
+
+def upload_facultys(request):
+    if request.method == 'POST':
+        person_resource = DeviceResource()
+        dataset = Dataset()
+        new_persons = request.FILES['myfile']
+
+        imported_data = dataset.load(new_persons.read())
+        result = person_resource.import_data(dataset, dry_run=True)  # Test the data import
+
+        if not result.has_errors():
+            person_resource.import_data(dataset, dry_run=False)  # Actually import now
+
+    return render(request, 'import/import-facultys.html')
+
+def upload_ips(request):
+    if request.method == 'POST':
+        person_resource = DeviceResource()
+        dataset = Dataset()
+        new_persons = request.FILES['myfile']
+
+        imported_data = dataset.load(new_persons.read())
+        result = person_resource.import_data(dataset, dry_run=True)  # Test the data import
+
+        if not result.has_errors():
+            person_resource.import_data(dataset, dry_run=False)  # Actually import now
+
+    return render(request, 'import/import-ips.html')
+
 def export_filter_devices(request):
     device = Device.objects.all()
     filter = deviceFilter(request.GET, queryset=device).qs
