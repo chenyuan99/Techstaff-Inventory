@@ -786,7 +786,7 @@ def upload_devices(request):
 
 def upload_hostnames(request):
     if request.method == 'POST':
-        person_resource = DeviceResource()
+        person_resource = NetworkInterfaceResource()
         dataset = Dataset()
         new_persons = request.FILES['myfile']
 
@@ -800,7 +800,7 @@ def upload_hostnames(request):
 
 def upload_buildings(request):
     if request.method == 'POST':
-        person_resource = DeviceResource()
+        person_resource = BuildingResource()
         dataset = Dataset()
         new_persons = request.FILES['myfile']
 
@@ -814,7 +814,7 @@ def upload_buildings(request):
 
 def upload_facultys(request):
     if request.method == 'POST':
-        person_resource = DeviceResource()
+        person_resource = FacultyResource()
         dataset = Dataset()
         new_persons = request.FILES['myfile']
 
@@ -828,7 +828,7 @@ def upload_facultys(request):
 
 def upload_ips(request):
     if request.method == 'POST':
-        person_resource = DeviceResource()
+        person_resource = IPAddrResource()
         dataset = Dataset()
         new_persons = request.FILES['myfile']
 
