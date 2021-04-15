@@ -60,7 +60,7 @@ class Building(models.Model):
     Building_Abbr = models.CharField(primary_key = True, max_length=64)
     Building_Name = models.CharField(max_length=64)
     Building_Addr = models.CharField(max_length=64)
-    IPv6_prefix = models.GenericIPAddressField(blank=True, null=True)
+    IPv6_prefix = models.CharField(max_length=64, blank=True, null=True)
     history = HistoricalRecords()
     
 

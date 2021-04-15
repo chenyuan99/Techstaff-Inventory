@@ -13,7 +13,7 @@ from django.db.models import Q
 from .filters import *
 import logging
 from tablib import Dataset
-import hello.ipv6_generator
+from hello.ipv6_generator import *
 import datetime
 import csv
 
@@ -349,7 +349,7 @@ def add_ip(request):
 
         if form.is_valid():
             form.save()
-            redirect('display_ip')
+            return redirect('display_ip')
 
     else:
         form = AddIpAddressForm
@@ -388,7 +388,7 @@ def edit_network(request, pk):
         form = AddNetworkForm(instance=item)
         return render(request, 'edit_item.html', {'form': form})
 
-def edit_ip(request, IPID):
+def edit_ip(request, IPID, networkID=None):
     if not request.user.is_authenticated:
         raise PermissionDenied
     item = get_object_or_404(IPAddr, IPID=IPID)
@@ -396,10 +396,28 @@ def edit_ip(request, IPID):
     if request.method == 'POST':
         form = EditIpAddressForm(request.POST, instance=item)
         if form.is_valid():
-            form.save()
-            redirect('display_ip')
+            ip = form.save(commit=False)
+            if request.POST.get('randomIPv6') == 'on':
+                # look for Building abbr: 
+                if ip.Building_Abbr:
+                    building = Building.objects.filter(Building_Abbr=ip.Building_Abbr)
+                    if building and building[0].IPv6_prefix:
+                        prefix = building[0].IPv6_prefix
+                        ip.IPv6 = ipv6_generator(prefix).split(',')[-1].strip()
+                    else:
+                        messages.info(request, 'Cannot find building IPv6 prefix. IP not updated.')
+                        return redirect('display_ip')
+                
+                else:
+                    messages.info(request, 'Building Abbr not filled in. IP not updated.')
+                    return redirect('display_ip') 
+            messages.success(request, 'IP updated!')
+            ip.save()
+            return redirect('display_ip')
+
 
     else:
+
         form = EditIpAddressForm(instance=item)
         return render(request, 'edit_item.html', {'form': form})
 
@@ -613,8 +631,21 @@ def assignip_new_hostname(request, CS_Tag):
         
         if ip_form.is_valid():
             ip = ip_form.save(commit=False)
-            #TODO: check for duplicate IP addresses:
-            
+            #TODO: generate random IPv6:
+            if request.POST.get('randomIPv6') == 'on':
+                # look for Building abbr: 
+                if ip.Building_Abbr:
+                    building = Building.objects.filter(Building_Abbr=ip.Building_Abbr)
+                    if building and building[0].IPv6_prefix:
+                        prefix = building[0].IPv6_prefix
+                        ip.IPv6 = ipv6_generator(prefix).split(',')[-1].strip()
+                    else:
+                        messages.info(request, 'Cannot find building IPv6 prefix. IP not assigned.')
+                        return redirect('display_ip')
+                else:
+                    messages.info(request, 'Building Abbr not filled in. IP not assigned.')
+                    return redirect('display_ip') 
+                
             ip.status = 'Assigned'
             networkID = max([network.NetworkID for network in NetworkInterface.objects.all()])
             ip.NetworkID = networkID
@@ -638,8 +669,29 @@ def assignip_to_device(request, CS_Tag):
     if request.method == 'POST':
         form = AddIpAddressForm(request.POST)
         if form.is_valid():
-            form.save()
+            ip = form.save(commit=False)
+            #TODO: generate random IPv6:
+            if request.POST.get('randomIPv6') == 'on':
+                # look for Building abbr: 
+                if ip.Building_Abbr:
+                    building = Building.objects.filter(Building_Abbr=ip.Building_Abbr)
+                    if building and building[0].IPv6_prefix:
+                        prefix = building[0].IPv6_prefix
+                        ip.IPv6 = ipv6_generator(prefix).split(',')[-1].strip()
+                    else:
+                        messages.info(request, 'Cannot find building IPv6 prefix. IP not assigned.')
+                        return redirect('display_ip')
+                
+                else:
+                    messages.info(request, 'Building Abbr not filled in. IP not assigned.')
+                    return redirect('display_ip') 
+                
+            ip.status = 'Assigned'
+            networkID = max([network.NetworkID for network in NetworkInterface.objects.all()])
+            ip.NetworkID = networkID
+            ip.save()
             messages.success(request, 'IP address for ' + CS_Tag + ' assigned!')
+
         return redirect('display_ip')
     
     else:
@@ -649,14 +701,18 @@ def assignip_to_device(request, CS_Tag):
         # look for matching hostname/netforkinterface
         network = NetworkInterface.objects.filter(DeviceID = device.CS_Tag)
         if network:
-            print('found hostname')
             ip = IPAddr.objects.filter(NetworkID=network[0].NetworkID)
             if ip: 
                 messages.success(request, 'Edit IP address for ' + CS_Tag)
+                print('editing ip: ', network[0].NetworkID)
                 return redirect('edit_ip', ip[0].IPID)
             else:
                 # adding IP:
-                form = AssignIPForm
+                initial = {
+                    'NetworkID' : network[0].NetworkID,
+                    'Building_Abbr' : network[0].Building_Abbr
+                }
+                form = AssignIPForm(initial=initial)
                 return render(request, 'assign_ip.html', {'form': form, 'DeviceID': CS_Tag })
 
         else:

@@ -45,7 +45,8 @@ class AddUserDeviceForm(forms.ModelForm):
         self.fields['Note'].required = False
         self.fields['Address'].required = False
         self.fields['ReturnDate'].required = False
-
+        self.fields['isHomeUse'].label = 'Home Use'
+        self.fields['isCheckedOut'].label = 'Item is checked out'
     class Meta:
         model = UserDevice
         fields = '__all__'
@@ -150,6 +151,7 @@ class AddIpAddressForm(forms.ModelForm):
         fields = '__all__'
 
 class AddIpAddressForm_no_hostname(forms.ModelForm):
+    randomIPv6 = forms.BooleanField()
     def __init__(self, *args, **kwargs):
         super(AddIpAddressForm_no_hostname, self).__init__(*args, **kwargs)
         self.helper = FormHelper(self)
@@ -157,7 +159,11 @@ class AddIpAddressForm_no_hostname(forms.ModelForm):
         self.helper.label_class = 'col-lg-2'
         self.helper.field_class = 'col-lg-8'
         self.fields['NetworkID'].widget.attrs['readonly'] = True
-
+        self.fields['NetworkID'].help_text = 'Auto generated'
+        self.fields['randomIPv6'].label = 'Random IPv6'
+        self.fields['randomIPv6'].required = False
+        self.fields['randomIPv6'].initial = False
+        self.fields['randomIPv6'].help_text = 'To generate random IPv6, building must have valid IPv6 prefix.'
     class Meta:
         model = IPAddr
         fields = '__all__'
@@ -166,6 +172,7 @@ class AddIpAddressForm_no_hostname(forms.ModelForm):
 
 
 class AssignIPForm(forms.ModelForm):
+    randomIPv6 = forms.BooleanField()
     disabled_fields = ['NetworkID']
     def __init__(self, *args, **kwargs):
         super(AssignIPForm, self).__init__(*args, **kwargs)
@@ -174,20 +181,33 @@ class AssignIPForm(forms.ModelForm):
         self.helper.label_class = 'col-lg-2'
         self.helper.field_class = 'col-lg-8'
         self.fields['NetworkID'].widget.attrs['readonly'] = True
+        self.fields['NetworkID'].help_text = 'Auto generated'
+        #self.fields['Building_Abbr'].widget.attrs['readonly'] = True
+        self.fields['randomIPv6'].label = 'Random IPv6'
+        self.fields['randomIPv6'].required = False
+        self.fields['randomIPv6'].initial = False
+        self.fields['randomIPv6'].help_text = 'To generate random IPv6, building must have valid IPv6 prefix.'
 
 
     class Meta:
         model = IPAddr
-        fields =('IPv4','IPv6','Building_Abbr', 'NetworkID')
+        fields =('IPv4','IPv6', 'randomIPv6', 'Building_Abbr', 'NetworkID')
 
 class EditIpAddressForm(forms.ModelForm):
+    randomIPv6 = forms.BooleanField()
     def __init__(self, *args, **kwargs):
         super(EditIpAddressForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper(self)
         self.helper.form_class = 'form-horizontal'
         self.helper.label_class = 'col-lg-2'
         self.helper.field_class = 'col-lg-8'
+        #self.fields['NetworkID'].widget.attrs['readonly'] = True
+        #self.fields['Building_Abbr'].widget.attrs['readonly'] = True
+        self.fields['randomIPv6'].label = 'Random IPv6'
+        self.fields['randomIPv6'].required = False
+        self.fields['randomIPv6'].initial = False
+        self.fields['randomIPv6'].help_text = 'To generate random IPv6, building must have valid IPv6 prefix.'
 
     class Meta:
         model = IPAddr
-        fields = ('IPv4','IPv6','Building_Abbr', 'status')
+        fields = ('IPv4','IPv6',  'randomIPv6', 'Building_Abbr', 'status', 'NetworkID')
