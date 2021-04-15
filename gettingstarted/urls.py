@@ -52,6 +52,7 @@ urlpatterns = [
     # edit delete device
     # url(r'^edit_device/(?P<pk>\d+)$', hello.views.edit_device, name='edit_device'),
     url(r'^edit_device/(?P<CS_Tag>[-\w]+)$', hello.views.edit_device, name='edit_device'),
+    url(r'^edit_device_detail/(?P<CS_Tag>[-\w]+)$', hello.views.edit_device_inDetailPage, name='edit_device_detail'),
     url(r'^delete_device/(?P<CS_Tag>[-\w]+)$', hello.views.delete_device, name='delete_device'),
     url(r'^view_device/(?P<CS_Tag>[-\w]+)$', hello.views.view_device, name='view_device'),
 

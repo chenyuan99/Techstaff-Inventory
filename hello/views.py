@@ -69,7 +69,7 @@ def db(request):
 
 def logout_request(request):
     logout(request)
-    messages.info(request, "Logged out successfully!")
+    # messages.info(request, "Logged out successfully!")
     return redirect("index")
 
 
@@ -80,10 +80,10 @@ def login_request(request):
         userobj = authenticate(request, username=user_name, password=pass_word)
         if userobj is not None:
             login(request, userobj)
-            messages.success(request, 'You are Logged in !')
+            # messages.success(request, 'You are Logged in !')
             return redirect('/')
         else:
-            messages.success(request, 'Wrong credentials', extra_tags='red')
+            # messages.success(request, 'Wrong credentials', extra_tags='red')
             return redirect('/')
     else:
 
@@ -137,6 +137,7 @@ def check_out(request, pk):
         "pid": user.PID,
         "full_name": user.FirstName + ' ' + user.LastName,
         "description": device.description,
+        "serial": device.Serial_Number,
         "serial": device.Serial_Number,
         "checkout_date": userdevice.CheckoutDate,
     }
@@ -577,6 +578,24 @@ def edit_device(request, CS_Tag):
     else:
         form = deviceForm(instance=item)
         return render(request, 'edit_item.html', {'form': form})
+
+# EDITING DEVICE FOR DETAIL PAGE
+def edit_device_inDetailPage(request, CS_Tag):
+    if not request.user.is_authenticated:
+        raise PermissionDenied
+    item = get_object_or_404(Device, CS_Tag=CS_Tag)
+
+    if request.method == 'POST':
+        form = deviceForm(request.POST, instance=item)
+
+        if form.is_valid():
+            form.save()
+            return view_device(request, CS_Tag)
+
+    else:
+        form = deviceForm(instance=item)
+        return render(request, 'edit_item.html', {'form': form})
+
 
 def checkDuplicateIP(ip):
     ip_list = [ip for ip in IPAddr.objects.all()]

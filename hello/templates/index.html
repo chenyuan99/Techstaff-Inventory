@@ -167,7 +167,7 @@
 
 						<td data-label="Device CS TAG">{{ item.DeviceID }}</td>
 						<td data-label="Hostname">{{ item.Hostname }}</td>
-						<td data-label="Aliases">{{ item.Aliases }}</td>
+						<td data-label="Aliases">{{ item.Aliases|truncatechars:20 }}</td>
 						<td data-label="Building_Abbr">{{ item.Building_Abbr }}</td>
 						<td data-label="Action">
 							<a href="{% url 'edit_network' item.pk %}" class="btn btn-outline-info btn-sm"

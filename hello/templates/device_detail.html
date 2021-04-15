@@ -36,7 +36,7 @@
 		<tr>
 			<td align=left><b>Device Action</b></td>
 			<td data-label="Action">
-				<a href="{% url 'edit_device' item.CS_Tag %}" class="btn btn-outline-info btn-sm" role="button">Edit</a>
+				<a href="{% url 'edit_device_detail' item.CS_Tag %}" class="btn btn-outline-info btn-sm" role="button">Edit</a>
 				<a href="{% url 'delete_device' item.CS_Tag %}" class="btn btn-outline-danger btn-sm"
 					role="button">Delete</a>
 			</td>
@@ -172,18 +172,16 @@
 					<th>changes</th>
 				</tr>
 				{% for item in delta %}
+					<tr>
+					<td>
 				{% if item.changes %}
 				{% for change in item.changes %}
-				<tr>
-					<td>
-						{{ change.field }} changes from {{ change.old }} to {{ change.new }}</td>
-				</tr>
+					<b>{{ change.field }}</b> changes from <b>{{ change.old }}</b> to <b>{{ change.new }}</b>
+					<br>
 				{% endfor %}
-				{% else %}
-				<tr>
-					<td>No changes</td>
-				</tr>
 				{% endif %}
+					</td>
+					</tr>
 				{% endfor %}
 				<tr>
 					<td>Added item</td>
