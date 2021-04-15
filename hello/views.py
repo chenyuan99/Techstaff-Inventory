@@ -488,6 +488,7 @@ def delete_network(request, pk):
             ip[0].NetworkID = None
             ip[0].save()
         network.delete()
+        messages.success(request, 'Hostname for ' + network.DeviceID + ' deleted!')
         return redirect('display_hostnames')
 
     form = AddNetworkForm(request.POST, instance=network)
@@ -539,12 +540,12 @@ def delete_ip(request, IPID):
     ip = IPAddr.objects.get(IPID=IPID)
     if request.method == "POST":
         ip.delete()
+        
         return redirect('display_ip')
 
     form = EditIpAddressForm(request.POST, instance=ip)
     for fieldname in form.fields:
         form.fields[fieldname].disabled = True
-
     return render(request, 'delete_item.html', {'form': form})
 
 
@@ -577,7 +578,9 @@ def edit_device(request, CS_Tag):
         form = deviceForm(instance=item)
         return render(request, 'edit_item.html', {'form': form})
 
-
+def checkDuplicateIP(ip):
+    ip_list = [ip for ip in IPAddr.objects.all()]
+    
 
 def assignip_new_hostname(request, CS_Tag):
     if not request.user.is_authenticated:
@@ -591,10 +594,13 @@ def assignip_new_hostname(request, CS_Tag):
         
         if ip_form.is_valid():
             ip = ip_form.save(commit=False)
+            #TODO: check for duplicate IP addresses:
+            
             ip.status = 'Assigned'
             networkID = max([network.NetworkID for network in NetworkInterface.objects.all()])
             ip.NetworkID = networkID
             ip.save()
+            messages.success(request, 'IP and hostname for ' + CS_Tag + ' assigned!')
         return redirect('display_ip')
     else:
         networkInitial = {
@@ -614,7 +620,8 @@ def assignip_to_device(request, CS_Tag):
         form = AddIpAddressForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('display_ip')
+            messages.success(request, 'IP address for ' + CS_Tag + ' assigned!')
+        return redirect('display_ip')
     
     else:
         item = get_object_or_404(Device, CS_Tag=CS_Tag)
@@ -626,6 +633,7 @@ def assignip_to_device(request, CS_Tag):
             print('found hostname')
             ip = IPAddr.objects.filter(NetworkID=network[0].NetworkID)
             if ip: 
+                messages.success(request, 'Edit IP address for ' + CS_Tag)
                 return redirect('edit_ip', ip[0].IPID)
             else:
                 # adding IP:

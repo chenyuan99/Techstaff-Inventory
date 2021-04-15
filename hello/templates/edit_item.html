@@ -7,7 +7,15 @@
 			<br>
 			{% csrf_token %}
 
-			<h4>Editing Item</h4>
+			{% if messages %}
+			<ul class="messages">
+				{% for message in messages %}
+				<h4{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</h4>
+				{% endfor %}
+			</ul>
+			{% else %}
+				<h4>Editing Item</h4>
+			{% endif %}
 			{% for field in form %}
 				<div class="form-group row">
 					<div class="col-10">

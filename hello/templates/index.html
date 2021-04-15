@@ -26,8 +26,8 @@
 				Add Faculty</a>
 			<a href="{% url 'add_ip' %}" class="btn btn-outline-danger btn-md" role="button"><i class="bi bi-plus"></i>
 				Add IP Addr</a>
-			<a href="{% url 'add_userDevice' %}" class="btn btn-outline-danger btn-md" role="button">Assign Device</a>
-			<a href="{% url 'display_useCase' %}" target="_blank" class="btn btn-outline-danger btn-md" role="button">TEST</a>
+			<a href="{% url 'add_userDevice' %}" class="btn btn-outline-success btn-md" role="button">Assign Device</a>
+			<a href="{% url 'display_useCase' %}" target="_blank" class="btn btn-outline-success btn-md" role="button">Assign IP</a>
 		</nav>
 		<style>
             .nav-column {
@@ -97,7 +97,11 @@
 				<th>Aliases</th>
 				<th>Building_Abbreviation</th>
 				<th>Action</th>
-
+				<ul class="messages">
+					{% for message in messages %}
+					<h3{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</h3>
+					{% endfor %}
+				</ul>
 			{% endif %}
 			{# FACULTY #}
 			{% if header|lower == "faculty" %}
@@ -124,7 +128,13 @@
 				<th>IPv6</th>
 				<th>Network Status</th>
 				<th>Action</th>
-
+			{% if messages %}
+			<ul class="messages">
+				{% for message in messages %}
+				<h3{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</h3>
+				{% endfor %}
+			</ul>
+			{% endif %}
 			{% endif %}
 			</thead>
 
