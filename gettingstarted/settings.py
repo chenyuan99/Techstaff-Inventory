@@ -11,7 +11,6 @@ ALLOWED_HOSTS = ['*']
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 IMPORT_EXPORT_USE_TRANSACTIONS = True
 INSTALLED_APPS = [
-    'simpleui', 
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
