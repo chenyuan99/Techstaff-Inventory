@@ -614,7 +614,7 @@ def edit_device_inDetailPage(request, CS_Tag):
         form = deviceForm(instance=item)
         return render(request, 'edit_item.html', {'form': form})
 
-
+#TODO: check IP address duplicates
 def checkDuplicateIP(ip):
     ip_list = [ip for ip in IPAddr.objects.all()]
     
@@ -631,20 +631,24 @@ def assignip_new_hostname(request, CS_Tag):
         
         if ip_form.is_valid():
             ip = ip_form.save(commit=False)
-            #TODO: generate random IPv6:
             if request.POST.get('randomIPv6') == 'on':
                 # look for Building abbr: 
                 if ip.Building_Abbr:
                     building = Building.objects.filter(Building_Abbr=ip.Building_Abbr)
                     if building and building[0].IPv6_prefix:
                         prefix = building[0].IPv6_prefix
-                        ip.IPv6 = ipv6_generator(prefix).split(',')[-1].strip()
+                        randomIP = ipv6_generator(prefix)
+                        if (randomIP != 1):
+                            ip.IPv6 = ipv6_generator(prefix).split(',')[-1].strip()
+                        else: 
+                            messages.info(request, 'Cannot generate IPv6 with given prefix. IP not assigned.')
+                            return redirect('display_ip')
                     else:
                         messages.info(request, 'Cannot find building IPv6 prefix. IP not assigned.')
                         return redirect('display_ip')
                 else:
                     messages.info(request, 'Building Abbr not filled in. IP not assigned.')
-                    return redirect('display_ip') 
+                    return redirect('display_ip')
                 
             ip.status = 'Assigned'
             networkID = max([network.NetworkID for network in NetworkInterface.objects.all()])
@@ -670,7 +674,6 @@ def assignip_to_device(request, CS_Tag):
         form = AddIpAddressForm(request.POST)
         if form.is_valid():
             ip = form.save(commit=False)
-            #TODO: generate random IPv6:
             if request.POST.get('randomIPv6') == 'on':
                 # look for Building abbr: 
                 if ip.Building_Abbr:

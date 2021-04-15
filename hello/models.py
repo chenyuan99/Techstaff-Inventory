@@ -77,8 +77,8 @@ class IPAddr(models.Model):
     IPID = models.AutoField(primary_key = True)
     NetworkID = models.IntegerField(blank=True,null=True, unique=True)
     Building_Abbr = models.CharField(max_length=64, blank=True)
-    IPv4 = models.GenericIPAddressField(blank=True, null=True)
-    IPv6 = models.GenericIPAddressField(blank=True, null=True)
+    IPv4 = models.GenericIPAddressField(blank=True, null=True, unique=True)
+    IPv6 = models.GenericIPAddressField(blank=True, null=True, unique=True)
     choices = (
         ('Assigned', 'Assigned'),
         ('Available', 'Available')

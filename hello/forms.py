@@ -128,7 +128,7 @@ class buildingForm(forms.ModelForm):
         self.helper.form_class = 'form-horizontal'
         self.helper.label_class = 'col-lg-2'
         self.helper.field_class = 'col-lg-8'
-
+        self.fields['IPv6_prefix'].help_text = 'IPv6 prefix example: 2001:db8:abcd:0012::0/64'
         self.fields['IPv6_prefix'].required = False
 
     class Meta:
