@@ -6,28 +6,51 @@
 	<div class="container-fluid sticky-top text-center">
 		<nav class='navbar nav-column'>
 			<br>
-			<a href="{% url 'display_devices' %}" class="btn btn-outline-primary btn-md" role="button"><i
-					class="bi bi-tablet-fill"></i> Devices</a>
-			<a href="{% url 'display_hostnames' %}" class="btn btn-outline-primary btn-md" role="button"><i
-					class="bi bi-wifi"></i> Hostnames</a>
-			<a href="{% url 'display_buildings' %}" class="btn btn-outline-primary btn-md" role="button"><i
-					class="bi bi-building"></i> Buildings</a>
-			<a href="{% url 'display_faculty' %}" class="btn btn-outline-primary btn-md" role="button"><i
-					class="bi bi-file-person-fill"></i> Faculty</a>
-			<a href="{% url 'display_ip' %}" class="btn btn-outline-primary btn-md" role="button"><i
-					class=""></i> IP Address</a>
-			<a href="{% url 'add_device' %}" class="btn btn-outline-danger btn-md" role="button"><i class="bi bi-plus"></i>
-				Add Device</a>
-			<a href="{% url 'add_hostname' %}" class="btn btn-outline-danger btn-md" role="button"><i
-					class="bi bi-plus"></i> Add Hostname</a>
-			<a href="{% url 'add_building' %}" class="btn btn-outline-danger btn-md" role="button"><i
-					class="bi bi-plus"></i> Add Building</a>
-			<a href="{% url 'add_faculty' %}" class="btn btn-outline-danger btn-md" role="button"><i class="bi bi-plus"></i>
-				Add Faculty</a>
-			<a href="{% url 'add_ip' %}" class="btn btn-outline-danger btn-md" role="button"><i class="bi bi-plus"></i>
-				Add IP Addr</a>
-			<a href="{% url 'add_userDevice' %}" class="btn btn-outline-success btn-md" role="button">Assign Device</a>
-			<a href="{% url 'display_useCase' %}" target="_blank" class="btn btn-outline-success btn-md" role="button">Assign IP</a>
+			<div class="btn-group">
+				<button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					Display
+				</button>
+				<div class="dropdown-menu">
+					<a href="{% url 'display_devices' %}" class="dropdown-item"><i
+							class="bi bi-tablet-fill"></i>Devices</a>
+					<a href="{% url 'display_hostnames' %}" class="dropdown-item"><i
+							class="bi bi-wifi"></i>Hostnames</a>
+					<a href="{% url 'display_buildings' %}" class="dropdown-item"><i
+							class="bi bi-building"></i>Buildings</a>
+					<a href="{% url 'display_faculty' %}" class="dropdown-item"><i
+							class="bi bi-file-person-fill"></i>Faculty</a>
+					<a href="{% url 'display_ip' %}" class="dropdown-item"><i
+							class=""></i>IP Address</a>
+				</div>
+			</div>
+			<div class="btn-group">
+				<button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					Add Item
+				</button>
+				<div class="dropdown-menu">
+					<a href="{% url 'add_device' %}" class="dropdown-item"><i class="bi bi-plus"></i>
+						Add Device</a>
+					<a href="{% url 'add_hostname' %}" class="dropdown-item"><i
+							class="bi bi-plus"></i> Add Hostname</a>
+					<a href="{% url 'add_building' %}" class="dropdown-item"><i
+							class="bi bi-plus"></i> Add Building</a>
+					<a href="{% url 'add_faculty' %}" class="dropdown-item"><i class="bi bi-plus"></i>
+						Add Faculty</a>
+					<a href="{% url 'add_ip' %}" class="dropdown-item"><i class="bi bi-plus"></i>
+						Add IP Addr</a>
+				</div>
+			</div>
+
+			<div class="btn-group">
+				<button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					Assign Item
+				</button>
+				<div class="dropdown-menu">
+					<a href="{% url 'add_userDevice' %}" class="dropdown-item">Assign Device</a>
+					<a href="{% url 'display_useCase' %}" target="_blank" class="dropdown-item">Assign IP</a>
+				</div>
+			</div>
+
 		</nav>
 		<style>
             .nav-column {
@@ -68,46 +91,46 @@
 			<div class="container-fluid text-center">
 			<h4> Search {{ header }} Results</h4>
 			<!-- Button trigger modal -->
-		{% if header|lower == "device" %}
-			<a type="button" class="btn btn-primary" href="{% url 'export_devices' %}">
-				Export {{ header }}
-			</a>
-			<a type="button" class="btn btn-primary" href="{% url 'import_devices' %}">
-				Import {{ header }}
-			</a>
-		{% endif %}
-		{% if header|lower == "hostname" %}
-		<a type="button" class="btn btn-primary" href="{% url 'export_devices' %}">
-			Export {{ header }}
-		</a>
-		<a type="button" class="btn btn-primary" href="{% url 'import_hostnames' %}">
-			Import {{ header }}
-		</a>
-	{% endif %}
-	{% if header|lower == "building" %}
-		<a type="button" class="btn btn-primary" href="{% url 'export_devices' %}">
-			Export {{ header }}
-		</a>
-		<a type="button" class="btn btn-primary" href="{% url 'import_buildings' %}">
-			Import {{ header }}
-		</a>
-	{% endif %}
-	{% if header|lower == "faculty" %}
-	<a type="button" class="btn btn-primary" href="{% url 'export_devices' %}">
-		Export {{ header }}
-	</a>
-	<a type="button" class="btn btn-primary" href="{% url 'import_facultys' %}">
-		Import {{ header }}
-	</a>
-{% endif %}
-{% if header|lower == "ip" %}
-<a type="button" class="btn btn-primary" href="{% url 'export_devices' %}">
-	Export {{ header }}
-</a>
-<a type="button" class="btn btn-primary" href="{% url 'import_ips' %}">
-	Import {{ header }}
-</a>
-{% endif %}
+			{% if header|lower == "device" %}
+				<a type="button" class="btn btn-primary" href="{% url 'export_devices' %}">
+					Export {{ header }}
+				</a>
+				<a type="button" class="btn btn-primary" href="{% url 'import_devices' %}">
+					Import {{ header }}
+				</a>
+			{% endif %}
+			{% if header|lower == "hostname" %}
+				<a type="button" class="btn btn-primary" href="{% url 'export_devices' %}">
+					Export {{ header }}
+				</a>
+				<a type="button" class="btn btn-primary" href="{% url 'import_hostnames' %}">
+					Import {{ header }}
+				</a>
+			{% endif %}
+			{% if header|lower == "building" %}
+				<a type="button" class="btn btn-primary" href="{% url 'export_devices' %}">
+					Export {{ header }}
+				</a>
+				<a type="button" class="btn btn-primary" href="{% url 'import_buildings' %}">
+					Import {{ header }}
+				</a>
+			{% endif %}
+			{% if header|lower == "faculty" %}
+				<a type="button" class="btn btn-primary" href="{% url 'export_devices' %}">
+					Export {{ header }}
+				</a>
+				<a type="button" class="btn btn-primary" href="{% url 'import_facultys' %}">
+					Import {{ header }}
+				</a>
+			{% endif %}
+			{% if header|lower == "ip" %}
+				<a type="button" class="btn btn-primary" href="{% url 'export_devices' %}">
+					Export {{ header }}
+				</a>
+				<a type="button" class="btn btn-primary" href="{% url 'import_ips' %}">
+					Import {{ header }}
+				</a>
+			{% endif %}
 		{% endif %}
 		<table id="info-table" class="table table-hover">
 			<thead>
@@ -133,7 +156,7 @@
 				<th>Action</th>
 				<ul class="messages">
 					{% for message in messages %}
-					<h3{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</h3>
+						<h3{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</h3>
 					{% endfor %}
 				</ul>
 			{% endif %}
@@ -162,13 +185,13 @@
 				<th>IPv6</th>
 				<th>Network Status</th>
 				<th>Action</th>
-			{% if messages %}
-			<ul class="messages">
-				{% for message in messages %}
-				<h3{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</h3>
-				{% endfor %}
-			</ul>
-			{% endif %}
+				{% if messages %}
+					<ul class="messages">
+						{% for message in messages %}
+							<h3{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</h3>
+						{% endfor %}
+					</ul>
+				{% endif %}
 			{% endif %}
 			</thead>
 
@@ -204,6 +227,8 @@
 						<td data-label="Aliases">{{ item.Aliases|truncatechars:20 }}</td>
 						<td data-label="Building_Abbr">{{ item.Building_Abbr }}</td>
 						<td data-label="Action">
+							<a href="{% url 'view_network' item.NetworkID %}" class="btn btn-outline-success btn-sm"
+							   role="button"><i class="bi bi-sticky-fill"></i> View</a>
 							<a href="{% url 'edit_network' item.pk %}" class="btn btn-outline-info btn-sm"
 							   role="button">Edit</a>
 							<a href="{% url 'delete_network' item.pk %}" class="btn btn-outline-danger btn-sm"

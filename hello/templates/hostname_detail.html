@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+	<div class="container text-center">
+		<h2> {{item.Hostname}} Detail Page</h2>
+		<table class="table table-striped text-left">
+			<tr>
+				<td align=left><b>Hostname</b></td>
+				<td data-label="Hostname">{{ item.Hostname }}</td>
+			</tr>
+			<tr>
+				<td align=left><b>Aliases</b></td>
+				<td data-label="Aliases">{{ item.Aliases }}</td>
+			</tr>
+			<tr>
+				<td align=left><b>Building Abbreviation</b></td>
+				<td data-label="Building Abbreviation">{{ item.Building_Abbr }}</td>
+			</tr>
+			<tr>
+				<td align=left><b>Hostname Action</b></td>
+				<td data-label="Action">
+					<a href="{% url 'edit_network' item.NetworkID %}" class="btn btn-outline-info btn-sm" role="button">Edit Network</a>
+					<a href="{% url 'delete_network' item.NetworkID %}" class="btn btn-outline-danger btn-sm"
+					   role="button">Delete Network</a>
+				</td>
+			</tr>
+			<tr>
+				<td align=left><b>Device CS_Tag</b></td>
+				<td data-label="Device Cs_Tag">{{ device.CS_Tag }}</td>
+			</tr>
+			{% if ip %}
+				{% for item in ip %}
+					<tr>
+						<td align=left><b>IPv4</b></td>
+						<td data-label="IPv4">{{ item.IPv4 }}</td>
+					</tr>
+					<tr>
+						<td align=left><b>IPv6</b></td>
+						<td data-label="IPv6">{{ item.IPv6 }}</td>
+					</tr>
+					<tr>
+						<td align=left><b>IP status</b></td>
+						<td data-label="IP Status">{{ item.status }}</td>
+					</tr>
+					<tr>
+						<td align=left><b>Action</b></td>
+						<td data-label="Action">
+							<a href="{% url 'edit_ip' item.IPID %}" class="btn btn-outline-info btn-sm" role="button">Edit IP</a>
+							<a href="{% url 'delete_ip' item.IPID %}" class="btn btn-outline-danger btn-sm"
+							   role="button">Delete IP</a>
+						</td>
+					</tr>
+				{% endfor %}
+			{% endif %}
+
+
+
+		</table>
+	</div>
+
+	<div class="container text-center">
+		<div id="hrow" class="container hrow">
+			<div id="action-col" class="hcolumn">
+				<table class="htable">
+					<tr>
+						<th>Action</th>
+					</tr>
+					{% for e in history %}
+						<tr>
+							<td>
+								{{ e.history_user }}
+								{{ e.history_type }} on {{ e.history_date }}
+							</td>
+						</tr>
+
+					{% endfor %}
+				</table>
+			</div>
+			<div id="change-col" class="hcolumn">
+				<table class="htable">
+					<tr>
+						<th>changes</th>
+					</tr>
+					{% for item in delta %}
+						<tr>
+							<td>
+								{% if item.changes %}
+									{% for change in item.changes %}
+										<b>{{ change.field }}</b> changes from <b>{{ change.old }}</b> to <b>{{ change.new }}</b>
+										<br>
+									{% endfor %}
+								{% endif %}
+							</td>
+						</tr>
+					{% endfor %}
+					<tr>
+						<td>Added item</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</div>
+{% endblock %}

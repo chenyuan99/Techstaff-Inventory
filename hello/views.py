@@ -748,6 +748,43 @@ def view_device(request, CS_Tag):
     }
     return render(request, "device_detail.html", context)
 
+
+def view_hostname(request, NetworkID):
+    network = NetworkInterface.objects.get(NetworkID=NetworkID)
+    device = Device.objects.get(CS_Tag=network.DeviceID)
+    ip = IPAddr.objects.filter(NetworkID=NetworkID)
+
+    context = {}
+    networkHistory = network.history.all()
+    diffHistory = list()
+    delta = list()
+    diffHistory.append(history[0])
+    for i in range(0, netoworkhistory.count() - 1):
+        nextHistory = history[i + 1]
+        tempDiff = history[i].diff_against(nextHistory)
+        if len(tempDiff.changes) is not 0:
+            delta.append(tempDiff)
+            diffHistory.append(nextHistory)
+
+
+
+    if ip:
+        context = {
+            'item': network,
+            'device': device,
+            'ip': ip,
+            'history': diffHistory,
+            'delta': delta
+        }
+    else:
+        context = {
+            'item': network,
+            'device': device,
+            'history': diffHistory,
+            'delta': delta
+        }
+    return render(request, "hostname_detail.html", context)
+
 def export_devices(request):
     device_resource = DeviceResource()
     dataset = device_resource.export()

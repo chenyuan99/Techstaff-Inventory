@@ -64,6 +64,19 @@
 		</tr>
 		{% endfor %}
 		{% for item in networks %}
+			<tr>
+				<td><b>Network Hostname</b></td>
+				<td>{{ item.Hostname }}</td>
+			</tr>
+			<tr>
+				<td><b>Network Aliases</b></td>
+				<td>{{ item.Aliases }}</td>
+			</tr>
+			<tr>
+				<td><b>Building Abbreviation</b></td>
+				<td>{{ item.Building_Abbr }}</td>
+			</tr>
+
 
 		{% endfor %}
 	</table>

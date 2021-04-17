@@ -58,15 +58,21 @@ urlpatterns = [
 
     url(r'^assign_ip/(?P<CS_Tag>[-\w]+)$', hello.views.assignip_to_device, name='assign_ip'),
     url(r'^assign_ip_new_host/(?P<CS_Tag>[-\w]+)$', hello.views.assignip_new_hostname, name='assignip_new_hostname'),
+
     # url(r'^delete_device/(?P<pk>\d+)$', hello.views.delete_device, name='delete_device'),
     url(r'^edit_network/(?P<pk>\d+)$', hello.views.edit_network, name='edit_network'),
     url(r'^delete_network/(?P<pk>\d+)$', hello.views.delete_network, name='delete_network'),
+    url(r'^view_network/(?P<NetworkID>\d+)$', hello.views.view_hostname, name='view_network'),
+
     url(r'^edit_building/(?P<pk>[-\w]+)$', hello.views.edit_building, name='edit_building'),
     url(r'^delete_building/(?P<pk>[-\w]+)$', hello.views.delete_building, name='delete_building'),
+
     url(r'^edit_faculty/(?P<PID>[-\w]+)$', hello.views.edit_faculty, name='edit_faculty'),
     url(r'^delete_faculty/(?P<PID>[-\w]+)$', hello.views.delete_faculty, name='delete_faculty'),
+
     url(r'^edit_userDevice/(?P<pk>\d+)$', hello.views.edit_userDevice, name='edit_userDevice'),
     url(r'^delete_userDevice/(?P<pk>\d+)$', hello.views.delete_userDevice, name='delete_userDevice'),
+
     url(r'^edit_ip/(?P<IPID>\d+)$', hello.views.edit_ip, name='edit_ip'),
     url(r'^delete_ip/(?P<IPID>\d+)$', hello.views.delete_ip, name='delete_ip'),
 
