@@ -51,6 +51,29 @@
 				</div>
 			</div>
 
+			<div class="btn-group">
+				<button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					Import
+				</button>
+				<div class="dropdown-menu">
+					<a type="button" class="dropdown-item" href="{% url 'import_devices' %}">
+						Import Devices
+					</a>
+					<a type="button" class="dropdown-item" href="{% url 'import_hostnames' %}">
+						Import Hostnames
+					</a>
+					<a type="button" class="dropdown-item" href="{% url 'import_buildings' %}">
+						Import Building
+					</a>
+					<a type="button" class="dropdown-item" href="{% url 'import_facultys' %}">
+						Import Faculty
+					</a>
+					<a type="button" class="dropdown-item" href="{% url 'import_ips' %}">
+						Import IP Addr
+					</a>
+				</div>
+			</div>
+
 		</nav>
 		<style>
             .nav-column {
@@ -95,41 +118,41 @@
 				<a type="button" class="btn btn-primary" href="{% url 'export_devices' %}">
 					Export {{ header }}
 				</a>
-				<a type="button" class="btn btn-primary" href="{% url 'import_devices' %}">
+				<!-- <a type="button" class="btn btn-primary" href="{% url 'import_devices' %}">
 					Import {{ header }}
-				</a>
+				</a> -->
 			{% endif %}
 			{% if header|lower == "hostname" %}
 				<a type="button" class="btn btn-primary" href="{% url 'export_devices' %}">
 					Export {{ header }}
 				</a>
-				<a type="button" class="btn btn-primary" href="{% url 'import_hostnames' %}">
+				<!-- <a type="button" class="btn btn-primary" href="{% url 'import_hostnames' %}">
 					Import {{ header }}
-				</a>
+				</a> -->
 			{% endif %}
 			{% if header|lower == "building" %}
 				<a type="button" class="btn btn-primary" href="{% url 'export_devices' %}">
 					Export {{ header }}
 				</a>
-				<a type="button" class="btn btn-primary" href="{% url 'import_buildings' %}">
+				<!-- <a type="button" class="btn btn-primary" href="{% url 'import_buildings' %}">
 					Import {{ header }}
-				</a>
+				</a> -->
 			{% endif %}
 			{% if header|lower == "faculty" %}
 				<a type="button" class="btn btn-primary" href="{% url 'export_devices' %}">
 					Export {{ header }}
 				</a>
-				<a type="button" class="btn btn-primary" href="{% url 'import_facultys' %}">
+				<!-- <a type="button" class="btn btn-primary" href="{% url 'import_facultys' %}">
 					Import {{ header }}
-				</a>
+				</a> -->
 			{% endif %}
 			{% if header|lower == "ip" %}
 				<a type="button" class="btn btn-primary" href="{% url 'export_devices' %}">
 					Export {{ header }}
 				</a>
-				<a type="button" class="btn btn-primary" href="{% url 'import_ips' %}">
+				<!-- <a type="button" class="btn btn-primary" href="{% url 'import_ips' %}">
 					Import {{ header }}
-				</a>
+				</a> -->
 			{% endif %}
 		{% endif %}
 		<table id="info-table" class="table table-hover">
