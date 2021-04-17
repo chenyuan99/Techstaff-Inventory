@@ -51,6 +51,7 @@
 							   role="button">Delete IP</a>
 						</td>
 					</tr>
+
 				{% endfor %}
 			{% endif %}
 
@@ -64,7 +65,7 @@
 			<div id="action-col" class="hcolumn">
 				<table class="htable">
 					<tr>
-						<th>Action</th>
+						<th>Hostname Action</th>
 					</tr>
 					{% for e in history %}
 						<tr>
@@ -101,4 +102,48 @@
 			</div>
 		</div>
 	</div>
+	{% if ip %}
+		<div class="container text-center">
+			<div id="hrow" class="container hrow">
+				<div id="action-col" class="hcolumn">
+					<table class="htable">
+						<tr>
+							<th>IP Action</th>
+						</tr>
+						{% for e in iphistory %}
+							<tr>
+								<td>
+									{{ e.history_user }}
+									{{ e.history_type }} on {{ e.history_date }}
+								</td>
+							</tr>
+
+						{% endfor %}
+					</table>
+				</div>
+				<div id="change-col" class="hcolumn">
+					<table class="htable">
+						<tr>
+							<th>changes</th>
+						</tr>
+						{% for item in delta2 %}
+							<tr>
+								<td>
+									{% if item.changes %}
+										{% for change in item.changes %}
+											<b>{{ change.field }}</b> changes from <b>{{ change.old }}</b> to <b>{{ change.new }}</b>
+											<br>
+										{% endfor %}
+									{% endif %}
+								</td>
+							</tr>
+						{% endfor %}
+						<tr>
+							<td>Added item</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+		</div>
+	{% endif %}
 {% endblock %}

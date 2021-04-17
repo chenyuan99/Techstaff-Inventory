@@ -734,7 +734,7 @@ def view_device(request, CS_Tag):
     for i in range(0, history.count() - 1):
         nextHistory = history[i+1]
         tempDiff = history[i].diff_against(nextHistory)
-        if len(tempDiff.changes) is not 0:
+        if len(tempDiff.changes) != 0:
              delta.append(tempDiff)
              diffHistory.append(nextHistory)
             #  print(tempDiff.changes)
@@ -758,24 +758,38 @@ def view_hostname(request, NetworkID):
     networkHistory = network.history.all()
     diffHistory = list()
     delta = list()
-    diffHistory.append(history[0])
-    for i in range(0, netoworkhistory.count() - 1):
-        nextHistory = history[i + 1]
-        tempDiff = history[i].diff_against(nextHistory)
-        if len(tempDiff.changes) is not 0:
+    diffHistory.append(networkHistory[0])
+    for i in range(0, networkHistory.count() - 1):
+        nextHistory = networkHistory[i + 1]
+        tempDiff = networkHistory[i].diff_against(nextHistory)
+        if len(tempDiff.changes) != 0:
             delta.append(tempDiff)
             diffHistory.append(nextHistory)
 
 
 
     if ip:
-        context = {
-            'item': network,
-            'device': device,
-            'ip': ip,
-            'history': diffHistory,
-            'delta': delta
-        }
+        for item in ip:
+            ipHistory = item.history.all()
+            diff = list()       #ip diff
+            delta2 = list()     #ip delta
+            diff.append(ipHistory[0])
+            for i in range(0, ipHistory.count() - 1):
+                nextHistory = ipHistory[i + 1]
+                tempDiff = ipHistory[i].diff_against(nextHistory)
+                if len(tempDiff.changes) != 0:
+                    delta2.append(tempDiff)
+                    diff.append(nextHistory)
+
+            context = {
+                'item': network,
+                'device': device,
+                'ip': ip,
+                'history': diffHistory,
+                'iphistory': ipHistory,
+                'delta': delta,
+                'delta2': delta2,
+            }
     else:
         context = {
             'item': network,
