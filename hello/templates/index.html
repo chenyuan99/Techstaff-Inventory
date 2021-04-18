@@ -24,7 +24,7 @@
 			</div>
 			<div class="btn-group">
 				<button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-					Add Item
+					Add
 				</button>
 				<div class="dropdown-menu">
 					<a href="{% url 'add_device' %}" class="dropdown-item"><i class="bi bi-plus"></i>
@@ -42,7 +42,7 @@
 
 			<div class="btn-group">
 				<button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-					Assign Item
+					Assign
 				</button>
 				<div class="dropdown-menu">
 					<a href="{% url 'add_userDevice' %}" class="dropdown-item">Assign Device</a>
@@ -104,7 +104,7 @@
 						</table>
 						<button class="btn btn-primary" type="submit"><i class="bi-search"></i> Search {{ header }}</button>
 						<a type="button" class="btn btn-primary" href="{% url 'export_devices' %}">
-							Export {{ header }}
+							<i class="bi bi-arrow-down-circle"></i> Export {{ header }}
 						</a>
 					</form>
 					<!-- </div> -->
