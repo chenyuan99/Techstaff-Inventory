@@ -680,7 +680,12 @@ def assignip_to_device(request, CS_Tag):
                     building = Building.objects.filter(Building_Abbr=ip.Building_Abbr)
                     if building and building[0].IPv6_prefix:
                         prefix = building[0].IPv6_prefix
-                        ip.IPv6 = ipv6_generator(prefix).split(',')[-1].strip()
+                        randomIP = ipv6_generator(prefix)
+                        if (randomIP != 1):
+                            ip.IPv6 = ipv6_generator(prefix).split(',')[-1].strip()
+                        else: 
+                            messages.info(request, 'Cannot generate IPv6 with given prefix. IP not assigned.')
+                            return redirect('display_ip')
                     else:
                         messages.info(request, 'Cannot find building IPv6 prefix. IP not assigned.')
                         return redirect('display_ip')
