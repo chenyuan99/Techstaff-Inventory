@@ -1,0 +1,120 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+	{% load crispy_forms_tags %}
+	<div class="card bg-light">
+		<div class="card-body text-center">
+			<br>
+			<form method="get">
+				<table>
+					<tr>
+						{% for field in myFilter1.form %}
+							<td>
+								{{ field|as_crispy_field }}
+							</td>
+						{% endfor %}
+					</tr>
+				</table>
+				<button class="btn btn-primary" type="submit"><i class="bi-search"></i>Device Search </button>
+			</form>
+		</div>
+	</div>
+	<div class="container-fluid text-center">
+		<table id="info-table" class="table table-hover">
+			{% if devs|length == 1 %}
+				<thead>
+				<tr>
+					<th>CS_Tag</th>
+					<th>Type</th>
+					<th>Price</th>
+					<th>Description</th>
+					<th>VT_Tag</th>
+					<th>Serial_Number</th>
+					<th>Status</th>
+					<th>Action</th>
+				</tr>
+				</thead>
+				<tbody>
+				{% for item in devs %}
+					<tr>
+					<td data-label="CS_Tag">{{ item.CS_Tag }}</td>
+					<td data-label="Type">{{ item.type }}</td>
+					<td data-label="Price">${{ item.price }}</td>
+					<td data-label="Description">{{ item.description }}</td>
+					<td data-label="VT_Tag">{{ item.VT_Tag }}</td>
+					<td data-label="Serial_Number">{{ item.Serial_Number }}</td>
+					<td data-label="Status">{{ item.status }}</td>
+					<td data-label="Action">
+						<a href="{% url 'view_device' item.CS_Tag %}" class="btn btn-outline-success btn-sm"
+						   role="button"><i class="bi bi-sticky-fill"></i> View</a>
+						   <a href="{% url 'assign_ip' item.CS_Tag %}" class="btn btn-outline-success btn-sm"
+						   role="button"><i class="bi bi-sticky-fill"></i> Assign IP</a>
+						<a href="{% url 'edit_device' item.CS_Tag %}" class="btn btn-outline-info btn-sm"
+						   role="button"><i class="bi bi-pen-fill"></i> Edit</a>
+						<a href="{% url 'delete_device' item.CS_Tag %}" class="btn btn-outline-danger btn-sm"
+						   role="button"><i class="bi bi-trash-fill"></i> Delete</a>
+					</td>
+				{% endfor %}
+			{% elif devs|length == 0 %}
+				<p>No such device</p>
+				<a href="{% url 'add_device' %}" class="btn btn-outline-danger btn-md" role="button"><i class="bi bi-plus"></i> Add Device</a>
+
+			{% endif %}
+			</tbody>
+
+		</table>
+	</div>
+	<div class="card bg-light">
+		<div class="card-body text-center">
+			<br>
+			<form method="get">
+				<table>
+					<tr>
+						{% for field in myFilter2.form %}
+							<td>
+								{{ field|as_crispy_field }}
+							</td>
+						{% endfor %}
+					</tr>
+				</table>
+				<button class="btn btn-primary" type="submit"><i class="bi-search"></i>Faculty Search </button>
+			</form>
+		</div>
+	</div>
+	<div class="container-fluid text-center">
+		<table id="info-table" class="table table-hover">
+			{% if facs|length == 0 %}
+				<p>Faculty is Empty</p>
+				<a href="{% url 'add_faculty' %}" class="btn btn-outline-danger btn-md" role="button"><i class="bi bi-plus"></i> Add Faculty</a>
+			{% else %}
+				<thead>
+				<tr>
+					<th>PID</th>
+					<th>Office Address</th>
+					<th>Firstname</th>
+					<th>Lastname</th>
+					<th>Action</th>
+				</tr>
+				</thead>
+				<tbody>
+				{% for item in facs %}
+					<tr>
+					<td data-label="PID">{{ item.PID }}</td>
+					<td data-label="Office Address">{{ item.Office_Addr }}</td>
+					<td data-label="Firstname">{{ item.FirstName }}</td>
+					<td data-label="Lastname">{{ item.LastName }}</td>
+					<td data-label="Action">
+						<a href="{% url 'edit_faculty' item.PID %}" class="btn btn-outline-info btn-sm"
+							role="button">Edit</a>
+						<a href="{% url 'delete_faculty' item.PID %}" class="btn btn-outline-danger btn-sm"
+							role="button">Delete</a>
+					</td>
+				{% endfor %}
+
+			{% endif %}
+			</tbody>
+
+		</table>
+	</div>
+
+{% endblock %}

@@ -355,6 +355,89 @@
 	</div>
 </nav>
 
+<div class="container-fluid sticky-top text-center">
+    <nav class='navbar nav-column justify-content-start'>
+        <br>
+        <div class="btn-group">
+            <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Display
+            </button>
+            <div class="dropdown-menu">
+                <a href="{% url 'display_devices' %}" class="dropdown-item"><i
+                        class="bi bi-tablet-fill"></i>Devices</a>
+                <a href="{% url 'display_hostnames' %}" class="dropdown-item"><i
+                        class="bi bi-wifi"></i>Hostnames</a>
+                <a href="{% url 'display_buildings' %}" class="dropdown-item"><i
+                        class="bi bi-building"></i>Buildings</a>
+                <a href="{% url 'display_faculty' %}" class="dropdown-item"><i
+                        class="bi bi-file-person-fill"></i>Faculty</a>
+                <a href="{% url 'display_ip' %}" class="dropdown-item"><i class="bi bi-lightning-charge-fill"></i></i>IP Address</a>
+            </div>
+        </div>
+        <div class="btn-group">
+            <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Add
+            </button>
+            <div class="dropdown-menu">
+                <a href="{% url 'add_device' %}" class="dropdown-item"><i class="bi bi-plus"></i>
+                    Add Device</a>
+                <a href="{% url 'add_hostname' %}" class="dropdown-item"><i
+                        class="bi bi-plus"></i> Add Hostname</a>
+                <a href="{% url 'add_building' %}" class="dropdown-item"><i
+                        class="bi bi-plus"></i> Add Building</a>
+                <a href="{% url 'add_faculty' %}" class="dropdown-item"><i class="bi bi-plus"></i>
+                    Add Faculty</a>
+                <a href="{% url 'add_ip' %}" class="dropdown-item"><i class="bi bi-plus"></i>
+                    Add IP Addr</a>
+            </div>
+        </div>
+
+        <div class="btn-group">
+            <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Assign
+            </button>
+            <div class="dropdown-menu">
+                <a href="{% url 'add_userDevice' %}" class="dropdown-item">Assign Device</a>
+                <a href="{% url 'assign_ip' %}" target="_blank" class="dropdown-item">Assign IP</a>
+            </div>
+        </div>
+
+        <div class="btn-group">
+            <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Import
+            </button>
+            <div class="dropdown-menu">
+                <a type="button" class="dropdown-item" href="{% url 'import_devices' %}">
+                    Import Devices
+                </a>
+                <a type="button" class="dropdown-item" href="{% url 'import_hostnames' %}">
+                    Import Hostnames
+                </a>
+                <a type="button" class="dropdown-item" href="{% url 'import_buildings' %}">
+                    Import Building
+                </a>
+                <a type="button" class="dropdown-item" href="{% url 'import_facultys' %}">
+                    Import Faculty
+                </a>
+                <a type="button" class="dropdown-item" href="{% url 'import_ips' %}">
+                    Import IP Addr
+                </a>
+            </div>
+        </div>
+
+    </nav>
+    <style>
+        .nav-column {
+            display: flex;
+            flex-flow: row wrap;
+            align-items: center;
+            gap: 10px;
+            justify-content: space-around;
+            background-color: white;
+        }
+    </style>
+</div>
+
 
 {% block content %}{% endblock %}
 <a id="back-to-top" href="#" class="btn btn-lg back-to-top" role="button"><i

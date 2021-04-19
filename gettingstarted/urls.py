@@ -41,7 +41,7 @@ urlpatterns = [
     url(r'^display_buildings$', hello.views.display_buildings, name='display_buildings'),
     url(r'^display_faculty$', hello.views.display_faculty, name='display_faculty'),
     url(r'^display_ip$', hello.views.display_ip, name='display_ip'),
-    url(r'^usecase$', hello.views.display_userCase, name='display_useCase'),
+    url(r'^assign_ip$', hello.views.display_userCase, name='assign_ip'),
 # 
     url(r'^add_device$', hello.views.add_device, name='add_device'),
     url(r'^add_faculty$', hello.views.add_faculty, name='add_faculty'),
