@@ -155,12 +155,6 @@ def account(request):
     return render(request, "main/account.html", {'query_results': query_results})
 
 
-def dashboard(request):
-    if not request.user.is_authenticated:
-        raise PermissionDenied
-    query_results = UserDevice.objects.all()
-    return render(request, "main/dashboard.html", {'query_results': query_results})
-
 
 def guest_dashboard(request):
     query_results = UserDevice.objects.all()
@@ -261,7 +255,7 @@ def display_ip(request):
 
 # -------------------------add-----------------------------------
 def add_device(request):
-    if not request.user.is_authenticated:
+    if not request.user.is_staff:
         raise PermissionDenied
     if request.method == 'POST':
         form = deviceForm(request.POST)
@@ -276,7 +270,7 @@ def add_device(request):
 
 
 def add_hostname(request):
-    if not request.user.is_authenticated:
+    if not request.user.is_staff:
         raise PermissionDenied
     if request.method == 'POST':
         existing_host = NetworkInterface.objects.filter(DeviceID=request.POST['DeviceID'])
@@ -297,7 +291,7 @@ def add_hostname(request):
 
 
 def add_building(request):
-    if not request.user.is_authenticated:
+    if not request.user.is_staff:
         raise PermissionDenied
     if request.method == 'POST':
         form = buildingForm(request.POST)
@@ -312,7 +306,7 @@ def add_building(request):
 
 
 def add_userDevice(request):
-    if not request.user.is_authenticated:
+    if not request.user.is_staff:
         raise PermissionDenied
     if request.method == 'POST':
         form = AddUserDeviceForm(request.POST)
@@ -327,7 +321,7 @@ def add_userDevice(request):
 
 
 def add_faculty(request):
-    if not request.user.is_authenticated:
+    if not request.user.is_staff:
         raise PermissionDenied
     if request.method == 'POST':
         form = AddFacultyForm(request.POST)
@@ -342,7 +336,7 @@ def add_faculty(request):
 
 
 def add_ip(request):
-    if not request.user.is_authenticated:
+    if not request.user.is_staff:
         raise PermissionDenied
     if request.method == 'POST':
         form = AddIpAddressForm(request.POST)
@@ -357,7 +351,7 @@ def add_ip(request):
 
 # -------------------------edit-----------------------------------
 def edit_item(request, pk, model, cls):
-    if not request.user.is_authenticated:
+    if not request.user.is_staff:
         raise PermissionDenied
     item = get_object_or_404(model, pk=pk)
 
@@ -374,7 +368,7 @@ def edit_item(request, pk, model, cls):
 
 
 def edit_network(request, pk):
-    if not request.user.is_authenticated:
+    if not request.user.is_staff:
         raise PermissionDenied
     item = get_object_or_404(NetworkInterface, pk=pk)
 
@@ -389,7 +383,7 @@ def edit_network(request, pk):
         return render(request, 'edit_item.html', {'form': form})
 
 def edit_ip(request, IPID, networkID=None):
-    if not request.user.is_authenticated:
+    if not request.user.is_staff:
         raise PermissionDenied
     item = get_object_or_404(IPAddr, IPID=IPID)
 
@@ -422,7 +416,7 @@ def edit_ip(request, IPID, networkID=None):
         return render(request, 'edit_item.html', {'form': form})
 
 def edit_faculty(request, PID):
-    if not request.user.is_authenticated:
+    if not request.user.is_staff:
         raise PermissionDenied
     item = get_object_or_404(Faculty, PID=PID)
 
@@ -438,7 +432,7 @@ def edit_faculty(request, PID):
 
 
 def edit_building(request, pk):
-    if not request.user.is_authenticated:
+    if not request.user.is_staff:
         raise PermissionDenied
     item = get_object_or_404(Building, pk=pk)
 
@@ -454,7 +448,7 @@ def edit_building(request, pk):
 
 
 def edit_userDevice(request, pk):
-    if not request.user.is_authenticated:
+    if not request.user.is_staff:
         raise PermissionDenied
     item = get_object_or_404(UserDevice, pk=pk)
 
@@ -582,7 +576,7 @@ def checkout_device(request, pk):
 
 
 def edit_device(request, CS_Tag):
-    if not request.user.is_authenticated:
+    if not request.user.is_staff:
         raise PermissionDenied
     item = get_object_or_404(Device, CS_Tag=CS_Tag)
 
@@ -620,7 +614,7 @@ def checkDuplicateIP(ip):
     
 
 def assignip_new_hostname(request, CS_Tag):
-    if not request.user.is_authenticated:
+    if not request.user.is_staff:
         raise PermissionDenied
     
     if request.method == 'POST':
@@ -667,7 +661,7 @@ def assignip_new_hostname(request, CS_Tag):
 
 
 def assignip_to_device(request, CS_Tag):
-    if not request.user.is_authenticated:
+    if not request.user.is_staff:
         raise PermissionDenied
     
     if request.method == 'POST':

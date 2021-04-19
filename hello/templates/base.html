@@ -354,7 +354,7 @@
 		</ul>
 	</div>
 </nav>
-
+{% if request.user.is_active and request.user.is_staff %}
 <div class="container-fluid sticky-top text-center">
     <nav class='navbar nav-column justify-content-start'>
         <br>
@@ -437,7 +437,7 @@
         }
     </style>
 </div>
-
+{% endif %}
 
 {% block content %}{% endblock %}
 <a id="back-to-top" href="#" class="btn btn-lg back-to-top" role="button"><i

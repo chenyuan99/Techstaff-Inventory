@@ -1,18 +1,20 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-<div class="jumbotron text-center">
-	<div class="container">
-		<h4>{{user.username|title}}'s History</h4>
+<!-- <div class="jumbotron text-center"> -->
+	<div class="container text-center">
+		<h4>{{user.username|title}}'s Assigned Devices</h4>
 	</div>
-</div>
+<!-- </div> -->
 <div class="container-fluid">
 	<div class="panel panel-default">
 		<br>
+		{% if request.user.is_active and request.user.is_staff %}
 		<div class="button-group">
-			<a href="{% url 'add_userDevice' %}" class="btn btn-outline-primary btn-md" role="button">Add
-				UserDevices</a>
+			<a href="{% url 'add_userDevice' %}" class="btn btn-outline-primary btn-md" role="button">Assign Device
+				</a>
 		</div>
+		{% endif %}
 		<br>
 		<table id="info-table" class="table table-hover">
 			<thead>
