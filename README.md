@@ -4,7 +4,7 @@
 
 ## Team Member
 
-- Weikai Liang (Prooduct Manager)
+- Weikai Liang (Project Manager)
 - Yuan Chen, Jun Chen, Kai Lynn
 
 ## Guidance
