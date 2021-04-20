@@ -126,23 +126,32 @@ def privacy(request):
 def check_out(request, pk):
     if not request.user.is_authenticated:
         raise PermissionDenied
+
     userdevice = get_object_or_404(UserDevice, pk=pk)
-    device = get_object_or_404(Device, pk=userdevice.DeviceID)
-    user = get_object_or_404(Faculty, PID=userdevice.UserPID)
-    context = {
-        'VT_Property': device.VT_Tag,
-        'CS_Property': device.CS_Tag,
-        "is_student_user": False,
-        "Office_Addr": user.Office_Addr,
-        "pid": user.PID,
-        "full_name": user.FirstName + ' ' + user.LastName,
-        "description": device.description,
-        "serial": device.Serial_Number,
-        "serial": device.Serial_Number,
-        "checkout_date": userdevice.CheckoutDate,
-    }
-    # Render the HTML template index.html with the data in the context variable
-    return render(request, "check-out.html", context=context)
+    if request.method == 'POST':
+        userdevice_form = UserDeviceCheckoutForm(request.POST, instance=userdevice)
+        if userdevice_form.is_valid():
+            userdevice_form.save()
+            return display_userDevice(request)
+    else:
+        device = get_object_or_404(Device, pk=userdevice.DeviceID)
+        user = get_object_or_404(Faculty, PID=userdevice.UserPID)
+        context = {
+            'VT_Property': device.VT_Tag,
+            'CS_Property': device.CS_Tag,
+            "is_student_user": False,
+            "Office_Addr": user.Office_Addr,
+            "pid": user.PID,
+            "full_name": user.FirstName + ' ' + user.LastName,
+            "description": device.description,
+            "serial": device.Serial_Number,
+            "serial": device.Serial_Number,
+            "checkout_date": userdevice.CheckoutDate,
+            "Note" : userdevice.Note
+            
+        }
+        # Render the HTML template index.html with the data in the context variable
+        return render(request, "check-out.html", context=context)
 
 # display different userdevices based on their permissions
 def account(request):

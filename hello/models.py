@@ -50,7 +50,7 @@ class UserDevice(models.Model):
     isCheckedOut = models.BooleanField(default=False)
     Address = models.CharField(max_length=100, blank=True, null=True)
     CheckoutDate = models.DateField(auto_now=True)  # create time (automatic)
-    ReturnDate = models.DateField(default='YYYY-MM-DD', blank=True, null=True)  # create time (automatic)
+    ReturnDate = models.DateField(blank=True, null=True)  # create time (automatic)
     
     class Meta:
         unique_together = ('UserPID', 'DeviceID', 'CheckoutDate')
