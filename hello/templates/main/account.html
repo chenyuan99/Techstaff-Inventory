@@ -1,72 +1,78 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-<!-- <div class="jumbotron text-center"> -->
+	<!-- <div class="jumbotron text-center"> -->
 	<div class="container text-center">
 		<h4>{{user.username|title}}'s Assigned Devices</h4>
 	</div>
-<!-- </div> -->
-<div class="container-fluid">
-	<div class="panel panel-default">
-		<br>
-		{% if request.user.is_active and request.user.is_staff %}
-		<div class="button-group">
-			<a href="{% url 'add_userDevice' %}" class="btn btn-outline-primary btn-md" role="button">Assign Device
-				</a>
-		</div>
-		{% endif %}
-		<br>
-		<table id="info-table" class="table table-hover">
-			<thead>
+	<!-- </div> -->
+	<div class="container-fluid">
+		<div class="panel panel-default">
+			<br>
+			{% if request.user.is_active and request.user.is_staff %}
+				<div class="button-group">
+					<a href="{% url 'add_userDevice' %}" class="btn btn-outline-primary btn-md" role="button">Assign Device
+					</a>
+				</div>
+			{% endif %}
+			<br>
+			<table id="info-table" class="table table-hover">
+				<thead>
 				<tr>
 					<th>Custodian Pid</th>
 					<th>DeviceID</th>
 					<th>Checkout Date</th>
 					<!-- <th>Faculty</th> -->
-					<th>Edit or Delete</th>
+					<th>Action</th>
 					<th>View</th>
 				</tr>
-			</thead>
+				</thead>
 
-			<tbody>
+				<tbody>
 
 				{% for item in items %}
 
-				<!-- UserPID =  models.CharField(max_length=100, default = '')
-				DeviceID = models.CharField(max_length=100, default = '')
-				Note = models.CharField(max_length=100, default = '')
-				Custodian = models.CharField(max_length=64, default = '')
-				isHomeUse = models.BooleanField(default=False)
-				CheckoutDate = models.DateField()  # create time (automatic)
-				ReturnDate = models.DateField()  # create time (automatic) -->
+					<!-- UserPID =  models.CharField(max_length=100, default = '')
+                    DeviceID = models.CharField(max_length=100, default = '')
+                    Note = models.CharField(max_length=100, default = '')
+                    Custodian = models.CharField(max_length=64, default = '')
+                    isHomeUse = models.BooleanField(default=False)
+                    CheckoutDate = models.DateField()  # create time (automatic)
+                    ReturnDate = models.DateField()  # create time (automatic) -->
 
-				<tr>
-					{% if item.UserPID == user.username %}
-					<td>{{ item.UserPID }}</td>
-					<td>{{ item.DeviceID }}</td>
-					<!-- <td>{{ item.Custodian }}</td> -->
-					<!-- <td>{{ item.isHomeUse }}</td> -->
-					<td>{{ item.CheckoutDate }}</td>
-					<!-- <td>{{ item.ReturnDate }}</td> -->
-					<td>
-						<a href="{% url 'edit_userDevice' item.pk %}" class="btn btn-outline-info btn-sm"
-							role="button">Edit</a>
-						<a href="{% url 'delete_userDevice' item.pk %}" class="btn btn-outline-danger btn-sm"
-							role="button">Delete</a>
-					</td>
-					<td>
-						<a href="{% url 'check-out' item.pk %}"> View Checkout</a>
-					</td>
+					<tr>
+						{% if item.UserPID == user.username %}
+							<td data-label="Custodian PID">{{ item.UserPID }}</td>
+							<td data-label="CS_Tag">{{ item.DeviceID }}</td>
+							<!-- <td>{{ item.Custodian }}</td> -->
+							<!-- <td>{{ item.isHomeUse }}</td> -->
+							<td data-label="Check out Date">
+								{% if item.isCheckedOut %}
+									{{ item.CheckoutDate }}
+								{% else %}
+									Not Checked Out
+								{% endif %}
+							</td>
+							<!-- <td>{{ item.ReturnDate }}</td> -->
+							<td data-label="Action">
+								<a href="{% url 'edit_userDevice' item.pk %}" class="btn btn-outline-info btn-sm"
+								   role="button">Edit</a>
+								<a href="{% url 'delete_userDevice' item.pk %}" class="btn btn-outline-danger btn-sm"
+								   role="button">Delete</a>
+							</td>
+							<td data-label="Checkout Form">
+								<a href="{% url 'check-out' item.pk %}"> View Checkout</a>
+							</td>
 
-					{% endif %}
+						{% endif %}
 
-				</tr>
+					</tr>
 
 				{% endfor %}
 
-			</tbody>
+				</tbody>
 
-		</table>
+			</table>
+		</div>
 	</div>
-</div>
 {% endblock %}
