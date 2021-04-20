@@ -128,9 +128,10 @@ def check_out(request, pk):
         raise PermissionDenied
 
     userdevice = get_object_or_404(UserDevice, pk=pk)
+
     if request.method == 'POST':
-        userdevice_form = UserDeviceCheckoutForm(request.POST, instance=userdevice)
         if userdevice_form.is_valid():
+            userdevice_form = UserDeviceCheckoutForm(request.POST, instance=userdevice)
             userdevice_form.save()
             return display_userDevice(request)
     else:
@@ -147,7 +148,8 @@ def check_out(request, pk):
             "serial": device.Serial_Number,
             "serial": device.Serial_Number,
             "checkout_date": userdevice.CheckoutDate,
-            "Note" : userdevice.Note
+            "Note" : userdevice.Note,
+            "form" : UserDeviceCheckoutForm,
             
         }
         # Render the HTML template index.html with the data in the context variable

@@ -4,7 +4,7 @@
 	  <TITLE>
 		Computer Science Checkout Form
 	  </TITLE>
-	  <link rel="shortcut icon" href="/favicon.ico"> 
+	  <link rel="shortcut icon" href="/favicon.ico">
 	</HEAD>
 	<BODY BGCOLOR=FFFFFF TEXT=000000>
 	<CENTER>
@@ -12,7 +12,7 @@
 	  <H2>
 		Equipment Checkout Form
 	  </H2>
-	  All equipment checked out is property of the CS Dept. and should be returned in 
+	  All equipment checked out is property of the CS Dept. and should be returned in
 	  exactly the same condition.  All equipment is inventoried.  By signing below, you
 	  agree that you are responisble for this equipment and its return.  Faculty/Staff
 	  loaner machines must be returned.
@@ -29,7 +29,7 @@
 		</td>
 	  </tr>
 	  <tr>
-		<td colspan=2> 
+		<td colspan=2>
 		  <b>CS Property #:</b>
 		</td>
 		<td>
@@ -131,7 +131,7 @@
 	  <tr>
 		<td width=50>
 		</td>
-		<td> 
+		<td>
 		  <!-- <img width=70 height=30 src=../static/underline.gif valign=bottom>  -->
 		  <input type="radio" id="horns" name="horns">
 		</td>
@@ -182,19 +182,21 @@
 		  <img width=300 height=30 src=../static/underline.gif valign=bottom>
 		</td>
 	  </tr>
-	  
+
 	  </table>
-	
+
 	  {% load crispy_forms_tags %}
 	  <form method="POST">
 		<br>
 		{% csrf_token %}
 
-		<div class="form-group row">
-			<div class="col-10">
-				{{Note}}
-			</div>
-		</div>
+		{% for field in form %}
+				<div class="form-group row">
+					<div class="col-10">
+						{{ field|as_crispy_field }}
+					</div>
+				</div>
+		{% endfor %}
 
 		<button type="submit" class="btn btn-primary" name="button">Submit</button>
 	</form>
