@@ -130,26 +130,31 @@ def check_out(request, pk):
     userdevice = get_object_or_404(UserDevice, pk=pk)
 
     if request.method == 'POST':
+        userdevice_form = UserDeviceCheckoutForm(request.POST, instance=userdevice)
         if userdevice_form.is_valid():
-            userdevice_form = UserDeviceCheckoutForm(request.POST, instance=userdevice)
             userdevice_form.save()
             return display_userDevice(request)
     else:
         device = get_object_or_404(Device, pk=userdevice.DeviceID)
         user = get_object_or_404(Faculty, PID=userdevice.UserPID)
+        initial = {
+            'Note' : userdevice.Note
+        }
+        userdevice_form = UserDeviceCheckoutForm(request.POST, instance=userdevice, initial=initial)
+
         context = {
             'VT_Property': device.VT_Tag,
             'CS_Property': device.CS_Tag,
             "is_student_user": False,
             "Office_Addr": user.Office_Addr,
+            "Office_Room": userdevice.Room if userdevice.Room else '',
             "pid": user.PID,
             "full_name": user.FirstName + ' ' + user.LastName,
             "description": device.description,
             "serial": device.Serial_Number,
-            "serial": device.Serial_Number,
             "checkout_date": userdevice.CheckoutDate,
             "Note" : userdevice.Note,
-            "form" : UserDeviceCheckoutForm,
+            "form" : userdevice_form
             
         }
         # Render the HTML template index.html with the data in the context variable

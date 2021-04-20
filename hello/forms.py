@@ -63,7 +63,7 @@ class UserDeviceCheckoutForm(forms.ModelForm):
         self.fields['Note'].help_text = 'Fill in student\'s email if checkout to student.'
     class Meta:
         model = UserDevice
-        fields = ('isCheckedOut','Note')
+        fields = ('Note',)
 
 
 

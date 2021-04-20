@@ -86,6 +86,18 @@
 		  <u>{{ Office_Addr }} </u>
 		</td>
 	  </tr>
+
+	  <tr>
+		<td width=50>
+		</td>
+		<td>
+		  Office Room:
+		</td>
+		<td>
+		  <u>{{ Office_Room }} </u>
+		</td>
+	  </tr>
+
 	  <tr>
 		<td width=50>
 		</td>
@@ -96,6 +108,21 @@
 		  <u>{{ pid }}@vt.edu</b>
 		</td>
 	  </tr>
+
+
+	  {% if Note %}
+		<tr>
+			<td width=50>
+			</td>
+			<td>
+			Note: 
+			</td>
+			<td>
+			<u>{{Note}}</b>
+			</td>
+		</tr>
+	  {% endif %}
+	  
 	  {% if is_student_user %}
 	  <tr>
 		<td colspan=3>
