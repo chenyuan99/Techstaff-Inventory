@@ -47,9 +47,24 @@ class AddUserDeviceForm(forms.ModelForm):
         self.fields['ReturnDate'].required = False
         self.fields['isHomeUse'].label = 'Home Use'
         self.fields['isCheckedOut'].label = 'Item is checked out'
+        self.fields['ReturnDate'].help_text = 'Date format: YYYY-MM-DD'
     class Meta:
         model = UserDevice
         fields = '__all__'
+
+class UserDeviceCheckoutForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(UserDeviceCheckoutForm, self).__init__(*args, **kwargs)
+        self.helper = FormHelper(self)
+        self.helper.form_class = 'form-horizontal'
+        self.helper.label_class = 'col-lg-2'
+        self.helper.field_class = 'col-lg-8'
+        self.fields['Note'].required = False
+        self.fields['Note'].help_text = 'Fill in student\'s email if checkout to student.'
+    class Meta:
+        model = UserDevice
+        fields = ('isCheckedOut','Note')
+
 
 
 # add guest
