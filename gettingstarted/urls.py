@@ -55,7 +55,7 @@ urlpatterns = [
     url(r'^edit_device_detail/(?P<CS_Tag>[-\w]+)$', hello.views.edit_device_inDetailPage, name='edit_device_detail'),
     url(r'^delete_device/(?P<CS_Tag>[-\w]+)$', hello.views.delete_device, name='delete_device'),
     url(r'^view_device/(?P<CS_Tag>[-\w]+)$', hello.views.view_device, name='view_device'),
-
+    url(r'^assign_device$', hello.views.assign_device, name='assign_device'),
     url(r'^assign_ip/(?P<CS_Tag>[-\w]+)$', hello.views.assignip_to_device, name='assign_ip'),
     url(r'^assign_ip_new_host/(?P<CS_Tag>[-\w]+)$', hello.views.assignip_new_hostname, name='assignip_new_hostname'),
 

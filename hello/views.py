@@ -256,6 +256,21 @@ def display_userCase(request):
     }
     return render(request, 'usecases/assign_ip.html', content)
 
+def assign_device(request):
+    devices = Device.objects.all()
+    faculty = Faculty.objects.all()
+    myFilter1 = useCaseDeviceFilter(request.GET, queryset=devices)
+    myFilter2 = useCaseFacultyFilter(request.GET, queryset=faculty)
+    devs = myFilter1.qs
+    facs = myFilter2.qs
+    content = {
+        'devs': devs,
+        'facs': facs,
+        'myFilter1': myFilter1,
+        'myFilter2': myFilter2,
+    }
+    return render(request, 'usecases/assign_device.html', content)
+
 def display_ip(request):
     items = IPAddr.objects.all()
     myFilter = ipFilter(request.GET, queryset=items)
