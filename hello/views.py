@@ -253,9 +253,8 @@ def display_userCase(request):
         'facs': facs,
         'myFilter1': myFilter1,
         'myFilter2': myFilter2,
-
     }
-    return render(request, 'usecases/assign_device.html', content)
+    return render(request, 'usecases/assign_ip.html', content)
 
 def display_ip(request):
     items = IPAddr.objects.all()
