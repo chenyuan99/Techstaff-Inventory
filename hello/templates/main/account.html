@@ -22,7 +22,8 @@
 					<th>Custodian Pid</th>
 					<th>DeviceID</th>
 					<th>Checkout Date</th>
-					<!-- <th>Faculty</th> -->
+					<th>Address</th>
+					<th>Room</th>
 					<th>Action</th>
 					<th>View</th>
 				</tr>
@@ -52,6 +53,10 @@
 								{% else %}
 									Not Checked Out
 								{% endif %}
+							</td>
+							<td data-label="Address">{{ item.Address }}
+							</td>
+							<td data-label="Room">{{ item.Room }}
 							</td>
 							<!-- <td>{{ item.ReturnDate }}</td> -->
 							<td data-label="Action">
