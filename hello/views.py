@@ -243,7 +243,6 @@ def display_userDevice(request):
 
 def display_userCase(request):
     devices = Device.objects.all()
-    faculty = Faculty.objects.all()
     myFilter1 = useCaseDeviceFilter(request.GET, queryset=devices)
     devs = myFilter1.qs
     content = {
