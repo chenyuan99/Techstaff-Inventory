@@ -48,14 +48,8 @@
 						<td data-label="Serial_Number">{{ item.Serial_Number }}</td>
 						<td data-label="Status">{{ item.status }}</td>
 						<td data-label="Action">
-							<a href="{% url 'view_device' item.CS_Tag %}" class="btn btn-outline-success btn-sm"
-								role="button"><i class="bi bi-sticky-fill"></i> View</a>
 							<a href="{% url 'assign_ip' item.CS_Tag %}" class="btn btn-outline-success btn-sm"
 								role="button"><i class="bi bi-sticky-fill"></i> Assign IP</a>
-							<a href="{% url 'edit_device' item.CS_Tag %}" class="btn btn-outline-info btn-sm"
-								role="button"><i class="bi bi-pen-fill"></i> Edit</a>
-							<a href="{% url 'delete_device' item.CS_Tag %}" class="btn btn-outline-danger btn-sm"
-								role="button"><i class="bi bi-trash-fill"></i> Delete</a>
 						</td>
 						{% endfor %}
 						{% elif devs|length == 0 %}
