@@ -4,7 +4,7 @@
 
 <div class="container text-center">
 	<h2>Device {{item.CS_Tag}} Detail Page</h2>
-	<table class="table table-striped text-left">
+	<table id="info-table" class="table table-striped text-left">
 		<tr>
 			<td align=left><b>CS_Tag</b></td>
 			<td data-label="CS_Tag">{{ item.CS_Tag }}</td>
@@ -44,19 +44,19 @@
 		{% for item in userdevices %}
 		<tr>
 			<td><b>Custodian Pid</b></td>
-			<td>{{ item.UserPID }}</td>
+			<td data-label="User PID">{{ item.UserPID }}</td>
 		</tr>
 		<tr>
 			<td><b>Checkout Date</b></td>
-			<td>{{ item.CheckoutDate }}</td>
+			<td data-label="Check out Date">{{ item.CheckoutDate }}</td>
 		</tr>
 		<tr>
 			<td><b>Home Use</b> </td>
-			<td>{{ item.isHomeUse }}</td>
+			<td data-label="isHomeUse">{{ item.isHomeUse }}</td>
 		</tr>
 		<tr>
 			<td><b>UserDevice Action</b> </td>
-			<td>
+			<td data-label="Action">
 				<a href="{% url 'edit_userDevice' item.pk %}" class="btn btn-outline-info btn-sm" role="button">Edit</a>
 				<a href="{% url 'delete_userDevice' item.pk %}" class="btn btn-outline-danger btn-sm"
 					role="button">Delete</a>
@@ -66,15 +66,15 @@
 		{% for item in networks %}
 			<tr>
 				<td><b>Network Hostname</b></td>
-				<td>{{ item.Hostname }}</td>
+				<td data-label="Hostname">{{ item.Hostname }}</td>
 			</tr>
 			<tr>
 				<td><b>Network Aliases</b></td>
-				<td>{{ item.Aliases }}</td>
+				<td data-label="Aliases">{{ item.Aliases }}</td>
 			</tr>
 			<tr>
 				<td><b>Building Abbreviation</b></td>
-				<td>{{ item.Building_Abbr }}</td>
+				<td data-label="Building Abbreviation">{{ item.Building_Abbr }}</td>
 			</tr>
 
 

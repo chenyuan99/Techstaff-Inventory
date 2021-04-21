@@ -4,7 +4,7 @@
 
 	<div class="container text-center">
 		<h2> {{item.Hostname}} Detail Page</h2>
-		<table class="table table-striped text-left">
+		<table id="info-table" class="table table-striped text-left">
 			<tr>
 				<td align=left><b>Hostname</b></td>
 				<td data-label="Hostname">{{ item.Hostname }}</td>
@@ -44,7 +44,7 @@
 						<td data-label="IP Status">{{ item.status }}</td>
 					</tr>
 					<tr>
-						<td align=left><b>Action</b></td>
+						<td align=left><b>IP Action</b></td>
 						<td data-label="Action">
 							<a href="{% url 'edit_ip' item.IPID %}" class="btn btn-outline-info btn-sm" role="button">Edit IP</a>
 							<a href="{% url 'delete_ip' item.IPID %}" class="btn btn-outline-danger btn-sm"

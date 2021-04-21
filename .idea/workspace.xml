@@ -21,9 +21,7 @@
   <component name="ChangeListManager">
     <list default="true" id="b56e6bd6-b008-43bd-b67c-75ea4ace249c" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hello/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/hello/templates/base.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/hello/templates/device_detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/hello/templates/device_detail.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hello/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/hello/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -103,6 +101,8 @@
       <workItem from="1617393534448" duration="56000" />
       <workItem from="1617593299552" duration="192000" />
       <workItem from="1617631653796" duration="5342000" />
+      <workItem from="1618945270546" duration="3147000" />
+      <workItem from="1619017769024" duration="306000" />
     </task>
     <servers />
   </component>
@@ -126,5 +126,9 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="740" y="275" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1617393587956" />
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1618946507284">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1618946507284" />
   </component>
 </project>
