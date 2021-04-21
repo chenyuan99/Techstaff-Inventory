@@ -231,9 +231,12 @@ def display_faculty(request):
 
 
 def display_userDevice(request):
-    items = UserDevice.objects.all()
+    if not request.user.is_staff:
+        items = UserDevice.objects.filter(UserPID=request.user.username)
+    else:
+        items = UserDevice.objects.all()    
     myFilter = UserDeviceFilter(request.GET, queryset=items)
-    items = myFilter.qs
+    items = myFilter.qs    
     context = {
         'items': items,
         'header': 'UserDevice',
