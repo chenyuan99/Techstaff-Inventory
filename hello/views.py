@@ -46,7 +46,6 @@ def index(request):
     else:
         return redirect('/display_userDevice')
 
-
 def about(request):
     return render(request, "main/about.html")
 
@@ -131,8 +130,16 @@ def check_out(request, pk):
     if request.method == 'POST':
         userdevice_form = UserDeviceCheckoutForm(request.POST, instance=userdevice)
         if userdevice_form.is_valid():
-            userdevice_form.save()
-            return display_userDevice(request)
+
+            userDevice = userdevice_form.save(commit=False)
+            if userDevice.isCheckedOut == False:
+                userDevice.isCheckedOut = True
+            device = Device.objects.filter(CS_Tag=userDevice.DeviceID)
+            if device and device[0].status == 'In Storage':
+                device[0].status = 'In Use'
+                device[0].save()
+            userDevice.save()
+            return redirect('display_userDevice')
     else:
         device = get_object_or_404(Device, pk=userdevice.DeviceID)
         user = get_object_or_404(Faculty, PID=userdevice.UserPID)
@@ -152,6 +159,7 @@ def check_out(request, pk):
             "description": device.description,
             "serial": device.Serial_Number,
             "checkout_date": userdevice.CheckoutDate,
+            "notCheckedOut" : not userdevice.isCheckedOut,
             "Note" : userdevice.Note,
             "form" : userdevice_form
             
@@ -270,6 +278,11 @@ def assign_device(request):
 
 def display_ip(request):
     items = IPAddr.objects.all()
+    for item in items:
+        if item.status == 'Assigned':
+            network = NetworkInterface.objects.filter(NetworkID=item.NetworkID)
+            item.assignedDeviceID = network[0].DeviceID
+            item.save()
     myFilter = ipFilter(request.GET, queryset=items)
     items = myFilter.qs
     context = {
@@ -567,6 +580,10 @@ def delete_building(request, pk):
 def delete_userDevice(request, pk):
     userDevice = UserDevice.objects.get(pk=pk)
     if request.method == "POST":
+        device = Device.objects.get(CS_Tag=userDevice.DeviceID)
+        if device and device.status == 'In Use':
+            device.status = 'In Storage'
+            device.save()
         userDevice.delete()
         return display_userDevice(request)
 
