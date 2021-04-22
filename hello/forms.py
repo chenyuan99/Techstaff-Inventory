@@ -43,6 +43,7 @@ class AddUserDeviceForm(forms.ModelForm):
         self.helper.field_class = 'col-lg-8'
 
         self.fields['Note'].required = False
+        self.fields['Note'].help_text = 'Fill in student\'s email if checkout to a student by a faculty.'
         self.fields['Address'].required = False
         self.fields['ReturnDate'].required = False
         self.fields['isHomeUse'].label = 'Home Use'
@@ -60,7 +61,6 @@ class UserDeviceCheckoutForm(forms.ModelForm):
         self.helper.label_class = 'col-lg-2'
         self.helper.field_class = 'col-lg-8'
         self.fields['Note'].required = False
-        self.fields['Note'].help_text = 'Fill in student\'s email if checkout to student.'
     class Meta:
         model = UserDevice
         fields = ('Note',)
@@ -160,10 +160,10 @@ class AddIpAddressForm(forms.ModelForm):
         self.helper.label_class = 'col-lg-2'
         self.helper.field_class = 'col-lg-8'
 
-
     class Meta:
         model = IPAddr
         fields = '__all__'
+        exclude = ('assignedDeviceID',)
 
 class AddIpAddressForm_no_hostname(forms.ModelForm):
     randomIPv6 = forms.BooleanField()
@@ -182,7 +182,7 @@ class AddIpAddressForm_no_hostname(forms.ModelForm):
     class Meta:
         model = IPAddr
         fields = '__all__'
-        exclude = ('status','Building_Abbr')
+        exclude = ('status','Building_Abbr', 'assignedDeviceID')
 
 
 
