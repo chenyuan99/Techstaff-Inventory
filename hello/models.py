@@ -84,6 +84,6 @@ class IPAddr(models.Model):
         ('Assigned', 'Assigned'),
         ('Available', 'Available')
     )
-
+    assignedDeviceID = models.CharField(max_length=64, blank=True)
     status = models.CharField(max_length=20, choices=choices, default='Available', blank=True, null=True) 
     history = HistoricalRecords()

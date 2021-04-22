@@ -211,21 +211,23 @@
 	  </tr>
 
 	  </table>
+	    {% if notCheckedOut %}
+			{% load crispy_forms_tags %}
+			<form method="POST">
+				<br>
+				{% csrf_token %}
 
-	  {% load crispy_forms_tags %}
-	  <form method="POST">
-		<br>
-		{% csrf_token %}
+				{% for field in form %}
+						<div class="form-group row">
+							<div class="col-10">
+								{{ field|as_crispy_field }} 
+								<b>Fill in student' email if check out to a student by a faculty.</b>
+							</div>
+						</div>
+				{% endfor %}
 
-		{% for field in form %}
-				<div class="form-group row">
-					<div class="col-10">
-						{{ field|as_crispy_field }}
-					</div>
-				</div>
-		{% endfor %}
-
-		<button type="submit" class="btn btn-primary" name="button">Submit</button>
-	</form>
+				<button type="submit" class="btn btn-primary" name="button">Submit</button>
+			</form>
+		{% endif %}
 	</BODY>
 </HTML> 
