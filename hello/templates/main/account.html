@@ -42,7 +42,7 @@
                     ReturnDate = models.DateField()  # create time (automatic) -->
 
 					<tr>
-						{% if item.UserPID == user.username %}
+						<!-- {% if item.UserPID == user.username %} -->
 							<td data-label="Custodian PID">{{ item.UserPID }}</td>
 							<td data-label="CS_Tag">{{ item.DeviceID }}</td>
 							<!-- <td>{{ item.Custodian }}</td> -->
@@ -69,7 +69,7 @@
 								<a href="{% url 'check-out' item.pk %}"> View Checkout</a>
 							</td>
 
-						{% endif %}
+						<!-- {% endif %} -->
 
 					</tr>
 

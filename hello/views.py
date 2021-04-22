@@ -44,8 +44,7 @@ def index(request):
     elif request.user.is_staff:
         return render(request, "index.html")
     else:
-        query_results = UserDevice.objects.all()
-        return render(request, "main/account.html", {'query_results': query_results})
+        return redirect('/display_userDevice')
 
 
 def about(request):
