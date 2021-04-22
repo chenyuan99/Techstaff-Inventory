@@ -212,7 +212,11 @@
 						<td data-label="Building_Abbreviation">{{ item.Building_Abbr }}</td>
 						<td data-label="IPv4">{{ item.IPv4 }}</td>
 						<td data-label="IPv6">{{ item.IPv6 }}</td>
-						<td data-label="Status">{{ item.status }}</td>
+						{% if item.status == 'Available' %}
+							<td data-label="Status">Available</td>
+						{% else %}
+							<td data-label="Status">Assigned to {{item.assignedDeviceID}}</td>
+						{% endif %}
 						<td data-label="Action">
 							<a href="{% url 'edit_ip' item.IPID %}" class="btn btn-outline-info btn-sm"
 							   role="button">Edit</a>
