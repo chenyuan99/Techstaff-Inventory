@@ -872,7 +872,7 @@ def upload_devices(request):
         dataset = Dataset()
         new_persons = request.FILES['myfile']
 
-        imported_data = dataset.load(new_persons.read())
+        imported_data = dataset.load(new_persons.read().decode(), format='csv', headers=False)
         result = person_resource.import_data(dataset, dry_run=True)  # Test the data import
 
         if not result.has_errors():
@@ -886,7 +886,7 @@ def upload_hostnames(request):
         dataset = Dataset()
         new_persons = request.FILES['myfile']
 
-        imported_data = dataset.load(new_persons.read())
+        imported_data = dataset.load(new_persons.read().decode(), format='csv', headers=False)
         result = person_resource.import_data(dataset, dry_run=True)  # Test the data import
 
         if not result.has_errors():
@@ -900,7 +900,7 @@ def upload_buildings(request):
         dataset = Dataset()
         new_persons = request.FILES['myfile']
 
-        imported_data = dataset.load(new_persons.read())
+        imported_data = dataset.load(new_persons.read().decode(), format='csv', headers=False)
         result = person_resource.import_data(dataset, dry_run=True)  # Test the data import
 
         if not result.has_errors():

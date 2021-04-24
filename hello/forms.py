@@ -5,6 +5,10 @@ from hello.models import *
 from django.forms import ModelForm
 from crispy_forms.helper import FormHelper
 
+class UploadFileForm(forms.Form):
+    title = forms.CharField(max_length=50)
+    file = forms.FileField()
+
 
 class NewUserForm(UserCreationForm):
     email = forms.EmailField(required=True)
