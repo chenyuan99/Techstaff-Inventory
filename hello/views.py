@@ -424,12 +424,17 @@ def edit_network(request, pk):
         form = AddNetworkForm(instance=item)
         return render(request, 'edit_item.html', {'form': form})
 
-def edit_ip(request, IPID, networkID=None):
+def edit_ip(request, IPID):
     if not request.user.is_staff:
         raise PermissionDenied
     item = get_object_or_404(IPAddr, IPID=IPID)
 
     if request.method == 'POST':
+
+        if request.POST.get('IPv4') and checkDuplicateIPv4(request.POST.get('IPv4'), IPID, request):
+            return redirect('display_ip')
+        if request.POST.get('IPv6') and checkDuplicateIPv6(request.POST.get('IPv6'), IPID, request):
+            return redirect('display_ip')
         form = EditIpAddressForm(request.POST, instance=item)
         if form.is_valid():
             ip = form.save(commit=False)
@@ -655,8 +660,25 @@ def edit_device_inDetailPage(request, CS_Tag):
         return render(request, 'edit_item.html', {'form': form})
 
 #TODO: check IP address duplicates
-def checkDuplicateIP(ip):
-    ip_list = [ip for ip in IPAddr.objects.all()]
+def checkDuplicateIPv4(ipv4, IPID, request):
+    matchIPv4 = IPAddr.objects.filter(IPv4=ipv4)
+    if matchIPv4 and IPID and matchIPv4[0].IPID != int(IPID):
+        messages.info(request, 'Cannot assign duplicate IPv4 addresses. IP not assigned.')
+        return True
+    elif matchIPv4 and IPID == None:
+        messages.info(request, 'IPv4 address already assigned. IP not assigned.')
+        return True
+    return False
+    
+def checkDuplicateIPv6(ipv6, IPID, request):
+    matchIPv6 = IPAddr.objects.filter(IPv6=ipv6)
+    if matchIPv6 and IPID and matchIPv6[0].IPID != int(IPID):
+        messages.info(request, 'Cannot assign duplicate IPv6 addresses. IP not assigned.')
+        return True
+    elif matchIPv6 and IPID == None:
+        messages.info(request, 'IPv6 address already assigned. IP not assigned.')
+        return True
+    return False
     
 
 def assignip_new_hostname(request, CS_Tag):
@@ -665,10 +687,15 @@ def assignip_new_hostname(request, CS_Tag):
     
     if request.method == 'POST':
         network_form = AddNetwork_assign_ip(request.POST)
-        ip_form = AddIpAddressForm(request.POST)
+        
         if network_form.is_valid():
             network_form.save()
-        
+
+        if request.POST.get('IPv4') and checkDuplicateIPv4(request.POST.get('IPv4'), None, request):
+            return redirect('display_ip')
+        if request.POST.get('IPv6') and checkDuplicateIPv6(request.POST.get('IPv6'), None, request):
+            return redirect('display_ip')
+        ip_form = AddIpAddressForm(request.POST)
         if ip_form.is_valid():
             ip = ip_form.save(commit=False)
             if request.POST.get('randomIPv6') == 'on':
@@ -711,9 +738,15 @@ def assignip_to_device(request, CS_Tag):
         raise PermissionDenied
     
     if request.method == 'POST':
+
+        if request.POST.get('IPv4') and checkDuplicateIPv4(request.POST.get('IPv4'), None, request):
+            return redirect('display_ip')
+        if request.POST.get('IPv6') and checkDuplicateIPv6(request.POST.get('IPv6'), None, request):
+            return redirect('display_ip')
         form = AddIpAddressForm(request.POST)
         if form.is_valid():
             ip = form.save(commit=False)
+            
             if request.POST.get('randomIPv6') == 'on':
                 # look for Building abbr: 
                 if ip.Building_Abbr:
@@ -735,8 +768,7 @@ def assignip_to_device(request, CS_Tag):
                     return redirect('display_ip') 
                 
             ip.status = 'Assigned'
-            networkID = max([network.NetworkID for network in NetworkInterface.objects.all()])
-            ip.NetworkID = networkID
+            ip.NetworkID = request.POST.get('NetworkID')
             ip.save()
             messages.success(request, 'IP address for ' + CS_Tag + ' assigned!')
 
