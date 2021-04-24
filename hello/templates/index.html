@@ -118,6 +118,7 @@
 				<th>Building_Abbreviation</th>
 				<th>Building Name</th>
 				<th>Building Address</th>
+				<th>IPv6_prefix</th>
 				<th>Action</th>
 
 			{% endif %}
@@ -185,7 +186,7 @@
 						<td data-label="Building_Abbreviation">{{ item.Building_Abbr }}</td>
 						<td data-label="Building Name">{{ item.Building_Name }}</td>
 						<td data-label="Building_Addr">{{ item.Building_Addr }}</td>
-						{# <td>{{ item.MAC_Address }}</td>#}
+						<td data-label="IPv6_prefix">{{ item.IPv6_prefix }}</td>
 						<td data-label="Action">
 							<a href="{% url 'edit_building' item.pk %}" class="btn btn-outline-info btn-sm"
 							   role="button">Edit</a>

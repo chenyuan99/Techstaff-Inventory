@@ -101,7 +101,7 @@ class deviceForm(forms.ModelForm):
 
     class Meta:
         model = Device
-        exclude = ('CS_Tag',)
+        fields = '__all__'
 
 
 # class userDeviceForm(forms.ModelForm):
