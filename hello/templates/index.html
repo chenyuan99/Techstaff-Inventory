@@ -108,6 +108,8 @@
 				<th>Office Address</th>
 				<th>Firstname</th>
 				<th>Lastname</th>
+				<th>Email</th>
+				<th>Phone</th>
 				<th>Action</th>
 
 			{% endif %}
@@ -198,6 +200,8 @@
 						<td data-label="Office Address">{{ item.Office_Addr }}</td>
 						<td data-label="Firstname">{{ item.FirstName }}</td>
 						<td data-label="Lastname">{{ item.LastName }}</td>
+						<td data-label="Email">{{ item.email }}</td>
+						<td data-label="Phone">{{ item.phone }}</td>
 						<td data-label="Action">
 							<a href="{% url 'edit_faculty' item.PID %}" class="btn btn-outline-info btn-sm"
 							   role="button">Edit</a>

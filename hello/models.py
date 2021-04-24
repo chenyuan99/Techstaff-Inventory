@@ -8,6 +8,8 @@ class Faculty(models.Model):
     Office_Addr = models.CharField(max_length=100, default = '')
     FirstName = models.CharField(max_length=100, default = 'First name')
     LastName = models.CharField(max_length=100, default = 'Last name')
+    phone = models.CharField(max_length=100, default = '', blank=True, null=True)
+    email = models.CharField(max_length=100, default = '', blank=True, null=True)
     history = HistoricalRecords()
 
 class Device(models.Model):

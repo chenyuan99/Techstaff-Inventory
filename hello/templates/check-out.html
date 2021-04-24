@@ -97,19 +97,31 @@
 		  <u>{{ Office_Room }} </u>
 		</td>
 	  </tr>
+	  {% if email %}
+		<tr>
+			<td width=50>
+			</td>
+			<td>
+			Email:
+			</td>
+			<td>
+			<u>{{ email }}</b>
+			</td>
+		</tr>
+	  {% endif %}
 
+	  {% if email %}
 	  <tr>
 		<td width=50>
 		</td>
 		<td>
-		  Email/Phone:
+		  Phone:
 		</td>
 		<td>
-		  <u>{{ pid }}@vt.edu</b>
+		  <u>{{ phone }}</b>
 		</td>
 	  </tr>
-
-
+	  {% endif %}
 	  {% if Note %}
 		<tr>
 			<td width=50>
@@ -143,7 +155,7 @@
 		<td width=50>
 		</td>
 		<td>
-		  Email/Phone:
+		  Email:
 		</td>
 		<td>
 		  <u></u>

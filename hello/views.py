@@ -155,6 +155,8 @@ def check_out(request, pk):
             "Office_Addr": user.Office_Addr,
             "Office_Room": userdevice.Room if userdevice.Room else '',
             "pid": user.PID,
+            "email": user.email,
+            "phone": user.phone,
             "full_name": user.FirstName + ' ' + user.LastName,
             "description": device.description,
             "serial": device.Serial_Number,
@@ -855,7 +857,7 @@ def simple_upload(request):
         person_resource = DeviceResource()
         dataset = Dataset()
         new_persons = request.FILES['myfile']
-
+        print(new_persons)
         imported_data = dataset.load(new_persons.read())
         result = person_resource.import_data(dataset, dry_run=True)  # Test the data import
 
