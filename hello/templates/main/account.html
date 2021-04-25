@@ -23,7 +23,9 @@
 					<th>Checkout Date</th>
 					<th>Address</th>
 					<th>Room</th>
-					<th>Action</th>
+					{% if request.user.is_active and request.user.is_staff %}
+						<th>Action</th>
+					{% endif %}
 					<th>View</th>
 				</tr>
 				</thead>
@@ -48,13 +50,14 @@
 						</td>
 						<td data-label="Room">{{ item.Room }}
 						</td>
-
-						<td data-label="Action">
-							<a href="{% url 'edit_userDevice' item.pk %}" class="btn btn-outline-info btn-sm"
-							   role="button">Edit</a>
-							<a href="{% url 'delete_userDevice' item.pk %}" class="btn btn-outline-danger btn-sm"
-							   role="button">Delete</a>
-						</td>
+						{% if request.user.is_active and request.user.is_staff %}
+							<td data-label="Action">
+								<a href="{% url 'edit_userDevice' item.pk %}" class="btn btn-outline-info btn-sm"
+								role="button">Edit</a>
+								<a href="{% url 'delete_userDevice' item.pk %}" class="btn btn-outline-danger btn-sm"
+								role="button">Delete</a>
+							</td>
+						{% endif %}
 						<td data-label="Checkout Form">
 							<a href="{% url 'check-out' item.pk %}"> View Checkout</a>
 						</td>
