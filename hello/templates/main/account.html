@@ -1,37 +1,41 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-	{% load crispy_forms_tags %}
-	<div class="container text-center">
-		<h4>{{user.username|title}}'s Assigned Devices</h4>
-	</div>
+{% load crispy_forms_tags %}
+<div class="container text-center">
+	<h4>{{user.username|title}}'s Assigned Devices</h4>
+</div>
 
-	<div class="container-fluid">
-		<div class="panel panel-default">
-			<br>
-			{% if request.user.is_active and request.user.is_staff %}
-				<div class="button-group">
-					<a href="{% url 'add_userDevice' %}" class="btn btn-outline-primary btn-md" role="button">Assign Device
-					</a>
-				</div>
-				<br>
-			{% endif %}
-			<form method="get">
-				<table>
-					<tr>
-						{% for field in myFilter.form %}
+<div class="container-fluid">
+	<div class="panel panel-default">
+		<br>
+		{% if request.user.is_active and request.user.is_staff %}
+		<div class="button-group">
+			<a href="{% url 'add_userDevice' %}" class="btn btn-outline-primary btn-md" role="button">Assign Device
+			</a>
+		</div>
+		<br>
+		{% endif %}
+		<div class="card bg-light">
+			<div class="card-body text-center">
+				<form method="get">
+					<table>
+						<tr>
+							{% for field in myFilter.form %}
 							<td>
 								{{ field|as_crispy_field }}
 							</td>
-						{% endfor %}
-					</tr>
-				</table>
-				<br>
-				<button class="btn btn-primary" type="submit"><i class="bi-search"></i>Device Search </button>
-			</form>
-			<br>
-			<table id="info-table" class="table table-hover">
-				<thead>
+							{% endfor %}
+						</tr>
+					</table>
+					<br>
+					<button class="btn btn-primary" type="submit"><i class="bi-search"></i>Device Search </button>
+				</form>
+			</div>
+		</div>
+		<br>
+		<table id="info-table" class="table table-hover">
+			<thead>
 				<tr>
 					<th>Custodian Pid</th>
 					<th>DeviceID</th>
@@ -39,53 +43,53 @@
 					<th>Address</th>
 					<th>Room</th>
 					{% if request.user.is_active and request.user.is_staff %}
-						<th>Action</th>
+					<th>Action</th>
 					{% endif %}
 					<th>View</th>
 				</tr>
-				</thead>
+			</thead>
 
-				<tbody>
+			<tbody>
 
 				{% for item in items %}
 
 
-					<tr>
-						<td data-label="Custodian PID">{{ item.UserPID }}</td>
-						<td data-label="CS_Tag">{{ item.DeviceID }}</td>
+				<tr>
+					<td data-label="Custodian PID">{{ item.UserPID }}</td>
+					<td data-label="CS_Tag">{{ item.DeviceID }}</td>
 
-						<td data-label="Check out Date">
-							{% if item.isCheckedOut %}
-								{{ item.CheckoutDate }}
-							{% else %}
-								Not Checked Out
-							{% endif %}
-						</td>
-						<td data-label="Address">{{ item.Address }}
-						</td>
-						<td data-label="Room">{{ item.Room }}
-						</td>
-						{% if request.user.is_active and request.user.is_staff %}
-							<td data-label="Action">
-								<a href="{% url 'edit_userDevice' item.pk %}" class="btn btn-outline-info btn-sm"
-								   role="button">Edit</a>
-								<a href="{% url 'delete_userDevice' item.pk %}" class="btn btn-outline-danger btn-sm"
-								   role="button">Delete</a>
-							</td>
+					<td data-label="Check out Date">
+						{% if item.isCheckedOut %}
+						{{ item.CheckoutDate }}
+						{% else %}
+						Not Checked Out
 						{% endif %}
-						<td data-label="Checkout Form">
-							<a href="{% url 'check-out' item.pk %}"> View Checkout</a>
-						</td>
+					</td>
+					<td data-label="Address">{{ item.Address }}
+					</td>
+					<td data-label="Room">{{ item.Room }}
+					</td>
+					{% if request.user.is_active and request.user.is_staff %}
+					<td data-label="Action">
+						<a href="{% url 'edit_userDevice' item.pk %}" class="btn btn-outline-info btn-sm"
+							role="button">Edit</a>
+						<a href="{% url 'delete_userDevice' item.pk %}" class="btn btn-outline-danger btn-sm"
+							role="button">Delete</a>
+					</td>
+					{% endif %}
+					<td data-label="Checkout Form">
+						<a href="{% url 'check-out' item.pk %}"> View Checkout</a>
+					</td>
 
 
 
-					</tr>
+				</tr>
 
 				{% endfor %}
 
-				</tbody>
+			</tbody>
 
-			</table>
-		</div>
+		</table>
 	</div>
+</div>
 {% endblock %}
