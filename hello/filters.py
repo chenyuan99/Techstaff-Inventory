@@ -27,9 +27,15 @@ class networkFilter(django_filters.FilterSet):
 
 
 class UserDeviceFilter(django_filters.FilterSet):
+    UserPID = CharFilter(field_name='UserPID', lookup_expr='icontains')
+    DeviceID = CharFilter(field_name='DeviceID', lookup_expr='icontains')
+    Address = CharFilter(field_name='Address', lookup_expr='icontains')
+    Room = CharFilter(field_name='Room', lookup_expr='icontains')
+
     class Meta:
         model = UserDevice
         fields = '__all__'
+        exclude = ['Note', 'CheckoutDate', 'ReturnDate',]
 
 
 class buildingFilter(django_filters.FilterSet):
