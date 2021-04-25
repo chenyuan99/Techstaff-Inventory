@@ -986,3 +986,24 @@ def export_filter_devices(request):
     #     writer.writerow(i)
     # response['Content-Disposition'] = 'attachment; filename = "' + file_name + '"'
     # return response
+
+def export_hostnames(request):
+    device_resource = NetworkInterfaceResource()
+    dataset = device_resource.export()
+    response = HttpResponse(dataset.csv, content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="hostnames.csv"'
+    return response
+
+def export_ips(request):
+    device_resource = IPAddrResource()
+    dataset = device_resource.export()
+    response = HttpResponse(dataset.csv, content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="ips.csv"'
+    return response
+
+def export_userdevices(request):
+    device_resource = UserDeviceResource
+    dataset = device_resource.export()
+    response = HttpResponse(dataset.csv, content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="user-devices.csv"'
+    return response
