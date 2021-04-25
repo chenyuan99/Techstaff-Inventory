@@ -77,9 +77,11 @@ urlpatterns = [
     url(r'^delete_ip/(?P<IPID>\d+)$', hello.views.delete_ip, name='delete_ip'),
 
     url(r'^check-out/(?P<pk>\d+)$', hello.views.check_out, name="check-out"),
-    url(r'^export_hostnames$', hello.views.export_hostnames, name='export_hostnamse'),
+    url(r'^export_hostnames$', hello.views.export_hostnames, name='export_hostnames'),
+    url(r'^export_facultys$', hello.views.export_facultys, name='export_facultys'),
     url(r'^export_devices$', hello.views.export_filter_devices, name='export_devices'),
     url(r'^export_ips$', hello.views.export_ips, name='export_ips'),
+     url(r'^export_userdevices$', hello.views.export_userdevices, name='export_userdevices'),
     url(r'^import_hostnames$', hello.views.upload_hostnames, name='import_hostnames'),
     url(r'^import_buildings$', hello.views.upload_buildings, name='import_buildings'),
     url(r'^import_facultys$', hello.views.upload_facultys, name='import_facultys'),

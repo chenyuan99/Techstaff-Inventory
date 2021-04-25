@@ -20,9 +20,40 @@
 							</tr>
 						</table>
 						<button class="btn btn-primary" type="submit"><i class="bi-search"></i> Search {{ header }}</button>
+						{% if header|lower == "device" %}
 						<a type="button" class="btn btn-primary" href="{% url 'export_devices' %}">
 							<i class="bi bi-arrow-down-circle"></i> Export {{ header }}
 						</a>
+						<a type="button" class="btn btn-primary" href="{% url 'export_userdevices' %}">
+							Export User-Devices
+						</a>
+					{% endif %}
+					{% if header|lower == "hostname" %}
+						<a type="button" class="btn btn-primary" href="{% url 'export_hostnames' %}">
+							Export {{ header }}
+						</a>
+					{% endif %}
+					{% if header|lower == "building" %}
+						<!-- <a type="button" class="btn btn-primary" href="{% url 'export_devices' %}">
+							Export {{ header }}
+						</a> -->
+						<!-- <a type="button" class="btn btn-primary" href="{% url 'import_buildings' %}">
+							Import {{ header }}
+						</a> -->
+					{% endif %}
+					{% if header|lower == "faculty" %}
+						<a type="button" class="btn btn-primary" href="{% url 'export_facultys' %}">
+							Export {{ header }}
+						</a>
+						<a type="button" class="btn btn-primary" href="{% url 'export_userdevices' %}">
+							Export User-Devices
+						</a>
+					{% endif %}
+					{% if header|lower == "ip" %}
+						<a type="button" class="btn btn-primary" href="{% url 'export_ips' %}">
+							Export {{ header }}
+						</a>
+					{% endif %}
 					</form>
 					<!-- </div> -->
 				</div>

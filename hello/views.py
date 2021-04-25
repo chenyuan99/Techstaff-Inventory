@@ -1002,7 +1002,14 @@ def export_ips(request):
     return response
 
 def export_userdevices(request):
-    device_resource = UserDeviceResource
+    device_resource = UserDeviceResource()
+    dataset = device_resource.export()
+    response = HttpResponse(dataset.csv, content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="user-devices.csv"'
+    return response
+
+def export_facultys(request):
+    device_resource = FacultyResource()
     dataset = device_resource.export()
     response = HttpResponse(dataset.csv, content_type='text/csv')
     response['Content-Disposition'] = 'attachment; filename="user-devices.csv"'
