@@ -1014,3 +1014,10 @@ def export_facultys(request):
     response = HttpResponse(dataset.csv, content_type='text/csv')
     response['Content-Disposition'] = 'attachment; filename="user-devices.csv"'
     return response
+
+def export_buildings(request):
+    device_resource = BuildingResource()
+    dataset = device_resource.export()
+    response = HttpResponse(dataset.csv, content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="Buildings.csv"'
+    return response

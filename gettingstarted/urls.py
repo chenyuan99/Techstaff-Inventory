@@ -78,6 +78,7 @@ urlpatterns = [
 
     url(r'^check-out/(?P<pk>\d+)$', hello.views.check_out, name="check-out"),
     url(r'^export_hostnames$', hello.views.export_hostnames, name='export_hostnames'),
+    url(r'^export_buildings$', hello.views.export_buildings, name='export_buildings'),
     url(r'^export_facultys$', hello.views.export_facultys, name='export_facultys'),
     url(r'^export_devices$', hello.views.export_filter_devices, name='export_devices'),
     url(r'^export_ips$', hello.views.export_ips, name='export_ips'),
