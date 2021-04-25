@@ -4,7 +4,6 @@ from hello.models import *
 class DeviceResource(resources.ModelResource):
     class Meta:
         model = Device
-        exclude = ('id',)
 
 class FacultyResource(resources.ModelResource):
     class Meta:
@@ -18,9 +17,9 @@ class NetworkInterfaceResource(resources.ModelResource):
     class Meta:
         model = NetworkInterface
 
-class DeviceResource(resources.ModelResource):
+class UserDeviceResource(resources.ModelResource):
     class Meta:
-        model = Device
+        model = UserDevice
 
 class IPAddrResource(resources.ModelResource):
     class Meta:
