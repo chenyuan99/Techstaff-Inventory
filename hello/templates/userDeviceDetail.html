@@ -26,6 +26,14 @@
 				<td data-label="Room">{{ item.Room }}</td>
 			</tr>
 			<tr>
+				<td><b>Checkout Date</b></td>
+
+				<td data-label="Check out Date">
+					{% if item.isCheckedOut %}{{ item.CheckoutDate }}
+						{% else %}Not Checked out
+				{% endif %}</td>
+			</tr>
+			<tr>
 				<td><b>Return Date</b></td>
 				<td data-label="Return Date">{{ item.ReturnDate }}</td>
 			</tr>
