@@ -71,6 +71,8 @@
 					</td>
 					{% if request.user.is_active and request.user.is_staff %}
 					<td data-label="Action">
+						<a href="{% url 'view_userDevice' item.pk %}" class="btn btn-outline-success btn-sm"
+							role="button">View</a>
 						<a href="{% url 'edit_userDevice' item.pk %}" class="btn btn-outline-info btn-sm"
 							role="button">Edit</a>
 						<a href="{% url 'delete_userDevice' item.pk %}" class="btn btn-outline-danger btn-sm"

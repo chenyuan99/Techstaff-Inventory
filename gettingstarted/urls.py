@@ -64,6 +64,8 @@ urlpatterns = [
     url(r'^delete_network/(?P<pk>\d+)$', hello.views.delete_network, name='delete_network'),
     url(r'^view_network/(?P<NetworkID>\d+)$', hello.views.view_hostname, name='view_network'),
 
+    url(r'^view_userDevice/(?P<pk>\d+)$', hello.views.view_userDevice, name='view_userDevice'),
+
     url(r'^edit_building/(?P<pk>[-\w]+)$', hello.views.edit_building, name='edit_building'),
     url(r'^delete_building/(?P<pk>[-\w]+)$', hello.views.delete_building, name='delete_building'),
 
