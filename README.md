@@ -5,7 +5,7 @@
 ## Team Member
 
 - Weikai Liang (Project Manager)
-- Yuan Chen, Jun Chen, Kai Lynn
+- Yuan Chen (Tech Lead), Jun Chen, Kai Lynn
 
 ## Guidance
 - Before running the server, install the requirements:
